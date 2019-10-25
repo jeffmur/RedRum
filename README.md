@@ -3,7 +3,7 @@
 # Git Basics
 
 #### clone the existing repository.
-`git clone https://github.com/erosnemesis/CSS370.git`
+`git clone https://github.com/jeffmur/RedRum.git`
 
 #### Execute the status command to see if your repo is in sync with the git server. Also shows you what files you have modified
 `git status`
@@ -15,7 +15,7 @@
 `git add <filename> <filename> <more filenames>`
 
 #### Shortcut for adding all files
-`git add *`
+`git add *` <- DO NOT DO THIS FOR ANY REASON
 
 #### Commit the changes you have made to the repo
 `git commit -m "Some message relating to the changes you have done"`
