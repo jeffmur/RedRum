@@ -63,8 +63,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\DoorBehavior.cs" />
-    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Map\DoorBehavior.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Utilities\ShakePosition.cs" />
+    <Compile Include="Assets\Scripts\Utilities\TimedLerp.cs" />
     <None Include="Assets\Textures\Spine Projects\ExportedForUnity\Character\Front\CharacterFront.atlas.txt" />
     <None Include="Assets\Textures\Spine Projects\ExportedForUnity\Monster1\Back\Monster1Back.atlas.txt" />
     <None Include="Assets\Textures\Spine Projects\ExportedForUnity\Monster2\Left\Monster2Left.atlas.txt" />
