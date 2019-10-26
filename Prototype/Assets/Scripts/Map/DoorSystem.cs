@@ -12,7 +12,7 @@ using UnityEngine;
  * NOTE: Doors must be ordered in this way,
  *       Otherwise this script with FAIL
  */ 
-public class DoorBehavior : MonoBehaviour
+public class DoorSystem : MonoBehaviour
 {
     // Door STATES: 
     public bool LOCKED = true;      // 0
@@ -29,29 +29,42 @@ public class DoorBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        updateState(); // for interactive bool toggling
+        //updateState(); // for interactive bool toggling
     }
 
     private void updateState()
     {
         if (LOCKED)
         {
-            LockAll();
             UNLOCKED = false;
             OPEN = false;
         }
         if (UNLOCKED)
         {
-            UnlockAll();
             OPEN = false;
             LOCKED = false;
         }
         if (OPEN)
         {
-            OpenAll();
             LOCKED = false;
             UNLOCKED = false;
         }
+    }
+    
+    /*
+     * Door Status: 
+     *  LOCKED  : 0
+     *  UNLOCKED: 1
+     *  OPEN    : 2
+     */
+    public int getStatus()
+    {
+        if (UNLOCKED)
+            return 1;
+        if (OPEN)
+            return 2;
+        // most common status: LOCKED
+        return 0;
     }
 
     private static List<GameObject> GetAllChildren(GameObject mDoor)
@@ -96,13 +109,17 @@ public class DoorBehavior : MonoBehaviour
     public void OpenAll()
     {
         OPEN = true;
-        for(int i = 0; i < allDoors.Count; i++)
+        LOCKED = false;
+        UNLOCKED = false;
+        for (int i = 0; i < allDoors.Count; i++)
             OpenDoor(allDoors[i]);
     }
 
     public void LockAll()
     {
         LOCKED = true;
+        UNLOCKED = false;
+        OPEN = false;
         for (int i = 0; i < allDoors.Count; i++)
             LockDoor(allDoors[i]);
     }
@@ -110,6 +127,9 @@ public class DoorBehavior : MonoBehaviour
     public void UnlockAll()
     {
         UNLOCKED = true;
+        OPEN = false;
+        LOCKED = false;
+        Debug.Log(gameObject.name + " UNLOCKED");
         for (int i = 0; i < allDoors.Count; i++)
             UnlockDoor(allDoors[i]);
     }
