@@ -11,6 +11,9 @@
 #### If the status shows that you are not in sync execute a pull
 `git pull`
 
+#### If you would like to work on your own branch
+`git checkout <your name>`
+
 #### Once complete with modifying a file or a number of files add the files to the git repo
 `git add <filename> <filename> <more filenames>`
 
