@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-
     public Rigidbody2D rb;
     public Animator animator;
+    private PlayerStats playerStats;
     Vector2 movement;
 
+    private void Start()
+    {
+        playerStats = gameObject.GetComponentInChildren<PlayerStats>();
+        Debug.Assert(playerStats != null);
+    }
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
        movement.x =  Input.GetAxisRaw("Horizontal");
        movement.y = Input.GetAxisRaw("Vertical");
@@ -23,6 +27,6 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // Movement
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement * playerStats.MoveSpeed * Time.fixedDeltaTime);
     }
 }
