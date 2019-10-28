@@ -9,6 +9,7 @@ public class PointAndShoot : MonoBehaviour
     public GameObject crosshairs;
     public GameObject player;
     public GameObject bulletPrefab;
+    public Camera mCamera;
 
     public float bulletSpeed = 5.0f; 
     void Start()
@@ -19,7 +20,7 @@ public class PointAndShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        target = transform.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
+        target = mCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
         crosshairs.transform.position = new Vector2(target.x, target.y);
 
         Vector3 difference = target - player.transform.position;
