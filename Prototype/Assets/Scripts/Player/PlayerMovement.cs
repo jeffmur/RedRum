@@ -8,18 +8,11 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     private PlayerStats playerStats;
     Vector2 movement;
-<<<<<<< HEAD:Prototype/Assets/Scripts/Player/PlayerMovement.cs
 
     private void Start()
     {
         playerStats = gameObject.GetComponentInChildren<PlayerStats>();
         Debug.Assert(playerStats != null);
-=======
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
->>>>>>> master:Prototype/Assets/Scripts/Player/PlayerMovement.cs
     }
     // Update is called once per frame
     private void Update()
