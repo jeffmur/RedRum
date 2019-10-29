@@ -15,40 +15,21 @@ using UnityEngine;
 public class DoorSystem : MonoBehaviour
 {
     // Door STATES: 
-    public bool LOCKED = true;      // 0
-    public bool UNLOCKED = false;   // 1
-    public bool OPEN = false;       // 2
+    private bool LOCKED = true;      // 0
+    private bool UNLOCKED = false;   // 1
+    private bool OPEN = false;       // 2
     public List<GameObject> allDoors;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        LockAll();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //updateState(); // for interactive bool toggling
-    }
 
-    private void updateState()
-    {
-        if (LOCKED)
-        {
-            UNLOCKED = false;
-            OPEN = false;
-        }
-        if (UNLOCKED)
-        {
-            OPEN = false;
-            LOCKED = false;
-        }
-        if (OPEN)
-        {
-            LOCKED = false;
-            UNLOCKED = false;
-        }
     }
     
     /*
@@ -112,7 +93,8 @@ public class DoorSystem : MonoBehaviour
         LOCKED = false;
         UNLOCKED = false;
         for (int i = 0; i < allDoors.Count; i++)
-            OpenDoor(allDoors[i]);
+            if(allDoors[i] != null)
+                OpenDoor(allDoors[i]);
     }
 
     public void LockAll()
@@ -121,7 +103,8 @@ public class DoorSystem : MonoBehaviour
         UNLOCKED = false;
         OPEN = false;
         for (int i = 0; i < allDoors.Count; i++)
-            LockDoor(allDoors[i]);
+            if(allDoors[i] != null)
+                LockDoor(allDoors[i]);
     }
 
     public void UnlockAll()
@@ -129,8 +112,8 @@ public class DoorSystem : MonoBehaviour
         UNLOCKED = true;
         OPEN = false;
         LOCKED = false;
-        Debug.Log(gameObject.name + " UNLOCKED");
         for (int i = 0; i < allDoors.Count; i++)
-            UnlockDoor(allDoors[i]);
+            if(allDoors[i] != null)
+                UnlockDoor(allDoors[i]);
     }
 }

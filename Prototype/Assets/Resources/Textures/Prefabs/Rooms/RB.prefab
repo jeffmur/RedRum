@@ -1,56 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &671877548188848479
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4545991132436519588}
-  - component: {fileID: 1928047357227704193}
-  m_Layer: 0
-  m_Name: LevelBManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4545991132436519588
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 671877548188848479}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1928047356835549310}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1928047357227704193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 671877548188848479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 370a534bcbf13eb40bc7fd306dac28bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LOCKED: 1
-  UNLOCKED: 0
-  OPEN: 0
-  allDoors:
-  - {fileID: 0}
-  - {fileID: 1928047357435369177}
-  - {fileID: 1928047358279982741}
-  - {fileID: 0}
 --- !u!1 &1680073100459432516
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +56,6 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -162,7 +110,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 1928047356835549310}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1928047356471339326
 MonoBehaviour:
@@ -176,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e144ebce05ec4a340bebea684e06c80e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openingDirection: 0
 --- !u!61 &1928047356471339327
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -254,7 +203,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 1928047356835549310}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1928047356976630429
 MonoBehaviour:
@@ -268,6 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e144ebce05ec4a340bebea684e06c80e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openingDirection: 0
 --- !u!61 &1928047356976630430
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -372,7 +322,6 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -479,7 +428,6 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -604,9 +552,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae6b981969da3da478d1afe4f781a8c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fromRoom: {fileID: 0}
   nextRoom: {fileID: 0}
   mHero: {fileID: 0}
-  sDoors: {fileID: 1928047357227704193}
   mCamera: {fileID: 0}
 --- !u!1 &1928047357625859811
 GameObject:
@@ -618,6 +566,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1928047356835549310}
   - component: {fileID: 1928047357625859809}
+  - component: {fileID: 6694316448884470402}
   m_Layer: 0
   m_Name: RB
   m_TagString: Untagged
@@ -639,7 +588,6 @@ Transform:
   - {fileID: 5245767569732094902}
   - {fileID: 5720786387604452138}
   - {fileID: 2142860067236439296}
-  - {fileID: 4545991132436519588}
   - {fileID: 1928047356471339313}
   - {fileID: 1928047356976630416}
   m_Father: {fileID: 0}
@@ -663,6 +611,21 @@ MonoBehaviour:
   - {fileID: 1928047357762411640}
   - {fileID: 1928047357350169164}
   - {fileID: 1928047357215234213}
+--- !u!114 &6694316448884470402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928047357625859811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 370a534bcbf13eb40bc7fd306dac28bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allDoors:
+  - {fileID: 1928047358279982741}
+  - {fileID: 1928047357435369177}
 --- !u!1 &1928047357762411640
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,7 +683,6 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -845,9 +807,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae6b981969da3da478d1afe4f781a8c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fromRoom: {fileID: 0}
   nextRoom: {fileID: 0}
   mHero: {fileID: 0}
-  sDoors: {fileID: 1928047357227704193}
   mCamera: {fileID: 0}
 --- !u!1 &1928047358601701215
 GameObject:
@@ -906,7 +868,6 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1044,7 +1005,6 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1124,7 +1084,6 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1204,7 +1163,6 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1835,7 +1793,6 @@ TilemapRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1912,7 +1869,6 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -2026,7 +1982,6 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -2106,7 +2061,6 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -2186,7 +2140,6 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -2266,7 +2219,6 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -2346,7 +2298,6 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class RoomPointer : MonoBehaviour
+public partial class RoomPointer : MonoBehaviour
 {
-    private GameObject mDoors;
+    public DoorSystem fromRoom;
     public GameObject nextRoom;
     public GameObject mHero;
-    public DoorSystem sDoors;
     public Camera mCamera;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -26,9 +25,6 @@ public class RoomPointer : MonoBehaviour
     private void RoomSwap(GameObject nextLevel, string doorSide)
     {
         RoomStats next = nextLevel.GetComponent<RoomStats>();
-        Vector2 height = next.getHeightDem();
-        Vector2 width = next.getWidthDem();
-        //Debug.Log("Height = " + height + "Width = " + width);
         // Move camera
         next.setCamLocation();
         // Move Hero
@@ -40,7 +36,7 @@ public class RoomPointer : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // if doors are unlocked or open
-        if (sDoors.getStatus() >= 1)
+        if (fromRoom.getStatus() >= 1)
         {
             switch (name)
             {
@@ -61,7 +57,7 @@ public class RoomPointer : MonoBehaviour
                     RoomSwap(nextRoom, "RIGHT");
                     break;
             }
-            sDoors.LockAll();
+            fromRoom.LockAll();
         }
     }
 }
