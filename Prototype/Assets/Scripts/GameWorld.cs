@@ -20,11 +20,31 @@ public class GameWorld : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        testHP();
     }
 
     public int getStartingHealth()
     {
         return stats.MaxHealth;
+    }
+
+    public void testHP()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            stats.incrementMaxHeath();
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            stats.decrementMaxHeath();
+        }
+        if (Input.GetKeyDown("1"))
+        {
+            stats.gainHealth(1);
+        }
+        if (Input.GetKeyDown("2"))
+        {
+            stats.loseHealth(1);
+        }
     }
 }

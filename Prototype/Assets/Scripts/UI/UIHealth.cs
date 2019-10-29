@@ -22,7 +22,7 @@ public class UIHealth : MonoBehaviour
 
     private void Update()
     {
-        testHP();
+
     }
     public void setStartingHealth(int activeHearts)
     {
@@ -135,27 +135,6 @@ public class UIHealth : MonoBehaviour
         {
             value = Mathf.Abs(value);
             for (int i = 0; i < value; i++) { echoHit(); }
-        }
-    }
-
-
-    public void testHP()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            echoMaxHPUp();
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            echoMaxHPDown();
-        }
-        if (Input.GetKeyDown("1"))
-        {
-            echoHeal();
-        }
-        if (Input.GetKeyDown("2"))
-        {
-            echoHit();
         }
     }
 }

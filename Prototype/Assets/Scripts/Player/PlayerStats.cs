@@ -9,7 +9,7 @@ public class PlayerStats : MonoBehaviour
     private float fireRate;
     private float accuracy;
     private float cooldownrate;
-    private float isInvincible;
+    private bool isInvincible;
 
     public delegate void onHealthChangeDelegate(int value);
     public event onHealthChangeDelegate onHealthChange, onMaxHealthChange;
@@ -26,6 +26,7 @@ public class PlayerStats : MonoBehaviour
     {
 
     }
+
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
     public float FireRate { get => fireRate; set => fireRate = value; }
     public float Accuracy { get => accuracy; set => accuracy = value; }
@@ -53,7 +54,26 @@ public class PlayerStats : MonoBehaviour
 
     public void loseHealth(int value) 
     { 
+        if (isInvincible) //logic only works on damage events
+        {
+            return;
+        }
         currentHealth -= value;
-        onHealthChange(value);
+        onHealthChange(-value);
+        //isInvincible = true;
+    }
+
+    //belongs in different class
+    public void processInvincibility()
+    {
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "egg")
+        {
+            GameObject.Destroy(collision.gameObject);
+        }
     }
 }
