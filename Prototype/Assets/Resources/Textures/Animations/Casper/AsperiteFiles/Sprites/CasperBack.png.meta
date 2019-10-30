@@ -3,16 +3,16 @@ guid: afd43d0d61fff95479a5435d1978e5de
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8615373953566314517
+      213: 21300000
     second: CasperBack 0
   - first:
-      213: 2496308293613712119
+      213: 21300002
     second: CasperBack 1
   - first:
-      213: 2602207998118126276
+      213: 21300004
     second: CasperBack 2
   - first:
-      213: 8589934463759088385
+      213: 21300006
     second: CasperBack 3
   externalObjects: {}
   serializedVersion: 10
@@ -100,8 +100,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: befe682190b007880800000000000000
-      internalID: -8615373953566314517
+      spriteID: 02305410000000000800000000000000
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -121,8 +121,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7f2f4b2ca2ba4a220800000000000000
-      internalID: 2496308293613712119
+      spriteID: 22305410000000000800000000000000
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -142,8 +142,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4c2e28f1366ec1420800000000000000
-      internalID: 2602207998118126276
+      spriteID: 42305410000000000800000000000000
+      internalID: 21300004
       vertices: []
       indices: 
       edges: []
@@ -163,8 +163,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 10bfe3422e3953770800000000000000
-      internalID: 8589934463759088385
+      spriteID: 62305410000000000800000000000000
+      internalID: 21300006
       vertices: []
       indices: 
       edges: []

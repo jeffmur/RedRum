@@ -9,11 +9,8 @@ public class PlayerStats : MonoBehaviour
     private float fireRate;
     private float accuracy;
     private float cooldownrate;
-<<<<<<< HEAD
-    private float isInvincible;
-=======
+    //private float isInvincible;
     private bool isInvincible;
->>>>>>> andy
 
     public delegate void onHealthChangeDelegate(int value);
     public event onHealthChangeDelegate onHealthChange, onMaxHealthChange;
@@ -30,10 +27,7 @@ public class PlayerStats : MonoBehaviour
     {
 
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> andy
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
     public float FireRate { get => fireRate; set => fireRate = value; }
     public float Accuracy { get => accuracy; set => accuracy = value; }
@@ -61,10 +55,9 @@ public class PlayerStats : MonoBehaviour
 
     public void loseHealth(int value) 
     { 
-<<<<<<< HEAD
         currentHealth -= value;
         onHealthChange(value);
-=======
+
         if (isInvincible) //logic only works on damage events
         {
             return;
@@ -86,6 +79,5 @@ public class PlayerStats : MonoBehaviour
         {
             GameObject.Destroy(collision.gameObject);
         }
->>>>>>> andy
     }
 }
