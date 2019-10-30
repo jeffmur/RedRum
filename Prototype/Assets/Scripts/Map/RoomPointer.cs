@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public partial class RoomPointer : MonoBehaviour
 {
+    private GameWorld gameManager;
     public DoorSystem fromRoom;
     public GameObject nextRoom;
     public GameObject mHero;
@@ -13,7 +14,8 @@ public partial class RoomPointer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.Find("GameManager").GetComponent<GameWorld>();
+        Debug.Assert(gameManager != null);
     }
 
     // Update is called once per frame
@@ -29,7 +31,8 @@ public partial class RoomPointer : MonoBehaviour
         next.setCamLocation();
         // Move Hero
         mHero.transform.position = next.sendPlayerToDoor(doorSide);
-        // Spawn enemies?
+        // Update MiniMap
+        //gameManager.
 
     }
 

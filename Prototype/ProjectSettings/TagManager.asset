@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - SpawnPoint
   - Level
+  - Rooms
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - UI
   - 
   - 
-  - Background
+  - MiniMap
   - 
   - 
   - 
@@ -42,9 +43,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Terrian
-    uniqueID: 4111308147
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\MainController.cs" />
     <Compile Include="Assets\Scripts\Map\DoorSystem.cs" />
     <Compile Include="Assets\Scripts\Map\Mini\AddRoom.cs" />
+    <Compile Include="Assets\Scripts\Map\Mini\CameraBehavior.cs" />
     <Compile Include="Assets\Scripts\Map\Mini\Destroyer.cs" />
     <Compile Include="Assets\Scripts\Map\Mini\RoomSpawner.cs" />
     <Compile Include="Assets\Scripts\Map\Mini\RoomTemplates.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Player\PointAndShoot.cs" />
+    <Compile Include="Assets\Scripts\README.cs" />
     <Compile Include="Assets\Scripts\UIHealth.cs" />
     <Compile Include="Assets\Scripts\Utilities\ShakePosition.cs" />
     <Compile Include="Assets\Scripts\Utilities\TimedLerp.cs" />

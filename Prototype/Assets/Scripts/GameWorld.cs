@@ -10,13 +10,19 @@ public class GameWorld : MonoBehaviour
     private PlayerStats stats;
     public AudioSource piano;
     public GameObject[] allRooms;
+    public Transform miniMap;
+    private Transform playerIcon;
 
     // Start is called before the first frame update
     void Awake()
     {
+        miniMap = GameObject.Find("Mini Template").GetComponent<Transform>();
+
         allRooms[0].GetComponent<DoorSystem>().LockAll();
+
         player = GameObject.FindGameObjectWithTag("Player");
         stats = player.GetComponent<PlayerStats>();
+
         Debug.Assert(player != null);
         Debug.Assert(stats != null);
         Debug.Assert(allRooms != null);
@@ -25,6 +31,7 @@ public class GameWorld : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playerIcon = miniMap.GetChild(0);
         int roomIndex = getPlayerCurrentRoom();
         if (roomIndex > 0)
             StartCoroutine(FadeAudioSource.StartFade(piano, 1f, 0f));
@@ -53,5 +60,10 @@ public class GameWorld : MonoBehaviour
                 return i;
         }
         return -1;
+    }
+
+    public void updateMiniMap(GameObject playerIcon)
+    {
+
     }
 }
