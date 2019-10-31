@@ -6,6 +6,7 @@ using UnityEngine.Audio;
 
 public class GameWorld : MonoBehaviour
 {
+    public static GameWorld sGameWorld = GameWorld.sGameWorld;
     private GameObject player;
     private PlayerStats stats;
     public AudioSource piano;
@@ -14,9 +15,11 @@ public class GameWorld : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        allRooms[0].GetComponent<DoorSystem>().LockAll();
+        allRooms[0].GetComponent<DoorSystem>().LockAll(); // Lock start room
+
         player = GameObject.FindGameObjectWithTag("Player");
         stats = player.GetComponent<PlayerStats>();
+
         Debug.Assert(player != null);
         Debug.Assert(stats != null);
         Debug.Assert(allRooms != null);
@@ -30,6 +33,7 @@ public class GameWorld : MonoBehaviour
             StartCoroutine(FadeAudioSource.StartFade(piano, 1f, 0f));
         else
             StartCoroutine(FadeAudioSource.StartFade(piano, 0.5f, .2f));
+        // All rooms
         if (roomIndex > -1)
         {
             if (Input.GetKeyDown("o"))
