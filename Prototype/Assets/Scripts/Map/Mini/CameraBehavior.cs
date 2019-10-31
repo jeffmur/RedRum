@@ -52,16 +52,25 @@ public class CameraBehavior : MonoBehaviour
         // assign camera size
         float x = maxX - minX;
         float y = maxY - minY;
-        if(miniTemp.childCount <= 7)
-            mCamera.orthographicSize = miniTemp.childCount * 3.5f;
+        // set camera zoom 
+        if (x < y)
+            mCamera.orthographicSize = y / 1.5f;
         else
-        {
-            if (x < y)
-                mCamera.orthographicSize = y / 1.5f;
-            else
-                mCamera.orthographicSize = x / 1.5f;
-        }
-            
+        mCamera.orthographicSize = x / 1.5f;
+        // Camera Info
+        float h = 2f * mCamera.orthographicSize;
+        float w = h * mCamera.aspect;
+        Vector3 loc = mCamera.transform.position;
 
+        // Bottom Left corner of mCamera in x,y,z
+        Vector3 BL = new Vector3(loc.x - w / 2f, loc.y - h / 2f, loc.z);
+        Vector2 mapEdge = new Vector2(minX, minY);
+
+        // shifting values
+        float sX = BL.x - mapEdge.x + 5.5f;
+        float sY = BL.y - mapEdge.y + 5.5f;
+
+        // shift camera to the left to be on window bound
+        mCamera.transform.position = new Vector3(loc.x - sX, loc.y - sY, loc.z);
     }
 }

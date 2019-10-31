@@ -21,7 +21,7 @@ public class MMController : MonoBehaviour
     void Update()
     {
         // waits until map is spawned and only called once
-        if (!once && miniMap.GetComponent<RoomTemplates>().waitTime <= -1f)
+        if (!once && miniMap.GetComponent<RoomTemplates>().waitTime <= -3f)
         {
             setUp(miniMap);
             once = true;

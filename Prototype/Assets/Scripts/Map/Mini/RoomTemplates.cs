@@ -9,6 +9,7 @@ public class RoomTemplates : MonoBehaviour {
 	public GameObject[] leftRooms;
 	public GameObject[] rightRooms;
 
+    public GameObject closedRoom;
 	public List<GameObject> rooms;
 
 	public float waitTime;
@@ -16,7 +17,7 @@ public class RoomTemplates : MonoBehaviour {
 	public GameObject casper;
 
 	void Update(){
-
+        // spawns Hero
 		if(waitTime <= 0 && spawnedHero == false){
 			for (int i = 0; i < rooms.Count; i++) {
 				if(rooms[i].name == "Entry Room"){
