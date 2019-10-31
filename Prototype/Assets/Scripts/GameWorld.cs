@@ -25,6 +25,12 @@ public class GameWorld : MonoBehaviour
         Debug.Assert(allRooms != null);
     }
 
+    private void Start()
+    {
+        for (int i = 0; i < allRooms.Length; i++)
+            allRooms[i].GetComponent<DoorSystem>().LockAll();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -36,7 +42,7 @@ public class GameWorld : MonoBehaviour
         // All rooms
         if (roomIndex > -1)
         {
-            if (Input.GetKeyDown("o"))
+            if (Input.GetMouseButtonDown(1))
             {
                 allRooms[roomIndex].GetComponent<DoorSystem>().OpenAll();
             }
@@ -55,7 +61,10 @@ public class GameWorld : MonoBehaviour
         {
             RoomStats stats = allRooms[i].GetComponent<RoomStats>();
             if (stats.isInRoom(player.transform.position))
+            {
+                GetComponent<MainController>().updateRoomStatus(allRooms[i].name);
                 return i;
+            }                
         }
         return -1;
     }

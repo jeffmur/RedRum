@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Transform player;
+    //public Transform player;
     private Rigidbody2D rb;
     private Vector2 movement;
 
@@ -20,11 +20,13 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         Vector3 dirction = player.position - transform.position;
         float angle = Mathf.Atan2(dirction.y, dirction.x) * Mathf.Rad2Deg-90f;
         rb.rotation = angle;
         dirction.Normalize();
         movement = dirction;
+        */
     }
 
 
@@ -50,5 +52,11 @@ public class Enemy : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collision2D collison)
+    {
+        if(collison.gameObject.name == "Bullet(Clone)")
+            TakeDamage(25);
     }
 }

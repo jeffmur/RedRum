@@ -50,16 +50,19 @@ public class RoomSpawner : MonoBehaviour {
 			spawned = true;
 		}
 	}
-
-	void OnTriggerEnter2D(Collider2D other){
-		if(other.CompareTag("SpawnPoint") && other.GetComponent<RoomSpawner>() != null)
+    /*
+     * Called every time SpawnPoints Collide
+     */
+	private void OnTriggerEnter2D(Collider2D other){
+		if(other.CompareTag("SpawnPoint"))
         {
-			if(other.GetComponent<RoomSpawner>().spawned == false && spawned == false){
+            if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
+            {
                 var room = Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
                 room.transform.parent = this.gameObject.transform;
-                Destroy(gameObject);
             }
-            spawned = true;
+            Destroy(gameObject);
         }
-	}
+        spawned = true;
+    }
 }

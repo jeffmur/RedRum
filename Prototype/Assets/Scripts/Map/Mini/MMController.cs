@@ -5,7 +5,8 @@ using UnityEngine;
 public class MMController : MonoBehaviour
 {
     private Transform miniMap;
-    private Transform playerIcon;
+    public Transform playerIcon;
+    public Transform bossIcon;
     private Transform entryRoom;
     public List<Transform> miniRooms;
     bool once = false;
@@ -51,6 +52,7 @@ public class MMController : MonoBehaviour
              miniRooms.Add(child);
         }
         playerIcon = miniRooms[0];
+        bossIcon = miniRooms[miniRooms.Count - 1];
     }
 
     /**
@@ -90,7 +92,7 @@ public class MMController : MonoBehaviour
         }
         return nameToList(room.name.Replace("(Clone)",""));
     }
-    private Transform getCurrentRoom()
+    public Transform getCurrentRoom()
     {
         // Entry Room is not a child must be checked first
         if (playerIcon.position == entryRoom.position)

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public partial class RoomPointer : MonoBehaviour
@@ -8,14 +9,13 @@ public partial class RoomPointer : MonoBehaviour
     private GameWorld gameManager;
     public DoorSystem fromRoom;
     public GameObject nextRoom;
-    public GameObject mHero;
-    public Camera mCamera;
+    private GameObject mHero;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameWorld>();
-        Debug.Assert(gameManager != null);
+        mHero = GameObject.Find("Casper");
     }
 
     // Update is called once per frame
@@ -33,38 +33,53 @@ public partial class RoomPointer : MonoBehaviour
         mHero.transform.position = next.sendPlayerToDoor(doorSide);
     }
 
+    private void bufferSwitch(string roomDir, string heroDir)
+    {
+        MMController mm = gameManager.GetComponent<MMController>();
+        // Move Player Icon First
+        mm.moveMMCasper(heroDir);
+
+        // Player Icon ON Entry Room
+        if (mm.getCurrentRoom().name == "Entry Room")
+            nextRoom = GameObject.Find("Welcome");
+
+        // Player Icon On Boss Icon
+        float dist = Vector2.Distance(mm.playerIcon.position, mm.bossIcon.position);
+        if (dist <= 1f)
+            nextRoom = GameObject.Find("Boss Pool");
+
+        // Re-locate real player location
+        RoomSwap(nextRoom, roomDir);
+        fromRoom.LockAll();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // if doors are unlocked or open
-        if (fromRoom.getStatus() >= 1)
+        // if door(s) are open
+        if (fromRoom.getStatus() == 2)
         {
+            //Debug.Log("Status is OPEN, " + fromRoom.name + " " + name);
+            //Debug.Log("Going to room: " + nextRoom.name);
             switch (name)
             {
                 case "Top_Door":
                     if (!fromRoom.isOpen(name)) { break; }
-                    RoomSwap(nextRoom, "BOTTOM");
-                    gameManager.GetComponent<MMController>().moveMMCasper("UP");
-                    fromRoom.LockAll();
+                    bufferSwitch("BOTTOM", "UP");
                     break;
                 case "Bottom_Door":
                     if (!fromRoom.isOpen(name)) { break; }
-                    RoomSwap(nextRoom, "TOP");
-                    gameManager.GetComponent<MMController>().moveMMCasper("DOWN");
-                    fromRoom.LockAll();
+                    bufferSwitch("TOP", "DOWN");
                     break;
                 case "Right_Door":
                     if (!fromRoom.isOpen(name)) { break; }
-                    RoomSwap(nextRoom, "LEFT");
-                    gameManager.GetComponent<MMController>().moveMMCasper("RIGHT");
-                    fromRoom.LockAll();
+                    bufferSwitch("LEFT", "RIGHT");
                     break;
                 case "Left_Door":
                     if (!fromRoom.isOpen(name)) { break; }
-                    RoomSwap(nextRoom, "RIGHT");
-                    gameManager.GetComponent<MMController>().moveMMCasper("LEFT");
-                    fromRoom.LockAll();
+                    bufferSwitch("RIGHT", "LEFT");
                     break;
             }
+            
         }
     }
 }
