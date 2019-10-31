@@ -5,7 +5,9 @@ using UnityEngine;
 public class CameraBehavior : MonoBehaviour
 {
     public Camera mCamera;
-    private Transform miniTemp;
+    private TimedLerp mPositionLerp = new TimedLerp(10f, 6f);
+    public Transform miniTemp;
+    bool once = false;
     float maxX = -100f;
     float maxY = -100f;
     float minX = 100f;
@@ -14,13 +16,18 @@ public class CameraBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        miniTemp = GameObject.Find("Mini Template").GetComponent<Transform>();
+        mCamera.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        traverseChildren();
+        if (!once && miniTemp.GetComponent<RoomTemplates>().waitTime < -3f)
+        {
+            traverseChildren();
+            mCamera.gameObject.SetActive(true);
+            once = true;
+        }
         setCamLocation();
     }
 
@@ -41,6 +48,7 @@ public class CameraBehavior : MonoBehaviour
 
     public void setCamLocation()
     {
+        #region Center Camera
         // min vector
         Vector2 min = new Vector2(minX, minY);
         // max vector
@@ -49,14 +57,24 @@ public class CameraBehavior : MonoBehaviour
         Vector2 target = (min + max) / 2f;
         // assign camera position
         mCamera.transform.position = new Vector3(target.x, target.y, -30f);
+        #endregion
+        #region Set Orthogonal
         // assign camera size
         float x = maxX - minX;
         float y = maxY - minY;
         // set camera zoom 
-        if (x < y)
-            mCamera.orthographicSize = y / 1.5f;
+        if (miniTemp.childCount <= 12)
+            mCamera.orthographicSize = miniTemp.childCount * 4f;
         else
-        mCamera.orthographicSize = x / 1.5f;
+        {
+            // set size = largest difference
+            if (x < y)
+                mCamera.orthographicSize = y;
+            else
+                mCamera.orthographicSize = x;
+        }
+        #endregion
+        #region MiniMap to Corner
         // Camera Info
         float h = 2f * mCamera.orthographicSize;
         float w = h * mCamera.aspect;
@@ -67,10 +85,11 @@ public class CameraBehavior : MonoBehaviour
         Vector2 mapEdge = new Vector2(minX, minY);
 
         // shifting values
-        float sX = BL.x - mapEdge.x + 5.5f;
-        float sY = BL.y - mapEdge.y + 5.5f;
+        float sX = BL.x - mapEdge.x + 6f;
+        float sY = BL.y - mapEdge.y + 6f;
 
         // shift camera to the left to be on window bound
         mCamera.transform.position = new Vector3(loc.x - sX, loc.y - sY, loc.z);
+        #endregion
     }
 }

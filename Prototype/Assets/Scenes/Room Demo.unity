@@ -241,13 +241,13 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 0.3
-    height: 0.3
+    width: 0.4
+    height: 0.4
   near clip plane: 0.3
   far clip plane: 20
   field of view: 60
   orthographic: 1
-  orthographic size: 60
+  orthographic size: 50
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -830,8 +830,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1480222185}
-  - component: {fileID: 1480222184}
   - component: {fileID: 1480222186}
+  - component: {fileID: 1480222184}
   m_Layer: 0
   m_Name: Mini Template
   m_TagString: Untagged
@@ -896,6 +896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCamera: {fileID: 464588161}
+  miniTemp: {fileID: 1480222185}
 --- !u!1 &1483670755
 GameObject:
   m_ObjectHideFlags: 0
