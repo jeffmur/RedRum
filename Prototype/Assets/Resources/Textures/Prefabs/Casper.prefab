@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3502540020961720588}
-  - component: {fileID: 3502540020961720586}
+  - component: {fileID: 3239818094334399785}
   - component: {fileID: 3502540020961720587}
   - component: {fileID: 3502540020961720630}
   - component: {fileID: 3502540020961720631}
@@ -37,7 +37,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &3502540020961720586
+--- !u!212 &3239818094334399785
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,11 +164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fc59911245f3b640b527e1efe401b1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crosshairs: {fileID: 0}
-  player: {fileID: 3502540020961720589}
-  bulletPrefab: {fileID: 4928272105802068142, guid: 284dc5ba1076ce14fa4723d02129e5fb,
-    type: 3}
-  mCamera: {fileID: 0}
   bulletSpeed: 5
 --- !u!114 &986839591
 MonoBehaviour:
@@ -194,5 +189,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ba0f39adf131940b7e0373193c38b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 3502540020961720630}
-  animator: {fileID: 3502540020961720587}

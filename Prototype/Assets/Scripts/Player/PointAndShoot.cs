@@ -6,15 +6,19 @@ public class PointAndShoot : MonoBehaviour
 {
     // Start is called before the first frame update
     private Vector3 target;
-    public GameObject crosshairs;
-    public GameObject player;
-    public GameObject bulletPrefab;
-    public Camera mCamera;
+    private GameObject crosshairs;
+    private GameObject player;
+    private Object bulletPrefab;
+    private Camera mCamera;
 
     public float bulletSpeed = 5.0f; 
     void Start()
     {
         Cursor.visible = false;
+        crosshairs = GameObject.Find("crossHairs");
+        player = GameObject.Find("Casper");
+        bulletPrefab = Resources.Load("Textures/Prefabs/Bullet");
+        mCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 
     // Update is called once per frame

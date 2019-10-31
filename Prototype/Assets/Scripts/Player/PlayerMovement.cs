@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public Animator animator;
+    private Rigidbody2D rb;
+    private Animator animator;
     private PlayerStats playerStats;
     Vector2 movement;
 
     private void Start()
     {
         playerStats = gameObject.GetComponentInChildren<PlayerStats>();
-        Debug.Assert(playerStats != null);
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        
     }
     // Update is called once per frame
     private void Update()
