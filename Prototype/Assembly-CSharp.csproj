@@ -63,12 +63,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\GameWorld.cs" />
-    <Compile Include="Assets\Scripts\Items\Item.cs" />
-    <Compile Include="Assets\Scripts\Items\PassiveItem.cs" />
+    <Compile Include="Assets\Scripts\ItemManager.cs" />
+    <Compile Include="Assets\Scripts\Items\Abstract Classes\ActiveItem.cs" />
+    <Compile Include="Assets\Scripts\Items\Abstract Classes\Item.cs" />
+    <Compile Include="Assets\Scripts\Items\Abstract Classes\PassiveItem.cs" />
+    <Compile Include="Assets\Scripts\Items\Bottle.cs" />
     <Compile Include="Assets\Scripts\Items\PoisonShroom.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\UI\MainController.cs" />
+    <Compile Include="Assets\Scripts\UI\NotificationUI.cs" />
     <Compile Include="Assets\Scripts\UI\UIHealth.cs" />
     <None Include="Assets\Textures\Spine Projects\ExportedForUnity\Character\Front\CharacterFront.atlas.txt" />
     <None Include="Assets\Textures\Spine Projects\ExportedForUnity\Monster1\Back\Monster1Back.atlas.txt" />

@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class PoisonShroom : PassiveItem
 {
-    public override void process()
+    protected override void Awake()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        base.Awake();
+        itemID = 1;
+        itemName = "Poison Shroom";
+        caption = "GOTY since 1976";
+    }
 
-        player.transform.localScale = new Vector3(0.7f, 0.7f, 1); //may affect weapon
+    public override void modifyStats()
+    {
+        player.transform.localScale = new Vector3(0.8f, 0.8f, 1); //may affect weapon
         player.GetComponent<PlayerStats>().decrementMaxHeath();
-
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameWorld : MonoBehaviour
+public partial class GameWorld : MonoBehaviour
 {
     private GameObject player;
     private PlayerStats stats;
@@ -33,6 +33,7 @@ public class GameWorld : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             stats.incrementMaxHeath();
+            triggerNotification("HOI!!!!!!!!!!!!!!!!!!!");
         }
         if (Input.GetMouseButtonDown(1))
         {
@@ -46,5 +47,13 @@ public class GameWorld : MonoBehaviour
         {
             stats.loseHealth(1);
         }
+    }
+
+    public delegate void onNotifyDelegate(string notification);
+    public static event onNotifyDelegate onNotifyChange;
+
+    public static void triggerNotification(string notification)
+    {
+        onNotifyChange?.Invoke(notification);
     }
 }

@@ -10,6 +10,8 @@ public class PlayerStats : MonoBehaviour
     private float accuracy;
     private float cooldownrate;
     private bool isInvincible;
+    public List<Item> heldItems;
+    private ActiveItem currentActiveItem;
 
     public delegate void onHealthChangeDelegate(int value);
     public event onHealthChangeDelegate onHealthChange, onMaxHealthChange;
@@ -49,6 +51,10 @@ public class PlayerStats : MonoBehaviour
     public void gainHealth(int value) 
     { 
         currentHealth += value;
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
         onHealthChange(value);
     }
 
@@ -59,6 +65,10 @@ public class PlayerStats : MonoBehaviour
             return;
         }
         currentHealth -= value;
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
         onHealthChange(-value);
         //isInvincible = true;
     }
@@ -69,11 +79,29 @@ public class PlayerStats : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void setActiveItem(ActiveItem item)
     {
-        if (collision.gameObject.tag == "egg")
+        if (currentActiveItem != null)
         {
-            GameObject.Destroy(collision.gameObject);
+            currentActiveItem.gameObject.SetActive(true);
+            currentActiveItem.transform.position = transform.position;
+        }
+        currentActiveItem = item;
+        item.gameObject.SetActive(false);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (collision.gameObject.tag == "Item")
+            {
+                collision.gameObject.GetComponent<Item>().process();
+            }
+            if (collision.gameObject.tag == "Heart")
+            {
+                gainHealth(1);
+            }
         }
     }
 }
