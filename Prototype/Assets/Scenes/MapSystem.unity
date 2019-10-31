@@ -969,11 +969,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3557480063750135915, guid: 10c65f0c164d2e04e9c3daf97304609a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10c65f0c164d2e04e9c3daf97304609a, type: 3}
 --- !u!1001 &1357473133
@@ -1148,6 +1143,66 @@ PrefabInstance:
       propertyPath: mCamera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 2625331760681363483, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: nextRoom
+      value: 
+      objectReference: {fileID: 6478781016209546251}
+    - target: {fileID: 2625331760681363483, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: mHero
+      value: 
+      objectReference: {fileID: 986839583}
+    - target: {fileID: 2625331760681363483, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: mCamera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 2625331761204325399, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: mHero
+      value: 
+      objectReference: {fileID: 986839583}
+    - target: {fileID: 2625331761204325399, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: nextRoom
+      value: 
+      objectReference: {fileID: 6478781016209546251}
+    - target: {fileID: 2625331761204325399, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: mCamera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 2625331760369116258, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: nextRoom
+      value: 
+      objectReference: {fileID: 6478781016209546251}
+    - target: {fileID: 2625331760369116258, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: mHero
+      value: 
+      objectReference: {fileID: 986839583}
+    - target: {fileID: 2625331760369116258, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: mCamera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 2625331760265370041, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: nextRoom
+      value: 
+      objectReference: {fileID: 6478781016209546251}
+    - target: {fileID: 2625331760265370041, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: mHero
+      value: 
+      objectReference: {fileID: 986839583}
+    - target: {fileID: 2625331760265370041, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: mCamera
+      value: 
+      objectReference: {fileID: 519420031}
     - target: {fileID: 2127674154302229868, guid: dfa11b5f43429a04f81e674438174970,
         type: 3}
       propertyPath: m_Color.r
@@ -1208,66 +1263,6 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2625331760681363483, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: nextRoom
-      value: 
-      objectReference: {fileID: 6478781016209546251}
-    - target: {fileID: 2625331760681363483, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: mHero
-      value: 
-      objectReference: {fileID: 986839583}
-    - target: {fileID: 2625331760681363483, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: mCamera
-      value: 
-      objectReference: {fileID: 519420031}
-    - target: {fileID: 2625331761204325399, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: mHero
-      value: 
-      objectReference: {fileID: 986839583}
-    - target: {fileID: 2625331761204325399, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: nextRoom
-      value: 
-      objectReference: {fileID: 6478781016209546251}
-    - target: {fileID: 2625331761204325399, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: mCamera
-      value: 
-      objectReference: {fileID: 519420031}
-    - target: {fileID: 2625331760369116258, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: nextRoom
-      value: 
-      objectReference: {fileID: 6478781016209546251}
-    - target: {fileID: 2625331760369116258, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: mHero
-      value: 
-      objectReference: {fileID: 986839583}
-    - target: {fileID: 2625331760369116258, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: mCamera
-      value: 
-      objectReference: {fileID: 519420031}
-    - target: {fileID: 2625331760265370041, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: nextRoom
-      value: 
-      objectReference: {fileID: 6478781016209546251}
-    - target: {fileID: 2625331760265370041, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: mHero
-      value: 
-      objectReference: {fileID: 986839583}
-    - target: {fileID: 2625331760265370041, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: mCamera
-      value: 
-      objectReference: {fileID: 519420031}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfa11b5f43429a04f81e674438174970, type: 3}
 --- !u!1 &1425913670 stripped
@@ -1998,6 +1993,66 @@ PrefabInstance:
       propertyPath: mCamera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 2625331760681363483, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: mHero
+      value: 
+      objectReference: {fileID: 986839583}
+    - target: {fileID: 2625331760681363483, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: mCamera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 2625331760681363483, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: nextRoom
+      value: 
+      objectReference: {fileID: 1425913670}
+    - target: {fileID: 2625331761204325399, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: mHero
+      value: 
+      objectReference: {fileID: 986839583}
+    - target: {fileID: 2625331761204325399, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: mCamera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 2625331761204325399, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: nextRoom
+      value: 
+      objectReference: {fileID: 1425913670}
+    - target: {fileID: 2625331760369116258, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: nextRoom
+      value: 
+      objectReference: {fileID: 1425913670}
+    - target: {fileID: 2625331760369116258, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: mHero
+      value: 
+      objectReference: {fileID: 986839583}
+    - target: {fileID: 2625331760369116258, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: mCamera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 2625331760265370041, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: nextRoom
+      value: 
+      objectReference: {fileID: 1425913670}
+    - target: {fileID: 2625331760265370041, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: mHero
+      value: 
+      objectReference: {fileID: 986839583}
+    - target: {fileID: 2625331760265370041, guid: dfa11b5f43429a04f81e674438174970,
+        type: 3}
+      propertyPath: mCamera
+      value: 
+      objectReference: {fileID: 519420031}
     - target: {fileID: 2127674154302229868, guid: dfa11b5f43429a04f81e674438174970,
         type: 3}
       propertyPath: m_Color.r
@@ -2058,65 +2113,5 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0.5411765
       objectReference: {fileID: 0}
-    - target: {fileID: 2625331760681363483, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: mHero
-      value: 
-      objectReference: {fileID: 986839583}
-    - target: {fileID: 2625331760681363483, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: mCamera
-      value: 
-      objectReference: {fileID: 519420031}
-    - target: {fileID: 2625331760681363483, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: nextRoom
-      value: 
-      objectReference: {fileID: 1425913670}
-    - target: {fileID: 2625331761204325399, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: mHero
-      value: 
-      objectReference: {fileID: 986839583}
-    - target: {fileID: 2625331761204325399, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: mCamera
-      value: 
-      objectReference: {fileID: 519420031}
-    - target: {fileID: 2625331761204325399, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: nextRoom
-      value: 
-      objectReference: {fileID: 1425913670}
-    - target: {fileID: 2625331760369116258, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: nextRoom
-      value: 
-      objectReference: {fileID: 1425913670}
-    - target: {fileID: 2625331760369116258, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: mHero
-      value: 
-      objectReference: {fileID: 986839583}
-    - target: {fileID: 2625331760369116258, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: mCamera
-      value: 
-      objectReference: {fileID: 519420031}
-    - target: {fileID: 2625331760265370041, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: nextRoom
-      value: 
-      objectReference: {fileID: 1425913670}
-    - target: {fileID: 2625331760265370041, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: mHero
-      value: 
-      objectReference: {fileID: 986839583}
-    - target: {fileID: 2625331760265370041, guid: dfa11b5f43429a04f81e674438174970,
-        type: 3}
-      propertyPath: mCamera
-      value: 
-      objectReference: {fileID: 519420031}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfa11b5f43429a04f81e674438174970, type: 3}

@@ -62,7 +62,8 @@ public class RoomSpawner : MonoBehaviour {
                 room.transform.parent = this.gameObject.transform;
             }
             Destroy(gameObject);
+            spawned = true;
         }
-        spawned = true;
+        
     }
 }

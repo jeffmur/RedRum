@@ -54,7 +54,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collision2D collison)
+    private void OnTriggerEnter2D(Collider2D collison)
     {
         if(collison.gameObject.name == "Bullet(Clone)")
             TakeDamage(25);
