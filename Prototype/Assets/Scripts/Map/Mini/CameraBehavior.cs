@@ -50,6 +50,18 @@ public class CameraBehavior : MonoBehaviour
         // assign camera position
         mCamera.transform.position = new Vector3(target.x, target.y, -30f);
         // assign camera size
-        mCamera.orthographicSize = miniTemp.childCount * 2.5f;
+        float x = maxX - minX;
+        float y = maxY - minY;
+        if(miniTemp.childCount <= 7)
+            mCamera.orthographicSize = miniTemp.childCount * 3.5f;
+        else
+        {
+            if (x < y)
+                mCamera.orthographicSize = y / 1.5f;
+            else
+                mCamera.orthographicSize = x / 1.5f;
+        }
+            
+
     }
 }

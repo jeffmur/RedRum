@@ -19,11 +19,13 @@ public class DoorSystem : MonoBehaviour
     private bool UNLOCKED = false;   // 1
     private bool OPEN = false;       // 2
     public List<GameObject> allDoors;
+    private MMController sMMController;
 
     // Start is called before the first frame update
     void Start()
     {
         LockAll();
+        sMMController = GameObject.Find("GameManager").GetComponent<MMController>();
     }
 
     // Update is called once per frame
@@ -93,7 +95,7 @@ public class DoorSystem : MonoBehaviour
         LOCKED = false;
         UNLOCKED = false;
         for (int i = 0; i < allDoors.Count; i++)
-            if(allDoors[i] != null)
+            if (allDoors[i] != null && isDoor(sMMController.availableDoors(), i))
                 OpenDoor(allDoors[i]);
     }
 
@@ -115,5 +117,35 @@ public class DoorSystem : MonoBehaviour
         for (int i = 0; i < allDoors.Count; i++)
             if(allDoors[i] != null)
                 UnlockDoor(allDoors[i]);
+    }
+    
+    private bool isDoor(List<char> doorsList, int index)
+    {
+        for (int i = 0; i < doorsList.Count; i++)
+            if (allDoors[index].name[0] == doorsList[i])
+                return true;
+        return false;
+    }
+
+    /**
+     * @param Top_door, Bottom_door, Right_door, Left_Door
+     * @returns true/false
+     * Iterates through allDoors & children
+     *  If any child 0-3 are true, returned
+     *  Otherwise, keeps getting set to false
+     */
+    public bool isOpen(string doorName)
+    {
+        bool open = true;
+        foreach(GameObject door in allDoors)
+        {
+            if(doorName == door.name)
+            {
+                List<GameObject> myChildren = GetAllChildren(door);
+                for (int i = 0; i < 3; i++)
+                    open = myChildren[0].activeSelf;
+            }
+        }
+        return open == false;
     }
 }

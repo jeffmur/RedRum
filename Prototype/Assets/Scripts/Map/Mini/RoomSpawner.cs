@@ -17,7 +17,7 @@ public class RoomSpawner : MonoBehaviour {
 	public float waitTime = 4f;
 
 	void Start(){
-		Destroy(gameObject, waitTime);
+		Destroy(gameObject, waitTime); // destroys spawn points
         templates = GameObject.Find("Mini Template").GetComponent<RoomTemplates>();
         //Debug.Log(templates != null);
 		Invoke("Spawn", 0.1f);
@@ -53,9 +53,7 @@ public class RoomSpawner : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if(other.CompareTag("SpawnPoint")){
-			if(other.GetComponent<RoomSpawner>().spawned == false && spawned == false){
-				var room = Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
-                room.transform.parent = this.gameObject.transform;
+			if(other.GetComponent<RoomSpawner>().spawned == true && spawned == false){
 				Destroy(gameObject);
 			} 
 			spawned = true;

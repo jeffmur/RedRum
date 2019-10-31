@@ -6,19 +6,16 @@ using UnityEngine.Audio;
 
 public class GameWorld : MonoBehaviour
 {
+    public static GameWorld sGameWorld = GameWorld.sGameWorld;
     private GameObject player;
     private PlayerStats stats;
     public AudioSource piano;
     public GameObject[] allRooms;
-    public Transform miniMap;
-    private Transform playerIcon;
 
     // Start is called before the first frame update
     void Awake()
     {
-        miniMap = GameObject.Find("Mini Template").GetComponent<Transform>();
-
-        allRooms[0].GetComponent<DoorSystem>().LockAll();
+        allRooms[0].GetComponent<DoorSystem>().LockAll(); // Lock start room
 
         player = GameObject.FindGameObjectWithTag("Player");
         stats = player.GetComponent<PlayerStats>();
@@ -31,12 +28,12 @@ public class GameWorld : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerIcon = miniMap.GetChild(0);
         int roomIndex = getPlayerCurrentRoom();
         if (roomIndex > 0)
             StartCoroutine(FadeAudioSource.StartFade(piano, 1f, 0f));
         else
             StartCoroutine(FadeAudioSource.StartFade(piano, 0.5f, .2f));
+        // All rooms
         if (roomIndex > -1)
         {
             if (Input.GetKeyDown("o"))
@@ -53,17 +50,12 @@ public class GameWorld : MonoBehaviour
 
     public int getPlayerCurrentRoom()
     {
-        for(int i = 0; i < allRooms.Length; i++)
+        for (int i = 0; i < allRooms.Length; i++)
         {
             RoomStats stats = allRooms[i].GetComponent<RoomStats>();
             if (stats.isInRoom(player.transform.position))
                 return i;
         }
         return -1;
-    }
-
-    public void updateMiniMap(GameObject playerIcon)
-    {
-
     }
 }

@@ -31,9 +31,6 @@ public partial class RoomPointer : MonoBehaviour
         next.setCamLocation();
         // Move Hero
         mHero.transform.position = next.sendPlayerToDoor(doorSide);
-        // Update MiniMap
-        //gameManager.
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -44,23 +41,30 @@ public partial class RoomPointer : MonoBehaviour
             switch (name)
             {
                 case "Top_Door":
-                    Debug.Log("Collided with " + collision.name + " at " + gameObject.name);
+                    if (!fromRoom.isOpen(name)) { break; }
                     RoomSwap(nextRoom, "BOTTOM");
+                    gameManager.GetComponent<MMController>().moveMMCasper("UP");
+                    fromRoom.LockAll();
                     break;
                 case "Bottom_Door":
-                    Debug.Log("Collided with " + collision.name + " at " + gameObject.name);
+                    if (!fromRoom.isOpen(name)) { break; }
                     RoomSwap(nextRoom, "TOP");
+                    gameManager.GetComponent<MMController>().moveMMCasper("DOWN");
+                    fromRoom.LockAll();
                     break;
                 case "Right_Door":
-                    Debug.Log("Collided with " + collision.name + " at " + gameObject.name);
+                    if (!fromRoom.isOpen(name)) { break; }
                     RoomSwap(nextRoom, "LEFT");
+                    gameManager.GetComponent<MMController>().moveMMCasper("RIGHT");
+                    fromRoom.LockAll();
                     break;
                 case "Left_Door":
-                    Debug.Log("Collided with " + collision.name + " at " + gameObject.name);
+                    if (!fromRoom.isOpen(name)) { break; }
                     RoomSwap(nextRoom, "RIGHT");
+                    gameManager.GetComponent<MMController>().moveMMCasper("LEFT");
+                    fromRoom.LockAll();
                     break;
             }
-            fromRoom.LockAll();
         }
     }
 }
