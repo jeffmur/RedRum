@@ -14,6 +14,18 @@ TextureImporter:
   - first:
       213: -245512824712268325
     second: CasperRight 3
+  - first:
+      213: -7545168421576708709
+    second: CasperRight 4
+  - first:
+      213: -3695090621164058763
+    second: CasperRight 5
+  - first:
+      213: -5219693482969678090
+    second: CasperRight 6
+  - first:
+      213: 7564672982818864624
+    second: CasperRight 7
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -70,9 +82,9 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 2
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 64
+    maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -81,7 +93,6 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -100,7 +111,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d995b27d537e0d1a0800000000000000
+      spriteID: 6e11ba17d1974cd49bbf929e7c57aac6
       internalID: -6786670420018112099
       vertices: []
       indices: 
@@ -121,7 +132,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 06e591ad4e4c1d270800000000000000
+      spriteID: 5dfabde12a3342b428b5ad4e171ca73f
       internalID: 8273610477646995040
       vertices: []
       indices: 
@@ -129,6 +140,48 @@ TextureImporter:
       weights: []
     - serializedVersion: 2
       name: CasperRight 2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c45a3b417a422e84cb3182d4a73e9746
+      internalID: 8773174647061220264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CasperRight 3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8492f905f2279a94287212c7e90bf492
+      internalID: -245512824712268325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CasperRight 4
       rect:
         serializedVersion: 2
         x: 0
@@ -142,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8ab0c86fbd390c970800000000000000
-      internalID: 8773174647061220264
+      spriteID: 89cb5f32d11dd5346b8f6c2474c6faff
+      internalID: -7545168421576708709
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CasperRight 3
+      name: CasperRight 5
       rect:
         serializedVersion: 2
         x: 32
@@ -163,8 +216,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bd5f83ff263c79cf0800000000000000
-      internalID: -245512824712268325
+      spriteID: d52da19881d56104bba32c3cbcd20a06
+      internalID: -3695090621164058763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CasperRight 6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bac56c08d649cf4bac63bba0a50dd37
+      internalID: -5219693482969678090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CasperRight 7
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ef579fa352773e4faae190cbc8f691c
+      internalID: 7564672982818864624
       vertices: []
       indices: 
       edges: []
