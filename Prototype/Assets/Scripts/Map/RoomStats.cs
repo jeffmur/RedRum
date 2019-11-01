@@ -31,6 +31,28 @@ public class RoomStats : MonoBehaviour
             && minY < location.y;
     }
 
+    public Vector2 spawnOnSide(string side)
+    {
+        float distance = getHeightDem() * 2 + 30f;
+        Vector2 myLoc = transform.position;
+        Vector2 location = new Vector2(0, 0);
+        switch (side)
+        {
+            case "TOP":
+                location = new Vector2(myLoc.x, myLoc.y + distance);
+                break;
+            case "BOTTOM":
+                location = new Vector2(myLoc.x, myLoc.y - distance);
+                break;
+            case "LEFT":
+                location = new Vector2(myLoc.x - distance, myLoc.y);
+                break;
+            case "RIGHT":
+                location = new Vector2(myLoc.x + distance, myLoc.y);
+                break;
+        }
+        return location;
+    }
     private void setWallDemensions()
     {
         for(int i = 0; i < mWalls.Count; i++)
@@ -83,7 +105,7 @@ public class RoomStats : MonoBehaviour
         // center is exactly between both
         Vector2 target = (x + y) / 2f;
         // assign camera position
-        mCamera.transform.position = new Vector3(target.x, target.y, -10f);
+        mCamera.transform.position = new Vector3(target.x, target.y, -30f);
     }
 
     public Vector2 sendPlayerToDoor(string side)
