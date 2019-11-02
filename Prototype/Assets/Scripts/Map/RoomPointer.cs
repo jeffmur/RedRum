@@ -40,11 +40,11 @@ public partial class RoomPointer : MonoBehaviour
         mm.moveMMCasper(heroDir);
 
         // Player Icon ON Entry Room
-        if (mm.getCurrentRoom().name == "Entry Room")
+        if (mm.getCurrentRoomName() == "Entry Room")
             nextRoom = GameObject.Find("Welcome");
 
-        // Player Icon On Boss Icon
-        float dist = Vector2.Distance(mm.playerIcon.position, mm.bossIcon.position);
+            // Player Icon On Boss Icon
+            float dist = Vector2.Distance(mm.playerIcon.position, mm.bossIcon.position);
         if (dist <= 1f)
             nextRoom = GameObject.Find("Boss Pool");
 

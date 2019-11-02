@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 4918076436423142}
   - component: {fileID: 212581094452848984}
   m_Layer: 8
-  m_Name: Wall (5)
+  m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 4061250319847774}
   - component: {fileID: 212992155282712870}
   m_Layer: 8
-  m_Name: Wall (6)
+  m_Name: T
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 4403932030817102}
   - component: {fileID: 212338951914403200}
   m_Layer: 8
-  m_Name: Wall (2)
+  m_Name: L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -412,7 +412,7 @@ GameObject:
   - component: {fileID: 4057763370436458}
   - component: {fileID: 212599085029675888}
   m_Layer: 8
-  m_Name: Wall (3)
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -526,6 +526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 574b113a1431ad2489b46dd20fdf7dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasOverlap: 1
 --- !u!1 &1993842130122838
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,7 +538,7 @@ GameObject:
   - component: {fileID: 4814395730019410}
   - component: {fileID: 212868627790954196}
   m_Layer: 8
-  m_Name: Wall
+  m_Name: R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

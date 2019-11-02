@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 4957117777021588}
   - component: {fileID: 212237624329886708}
   m_Layer: 8
-  m_Name: Wall (2)
+  m_Name: T
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 4646064312849792}
   - component: {fileID: 212377450164622612}
   m_Layer: 8
-  m_Name: Wall
+  m_Name: B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -783,3 +783,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 574b113a1431ad2489b46dd20fdf7dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasOverlap: 1

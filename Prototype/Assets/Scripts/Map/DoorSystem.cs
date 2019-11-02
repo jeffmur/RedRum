@@ -95,7 +95,7 @@ public class DoorSystem : MonoBehaviour
         LOCKED = false;
         UNLOCKED = false;
         for (int i = 0; i < allDoors.Count; i++)
-            if (allDoors[i] != null && isDoor(sMMController.availableDoors(), i))
+            if (isAvailable(i))
                 OpenDoor(allDoors[i]);
     }
 
@@ -119,11 +119,16 @@ public class DoorSystem : MonoBehaviour
                 UnlockDoor(allDoors[i]);
     }
     
-    private bool isDoor(List<char> doorsList, int index)
+    private bool isAvailable(int index)
     {
-        for (int i = 0; i < doorsList.Count; i++)
-            if (allDoors[index].name[0] == doorsList[i])
+        if (allDoors[index] == null)
+            return false;
+        List<char> all = sMMController.availableDoors();
+        for(int j = 0; j < all.Count; j++)
+        {
+            if (allDoors[index].name[0] == all[j])
                 return true;
+        }
         return false;
     }
 

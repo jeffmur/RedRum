@@ -22,7 +22,7 @@ public class MMController : MonoBehaviour
     void Update()
     {
         // waits until map is spawned and only called once
-        if (!once && miniMap.GetComponent<RoomTemplates>().waitTime <= -3f)
+        if (!once && miniMap.GetComponent<RoomTemplates>().waitTime < -3f)
         {
             setUp(miniMap);
             once = true;
@@ -47,12 +47,63 @@ public class MMController : MonoBehaviour
 
     public void setUp(Transform folder)
     {
-        foreach (Transform child in folder)
+        foreach (Transform i in folder)
         {
-             miniRooms.Add(child);
+            miniRooms.Add(i);
         }
         playerIcon = miniRooms[0];
         bossIcon = miniRooms[miniRooms.Count - 1];
+        manageDups();
+    }
+
+    private void manageDups()
+    {
+        foreach(Transform i in miniMap)
+        {
+            if(i == playerIcon || i == bossIcon) { continue; }
+            foreach(Transform j in miniMap)
+            {
+                if(j == playerIcon || j == bossIcon) { continue; }
+                if(i.position == j.position && i != j)
+                {
+                    string iName = i.name.Replace("(Clone)", "");
+                    string jName = j.name.Replace("(Clone)", "");
+                    if (iName.Length == 1)
+                        if (jName.Contains(jName))
+                            continue;
+                    if (jName.Length == 1)
+                        if (iName.Contains(jName))
+                            continue;
+
+                    // Two Rooms overlapping (creates 3 doors)
+                    hideWalls(i);
+                    hideWalls(j);
+                    Debug.Log(i.name +" & " + j.name +" are overlapping!");
+                }                       
+            }
+        }
+    }
+
+    private void hideWalls(Transform room)
+    {
+        if (room != playerIcon || room != bossIcon)
+        {
+            Transform all = room.GetChild(0); // Walls (empty gameObject - "folder")
+            string R = getCurrentRoomName();
+            foreach (Transform wall in all)
+            {
+                // Walls are labeled L, R, T, B 
+                // Hide walls that match the room description
+                for (int i = 0; i < R.Length; i++)
+                {
+                    // Found matching & do not hide door openings
+                    if (wall.name == R[i].ToString() && wall.name[0] != 'W')
+                        wall.gameObject.SetActive(false);
+                }
+                
+                
+            }
+        }
     }
 
     /**
@@ -85,34 +136,56 @@ public class MMController : MonoBehaviour
 
     public List<char> availableDoors()
     {
-        Transform room = getCurrentRoom();
-        if (room == entryRoom)
-        {
-            return new List<char> { 'T', 'B', 'R', 'L' };
-        }
-        return nameToList(room.name.Replace("(Clone)",""));
+        return nameToList(getCurrentRoomName());
     }
-    public Transform getCurrentRoom()
+
+    public string getCurrentRoomName()
     {
         // Entry Room is not a child must be checked first
         if (playerIcon.position == entryRoom.position)
-            return entryRoom;
+            return "Entry Room";
 
+        string result = "";
         for (int i = 1; i < miniRooms.Count; i++)
         {
             float dist = Vector2.Distance(playerIcon.position, miniRooms[i].position);
             // Otherwise, check all children
             if (dist <= 1f && dist >= 0f)
-                return miniRooms[i];
+                result += miniRooms[i].name.Replace("(Clone)", "");
         }
-        return null;
+        removeDuplicates(result);
+        return result;
     }
 
     private List<char> nameToList(string roomName)
     {
-        if (roomName.Length == 1)
-            return new List<char> { roomName[0] };
-        else
-            return new List<char> { roomName[0], roomName[1] };
+        roomName.Replace("(Clone)", "");
+        if(roomName == "Entry Room")
+            return new List<char> { 'T', 'L', 'R', 'B' };
+        switch (roomName.Length)
+        {
+            case 1:
+                return new List<char> { roomName[0] };
+            case 2:
+                return new List<char> { roomName[0], roomName[1] };
+            case 3:
+                return new List<char> { roomName[0], roomName[1], roomName[2] };
+            case 4:
+                return new List<char> { roomName[0], roomName[1], roomName[2], roomName[3] };
+            default:
+                return null;
+        }              
+    }
+
+    private void removeDuplicates(string init)
+    {
+        for(int i = 0; i < init.Length; i++)
+        {
+            for(int j = 0; j < init.Length; j++)
+            {
+                if (init[i] == init[j])
+                    init.Remove(i);
+            }
+        }
     }
 }

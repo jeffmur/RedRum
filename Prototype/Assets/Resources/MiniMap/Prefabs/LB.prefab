@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 574b113a1431ad2489b46dd20fdf7dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasOverlap: 1
 --- !u!1 &1152644564881294
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,7 +57,7 @@ GameObject:
   - component: {fileID: 4390292705741372}
   - component: {fileID: 212073347290492632}
   m_Layer: 8
-  m_Name: Wall
+  m_Name: R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -634,7 +635,7 @@ GameObject:
   - component: {fileID: 4900498916408868}
   - component: {fileID: 212487361786360832}
   m_Layer: 8
-  m_Name: Wall (6)
+  m_Name: T
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

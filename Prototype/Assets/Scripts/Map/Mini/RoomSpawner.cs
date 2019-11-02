@@ -20,7 +20,7 @@ public class RoomSpawner : MonoBehaviour {
 		Destroy(gameObject, waitTime); // destroys spawn points
         templates = GameObject.Find("Mini Template").GetComponent<RoomTemplates>();
         //Debug.Log(templates != null);
-		Invoke("Spawn", 0.1f);
+		Invoke("Spawn", 0.01f);
 	}
 
 
@@ -58,10 +58,10 @@ public class RoomSpawner : MonoBehaviour {
         {
             if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
             {
-                var room = Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
-                room.transform.parent = this.gameObject.transform;
+                Debug.Log(name + " and " + other.name + " should spawn wall");
+                Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
             spawned = true;
         }
         
