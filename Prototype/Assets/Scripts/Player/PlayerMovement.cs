@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private GameObject crosshairs;
     private Rigidbody2D rb;
     private Animator animator;
     private PlayerStats playerStats;
@@ -14,16 +15,17 @@ public class PlayerMovement : MonoBehaviour
         playerStats = gameObject.GetComponentInChildren<PlayerStats>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        
+        crosshairs = GameObject.Find("crossHairs");
     }
     // Update is called once per frame
     private void Update()
     {
-       movement.x =  Input.GetAxisRaw("Horizontal");
-       movement.y = Input.GetAxisRaw("Vertical");
+        Vector2 direction = Vector3.Normalize(crosshairs.transform.localPosition - transform.localPosition);
+        movement.x =  Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
 
-        animator.SetFloat("HorizontalDirection", movement.x);
-        animator.SetFloat("VerticalDirection", movement.y);
+        animator.SetFloat("HorizontalDirection", direction.x);
+        animator.SetFloat("VerticalDirection", direction.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
     }
     private void FixedUpdate()
