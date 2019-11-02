@@ -25,10 +25,10 @@ public class CameraBehavior : MonoBehaviour
         if (!once && miniTemp.GetComponent<RoomTemplates>().waitTime < -3f)
         {
             traverseChildren();
+            setCamLocation();
             mCamera.gameObject.SetActive(true);
             once = true;
         }
-        setCamLocation();
     }
 
     private void traverseChildren()
@@ -42,7 +42,7 @@ public class CameraBehavior : MonoBehaviour
             else if (child.position.y < minY)
                 minY = child.position.y;
             else if (child.position.y > maxY)
-                maxY = child.position.y;
+                maxY = child.position.y + 5f;
         }
     }
 
