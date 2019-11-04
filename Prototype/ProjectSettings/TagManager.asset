@@ -9,6 +9,8 @@ TagManager:
   - SpawnPoint
   - Level
   - Rooms
+  - HeroBullet
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
