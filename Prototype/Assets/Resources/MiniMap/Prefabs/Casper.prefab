@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3502540020961720586}
   m_Layer: 8
   m_Name: Casper
-  m_TagString: Player
+  m_TagString: Icon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

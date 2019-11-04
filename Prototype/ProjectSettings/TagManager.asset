@@ -11,6 +11,8 @@ TagManager:
   - Rooms
   - HeroBullet
   - EnemyBullet
+  - Icon
+  - Undefined
   layers:
   - Default
   - TransparentFX

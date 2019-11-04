@@ -115,7 +115,7 @@ public class DoorSystem : MonoBehaviour
         OPEN = false;
         LOCKED = false;
         for (int i = 0; i < allDoors.Count; i++)
-            if(allDoors[i] != null)
+            if(isAvailable(i))
                 UnlockDoor(allDoors[i]);
     }
     

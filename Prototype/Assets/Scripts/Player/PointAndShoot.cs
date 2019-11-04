@@ -17,7 +17,7 @@ public class PointAndShoot : MonoBehaviour
         Cursor.visible = false;
         crosshairs = GameObject.Find("crossHairs");
         player = GameObject.Find("Casper");
-        bulletPrefab = Resources.Load("Textures/Prefabs/Bullet");
+        bulletPrefab = Resources.Load("Textures/Prefabs/Hero/Bullet");
         mCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 

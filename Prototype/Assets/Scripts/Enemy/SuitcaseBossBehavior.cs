@@ -24,7 +24,9 @@ public class SuitcaseBossBehavior : MonoBehaviour
     void Update()
     {
         direction = Vector3.Normalize(Casper.transform.position - transform.position);
-        transform.position += EnemySpeed * direction * Time.deltaTime;
+        float distance = Vector3.Distance(Casper.transform.position, transform.position);
+        if(distance <= 15f)
+            transform.position += EnemySpeed * direction * Time.deltaTime;
         if (direction.x < 0)
         {
             renderer.flipX = false;

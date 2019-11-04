@@ -151,10 +151,10 @@ public class MMController : MonoBehaviour
         {
             float dist = Vector2.Distance(playerIcon.position, miniRooms[i].position);
             // Otherwise, check all children
-            if (dist <= 1f && dist >= 0f)
+            if (dist <= 1f && dist >= 0f && miniRooms[i].tag == "Untagged")
                 result += miniRooms[i].name.Replace("(Clone)", "");
         }
-        removeDuplicates(result);
+        result = removeDuplicates(result);
         return result;
     }
 
@@ -178,15 +178,41 @@ public class MMController : MonoBehaviour
         }              
     }
 
-    private void removeDuplicates(string init)
+    // Function to remove duplicates : GeeksForGeeks
+    static string removeDuplicates(string string1)
     {
-        for(int i = 0; i < init.Length; i++)
+
+        // keeps track of visited characters 
+        int counter = 0;
+        char[] str = string1.ToCharArray();
+        int i = 0;
+        int size = str.Length;
+
+        // gets character value 
+        int x;
+
+        // keeps track of length of resultant String 
+        int length = 0;
+
+        while (i < size)
         {
-            for(int j = 0; j < init.Length; j++)
+            x = str[i] - 97;
+
+            // check if Xth bit of counter is unset 
+            if ((counter & (1 << x)) == 0)
             {
-                if (init[i] == init[j])
-                    init.Remove(i);
+
+                str[length] = (char)('a' + x);
+
+                // mark current character as visited 
+                counter = counter | (1 << x);
+
+                length++;
             }
+            i++;
         }
+
+        return (new string(str)).Substring(0, length);
     }
+
 }

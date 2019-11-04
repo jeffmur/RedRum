@@ -27,6 +27,9 @@ public partial class RoomPointer : MonoBehaviour
     private void RoomSwap(GameObject nextLevel, string doorSide)
     {
         RoomStats next = nextLevel.GetComponent<RoomStats>();
+        // Spawn Enemies (if available)
+        nextLevel.GetComponent<RoomManager>().Initialize();
+        nextLevel.GetComponent<DoorSystem>().LockAll();
         // Move camera
         next.setCamLocation();
         // Move Hero
@@ -38,6 +41,12 @@ public partial class RoomPointer : MonoBehaviour
         MMController mm = gameManager.GetComponent<MMController>();
         // Move Player Icon First
         mm.moveMMCasper(heroDir);
+
+        // Base Case
+        if (fromRoom.gameObject.name == "Swap_1")
+            nextRoom = GameObject.Find("Swap_2");
+        if(fromRoom.gameObject.name == "Swap_2")
+            nextRoom = GameObject.Find("Swap_1");
 
         // Player Icon ON Entry Room
         if (mm.getCurrentRoomName() == "Entry Room")
@@ -72,7 +81,7 @@ public partial class RoomPointer : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // if door(s) are open
-        if (fromRoom.getStatus() == 2)
+        if (fromRoom.getStatus() == 2 && collision.name == "Casper")
         {
             //Debug.Log("Status is OPEN, " + fromRoom.name + " " + name);
             //Debug.Log("Going to room: " + nextRoom.name);

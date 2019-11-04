@@ -6,7 +6,7 @@ public class GhostBehavior : MonoBehaviour
 {
     public float AngerDistance = 3;
     public float Speed = 5;
-    public float AngerStateTimeLimit;
+    public float AngerStateTimeLimit = 5f;
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -60,7 +60,7 @@ public class GhostBehavior : MonoBehaviour
         }
         else if (other.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerStats>().loseHealth(1);
+            //other.gameObject.GetComponent<PlayerStats>().loseHealth(1);
         }
         else if (other.CompareTag("HeroBullet"))
         {
@@ -72,16 +72,19 @@ public class GhostBehavior : MonoBehaviour
 
     private void IdleState()
     {
+        // "Casper touches ghost"
         if (Vector2.Distance(casper.transform.localPosition, transform.position) <= AngerDistance) 
         {
             state = (int)States.Anger;
             animator.SetFloat("State", (float)States.Anger);
         }
+        else
+            animator.SetFloat("State", (float)States.Idle);
     }
 
     private void AngerState()
     {
-        if (timeSinceAngerStarted == -1)
+        if (timeSinceAngerStarted <= -1)
             timeSinceAngerStarted = Time.time;
         else if (Time.time - timeSinceAngerStarted >= AngerStateTimeLimit)
         {
@@ -94,7 +97,11 @@ public class GhostBehavior : MonoBehaviour
 
     private void ChaseState()
     {
-        rb.MovePosition(rb.position + direction * Speed * Time.fixedDeltaTime);
+        float distance = Vector3.Distance(casper.transform.position, transform.position);
+        if (distance <= 13)
+            rb.MovePosition(rb.position + direction * Speed * Time.fixedDeltaTime);
+        else
+            state = (int)States.Idle;
     }
 
     private void GetChaseDirection()
