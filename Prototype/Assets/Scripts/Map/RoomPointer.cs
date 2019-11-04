@@ -43,14 +43,30 @@ public partial class RoomPointer : MonoBehaviour
         if (mm.getCurrentRoomName() == "Entry Room")
             nextRoom = GameObject.Find("Welcome");
 
-            // Player Icon On Boss Icon
-            float dist = Vector2.Distance(mm.playerIcon.position, mm.bossIcon.position);
+        // Player Icon On Boss Icon
+        float dist = Vector2.Distance(mm.playerIcon.position, mm.bossIcon.position);
         if (dist <= 1f)
             nextRoom = GameObject.Find("Boss Pool");
 
         // Re-locate real player location
         RoomSwap(nextRoom, roomDir);
         fromRoom.LockAll();
+    }
+
+    private string oppositeDir(string room)
+    {
+        switch (room)
+        {
+            case "UP":
+                return "DOWN";
+            case "DOWN":
+                return "UP";
+            case "LEFT":
+                return "RIGHT";
+            case "RIGHT":
+                return "LEFT";
+        }
+        return null;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -8,6 +8,7 @@ public class MMController : MonoBehaviour
     public Transform playerIcon;
     public Transform bossIcon;
     private Transform entryRoom;
+    public Transform closedRoom;
     public List<Transform> miniRooms;
     bool once = false;
 

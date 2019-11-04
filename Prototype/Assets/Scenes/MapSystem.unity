@@ -609,8 +609,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c449ebf7cab5c0d45a53d6abda116259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIcon: {fileID: 0}
-  bossIcon: {fileID: 0}
+  playerIcon: {fileID: 3502540020961720588, guid: 73a65106fb3097045bc91826dd57fcf9,
+    type: 3}
+  bossIcon: {fileID: 4740692003269406, guid: 09e14c596e782a742829f1166838514d, type: 3}
+  closedRoom: {fileID: 4207515337293680, guid: 71addd1db0904154d960002486bf6a2b, type: 3}
   miniRooms: []
 --- !u!114 &982888127
 MonoBehaviour:
