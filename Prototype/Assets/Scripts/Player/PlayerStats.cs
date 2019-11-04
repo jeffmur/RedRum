@@ -11,7 +11,7 @@ public class PlayerStats : MonoBehaviour
     private float cooldownrate;
     //private float isInvincible;
     private bool isInvincible;
-
+    public List<Item> heldItems;
     public delegate void onHealthChangeDelegate(int value);
     public event onHealthChangeDelegate onHealthChange, onMaxHealthChange;
 

@@ -2,51 +2,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 
-public class GameWorld : MonoBehaviour
+public partial class GameWorld : MonoBehaviour
 {
-    public static GameWorld sGameWorld = GameWorld.sGameWorld;
     private GameObject player;
     private PlayerStats stats;
-    public AudioSource piano;
-    public GameObject[] allRooms;
 
     // Start is called before the first frame update
     void Awake()
     {
-        allRooms[0].GetComponent<DoorSystem>().LockAll(); // Lock start room
-
         player = GameObject.FindGameObjectWithTag("Player");
         stats = player.GetComponent<PlayerStats>();
-
         Debug.Assert(player != null);
         Debug.Assert(stats != null);
-        Debug.Assert(allRooms != null);
-    }
-
-    private void Start()
-    {
-        for (int i = 0; i < allRooms.Length; i++)
-            allRooms[i].GetComponent<DoorSystem>().LockAll();
     }
 
     // Update is called once per frame
     void Update()
     {
-        int roomIndex = getPlayerCurrentRoom();
-        if (roomIndex > 0)
-            StartCoroutine(FadeAudioSource.StartFade(piano, 1f, 0f));
-        else
-            StartCoroutine(FadeAudioSource.StartFade(piano, 0.5f, .2f));
-        // All rooms
-        if (roomIndex > -1)
-        {
-            if (Input.GetMouseButtonDown(1))
-            {
-                allRooms[roomIndex].GetComponent<DoorSystem>().OpenAll();
-            }
-        }
         testHP();
     }
 
@@ -55,25 +28,12 @@ public class GameWorld : MonoBehaviour
         return stats.MaxHealth;
     }
 
-    public int getPlayerCurrentRoom()
-    {
-        for (int i = 0; i < allRooms.Length; i++)
-        {
-            RoomStats stats = allRooms[i].GetComponent<RoomStats>();
-            if (stats.isInRoom(player.transform.position))
-            {
-                GetComponent<MainController>().updateRoomStatus(allRooms[i].name);
-                return i;
-            }                
-        }
-        return -1;
-    }
-
     public void testHP()
     {
         if (Input.GetMouseButtonDown(0))
         {
             stats.incrementMaxHeath();
+            triggerNotification("HOI!!!!!!!!!!!!!!!!!!!");
         }
         if (Input.GetMouseButtonDown(1))
         {
@@ -87,6 +47,13 @@ public class GameWorld : MonoBehaviour
         {
             stats.loseHealth(1);
         }
+    }
 
+    public delegate void onNotifyDelegate(string notification);
+    public static event onNotifyDelegate onNotifyChange;
+
+    public static void triggerNotification(string notification)
+    {
+        onNotifyChange?.Invoke(notification);
     }
 }
