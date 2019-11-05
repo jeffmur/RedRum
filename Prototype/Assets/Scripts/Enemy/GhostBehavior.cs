@@ -60,7 +60,7 @@ public class GhostBehavior : MonoBehaviour
         }
         else if (other.CompareTag("Player"))
         {
-            //other.gameObject.GetComponent<PlayerStats>().loseHealth(1);
+            other.gameObject.GetComponent<PlayerStats>().loseHealth(1);
         }
         else if (other.CompareTag("HeroBullet"))
         {

@@ -20,14 +20,14 @@ public class EnemyBullet : MonoBehaviour
         if (other.CompareTag("Wall"))
         {
             GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-            Destroy(effect, 1f);
+            Destroy(effect, 0.5f);
             Destroy(gameObject);
         }
         else if (other.CompareTag("Player"))
         {
             GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-            Destroy(effect, 1f);
-            //other.GetComponent<PlayerStats>().loseHealth(bulletDamage);
+            Destroy(effect, 0.5f);
+            other.GetComponent<PlayerStats>().loseHealth(bulletDamage);
             Destroy(gameObject);
         }
     }

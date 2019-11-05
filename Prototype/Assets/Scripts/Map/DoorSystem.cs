@@ -124,6 +124,7 @@ public class DoorSystem : MonoBehaviour
         if (allDoors[index] == null)
             return false;
         List<char> all = sMMController.availableDoors();
+        if(all == null) { return false; }
         for(int j = 0; j < all.Count; j++)
         {
             if (allDoors[index].name[0] == all[j])

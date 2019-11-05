@@ -47,23 +47,26 @@ public class RoomSpawner : MonoBehaviour {
 			}
             if(newRoom != null)
                 newRoom.transform.parent = templates.transform;
+                
 			spawned = true;
 		}
 	}
     /*
      * Called every time SpawnPoints Collide
      */
-	private void OnTriggerEnter2D(Collider2D other){
-		if(other.CompareTag("SpawnPoint"))
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("SpawnPoint"))
         {
             if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
             {
                 Debug.Log(name + " and " + other.name + " should spawn wall");
-                Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
+                GameObject room = Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
+                room.transform.parent = templates.transform;
                 Destroy(gameObject);
             }
             spawned = true;
         }
-        
+
     }
 }

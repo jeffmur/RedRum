@@ -28,32 +28,18 @@ public class MMController : MonoBehaviour
             setUp(miniMap);
             once = true;
         }
-        
-    }
-    public void updateMiniMap(string side)
-    {
-        switch (side)
-        {
-            case "TOP":
-                //moveIcon(450f);
-                break;
-            case "BOTTOM":
-                break;
-            case "LEFT":
-                break;
-            case "RIGHT":
-                break;
-        }
+        removeClosed();
     }
 
     public void setUp(Transform folder)
     {
+        // Actually setting up data structure
         foreach (Transform i in folder)
-        {
             miniRooms.Add(i);
-        }
         playerIcon = miniRooms[0];
         bossIcon = miniRooms[miniRooms.Count - 1];
+
+        // Remove walls on overlapping rooms
         manageDups();
     }
 
@@ -64,7 +50,15 @@ public class MMController : MonoBehaviour
             if(i == playerIcon || i == bossIcon) { continue; }
             foreach(Transform j in miniMap)
             {
-                if(j == playerIcon || j == bossIcon) { continue; }
+                if(j == playerIcon || j == bossIcon || i == j) { continue; }
+
+                // Duplicate Walls
+                if (i.name == "Closed Wall(Clone)" && i.name == j.name)
+                {
+                    miniRooms.Remove(j);
+                    Destroy(j.gameObject);
+                }
+                // Overlapping Rooms (3 doors)
                 if(i.position == j.position && i != j)
                 {
                     string iName = i.name.Replace("(Clone)", "");
@@ -140,6 +134,21 @@ public class MMController : MonoBehaviour
         return nameToList(getCurrentRoomName());
     }
 
+    public Transform getCurrentRoom()
+    {
+        // Entry Room is not a child must be checked first
+        if (playerIcon.position == entryRoom.position)
+            return entryRoom;
+
+        for (int i = 1; i < miniRooms.Count; i++)
+        {
+            float dist = Vector2.Distance(playerIcon.position, miniRooms[i].position);
+            // Otherwise, check all children
+            if (dist <= 1f && dist >= 0f && miniRooms[i].tag == "Untagged")
+                return miniRooms[i];
+        }
+        return null;
+    }
     public string getCurrentRoomName()
     {
         // Entry Room is not a child must be checked first
@@ -178,7 +187,7 @@ public class MMController : MonoBehaviour
         }              
     }
 
-    // Function to remove duplicates : GeeksForGeeks
+    // Function to remove duplicates : GeeksForGeeks -> gekfor
     static string removeDuplicates(string string1)
     {
 
@@ -215,4 +224,45 @@ public class MMController : MonoBehaviour
         return (new string(str)).Substring(0, length);
     }
 
+    // Called every update, however only runs when current room <= 10 from closed
+    // And if closed != null
+    private void removeClosed()
+    {
+        Transform ofRoom = getCurrentRoom();
+        Transform toRoom = getClosed();
+        if(toRoom == null) { return; }
+        float dist = Vector3.Distance(playerIcon.position, toRoom.position);
+        if(dist < 11f)
+        {
+            string temp = ofRoom.name;
+            Vector2 l = playerIcon.position;
+            if (new Vector2(l.x + 10f, l.y) == (Vector2)toRoom.position)
+            {
+                ofRoom.name = temp.Replace("R", "");
+            }
+            else if(new Vector2(l.x - 10f, l.y) == (Vector2)toRoom.position)
+            {
+                ofRoom.name = temp.Replace("L", "");
+            }
+            else if (new Vector2(l.x, l.y+10f) == (Vector2)toRoom.position)
+            {
+                ofRoom.name = temp.Replace("T", "");
+            }
+            else if (new Vector2(l.x, l.y-10f) == (Vector2)toRoom.position)
+            {
+                ofRoom.name = temp.Replace("B", "");
+            }
+        }
+
+    }
+
+    private Transform getClosed()
+    {
+        foreach(Transform room in miniRooms)
+        {
+            if (room.name == "Closed Wall(Clone)")
+                return room;
+        }
+        return null;
+    }
 }

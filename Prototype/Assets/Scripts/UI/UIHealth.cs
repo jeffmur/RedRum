@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class UIHealth : MonoBehaviour
 {
-    public GameObject healthPanel;
-    public GameWorld gameWorld;
-    public Image[] hearts, emptyHearts;
+    public Transform empty;
+    public Transform full;
+    public List<Image> hearts, emptyHearts;
     public int maxHP, currentHP;
     private GameObject player;
 
@@ -18,6 +18,11 @@ public class UIHealth : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<PlayerStats>().onHealthChange += healthChanged;
         player.GetComponent<PlayerStats>().onMaxHealthChange += maxHealthChanged;
+        foreach (Transform e in empty)
+            emptyHearts.Add(e.GetComponent<Image>());
+        foreach (Transform f in full)
+            hearts.Add(f.GetComponent<Image>());
+        setStartingHealth(3);
     }
 
     private void Update()
@@ -30,12 +35,11 @@ public class UIHealth : MonoBehaviour
         maxHP = activeHearts;
         for (int i = 0; i < 10; i++)
         {
-            hearts[i].enabled = false;
+            if(i < activeHearts)
+                hearts[i].enabled = true;
+            else
+                hearts[i].enabled = false;
             emptyHearts[i].enabled = false;
-        }
-        for (int i = 0; i < activeHearts; i++)
-        {
-            hearts[i].enabled = true;
         }
     }
 
@@ -65,6 +69,7 @@ public class UIHealth : MonoBehaviour
     {
         if (maxHP == 1)
         {
+            // DON'T DIE
             return; //we should be at least a little nice.
         }
 

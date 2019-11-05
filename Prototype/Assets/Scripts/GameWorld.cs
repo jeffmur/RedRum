@@ -5,15 +5,12 @@ using UnityEngine;
 
 public partial class GameWorld : MonoBehaviour
 {
-    private GameObject player;
     private PlayerStats stats;
 
     // Start is called before the first frame update
     void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        stats = player.GetComponent<PlayerStats>();
-        Debug.Assert(player != null);
+        stats = GameObject.Find("Casper").GetComponent<PlayerStats>();
         Debug.Assert(stats != null);
     }
 
@@ -30,22 +27,13 @@ public partial class GameWorld : MonoBehaviour
 
     public void testHP()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            stats.incrementMaxHeath();
-            triggerNotification("HOI!!!!!!!!!!!!!!!!!!!");
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            stats.decrementMaxHeath();
-        }
         if (Input.GetKeyDown("1"))
         {
-            stats.gainHealth(1);
+            stats.incrementMaxHeath();
         }
         if (Input.GetKeyDown("2"))
         {
-            stats.loseHealth(1);
+            stats.decrementMaxHeath();
         }
     }
 

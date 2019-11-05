@@ -44,7 +44,7 @@ public class PlayerStats : MonoBehaviour
     public void decrementMaxHeath() 
     { 
         maxHealth--; 
-        onMaxHealthChange?.Invoke(-1); 
+        onMaxHealthChange?.Invoke(-1);
     }
 
     public void gainHealth(int value) 
@@ -56,28 +56,7 @@ public class PlayerStats : MonoBehaviour
     public void loseHealth(int value) 
     { 
         currentHealth -= value;
-        onHealthChange(value);
-
-        if (isInvincible) //logic only works on damage events
-        {
-            return;
-        }
-        currentHealth -= value;
         onHealthChange(-value);
-        //isInvincible = true;
     }
 
-    //belongs in different class
-    public void processInvincibility()
-    {
-
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "egg")
-        {
-            GameObject.Destroy(collision.gameObject);
-        }
-    }
 }
