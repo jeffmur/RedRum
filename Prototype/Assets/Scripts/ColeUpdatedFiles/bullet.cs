@@ -31,7 +31,7 @@ public class bullet : MonoBehaviour
         else if(other.CompareTag("Enemy"))
         {
             GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-            Destroy(effect, 1f);
+            Destroy(effect);
             other.GetComponent<Enemy>().TakeDamage(bulletDamage);
             Destroy(this.gameObject);
         }
