@@ -54,8 +54,8 @@ public partial class RoomManager : MonoBehaviour
         int RandomChest = Random.Range(0,2);
         if (RandomChest == 1 && !ChestSpawned)
         {
-            ChestSpawned = true;
             Instantiate(ClosedChest, transform.position, Quaternion.Euler(0, 0, 0));
+            ChestSpawned = true;
         }
         return true;
     }
