@@ -22,14 +22,19 @@ public partial class RoomManager : MonoBehaviour
         // If unlocked and right mouse clicked
         if (sDoorSys.getStatus() == 1 && Input.GetMouseButtonDown(1))
             sDoorSys.OpenAll();
-
     }
 
     public void Initialize()
     {
-        foreach(GameObject enemy in Enemies)
+        int AmountOFEnemies = Random.Range(0, 5);
+        for(int i = 0; AmountOFEnemies > i; i++ ) //creates a random amount of enemies
         {
-            enemy.GetComponent<EnemyHealthManager>().initMe(transform);
+            float x = Random.Range(-5, 5);
+            float y = Random.Range(-5, 5);
+            int typeOfEnemy = Random.Range(0, 2); //number of types of enemies 
+            GameObject enemy  = Enemies[typeOfEnemy];
+            Instantiate(enemy, new Vector2(transform.position.x + x, transform.position.y + y), Quaternion.identity);
+            enemy.gameObject.SetActive(true);
         }
     }
 
