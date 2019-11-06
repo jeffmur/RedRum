@@ -51,8 +51,8 @@ public partial class RoomManager : MonoBehaviour
             }
         }
         // no enemies
-        int RandomChest = Random.Range(0,2);
-        if (RandomChest == 1 && !ChestSpawned)
+        int RandomChest = Random.Range(0,4);
+        if (RandomChest == 1 && !ChestSpawned && gameObject.name != "Welcome")
         {
             Instantiate(ClosedChest, transform.position, Quaternion.Euler(0, 0, 0));
             ChestSpawned = true;
