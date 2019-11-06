@@ -6,6 +6,8 @@ public partial class RoomManager : MonoBehaviour
 {
     public List<GameObject> Enemies;
     public List<GameObject> Items;
+    public GameObject ClosedChest;
+    private bool ChestSpawned;
     private DoorSystem sDoorSys;
     // Start is called before the first frame update
     void Start()
@@ -14,7 +16,7 @@ public partial class RoomManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // No enemies and doors are locked
         if(allEnemiesDead() && sDoorSys.getStatus() == 0)
@@ -49,6 +51,13 @@ public partial class RoomManager : MonoBehaviour
             }
         }
         // no enemies
+        int RandomChest = Random.Range(0,2);
+        if (RandomChest == 1 && !ChestSpawned)
+        {
+            ChestSpawned = true;
+            Instantiate(ClosedChest, transform.position, Quaternion.Euler(0, 0, 0));
+        }
         return true;
     }
 }
+

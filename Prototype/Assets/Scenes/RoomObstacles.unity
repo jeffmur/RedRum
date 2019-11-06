@@ -1441,7 +1441,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d9244d06d18dd4a9a5b92ab417322a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPool: []
 --- !u!4 &982888129
 Transform:
   m_ObjectHideFlags: 0
@@ -1651,6 +1650,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemies: []
   Items: []
+  ClosedChest: {fileID: 1998873333861008, guid: a566a4ec74b362446811254d0c887410,
+    type: 3}
 --- !u!1 &1042667004
 GameObject:
   m_ObjectHideFlags: 0
@@ -2236,6 +2237,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4644436877037681442, guid: 9e9afb926b6181f41a3bb153d81c32fa,
         type: 3}
+    - target: {fileID: 1425913674, guid: dfa11b5f43429a04f81e674438174970, type: 3}
+      propertyPath: ClosedChest
+      value: 
+      objectReference: {fileID: 1998873333861008, guid: a566a4ec74b362446811254d0c887410,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfa11b5f43429a04f81e674438174970, type: 3}
 --- !u!1001 &1425913669
@@ -2330,6 +2336,11 @@ PrefabInstance:
       propertyPath: nextRoom
       value: 
       objectReference: {fileID: 6478781016209546251}
+    - target: {fileID: 1425913674, guid: dfa11b5f43429a04f81e674438174970, type: 3}
+      propertyPath: ClosedChest
+      value: 
+      objectReference: {fileID: 1998873333861008, guid: a566a4ec74b362446811254d0c887410,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfa11b5f43429a04f81e674438174970, type: 3}
 --- !u!1 &1425913670 stripped
@@ -3314,5 +3325,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1425913674, guid: dfa11b5f43429a04f81e674438174970, type: 3}
+      propertyPath: ClosedChest
+      value: 
+      objectReference: {fileID: 1998873333861008, guid: a566a4ec74b362446811254d0c887410,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfa11b5f43429a04f81e674438174970, type: 3}

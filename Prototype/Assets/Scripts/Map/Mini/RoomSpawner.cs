@@ -60,7 +60,6 @@ public class RoomSpawner : MonoBehaviour {
         {
             if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
             {
-                Debug.Log(name + " and " + other.name + " should spawn wall");
                 GameObject room = Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
                 room.transform.parent = templates.transform;
                 Destroy(gameObject);

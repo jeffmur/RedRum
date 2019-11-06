@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4124728988837648}
   - component: {fileID: 212551904140865530}
   - component: {fileID: 1584648148925343617}
+  - component: {fileID: 5687054181122865784}
   m_Layer: 0
   m_Name: chest
   m_TagString: Untagged
@@ -96,3 +97,29 @@ MonoBehaviour:
   spawnLocation: {fileID: 4124728988837648}
   OpenedChest: {fileID: 1661474771933488, guid: 44f29dd5abee0754597b097157c64823,
     type: 3}
+--- !u!61 &5687054181122865784
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998873333861008}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.26, y: 0.72}
+    newSize: {x: 1.26, y: 0.72}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.26, y: 0.72}
+  m_EdgeRadius: 0
