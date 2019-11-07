@@ -30,54 +30,51 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-<<<<<<< Updated upstream:Prototype/Assets/Scripts/ColeUpdatedFiles/Enemy.cs
         Vector3 dirction = player.position - transform.position;
-        float angle = Mathf.Atan2(dirction.y, dirction.x) * Mathf.Rad2Deg-90f;
+        float angle = Mathf.Atan2(dirction.y, dirction.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = angle;
         dirction.Normalize();
         movement = dirction;
-=======
-        
+
         Vector3 dirction = (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position).normalized;
         movement = dirction;
-        
->>>>>>> Stashed changes:Prototype/Assets/Scripts/Enemy/Enemy.cs
+
     }
 
 
     private void FixedUpdate()
     {
-      
+
         enemyMove(movement);
-        
+
     }
 
     void enemyMove(Vector2 direction)
     {
-            if (movement.x < 0)
+        if (movement.x < 0)
+        {
+            enemySprite.flipX = true;
+        }
+        else
+        {
+            enemySprite.flipX = false;
+        }
+        float distanceToPlayer = Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position);
+        if (distanceToPlayer < attackRange)
+        {
+            if (Time.time > (lastAttackTime + attackDelay))
             {
-                enemySprite.flipX = true;
+                enemyAnimator.SetBool("isAttacking", true);
+                lastAttackTime = Time.time;
             }
-            else
-            {
-                enemySprite.flipX = false;
-            }
-            float distanceToPlayer = Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position);
-            if (distanceToPlayer < attackRange)
-            {
-                if (Time.time > (lastAttackTime + attackDelay))
-                {
-                    enemyAnimator.SetBool("isAttacking", true);
-                    lastAttackTime = Time.time;
-                }
-            }
-            else
-            {
+        }
+        else
+        {
 
-                enemyAnimator.SetBool("isAttacking", false);
-                enemyAnimator.SetFloat("Speed", moveSpeed);
-                rb.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.smoothDeltaTime));
-            }
+            enemyAnimator.SetBool("isAttacking", false);
+            enemyAnimator.SetFloat("Speed", moveSpeed);
+            rb.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.smoothDeltaTime));
+        }
     }
 
     public void TakeDamage(int damage)
@@ -97,12 +94,9 @@ public class Enemy : MonoBehaviour
         diedBone.transform.position = transform.position;
         Destroy(this.gameObject);
     }
-<<<<<<< Updated upstream:Prototype/Assets/Scripts/ColeUpdatedFiles/Enemy.cs
-=======
 
     private void OnTriggerEnter2D(Collider2D collison)
     {
-       // enemyAnimator.SetBool("isAttacking", true);
+        // enemyAnimator.SetBool("isAttacking", true);
     }
->>>>>>> Stashed changes:Prototype/Assets/Scripts/Enemy/Enemy.cs
 }
