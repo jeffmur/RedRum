@@ -16,6 +16,7 @@ public class MMController : MonoBehaviour
 
     public Transform casperIcon;
     public Transform bossIcon;
+    public Transform entryRoom;
 
     private SizeController SIZE;
 
@@ -47,6 +48,7 @@ public class MMController : MonoBehaviour
             // Set Icons
             casperIcon = icons.transform.GetChild(0);
             bossIcon = icons.transform.GetChild(1);
+            entryRoom = getRoom(casperIcon.position);
 
             // Only run once
             once = true;
