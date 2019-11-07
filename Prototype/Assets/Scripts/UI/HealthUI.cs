@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class HealthUI : MonoBehaviour
 {
-    public GameObject healthPanel;
-    public Image[] hearts, emptyHearts;
-    public int maxHP, currentHP;
-
+    public RectTransform healthPanel;
+    public Sprite fullheart, emptyHeart;
+    private int maxHP, currentHP;
+    private float xDisplacement, yDisplacement;
+    private List<GameObject> currentHearts;
     public int MaxHP
     {
         set
@@ -35,18 +36,34 @@ public class HealthUI : MonoBehaviour
 
     private void setHealthUI()
     {
-        for (int i = 0; i < 10; i++)
+        xDisplacement = 50f;
+        yDisplacement = 25f;
+
+        foreach (GameObject heart in currentHearts)
         {
-            hearts[i].enabled = false;
-            emptyHearts[i].enabled = false;
+            GameObject.Destroy(heart);
         }
+        currentHearts.Clear();
         for (int i = 0; i < currentHP; i++)
         {
-            hearts[i].enabled = true;
+            generateHeart(fullheart);
         }
         for (int i = currentHP; i < maxHP; i++)
         {
-            emptyHearts[i].enabled = true;
+            generateHeart(emptyHeart);
         }
+    }
+
+    private void generateHeart(Sprite heart)
+    {
+        GameObject NewObj = new GameObject(); //Create the GameObject
+        Image NewImage = NewObj.AddComponent<Image>(); //Add the Image Component script
+        NewImage.GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
+        NewImage.sprite = heart; //Set the Sprite of the Image Component on the new GameObject
+        NewObj.GetComponent<RectTransform>().SetParent(healthPanel.transform); //Assign the newly created Image GameObject as a Child of the Parent Panel.
+        NewObj.SetActive(true); //Activate the GameObject
+        NewObj.transform.localPosition = healthPanel.anchoredPosition + new Vector2(xDisplacement, yDisplacement);
+        currentHearts.Add(NewObj);
+        xDisplacement += 50f;
     }
 }
