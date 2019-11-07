@@ -63,6 +63,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Resources\MiniMap\Scripts\Camera\CameraBehavior.cs" />
+    <Compile Include="Assets\Resources\MiniMap\Scripts\LevelGeneration.cs" />
+    <Compile Include="Assets\Resources\MiniMap\Scripts\MMController.cs" />
+    <Compile Include="Assets\Resources\MiniMap\Scripts\Room Gen\Room.cs" />
+    <Compile Include="Assets\Resources\MiniMap\Scripts\Room Gen\RoomPos.cs" />
+    <Compile Include="Assets\Resources\MiniMap\Scripts\Room Gen\SpawnPoint.cs" />
+    <Compile Include="Assets\Resources\MiniMap\Scripts\SizeController.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyBullet.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyHealthManager.cs" />
@@ -78,12 +85,6 @@
     <Compile Include="Assets\Scripts\Items\Bottle.cs" />
     <Compile Include="Assets\Scripts\Items\PoisonShroom.cs" />
     <Compile Include="Assets\Scripts\Map\DoorSystem.cs" />
-    <Compile Include="Assets\Scripts\Map\Mini\AddRoom.cs" />
-    <Compile Include="Assets\Scripts\Map\Mini\CameraBehavior.cs" />
-    <Compile Include="Assets\Scripts\Map\Mini\Destroyer.cs" />
-    <Compile Include="Assets\Scripts\Map\Mini\MMController.cs" />
-    <Compile Include="Assets\Scripts\Map\Mini\RoomSpawner.cs" />
-    <Compile Include="Assets\Scripts\Map\Mini\RoomTemplates.cs" />
     <Compile Include="Assets\Scripts\Map\RoomManager.cs" />
     <Compile Include="Assets\Scripts\Map\RoomPointer.cs" />
     <Compile Include="Assets\Scripts\Map\RoomStats.cs" />

@@ -25,7 +25,7 @@ public class DoorSystem : MonoBehaviour
     void Start()
     {
         LockAll();
-        sMMController = GameObject.Find("GameManager").GetComponent<MMController>();
+        sMMController = GameObject.Find("Level Generator").GetComponent<MMController>();
     }
 
     // Update is called once per frame

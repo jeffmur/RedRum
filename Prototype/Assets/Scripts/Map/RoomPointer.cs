@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public partial class RoomPointer : MonoBehaviour
 {
-    private GameWorld gameManager;
+    private MMController mm;
     public DoorSystem fromRoom;
     public GameObject nextRoom;
     private GameObject mHero;
@@ -14,7 +14,7 @@ public partial class RoomPointer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameWorld>();
+        mm = GameObject.Find("Level Generator").GetComponent<MMController>();
         mHero = GameObject.Find("Casper");
     }
 
@@ -38,7 +38,6 @@ public partial class RoomPointer : MonoBehaviour
 
     private void bufferSwitch(string roomDir, string heroDir)
     {
-        MMController mm = gameManager.GetComponent<MMController>();
         // Move Player Icon First
         mm.moveMMCasper(heroDir);
 
@@ -49,11 +48,11 @@ public partial class RoomPointer : MonoBehaviour
             nextRoom = GameObject.Find("Swap_1");
 
         // Player Icon ON Entry Room
-        if (mm.getCurrentRoomName() == "Entry Room")
-            nextRoom = GameObject.Find("Welcome");
+        //if (mm.getCurrentRoomName() == "Entry Room")
+        //nextRoom = GameObject.Find("Welcome");
 
         // Player Icon On Boss Icon
-        float dist = Vector2.Distance(mm.playerIcon.position, mm.bossIcon.position);
+        float dist = Vector2.Distance(mm.casperIcon.position, mm.bossIcon.position);
         if (dist <= 1f)
             nextRoom = GameObject.Find("Boss Pool");
 
