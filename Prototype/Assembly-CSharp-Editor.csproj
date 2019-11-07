@@ -77,23 +77,16 @@
     <Compile Include="Assets\Scripts\AnimationImporter\Editor\Config\PreviousImportSettings.cs" />
     <Compile Include="Assets\Scripts\AnimationImporter\Editor\Config\SpriteNaming.cs" />
     <Compile Include="Assets\Scripts\AnimationImporter\Editor\IAnimationImporterPlugin.cs" />
-    <Compile Include="Assets\Scripts\AnimationImporter\Editor\ImportedData\ImportedAnimation 2.cs" />
     <Compile Include="Assets\Scripts\AnimationImporter\Editor\ImportedData\ImportedAnimation.cs" />
-    <Compile Include="Assets\Scripts\AnimationImporter\Editor\ImportedData\ImportedAnimationFrame 2.cs" />
     <Compile Include="Assets\Scripts\AnimationImporter\Editor\ImportedData\ImportedAnimationFrame.cs" />
-    <Compile Include="Assets\Scripts\AnimationImporter\Editor\ImportedData\ImportedAnimationSheet 2.cs" />
     <Compile Include="Assets\Scripts\AnimationImporter\Editor\ImportedData\ImportedAnimationSheet.cs" />
-    <Compile Include="Assets\Scripts\AnimationImporter\Editor\PyxelEdit\PyxelEditData 2.cs" />
     <Compile Include="Assets\Scripts\AnimationImporter\Editor\PyxelEdit\PyxelEditData.cs" />
-    <Compile Include="Assets\Scripts\AnimationImporter\Editor\PyxelEdit\PyxelEditImporter 2.cs" />
     <Compile Include="Assets\Scripts\AnimationImporter\Editor\PyxelEdit\PyxelEditImporter.cs" />
     <Compile Include="Assets\Scripts\AnimationImporter\Editor\Utilities\AnimationClipUtility.cs" />
-    <Compile Include="Assets\Scripts\AnimationImporter\Editor\Utilities\AssetDatabaseUtility 2.cs" />
     <Compile Include="Assets\Scripts\AnimationImporter\Editor\Utilities\AssetDatabaseUtility.cs" />
     <Compile Include="Assets\Scripts\AnimationImporter\Editor\Utilities\JSONObject.cs" />
     <Compile Include="Assets\Scripts\AnimationImporter\Editor\Utilities\ScriptableObjectUtility.cs" />
     <None Include="Assets\Scripts\AnimationImporter\Editor\PyxelEdit\Ionic.Zip.dll-readme.txt" />
-    <None Include="Assets\Scripts\AnimationImporter\Editor\PyxelEdit\Ionic.Zip.dll-readme 2.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/Users/zhich/Documents/GitHub/RedRum/Prototype/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
