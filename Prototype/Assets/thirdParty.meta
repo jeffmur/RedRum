@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Prototype/Assets/thirdParty.meta
 guid: a9bd390c3f3b55d45a1c4f89938f06f1
+=======
+guid: 80804d95abdc4cc41a22f9a368155b7c
+>>>>>>> master:Prototype/Assets/Scenes.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

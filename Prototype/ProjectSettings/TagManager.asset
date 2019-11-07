@@ -6,6 +6,16 @@ TagManager:
   tags:
   - Wall
   - Enemy
+<<<<<<< HEAD
+=======
+  - SpawnPoint
+  - Level
+  - Rooms
+  - HeroBullet
+  - EnemyBullet
+  - Icon
+  - Undefined
+>>>>>>> master
   layers:
   - Default
   - TransparentFX
@@ -15,7 +25,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - MiniMap
   - 
   - 
   - 
