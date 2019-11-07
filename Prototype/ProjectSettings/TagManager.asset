@@ -13,6 +13,7 @@ TagManager:
   - EnemyBullet
   - Icon
   - Undefined
+  - Item
   layers:
   - Default
   - TransparentFX

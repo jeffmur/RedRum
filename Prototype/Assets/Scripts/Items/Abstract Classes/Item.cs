@@ -9,10 +9,12 @@ public abstract class Item : MonoBehaviour
     protected string caption;
     protected bool alreadySpawned = false;
     protected GameObject player;
+    protected PlayerStats stats;
 
     protected virtual void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        stats = player.GetComponent<PlayerStats>();
         tag = "Item";
         itemName = "UNTITLED ITEMNAME";
         caption = "UNTITLED CAPTION";
@@ -24,7 +26,7 @@ public abstract class Item : MonoBehaviour
     public virtual void process()
     {
         string message = itemName + "\n" + caption;
-        GameWorld.triggerNotification(message);
+        EventManager.TriggerNotification(message);
         gameObject.SetActive(false);
     }
 

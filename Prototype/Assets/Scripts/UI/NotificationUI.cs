@@ -11,8 +11,8 @@ public class NotificationUI : MonoBehaviour
     {
         print(notification);
         notificationText.text = notification;
-        notificationText.enabled = true;
+        gameObject.SetActive(true);
         yield return new WaitForSeconds(2);
-        notificationText.enabled = false;
+        gameObject.SetActive(false);
     }
 }

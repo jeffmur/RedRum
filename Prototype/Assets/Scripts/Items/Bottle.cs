@@ -1,22 +1,31 @@
-﻿using System.Collections;
+﻿﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bottle : ActiveItem
+public class Bottle : HeldItem
 {
     private bool isFilled = false;
+    private int playerHealth = -1;
 
-    // Start is called before the first frame update
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
         itemID = 2;
-        name = "Bottle";
-        //GameWorld.onItemPickup += activateItem
+        itemName = "Bottle";
+        caption = "Contains a small piece of fairy";
+
+        stats.onHealthChange += checkHealth;
     }
 
     public override void activateItem()
     {
-
+        if (playerHealth == 0)
+        {
+            player.GetComponent<PlayerStats>().changeHealth(5);
+        }
     }
-
+    public void checkHealth(int hp)
+    {
+        playerHealth = stats.CurrentHealth;
+    }
 }

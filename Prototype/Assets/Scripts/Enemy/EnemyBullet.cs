@@ -27,7 +27,7 @@ public class EnemyBullet : MonoBehaviour
         {
             GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
             Destroy(effect, 0.5f);
-            other.GetComponent<PlayerStats>().loseHealth(bulletDamage);
+            other.GetComponent<PlayerStats>().changeHealth(-bulletDamage);
             Destroy(gameObject);
         }
     }
