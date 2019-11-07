@@ -43,7 +43,8 @@ public class PointAndShoot : MonoBehaviour
     void Shooting(Vector2 direction, float rotationZ)
     {
         GameObject bullet = Instantiate(bulletPrefab) as GameObject;
-        bullet.transform.position = player.transform.position;
+        Vector2 startPos = player.transform.position;
+        bullet.transform.position = new Vector2(startPos.x + 0.5f, startPos.y - 0.2f);
         bullet.transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
         bullet.GetComponent<Rigidbody2D>().AddForce(direction * bulletSpeed, ForceMode2D.Impulse);
     }

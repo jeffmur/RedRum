@@ -48,8 +48,8 @@ public partial class RoomPointer : MonoBehaviour
             nextRoom = GameObject.Find("Swap_1");
 
         // Player Icon ON Entry Room
-        //if (mm.getCurrentRoomName() == "Entry Room")
-        //nextRoom = GameObject.Find("Welcome");
+        if (mm.casperIcon.position == mm.allRooms[0].transform.position)
+            nextRoom = GameObject.Find("Welcome");
 
         // Player Icon On Boss Icon
         float dist = Vector2.Distance(mm.casperIcon.position, mm.bossIcon.position);
