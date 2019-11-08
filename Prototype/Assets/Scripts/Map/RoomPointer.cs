@@ -23,27 +23,28 @@ public partial class RoomPointer : MonoBehaviour
     private void RoomSwap(GameObject nextLevel, string doorSide)
     {
         RoomStats next = nextLevel.GetComponent<RoomStats>();
-        foreach (GameObject room in mm.allRooms) // for all the rooms
+        if (mm.casperIcon.position != mm.allRooms[0].transform.position)
         {
-            if (Vector2.Distance(room.transform.position, mm.casperIcon.position) < 2f) // find the room I am in 
+            foreach (GameObject room in mm.allRooms) // for all the rooms
             {
-                Debug.Log("This is the correct Room");
-                if (room.GetComponent<Room>() != null)
+                if (Vector2.Distance(room.transform.position, mm.casperIcon.position) < 2f) // find the room I am in 
                 {
-                    if (!room.GetComponent<Room>().isVisited) //if the room is not visited
+                    if (room.GetComponent<Room>() != null) //if it is actually a room
                     {
-                        room.GetComponent<Room>().isVisited = true; //mark it is visited
-                        next.GetComponent<RoomManager>().Initialize();
+                        if (!room.GetComponent<Room>().isVisited) //if the room is not visited
+                        {
+                            room.GetComponent<Room>().isVisited = true; //mark it is visited
+                            next.GetComponent<RoomManager>().Initialize(); //make the enemies spawn 
+                        }
                     }
                 }
             }
         }
-        // Spawn Enemies (if available)
-        next.GetComponent<DoorSystem>().LockAll();
+        next.GetComponent<DoorSystem>().LockAll(); //Spawn Enemies
         // Move camera
         next.setCamLocation();
             // Move Hero
-            mHero.transform.position = next.sendPlayerToDoor(doorSide);
+        mHero.transform.position = next.sendPlayerToDoor(doorSide);
     }
 
     private void bufferSwitch(string roomDir, string heroDir)
