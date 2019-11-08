@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class Item : MonoBehaviour
 {
     protected int itemID;
     protected string itemName;
     protected string caption;
-    protected bool alreadySpawned = false;
     protected GameObject player;
     protected PlayerStats stats;
 
@@ -30,10 +27,5 @@ public abstract class Item : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void triggerSpawn()
-    {
-        alreadySpawned = true;
-    }
-
-    public bool getAlreadySpawned() { return alreadySpawned; }
+    protected abstract void setItemInfo();
 }

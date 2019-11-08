@@ -12,7 +12,7 @@ public class NotificationUI : MonoBehaviour
         print(notification);
         notificationText.text = notification;
         gameObject.SetActive(true);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         gameObject.SetActive(false);
     }
 }

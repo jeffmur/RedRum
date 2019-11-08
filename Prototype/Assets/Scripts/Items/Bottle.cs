@@ -2,30 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bottle : HeldItem
+public class Bottle : TriggeredItem
 {
-    private bool isFilled = false;
-    private int playerHealth = -1;
-
-    protected override void Awake()
+    protected override void setItemInfo()
     {
-        base.Awake();
         itemID = 2;
         itemName = "Bottle";
         caption = "Contains a small piece of fairy";
 
-        stats.onHealthChange += checkHealth;
     }
 
-    public override void activateItem()
+    protected override void setTrigger()
     {
-        if (playerHealth == 0)
-        {
-            player.GetComponent<PlayerStats>().changeHealth(5);
-        }
+        //stats.onHealthChange += triggerItem;
     }
-    public void checkHealth(int hp)
+
+    protected override void triggerItem()
     {
-        playerHealth = stats.CurrentHealth;
+        
     }
 }

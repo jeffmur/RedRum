@@ -25,7 +25,7 @@ public class EventManager : MonoBehaviour
         stats.onHealthChange += triggerHealthChange;
         stats.onMaxHealthChange += triggerMaxHealthChange;
         stats.onItemPickup += triggerItemPickup;
-        stats.onItemActivate += triggerItemActivate;
+        stats.onItemUse += triggerItemActivate;
     }
 
     public static void TriggerNotification(string notification)
@@ -42,6 +42,7 @@ public class EventManager : MonoBehaviour
     {
         onHealthTrigger?.Invoke(value);
     }
+
     private void triggerItemPickup(Item item)
     {
         onItemPickupTrigger?.Invoke(item);

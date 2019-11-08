@@ -72,9 +72,14 @@
     <Compile Include="Assets\Scripts\FadeAudio.cs" />
     <Compile Include="Assets\Scripts\GameWorld.cs" />
     <Compile Include="Assets\Scripts\ItemManager.cs" />
+    <Compile Include="Assets\Scripts\Items\Abstract Classes\ActivatedItem.cs" />
     <Compile Include="Assets\Scripts\Items\Abstract Classes\HeldItem.cs" />
+    <Compile Include="Assets\Scripts\Items\Abstract Classes\HeldItemBehavior\CooldownItem.cs" />
+    <Compile Include="Assets\Scripts\Items\Abstract Classes\HeldItemBehavior\IUseItem.cs" />
+    <Compile Include="Assets\Scripts\Items\Abstract Classes\HeldItemBehavior\OneTimeUseItem.cs" />
     <Compile Include="Assets\Scripts\Items\Abstract Classes\Item.cs" />
     <Compile Include="Assets\Scripts\Items\Abstract Classes\PassiveItem.cs" />
+    <Compile Include="Assets\Scripts\Items\Abstract Classes\TriggeredItem.cs" />
     <Compile Include="Assets\Scripts\Items\Bottle.cs" />
     <Compile Include="Assets\Scripts\Items\PoisonShroom.cs" />
     <Compile Include="Assets\Scripts\Map\DoorSystem.cs" />
@@ -110,6 +115,7 @@
     <None Include="Assets\Resources\Textures\Spine Projects\ExportedForUnity\Character\Back\CharacterBack.atlas.txt" />
     <None Include="Assets\Resources\Textures\Spine Projects\ExportedForUnity\Monster1\Front\Monster1Front.atlas.txt" />
     <None Include="Assets\Resources\Textures\Spine Projects\ExportedForUnity\Monster2\Back\Monster2Back.atlas.txt" />
+    <None Include="Assets\Pixel Font - Tripfive\_README.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/andyt/Documents/Testing/RedRum/Prototype/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PoisonShroom : PassiveItem
 {
-    protected override void Awake()
+    protected override void setItemInfo()
     {
-        base.Awake();
         itemID = 1;
         itemName = "Poison Shroom";
         caption = "GOTY since 1976";

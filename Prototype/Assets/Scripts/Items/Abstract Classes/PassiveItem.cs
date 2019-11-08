@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public abstract class PassiveItem : Item
+﻿public abstract class PassiveItem : Item
 {
     public override void process()
     {
         base.process();
+        setItemInfo();
         modifyStats();
-        player.GetComponent<PlayerStats>().heldItems.Add(this);
+        player.GetComponent<PlayerStats>().passiveItems.Add(this);
          
     }
     public abstract void modifyStats();
