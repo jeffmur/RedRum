@@ -11,29 +11,28 @@ public partial class RoomPointer : MonoBehaviour
     public GameObject nextRoom;
     private GameObject mHero;
 
+
     // Start is called before the first frame update
     void Start()
     {
         mm = GameObject.Find("Level Generator").GetComponent<MMController>();
         mHero = GameObject.Find("Casper");
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     
     private void RoomSwap(GameObject nextLevel, string doorSide)
     {
         RoomStats next = nextLevel.GetComponent<RoomStats>();
-        // Spawn Enemies (if available)
-        nextLevel.GetComponent<RoomManager>().Initialize();
-        nextLevel.GetComponent<DoorSystem>().LockAll();
-        // Move camera
-        next.setCamLocation();
-        // Move Hero
-        mHero.transform.position = next.sendPlayerToDoor(doorSide);
+        //if (!nextRoom.GetComponent<Room>().isVisited)
+       // {
+            // Spawn Enemies (if available)
+            //nextLevel.GetComponent<Room>().isVisited = true;
+            nextLevel.GetComponent<RoomManager>().Initialize();
+            nextLevel.GetComponent<DoorSystem>().LockAll();
+      //  }
+            // Move camera
+            next.setCamLocation();
+            // Move Hero
+            mHero.transform.position = next.sendPlayerToDoor(doorSide);
     }
 
     private void bufferSwitch(string roomDir, string heroDir)
