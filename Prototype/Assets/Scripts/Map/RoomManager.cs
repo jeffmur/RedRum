@@ -37,10 +37,11 @@ public partial class RoomManager : MonoBehaviour
                 int typeOfEnemy = Random.Range(0, Enemies.Count); //number of types of enemies 
                 if (Enemies[typeOfEnemy] == null) { typeOfEnemy--; }
                 GameObject enemy = Enemies[typeOfEnemy];
-                Instantiate(enemy, new Vector2(transform.position.x + x, transform.position.y + y), Quaternion.identity);
-                enemy.gameObject.SetActive(true);
-                // Boss Room should only spawn one
-                if (this.name == "Boss Pool") { return; }
+                GameObject ChildEnemy = Instantiate(enemy, new Vector2(transform.position.x + x, transform.position.y + y), Quaternion.identity);
+                ChildEnemy.gameObject.SetActive(true);
+                ChildEnemy.transform.parent = transform;
+            // Boss Room should only spawn one
+            if (this.name == "Boss Pool") { return; }
             }
     }
 

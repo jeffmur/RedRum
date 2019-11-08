@@ -39,12 +39,7 @@ public class MMController : MonoBehaviour
             // Add all dangling (not organized rooms) to Critical Path
             allRooms = GameObject.FindGameObjectsWithTag("Rooms");
             foreach (GameObject room in allRooms)
-            {
                 room.transform.parent = criticalPath.transform;
-                //Room newRoomState = new Room(); // creating a roomState
-               // newRoomState = criticalPath.transform; //Making it = to the transform
-                //RSS.Add(newRoomState); //saving the new room state to the list 
-            }
 
 
             // All icons to Icons
