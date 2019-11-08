@@ -10,6 +10,7 @@ public partial class RoomPointer : MonoBehaviour
     public DoorSystem fromRoom;
     public GameObject nextRoom;
     private GameObject mHero;
+    private GameObject casperIcon;
 
 
     // Start is called before the first frame update
@@ -22,19 +23,18 @@ public partial class RoomPointer : MonoBehaviour
     private void RoomSwap(GameObject nextLevel, string doorSide)
     {
         RoomStats next = nextLevel.GetComponent<RoomStats>();
-        //if (!nextRoom.GetComponent<Room>().isVisited)
-       // {
-            // Spawn Enemies (if available)
-<<<<<<< Updated upstream
-            //nextLevel.GetComponent<Room>().isVisited = true;
-=======
-            nextLevel.GetComponent<Room>().isVisited = true;
->>>>>>> Stashed changes
-            nextLevel.GetComponent<RoomManager>().Initialize();
-            nextLevel.GetComponent<DoorSystem>().LockAll();
-      //  }
-            // Move camera
-            next.setCamLocation();
+        foreach (GameObject room in mm.allRooms) // for all the rooms
+        { 
+            if (Vector2.Distance(room.transform.position, mm.casperIcon.transform.position) < 2f) // find the room I am in 
+            {
+                room.GetComponent<Room>().isVisited = true; //mark it is visited
+            }
+        }
+        // Spawn Enemies (if available)
+        next.GetComponent<RoomManager>().Initialize();
+        next.GetComponent<DoorSystem>().LockAll();
+        // Move camera
+        next.setCamLocation();
             // Move Hero
             mHero.transform.position = next.sendPlayerToDoor(doorSide);
     }
