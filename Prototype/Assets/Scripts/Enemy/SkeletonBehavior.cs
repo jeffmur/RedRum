@@ -2,24 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class SkeletonBehavior : MonoBehaviour
 {
     // Start is called before the first frame update
     //public Transform player;
+
+
+    public float attackRange = 1;
+    public int damage;
+    private float lastAttackTime;
+    public float attackDelay;
+
+    public int skelletonHealth;
+
+    public GameObject SkellentonDeadBody;
+
+    public float moveSpeed = 5f;
+    private float distanceToPlayer;
     private Rigidbody2D rb;
     private Vector2 movement;
     private Animator enemyAnimator;
     private SpriteRenderer enemySprite;
 
-    public float attackRange;
-    public int damage;
-    private float lastAttackTime;
-    public float attackDelay;
 
-    public GameObject BoneDie;
 
-    public float moveSpeed = 5f;
-    public int enemyHealth = 100;
+
     void Start()
     {
         enemySprite = GetComponent<SpriteRenderer>();
@@ -33,65 +40,73 @@ public class Enemy : MonoBehaviour
         
         Vector3 dirction = (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position).normalized;
         movement = dirction;
-        
-    }
 
+        distanceToPlayer = Vector2.Distance(GameObject.FindGameObjectWithTag("Player").transform.localPosition, transform.position);
 
-    private void FixedUpdate()
-    {
-      
-        enemyMove(movement);
-        
-    }
-
-    void enemyMove(Vector2 direction)
-    {
-            if (movement.x < 0)
+            if (enemyAnimator.GetBool("Die") == false || distanceToPlayer > attackRange)
             {
-                enemySprite.flipX = true;
-            }
-            else
-            {
-                enemySprite.flipX = false;
-            }
-            float distanceToPlayer = Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position);
-            if (distanceToPlayer < attackRange)
-            {
-                if (Time.time > (lastAttackTime + attackDelay))
-                {
-                    enemyAnimator.SetBool("isAttacking", true);
-                    lastAttackTime = Time.time;
-                }
-            }
-            else
-            {
-
-                enemyAnimator.SetBool("isAttacking", false);
-                enemyAnimator.SetFloat("Speed", moveSpeed);
-                rb.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.smoothDeltaTime));
+                EnemyMove(movement);
             }
     }
 
-    public void TakeDamage(int damage)
+    void EnemyMove(Vector2 direction)
     {
 
-        enemyHealth -= damage;
-        if (enemyHealth <= 0)
+        if (movement.x < 0)
         {
-            enemyAnimator.SetBool("Die", true);
-            Die();
+            enemySprite.flipX = true;
+        }
+        else
+        {
+            enemySprite.flipX = false;
+        }
+
+        if (distanceToPlayer <= attackRange)
+        {
+            if (Time.time > (lastAttackTime + attackDelay))
+            {
+                enemyAnimator.SetFloat("Speed", 0);
+                enemyAnimator.SetBool("isAttacking", true);
+                lastAttackTime = Time.time;
+                Debug.Log("Attacking casper");
+                Attack(1);
+            }
+        }
+        else
+        {
+            enemyAnimator.SetBool("isAttacking", false);
+            enemyAnimator.SetFloat("Speed", moveSpeed);
+            rb.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.smoothDeltaTime));
         }
     }
 
-    public void Die()
+    private void takeDamage(int hit)
     {
-        GameObject diedBone = Instantiate(BoneDie) as GameObject;
-        diedBone.transform.position = transform.position;
-        Destroy(this.gameObject);
+        skelletonHealth -= hit;
+        if (skelletonHealth <= 0)
+        {
+            enemyAnimator.SetBool("Die", true);
+
+            Destroy(this.gameObject, 0.5f);
+
+            GameObject diedBone = Instantiate(SkellentonDeadBody) as GameObject;
+            diedBone.transform.position = transform.position;
+        }
     }
 
+    private void Attack(int hitDamage)
+    {
+        GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<PlayerStats>().loseHealth(hitDamage);
+    }
+
+
+    
     private void OnTriggerEnter2D(Collider2D collison)
     {
-       // enemyAnimator.SetBool("isAttacking", true);
+        if (collison.CompareTag("HeroBullet"))
+        {
+            Destroy(collison.gameObject);
+            takeDamage(collison.transform.GetComponent<bullet>().bulletDamage);
+        }
     }
 }

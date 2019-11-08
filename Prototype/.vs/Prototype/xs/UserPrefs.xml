@@ -1,12 +1,13 @@
 ﻿<Properties StartupConfiguration="{B1235EE4-71EE-C815-28F8-C3378E5ADB84}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Enemy/Enemy.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Enemy/SkeletonBehavior.cs">
     <Files>
       <File FileName="Assets/Scripts/Player/PlayerStats.cs" Line="13" Column="1" />
-      <File FileName="Assets/Scripts/Player/bullet.cs" Line="8" Column="34" />
-      <File FileName="Assets/Scripts/Player/PointAndShoot.cs" Line="44" Column="6" />
-      <File FileName="Assets/Scripts/Player/PlayerMovement.cs" Line="9" Column="37" />
-      <File FileName="Assets/Scripts/Enemy/Enemy.cs" Line="41" Column="57" />
-      <File FileName="Assets/Scripts/Map/Mini/RoomSpawner.cs" Line="61" Column="1" />
+      <File FileName="Assets/Scripts/Player/bullet.cs" Line="29" Column="38" />
+      <File FileName="Assets/Scripts/Player/PointAndShoot.cs" />
+      <File FileName="Assets/Scripts/Player/PlayerMovement.cs" Line="9" Column="31" />
+      <File FileName="Assets/Scripts/Enemy/EnemyHealthManager.cs" Line="29" Column="1" />
+      <File FileName="Assets/Scripts/Enemy/GhostBehavior.cs" Line="95" Column="18" />
+      <File FileName="Assets/Scripts/Enemy/SkeletonBehavior.cs" Line="52" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -15,27 +16,20 @@
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
                 <Node name="Enemy" expanded="True">
-                  <Node name="Enemy.cs" selected="True" />
+                  <Node name="SkeletonBehavior.cs" selected="True" />
                 </Node>
-                <Node name="Map" expanded="True">
-                  <Node name="Mini" expanded="True" />
-                </Node>
+                <Node name="Map" expanded="True" />
                 <Node name="Player" expanded="True" />
               </Node>
             </Node>
           </Node>
         </State>
       </Pad>
-      <Pad Id="MonoDevelop.UnitTesting.TestPad">
-        <State name="__root__">
-          <Node name="Prototype" expanded="True" selected="True" />
-        </State>
-      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="81ad0549-2814-4ca1-bcf0-f282b1685495" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="bc7a2a9a-e351-4b53-86d0-bb580d1faa58" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
