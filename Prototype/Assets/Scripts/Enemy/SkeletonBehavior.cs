@@ -13,7 +13,7 @@ public class SkeletonBehavior : MonoBehaviour
     private float lastAttackTime;
     public float attackDelay;
 
-    public int skelletonHealth;
+    private float myHealth;
 
     public GameObject SkellentonDeadBody;
 
@@ -23,6 +23,7 @@ public class SkeletonBehavior : MonoBehaviour
     private Vector2 movement;
     private Animator enemyAnimator;
     private SpriteRenderer enemySprite;
+    private Transform casper;
 
 
 
@@ -32,16 +33,18 @@ public class SkeletonBehavior : MonoBehaviour
         enemySprite = GetComponent<SpriteRenderer>();
         enemyAnimator = GetComponent<Animator>();
         rb = this.GetComponent<Rigidbody2D>();
+        casper = GameObject.FindGameObjectWithTag("Player").transform;
+        myHealth = GetComponent<EnemyHealthManager>().Health;
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        Vector3 dirction = (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position).normalized;
+        Vector3 dirction = (casper.position - transform.position).normalized;
         movement = dirction;
 
-        distanceToPlayer = Vector2.Distance(GameObject.FindGameObjectWithTag("Player").transform.localPosition, transform.position);
+        distanceToPlayer = Vector2.Distance(casper.transform.position, transform.position);
 
             if (enemyAnimator.GetBool("Die") == false || distanceToPlayer > attackRange)
             {
@@ -82,15 +85,14 @@ public class SkeletonBehavior : MonoBehaviour
 
     private void takeDamage(int hit)
     {
-        skelletonHealth -= hit;
-        if (skelletonHealth <= 0)
+        myHealth -= hit;
+        if (myHealth <= 0)
         {
             enemyAnimator.SetBool("Die", true);
 
-            Destroy(this.gameObject, 0.5f);
+            Destroy(this.gameObject, 0.1f);
 
-            GameObject diedBone = Instantiate(SkellentonDeadBody) as GameObject;
-            diedBone.transform.position = transform.position;
+            Instantiate(SkellentonDeadBody, transform.position, Quaternion.identity);
         }
     }
 
