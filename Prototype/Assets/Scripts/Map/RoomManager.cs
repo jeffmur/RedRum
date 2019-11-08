@@ -7,7 +7,6 @@ public partial class RoomManager : MonoBehaviour
     public List<GameObject> Enemies;
     public List<GameObject> Items;
     private DoorSystem sDoorSys;
-    Room RoomSS;
     // Start is called before the first frame update
     void Start()
     {

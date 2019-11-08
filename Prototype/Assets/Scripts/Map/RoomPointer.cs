@@ -24,14 +24,21 @@ public partial class RoomPointer : MonoBehaviour
     {
         RoomStats next = nextLevel.GetComponent<RoomStats>();
         foreach (GameObject room in mm.allRooms) // for all the rooms
-        { 
-            if (Vector2.Distance(room.transform.position, mm.casperIcon.transform.position) < 2f) // find the room I am in 
+        {
+            if (Vector2.Distance(room.transform.position, mm.casperIcon.position) < 2f) // find the room I am in 
             {
-                room.GetComponent<Room>().isVisited = true; //mark it is visited
+                Debug.Log("This is the correct Room");
+                if (room.GetComponent<Room>() != null)
+                {
+                    if (!room.GetComponent<Room>().isVisited) //if the room is not visited
+                    {
+                        room.GetComponent<Room>().isVisited = true; //mark it is visited
+                        next.GetComponent<RoomManager>().Initialize();
+                    }
+                }
             }
         }
         // Spawn Enemies (if available)
-        next.GetComponent<RoomManager>().Initialize();
         next.GetComponent<DoorSystem>().LockAll();
         // Move camera
         next.setCamLocation();
