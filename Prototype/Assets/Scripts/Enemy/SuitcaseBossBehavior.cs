@@ -74,7 +74,7 @@ public class SuitcaseBossBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //other.gameObject.GetComponent<PlayerStats>().loseHealth(1);
+            other.gameObject.GetComponent<PlayerStats>().loseHealth(1);
         }
     }
 }

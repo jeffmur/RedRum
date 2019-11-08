@@ -11,11 +11,11 @@ public partial class GameWorld : MonoBehaviour
     private void Start()
     {
         itemPool = Resources.LoadAll("Items");
-        print(itemPool.Length);
-        foreach (var t in itemPool)
-        {
-            Debug.Log(t.name);
-        }
+        //print(itemPool.Length);
+        //foreach (var t in itemPool)
+        //{
+        //    Debug.Log(t.name);
+        //}
     }
 
 

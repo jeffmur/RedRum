@@ -56,7 +56,7 @@ public class PlayerStats : MonoBehaviour
     public void loseHealth(int value) 
     { 
         currentHealth -= value;
-        //onHealthChange(-value);
+        onHealthChange(-value);
     }
 
 }

@@ -345,7 +345,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 97feb9a6052ecfa4ab79075f1cebfc3b, type: 3}
-  m_Color: {r: 0.6156863, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.9529412, b: 0.015686275, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -683,7 +683,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: f1d98e3c8b4068e43bcfc77d7d55f668, type: 3}
-  m_Color: {r: 0.6156863, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.9529412, b: 0.015686275, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -734,7 +734,7 @@ GameObject:
   m_Layer: 0
   m_Name: Swap
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -803,8 +803,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemies:
-  - {fileID: 416837339725389614, guid: 9d9a5828c7e857f48af406e434b294f6, type: 3}
-  - {fileID: 1410281307740306776, guid: 46aabfdfa09d30243955d312c619ca9f, type: 3}
+  - {fileID: 4644436877037681442, guid: 9e9afb926b6181f41a3bb153d81c32fa, type: 3}
   Items: []
 --- !u!1 &2625331761204325416
 GameObject:
@@ -954,7 +953,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: cef4cc48d61f62347a0b84e5ab4bee2a, type: 3}
-  m_Color: {r: 0.6132076, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.9529227, b: 0.0141509175, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1061,7 +1060,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 043c171d1de94324290449ed9e3a5ed4, type: 3}
-  m_Color: {r: 0.6156863, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.9529412, b: 0.015686275, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

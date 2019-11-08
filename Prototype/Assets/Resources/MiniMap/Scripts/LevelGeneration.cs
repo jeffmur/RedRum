@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LevelGeneration : MonoBehaviour {
 
@@ -34,19 +33,22 @@ public class LevelGeneration : MonoBehaviour {
         Instantiate(rooms[1], transform.position, Quaternion.identity);
         Instantiate(playerIcon, transform.position, Quaternion.identity);
         
-        // Set up Camera, Demensions 
-        // @param string 4x4, 5x5, 6x6
+        // Set up Camera, Demensions (Scenes.cs)
+        // @param 4x4, 5x5, 6x6
         SIZE = GetComponent<SizeController>();
-        SIZE.setUp("6x6");
+        SIZE.setUp(Scenes.getDem());
         direction = Random.Range(1, 6);
     }
 
     private void Update()
     {
-        // Reload scene -> needs removal (testing)
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
+        // Testing Level Generation
+        if (Input.GetKeyDown("4"))
+            Scenes.Load("Tutorial", "4x4");
+        if (Input.GetKeyDown("5"))
+            Scenes.Load("Tutorial", "5x5");
+        if (Input.GetKeyDown("6"))
+            Scenes.Load("Tutorial", "6x6");
 
         if (timeBtwSpawn <= 0 && stopGeneration == false)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SizeController : MonoBehaviour
 {
-    public string Demensions;
+    private string Demensions;
     private char dem;
     public GameObject startPos;
     // ASSUMPTION: Starting from (-200,5,0)
@@ -32,8 +32,15 @@ public class SizeController : MonoBehaviour
 
     public void setUp(string DEMENSIONS)
     {
-        Demensions = DEMENSIONS;
-        dem = DEMENSIONS[0];
+        if (DEMENSIONS != null)
+        {
+            Demensions = DEMENSIONS;
+            dem = DEMENSIONS[0];
+        } else
+        {
+            Demensions = "4x4";
+            dem = '4';
+        }
         disableLarger();
         switch (dem)
         {
