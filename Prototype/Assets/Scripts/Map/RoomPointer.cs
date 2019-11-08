@@ -25,7 +25,11 @@ public partial class RoomPointer : MonoBehaviour
         //if (!nextRoom.GetComponent<Room>().isVisited)
        // {
             // Spawn Enemies (if available)
+<<<<<<< Updated upstream
             //nextLevel.GetComponent<Room>().isVisited = true;
+=======
+            nextLevel.GetComponent<Room>().isVisited = true;
+>>>>>>> Stashed changes
             nextLevel.GetComponent<RoomManager>().Initialize();
             nextLevel.GetComponent<DoorSystem>().LockAll();
       //  }

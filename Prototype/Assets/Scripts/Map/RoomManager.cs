@@ -7,6 +7,7 @@ public partial class RoomManager : MonoBehaviour
     public List<GameObject> Enemies;
     public List<GameObject> Items;
     private DoorSystem sDoorSys;
+    Room RoomSS;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,22 +28,21 @@ public partial class RoomManager : MonoBehaviour
 
     public void Initialize()
     {
-
-        // Random generation of enemies
-        // Between 1 and 5 enemies per room
-        int AmountOFEnemies = Random.Range(1, 5);
-        for (int i = 0; AmountOFEnemies > i; i++) //creates a random amount of enemies
-        {
-            float x = Random.Range(-5, 5);
-            float y = Random.Range(-5, 5);
-            int typeOfEnemy = Random.Range(0, Enemies.Count); //number of types of enemies 
-            if(Enemies[typeOfEnemy] == null) { typeOfEnemy--; }
-            GameObject enemy = Enemies[typeOfEnemy];
-            Instantiate(enemy, new Vector2(transform.position.x + x, transform.position.y + y), Quaternion.identity);
-            enemy.gameObject.SetActive(true);
-            // Boss Room should only spawn one
-            if (this.name == "Boss Pool") { return; }
-        }
+            // Random generation of enemies
+            // Between 1 and 5 enemies per room
+            int AmountOFEnemies = Random.Range(1, 5);
+            for (int i = 0; AmountOFEnemies > i; i++) //creates a random amount of enemies
+            {
+                float x = Random.Range(-5, 5);
+                float y = Random.Range(-5, 5);
+                int typeOfEnemy = Random.Range(0, Enemies.Count); //number of types of enemies 
+                if (Enemies[typeOfEnemy] == null) { typeOfEnemy--; }
+                GameObject enemy = Enemies[typeOfEnemy];
+                Instantiate(enemy, new Vector2(transform.position.x + x, transform.position.y + y), Quaternion.identity);
+                enemy.gameObject.SetActive(true);
+                // Boss Room should only spawn one
+                if (this.name == "Boss Pool") { return; }
+            }
     }
 
     private bool allEnemiesDead()
