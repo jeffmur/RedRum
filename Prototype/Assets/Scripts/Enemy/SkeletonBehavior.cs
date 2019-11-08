@@ -15,7 +15,7 @@ public class SkeletonBehavior : MonoBehaviour
 
     private float myHealth;
 
-    public GameObject SkellentonDeadBody;
+    public GameObject myDeadBody;
 
     public float moveSpeed = 5f;
     private float distanceToPlayer;
@@ -89,10 +89,9 @@ public class SkeletonBehavior : MonoBehaviour
         if (myHealth <= 0)
         {
             enemyAnimator.SetBool("Die", true);
-
-            Destroy(this.gameObject, 0.1f);
-
-            Instantiate(SkellentonDeadBody, transform.position, Quaternion.identity);
+            Destroy(this, 0.5f);
+            //Instantiate(myDeadBody, transform.position, Quaternion.identity);
+            
         }
     }
 

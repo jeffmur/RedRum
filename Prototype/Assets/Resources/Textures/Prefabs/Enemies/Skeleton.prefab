@@ -167,7 +167,7 @@ MonoBehaviour:
   attackRange: 1
   damage: 1
   attackDelay: 1
-  SkellentonDeadBody: {fileID: 1798092532787938560, guid: 6fca6b1c21bc94904920763f3857daaf,
+  myDeadBody: {fileID: 1798092532787938560, guid: 6fca6b1c21bc94904920763f3857daaf,
     type: 3}
   moveSpeed: 2
 --- !u!114 &513563564860898888
