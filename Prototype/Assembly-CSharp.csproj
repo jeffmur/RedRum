@@ -62,7 +62,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Resources\Items\SpeedSyringe.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyBullet.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyHealthManager.cs" />
@@ -84,6 +83,8 @@
     <Compile Include="Assets\Scripts\Items\Bottle.cs" />
     <Compile Include="Assets\Scripts\Items\Medkit.cs" />
     <Compile Include="Assets\Scripts\Items\PoisonShroom.cs" />
+    <Compile Include="Assets\Scripts\Items\SpeedSyringe.cs" />
+    <Compile Include="Assets\Scripts\Items\SrBellhopHat.cs" />
     <Compile Include="Assets\Scripts\Map\DoorSystem.cs" />
     <Compile Include="Assets\Scripts\Map\Mini\AddRoom.cs" />
     <Compile Include="Assets\Scripts\Map\Mini\CameraBehavior.cs" />
