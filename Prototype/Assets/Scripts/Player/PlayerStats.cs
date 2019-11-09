@@ -125,8 +125,12 @@ public class PlayerStats : MonoBehaviour
         selectedItem.process();
         onItemPickup?.Invoke(selectedItem);
     }
-    private void triggerHeldItem()
+    private void activateHeldItem()
     {
+        if (currentHeldItem is ActivatedItem)
+        {
+            
+        }
         onItemUse?.Invoke(currentHeldItem);
     }
 }

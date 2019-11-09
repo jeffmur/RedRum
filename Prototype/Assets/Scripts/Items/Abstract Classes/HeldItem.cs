@@ -7,7 +7,8 @@ public abstract class HeldItem : Item
     public override void process()
     {
         base.process();
-        setItemInfo();
         stats.setHeldItem(this);
     }
+
+    public abstract void useHeldItem();
 }

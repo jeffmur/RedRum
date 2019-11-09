@@ -4,7 +4,7 @@ public abstract class Item : MonoBehaviour
 {
     protected int itemID;
     protected string itemName;
-    protected string caption;
+    public string caption;
     protected GameObject player;
     protected PlayerStats stats;
 
@@ -17,7 +17,7 @@ public abstract class Item : MonoBehaviour
         caption = "UNTITLED CAPTION";
         gameObject.AddComponent<BoxCollider2D>();
         GetComponent<BoxCollider2D>().isTrigger = true;
-
+        setItemInfo();
     }
 
     public virtual void process()

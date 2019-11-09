@@ -7,7 +7,7 @@ public class HealthUI : MonoBehaviour
 {
     public RectTransform healthPanel;
     public Sprite fullheart, emptyHeart;
-    private int maxHP, currentHP;
+    public int maxHP, currentHP;
     private float xDisplacement, yDisplacement;
     private List<GameObject> currentHearts;
     public int MaxHP
@@ -29,6 +29,7 @@ public class HealthUI : MonoBehaviour
 
     public void setStartingHealth(int activeHearts)
     {
+        currentHearts = new List<GameObject>();
         currentHP = activeHearts;
         maxHP = activeHearts;
         setHealthUI();
@@ -44,6 +45,7 @@ public class HealthUI : MonoBehaviour
             GameObject.Destroy(heart);
         }
         currentHearts.Clear();
+
         for (int i = 0; i < currentHP; i++)
         {
             generateHeart(fullheart);

@@ -4,5 +4,9 @@ using UnityEngine;
 
 public abstract class ActivatedItem : HeldItem
 {
-    protected abstract void activateItem();
+    public override void useHeldItem()
+    {
+        activateItem();
+    }
+    public abstract void activateItem();
 }

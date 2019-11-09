@@ -12,6 +12,12 @@ public abstract class TriggeredItem : HeldItem
         base.process();
         setTrigger();
     }
+
+    public override void useHeldItem()
+    {
+        triggerItem();
+    }
+
     protected abstract void triggerItem();
     protected abstract void setTrigger();
 }

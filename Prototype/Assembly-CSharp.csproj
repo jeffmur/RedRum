@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Items\Abstract Classes\PassiveItem.cs" />
     <Compile Include="Assets\Scripts\Items\Abstract Classes\TriggeredItem.cs" />
     <Compile Include="Assets\Scripts\Items\Bottle.cs" />
+    <Compile Include="Assets\Scripts\Items\Medkit.cs" />
     <Compile Include="Assets\Scripts\Items\PoisonShroom.cs" />
     <Compile Include="Assets\Scripts\Map\DoorSystem.cs" />
     <Compile Include="Assets\Scripts\Map\Mini\AddRoom.cs" />

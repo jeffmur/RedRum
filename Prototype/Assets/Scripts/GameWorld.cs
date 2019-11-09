@@ -36,5 +36,20 @@ public partial class GameWorld : MonoBehaviour
         {
             stats.changeMaxHealth(-1);
         }
+        if (Input.GetKeyDown("3"))
+        {
+            stats.changeHealth(1);
+        }
+        if (Input.GetKeyDown("4"))
+        {
+            stats.changeHealth(-1);
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (stats.currentHeldItem is ActivatedItem)
+            {
+                stats.currentHeldItem.useHeldItem();
+            }
+        }
     }
 }
