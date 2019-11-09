@@ -46,7 +46,7 @@ public class SkeletonBehavior : MonoBehaviour
 
         distanceToPlayer = Vector2.Distance(casper.transform.position, transform.position);
 
-            if (enemyAnimator.GetBool("Die") == false || distanceToPlayer > attackRange)
+            if (enemyAnimator.GetBool("Die") == false && distanceToPlayer > attackRange)
             {
                 EnemyMove(movement);
             }
@@ -89,7 +89,7 @@ public class SkeletonBehavior : MonoBehaviour
         if (myHealth <= 0)
         {
             enemyAnimator.SetBool("Die", true);
-            Destroy(this, 0.5f);
+            Destroy(this.gameObject, 1f);
             //Instantiate(myDeadBody, transform.position, Quaternion.identity);
             
         }
@@ -97,7 +97,7 @@ public class SkeletonBehavior : MonoBehaviour
 
     private void Attack(int hitDamage)
     {
-        GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<PlayerStats>().loseHealth(hitDamage);
+        GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<PlayerStats>().changeHealth(hitDamage);
     }
 
 

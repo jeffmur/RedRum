@@ -1,62 +1,136 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
+    private float fireRateModifier;
+    private float accuracyPercentage;
+    public int currentHealth, maxHealth;
     private float moveSpeed;
-    private int maxHealth, currentHealth;
-    private float fireRate;
-    private float accuracy;
-    private float cooldownrate;
     //private float isInvincible;
     private bool isInvincible;
-    public List<Item> heldItems;
+    public List<Item> passiveItems;
+    public HeldItem currentHeldItem;
+
     public delegate void onHealthChangeDelegate(int value);
     public event onHealthChangeDelegate onHealthChange, onMaxHealthChange;
+
+    public delegate void onItemDelegate(Item item);
+    public event onItemDelegate onItemPickup;
+
+    public delegate void onActiveItemDelegate(HeldItem item);
+    public event onActiveItemDelegate onItemUse;
 
     // Start is called before the first frame update
     void Awake()
     {
         moveSpeed = 5f;
         maxHealth = 3;
+        currentHealth = maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
-    public float FireRate { get => fireRate; set => fireRate = value; }
-    public float Accuracy { get => accuracy; set => accuracy = value; }
-    public float Cooldownrate { get => cooldownrate; set => cooldownrate = value; }
     public int MaxHealth { get => maxHealth; }
     public int CurrentHealth { get => currentHealth; }
+    public HeldItem CurrentActiveItem { get => currentHeldItem; }
 
-    public void incrementMaxHeath() 
-    { 
-        maxHealth++;
-        onMaxHealthChange?.Invoke(1); 
+    public void changeMaxHealth(int value)
+    {
+        if (value == 0)
+        {
+            return;
+        }
+
+        maxHealth += value;
+        int healthChanged;
+
+        if (value > 0)
+        {
+            if (maxHealth > 10)
+            {
+                maxHealth = 10;
+            }
+            changeHealth(value);
+        }
+        if (value < 0)
+        {
+            if (maxHealth < 1)
+            {
+                maxHealth = 1;
+                changeHealth(-(currentHealth - 1));
+            }
+            else
+            {
+                int previousMaxHealth = maxHealth - value;
+                int missingHealth = previousMaxHealth - currentHealth;
+                healthChanged = (missingHealth + value >= 0) ? 0 : value + missingHealth;
+                healthChanged = (currentHealth - healthChanged < 1) ? 1 : healthChanged;
+                changeHealth(-healthChanged);
+            }
+        }
+        onMaxHealthChange?.Invoke(maxHealth);
     }
 
-    public void decrementMaxHeath() 
-    { 
-        maxHealth--; 
-        onMaxHealthChange?.Invoke(-1);
-    }
+    public void changeHealth(int value)
+    {
+        if (value == 0)
+        {
+            return;
+        }
 
-    public void gainHealth(int value) 
-    { 
         currentHealth += value;
-        onHealthChange(value);
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
+        onHealthChange?.Invoke(currentHealth);
     }
 
-    public void loseHealth(int value) 
-    { 
-        currentHealth -= value;
-        onHealthChange(-value);
+    public void setHeldItem(HeldItem item)
+    {
+        if (currentHeldItem != null)
+        {
+            currentHeldItem.gameObject.SetActive(true);
+            currentHeldItem.transform.position = transform.position;
+        }
+        currentHeldItem = item;
+        item.gameObject.SetActive(false);
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            
+            if (collision.gameObject.tag == "Item")
+            {              
+                pickUpItem(collision.gameObject.GetComponent<Item>());
+            }
+            if (collision.gameObject.tag == "Heart")
+            {
+                GameObject.Destroy(collision.gameObject);
+                changeHealth(1);
+            }
+        }
+    }
+    private void pickUpItem(Item selectedItem)
+    {
+        selectedItem.process();
+        onItemPickup?.Invoke(selectedItem);
+    }
+    private void activateHeldItem()
+    {
+        if (currentHeldItem is ActivatedItem)
+        {
+            
+        }
+        onItemUse?.Invoke(currentHeldItem);
+    }
 }

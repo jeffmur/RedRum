@@ -77,16 +77,25 @@
     <Compile Include="Assets\Scripts\Enemy\SkeletonBehavior.cs" />
     <Compile Include="Assets\Scripts\Enemy\SlimeBehavior.cs" />
     <Compile Include="Assets\Scripts\Enemy\SuitcaseBossBehavior.cs" />
+    <Compile Include="Assets\Scripts\EventManager.cs" />
     <Compile Include="Assets\Scripts\FadeAudio.cs" />
     <Compile Include="Assets\Scripts\GameWorld.cs" />
     <Compile Include="Assets\Scripts\ItemManager.cs" />
-    <Compile Include="Assets\Scripts\Items\Abstract Classes\ActiveItem.cs" />
+    <Compile Include="Assets\Scripts\Items\Abstract Classes\ActivatedItem.cs" />
+    <Compile Include="Assets\Scripts\Items\Abstract Classes\HeldItem.cs" />
+    <Compile Include="Assets\Scripts\Items\Abstract Classes\HeldItemBehavior\CooldownItem.cs" />
+    <Compile Include="Assets\Scripts\Items\Abstract Classes\HeldItemBehavior\IUseItem.cs" />
+    <Compile Include="Assets\Scripts\Items\Abstract Classes\HeldItemBehavior\OneTimeUseItem.cs" />
     <Compile Include="Assets\Scripts\Items\Abstract Classes\Item.cs" />
     <Compile Include="Assets\Scripts\Items\Abstract Classes\PassiveItem.cs" />
+    <Compile Include="Assets\Scripts\Items\Abstract Classes\TriggeredItem.cs" />
     <Compile Include="Assets\Scripts\Items\Bottle.cs" />
     <Compile Include="Assets\Scripts\Items\Chest.cs" />
     <Compile Include="Assets\Scripts\Items\ItemBehavior.cs" />
+    <Compile Include="Assets\Scripts\Items\Medkit.cs" />
     <Compile Include="Assets\Scripts\Items\PoisonShroom.cs" />
+    <Compile Include="Assets\Scripts\Items\SpeedSyringe.cs" />
+    <Compile Include="Assets\Scripts\Items\SrBellhopHat.cs" />
     <Compile Include="Assets\Scripts\Map\DoorSystem.cs" />
     <Compile Include="Assets\Scripts\Map\RoomManager.cs" />
     <Compile Include="Assets\Scripts\Map\RoomPointer.cs" />
@@ -95,12 +104,14 @@
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Player\PointAndShoot.cs" />
+    <Compile Include="Assets\Scripts\UI\ActiveItemUI.cs" />
+    <Compile Include="Assets\Scripts\UI\HealthUI.cs" />
     <Compile Include="Assets\Scripts\UI\MainController.cs" />
     <Compile Include="Assets\Scripts\UI\NotificationUI.cs" />
-    <Compile Include="Assets\Scripts\UI\UIHealth.cs" />
     <Compile Include="Assets\Scripts\Utilities\ShakePosition.cs" />
     <Compile Include="Assets\Scripts\Utilities\TimedLerp.cs" />
     <None Include="Assets\Scripts\AnimationImporter\readme.txt" />
+    <None Include="Assets\Pixel Font - Tripfive\_README.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Phoenix/Documents/GitHub/RedRum/Prototype/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

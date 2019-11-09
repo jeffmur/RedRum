@@ -5,8 +5,6 @@ using UnityEngine;
 public partial class GameWorld : MonoBehaviour
 {
     public Object[] itemPool;
-    //public delegate void onItemPickupDelegate();
-    //public static event onItemPickupDelegate onItemPickup, onHeartPickup;
 
     private void Start()
     {
@@ -17,6 +15,4 @@ public partial class GameWorld : MonoBehaviour
         //    Debug.Log(t.name);
         //}
     }
-
-
 }

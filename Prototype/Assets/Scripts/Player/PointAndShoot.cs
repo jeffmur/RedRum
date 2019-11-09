@@ -10,10 +10,13 @@ public class PointAndShoot : MonoBehaviour
     private GameObject player;
     private Object bulletPrefab;
     private Camera mCamera;
+    private float lastAttackTime;
 
+    public float firerate;
     public float bulletSpeed = 5.0f; 
     void Start()
     {
+        firerate = 1f;
         Cursor.visible = false;
         crosshairs = GameObject.Find("crossHairs");
         player = GameObject.Find("Casper");
@@ -32,10 +35,14 @@ public class PointAndShoot : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            float distance = difference.magnitude;
-            Vector2 direction = difference / distance;
-            direction.Normalize();
-            Shooting(direction, rotationZ);
+            if (Time.time > (lastAttackTime + firerate))
+            {
+                float distance = difference.magnitude;
+                Vector2 direction = difference / distance;
+                direction.Normalize();
+                Shooting(direction, rotationZ);
+                lastAttackTime = Time.time;
+            }
         }
 
     }
