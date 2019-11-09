@@ -64,7 +64,6 @@ public class GhostBehavior : MonoBehaviour
         }
         else if (other.CompareTag("HeroBullet"))
         {
-            enemyHealth.DecreaseHealth(other.transform.GetComponent<bullet>().bulletDamage);
             state = (int)States.Anger;
             animator.SetFloat("State", (float)States.Anger);
         }

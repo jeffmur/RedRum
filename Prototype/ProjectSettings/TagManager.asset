@@ -4,15 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Wall
+  - Icon
   - Enemy
-  - SpawnPoint
-  - Level
   - Rooms
   - HeroBullet
   - EnemyBullet
-  - Icon
-  - Undefined
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -22,7 +19,7 @@ TagManager:
   - UI
   - 
   - 
-  - MiniMap
+  - 
   - 
   - 
   - 
