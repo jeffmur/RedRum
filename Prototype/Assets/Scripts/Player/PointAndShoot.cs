@@ -16,7 +16,7 @@ public class PointAndShoot : MonoBehaviour
     public float bulletSpeed = 5.0f; 
     void Start()
     {
-        firerate = 1f;
+        firerate = 0.5f;
         Cursor.visible = false;
         crosshairs = GameObject.Find("crossHairs");
         player = GameObject.Find("Casper");
