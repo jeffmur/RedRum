@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2d4ad6999271c9843ac70b5b46fae506
+guid: 01cfe29c89c924047b54db08749b6a3d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8045460545107507290
-    second: RayGun 0
+      213: 7493573477488181231
+    second: RayGunBullet 0
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -77,7 +77,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RayGun 0
+      name: RayGunBullet 0
       rect:
         serializedVersion: 2
         x: 0
@@ -92,7 +92,7 @@ TextureImporter:
       tessellationDetail: -1
       bones: []
       spriteID: 
-      internalID: 8045460545107507290
+      internalID: 7493573477488181231
       vertices: []
       indices: 
       edges: []
