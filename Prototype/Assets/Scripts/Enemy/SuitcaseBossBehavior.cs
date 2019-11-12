@@ -25,7 +25,7 @@ public class SuitcaseBossBehavior : MonoBehaviour
     {
         direction = Vector3.Normalize(Casper.transform.position - transform.position);
         float distance = Vector3.Distance(Casper.transform.position, transform.position);
-        if(distance <= 15f)
+        if (distance <= 15f && distance >= 1)
             transform.position += EnemySpeed * direction * Time.deltaTime;
         if (direction.x < 0)
         {
@@ -74,7 +74,7 @@ public class SuitcaseBossBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //other.gameObject.GetComponent<PlayerStats>().loseHealth(1);
+            other.gameObject.GetComponent<PlayerStats>().changeHealth(1);
         }
     }
 }

@@ -1,31 +1,62 @@
-﻿using System.Collections;
+﻿﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine;
 using UnityEngine;
 
 public class MainController : MonoBehaviour
 {
     //declare all UI elements and the model
-    public UIHealth healthInfo;
+    public HealthUI healthInfo;
+    public ActiveItemUI activeItemInfo;
     public NotificationUI notificationPanel;
     public GameWorld gameWorld;
+    public Text roomStatus;
 
-   
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        healthInfo.setStartingHealth(gameWorld.getStartingHealth());
-        GameWorld.onNotifyChange += sendNotification;
+        notificationPanel.gameObject.SetActive(false);
+        EventManager.OnNotifyChange += sendNotification;
+        gameWorld.eventManager.onHealthTrigger += updatehealthUI;
+        gameWorld.eventManager.onMaxHealthTrigger += updateMaxHealthUI;
+        gameWorld.eventManager.onItemPickupTrigger += updateActiveItemPickupUI;
+        gameWorld.eventManager.onItemActivateTrigger += updateActiveItemUseUI;
     }
 
-    // Update is called once per frame
-    void Update()
+    // Start is called before the first frame update
+    private void Start()
     {
-        
+        healthInfo.setStartingHealth(gameWorld.getStartingHealth());
     }
 
     private void sendNotification(string notification)
     {
         StartCoroutine(notificationPanel.displayMessage(notification));
+    }
+
+    private void updatehealthUI(int value)
+    {
+        healthInfo.CurrentHP = value;
+    }
+
+    private void updateMaxHealthUI(int value)
+    {
+        healthInfo.MaxHP = value;
+    }
+
+    private void updateActiveItemPickupUI(Item item)
+    {
+        activeItemInfo.displayActiveItem(item);
+    }
+
+    private void updateActiveItemUseUI(HeldItem item)
+    {
+        activeItemInfo.updateItemUI(item);
+    }
+
+    public void updateRoomStatus(string room)
+    {
+        roomStatus.text = "Current Room: " + room;
     }
 }

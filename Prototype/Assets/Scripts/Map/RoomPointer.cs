@@ -10,6 +10,8 @@ public partial class RoomPointer : MonoBehaviour
     public DoorSystem fromRoom;
     public GameObject nextRoom;
     private GameObject mHero;
+    private GameObject casperIcon;
+
 
     // Start is called before the first frame update
     void Start()
@@ -17,22 +19,31 @@ public partial class RoomPointer : MonoBehaviour
         mm = GameObject.Find("Level Generator").GetComponent<MMController>();
         mHero = GameObject.Find("Casper");
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     
     private void RoomSwap(GameObject nextLevel, string doorSide)
     {
         RoomStats next = nextLevel.GetComponent<RoomStats>();
-        // Spawn Enemies (if available)
-        nextLevel.GetComponent<RoomManager>().Initialize();
-        nextLevel.GetComponent<DoorSystem>().LockAll();
+        if (mm.casperIcon.position != mm.allRooms[0].transform.position)
+        {
+            foreach (GameObject room in mm.allRooms) // for all the rooms
+            {
+                if (Vector2.Distance(room.transform.position, mm.casperIcon.position) < 2f) // find the room I am in 
+                {
+                    if (room.GetComponent<Room>() != null) //if it is actually a room
+                    {
+                        if (!room.GetComponent<Room>().isVisited) //if the room is not visited
+                        {
+                            room.GetComponent<Room>().isVisited = true; //mark it is visited
+                            next.GetComponent<RoomManager>().Initialize(); //make the enemies spawn 
+                        }
+                    }
+                }
+            }
+        }
+        next.GetComponent<DoorSystem>().LockAll(); //Spawn Enemies
         // Move camera
         next.setCamLocation();
-        // Move Hero
+            // Move Hero
         mHero.transform.position = next.sendPlayerToDoor(doorSide);
     }
 
@@ -48,8 +59,8 @@ public partial class RoomPointer : MonoBehaviour
             nextRoom = GameObject.Find("Swap_1");
 
         // Player Icon ON Entry Room
-        //if (mm.getCurrentRoomName() == "Entry Room")
-        //nextRoom = GameObject.Find("Welcome");
+        if (mm.casperIcon.position == mm.allRooms[0].transform.position)
+            nextRoom = GameObject.Find("Welcome");
 
         // Player Icon On Boss Icon
         float dist = Vector2.Distance(mm.casperIcon.position, mm.bossIcon.position);

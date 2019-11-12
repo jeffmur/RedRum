@@ -4,48 +4,48 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Wall
+  - Icon
   - Enemy
-  - SpawnPoint
-  - Level
   - Rooms
   - HeroBullet
   - EnemyBullet
+  - Wall
   - Icon
   - Undefined
+  - Item
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  -
   - Water
   - UI
-  - 
-  - 
-  - MiniMap
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
   m_SortingLayers:
   - name: Default
     uniqueID: 0

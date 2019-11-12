@@ -19,6 +19,7 @@ public class MMController : MonoBehaviour
     public Transform entryRoom;
 
     private SizeController SIZE;
+    private List<Room> RSS; //saving the states of all rooms (visited and location)
 
     // Start is called before the first frame update
     void Start()
@@ -37,8 +38,9 @@ public class MMController : MonoBehaviour
         {
             // Add all dangling (not organized rooms) to Critical Path
             allRooms = GameObject.FindGameObjectsWithTag("Rooms");
-            foreach(GameObject room in allRooms)
+            foreach (GameObject room in allRooms)
                 room.transform.parent = criticalPath.transform;
+
 
             // All icons to Icons
             allIcons = GameObject.FindGameObjectsWithTag("Icon");

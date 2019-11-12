@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,9 +11,13 @@ public class PointAndShoot : MonoBehaviour
     private GameObject selectedWeapon;
     private Object bulletPrefab;
     private Camera mCamera;
+    private float lastAttackTime;
+    public float firerate;
+    public float bulletSpeed = 5.0f; 
 
     void Start()
     {
+        firerate = 0.5f;
         Cursor.visible = false;
         crosshairs = GameObject.Find("crossHairs");
         weaponInventory = GameObject.Find("WeaponInventory").GetComponent<WeaponInventory>();
@@ -45,5 +49,24 @@ public class PointAndShoot : MonoBehaviour
                 
             }
         }
+            if (Time.time > (lastAttackTime + firerate))
+            {
+                float distance = difference.magnitude;
+                Vector2 direction = difference / distance;
+                direction.Normalize();
+                Shooting(direction, rotationZ);
+                lastAttackTime = Time.time;
+            }
+        }
+
+    }
+
+    void Shooting(Vector2 direction, float rotationZ)
+    {
+        GameObject bullet = Instantiate(bulletPrefab) as GameObject;
+        Vector2 startPos = player.transform.position;
+        bullet.transform.position = new Vector2(startPos.x + 0.5f, startPos.y - 0.2f);
+        bullet.transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
+        bullet.GetComponent<Rigidbody2D>().AddForce(direction * bulletSpeed, ForceMode2D.Impulse);
     }
 }
