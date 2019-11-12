@@ -64,8 +64,11 @@ public class GhostBehavior : MonoBehaviour
         }
         else if (other.CompareTag("HeroBullet"))
         {
-            state = (int)States.Anger;
-            animator.SetFloat("State", (float)States.Anger);
+            if (state != (int)States.Chase)
+            {
+                state = (int)States.Anger;
+                animator.SetFloat("State", (float)States.Anger);
+            }
         }
     }
 
@@ -97,7 +100,7 @@ public class GhostBehavior : MonoBehaviour
     private void ChaseState()
     {
         float distance = Vector3.Distance(casper.transform.position, transform.position);
-        if (distance <= 13)
+        if (distance <= 20)
             rb.MovePosition(rb.position + direction * Speed * Time.fixedDeltaTime);
         else
             state = (int)States.Idle;
