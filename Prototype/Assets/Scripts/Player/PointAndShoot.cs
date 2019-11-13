@@ -13,7 +13,7 @@ public class PointAndShoot : MonoBehaviour
     private Camera mCamera;
     private float lastAttackTime;
     public float firerate;
-    public float bulletSpeed = 5.0f; 
+    public float bulletSpeed = 5.0f;
 
     void Start()
     {
@@ -46,27 +46,7 @@ public class PointAndShoot : MonoBehaviour
                 Vector2 direction = difference / distance;
                 direction.Normalize();
                 selectedWeapon.GetComponent<Weapon>().FireWeapon(direction, rotationZ);
-                
             }
         }
-            if (Time.time > (lastAttackTime + firerate))
-            {
-                float distance = difference.magnitude;
-                Vector2 direction = difference / distance;
-                direction.Normalize();
-                Shooting(direction, rotationZ);
-                lastAttackTime = Time.time;
-            }
-        }
-
-    }
-
-    void Shooting(Vector2 direction, float rotationZ)
-    {
-        GameObject bullet = Instantiate(bulletPrefab) as GameObject;
-        Vector2 startPos = player.transform.position;
-        bullet.transform.position = new Vector2(startPos.x + 0.5f, startPos.y - 0.2f);
-        bullet.transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
-        bullet.GetComponent<Rigidbody2D>().AddForce(direction * bulletSpeed, ForceMode2D.Impulse);
     }
 }
