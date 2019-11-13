@@ -543,8 +543,7 @@ MonoBehaviour:
   attackRange: 0
   damage: 0
   attackDelay: 0
-  SkellentonDeadBody: {fileID: 1798092532787938560, guid: 6fca6b1c21bc94904920763f3857daaf,
-    type: 3}
+  myDeadBody: {fileID: 0}
   moveSpeed: 1
 --- !u!61 &1590153327
 BoxCollider2D:
@@ -561,9 +560,9 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.062205076, y: -0.005940646}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0.025}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.3, y: 1.6}
+    oldSize: {x: 1.125, y: 1.65}
     newSize: {x: 2.08, y: 2.56}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
