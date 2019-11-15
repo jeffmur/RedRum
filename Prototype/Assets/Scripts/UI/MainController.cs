@@ -33,7 +33,8 @@ public class MainController : MonoBehaviour
 
     private void sendNotification(string notification)
     {
-        StartCoroutine(notificationPanel.displayMessage(notification));
+        if(this != null)
+            StartCoroutine(notificationPanel.displayMessage(notification));
     }
 
     private void updateAmmoUI(int value)

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2209327765211105678}
   - component: {fileID: 2209327765211105679}
   - component: {fileID: 2209327765211105672}
+  - component: {fileID: 665416239163148428}
   m_Layer: 0
   m_Name: Wallshooter
   m_TagString: Enemy
@@ -98,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 125
+  itemDrop: {fileID: 0}
 --- !u!114 &2209327765211105678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,3 +154,22 @@ CircleCollider2D:
   m_Offset: {x: -0.00000023841858, y: 0.030856848}
   serializedVersion: 2
   m_Radius: 0.42171574
+--- !u!95 &665416239163148428
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2209327765211105673}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b9201f93e65eec34aa325c667b847d76, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

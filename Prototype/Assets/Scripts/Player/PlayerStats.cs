@@ -94,9 +94,11 @@ public class PlayerStats : MonoBehaviour
             maxHealth = currentHealth;
             onMaxHealthChange?.Invoke(maxHealth);
         }
-        if (currentHealth < 0)
+        if (currentHealth <= 0)
         {
-            currentHealth = 0;
+            
+            Debug.Log("CASPER DEAD");
+            Die();
         }
         onHealthChange?.Invoke(currentHealth);
     }
@@ -153,5 +155,10 @@ public class PlayerStats : MonoBehaviour
             
         }
         onItemUse?.Invoke(currentHeldItem);
+    }
+
+    private void Die()
+    {
+        Scenes.Load("Alpha", Scenes.nextDem());
     }
 }

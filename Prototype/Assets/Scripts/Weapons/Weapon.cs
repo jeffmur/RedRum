@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour
     public int Damage;
     public int ClipSize;
     public float BulletSpeed;
-    public float FireRate;
+    public float FireRate = 0.3f;
     public float Accuracy;
     public float reloadSpeed;
     public GameObject BulletPrefab;
@@ -33,7 +33,7 @@ public class Weapon : MonoBehaviour
     void Update()
     {
         // Hot reload
-        if (Input.GetKeyDown(KeyCode.R) && bulletsInClip != ClipSize) {
+        if (Input.GetKeyDown(KeyCode.R) && bulletsInClip != ClipSize && !reloadCooldown.reloading) {
             reloadCooldown.StartReload(reloadSpeed);
             reloadStartTime = Time.time;
         }
@@ -55,6 +55,7 @@ public class Weapon : MonoBehaviour
         {
             if (Time.time - timeSinceLastShot >= FireRate)
             {
+                gameObject.GetComponent<AudioSource>().Play();
                 GameObject bullet = Instantiate(BulletPrefab) as GameObject;
                 bullet.transform.position = transform.position;
                 // accuracy 

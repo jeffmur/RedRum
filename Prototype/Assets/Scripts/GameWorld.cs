@@ -33,24 +33,18 @@ public partial class GameWorld : MonoBehaviour
 
     public void TestController()
     {
+        //if (Input.GetKeyDown("1"))
+        //{
+        //    stats.changeMaxHealth(1);
+        //}
+        //if (Input.GetKeyDown("2"))
+        //{
+        //    stats.changeMaxHealth(-1);
+        //}
         if (Input.GetKeyDown("1"))
-        {
-            stats.changeMaxHealth(1);
-        }
-        if (Input.GetKeyDown("2"))
-        {
-            stats.changeMaxHealth(-1);
-        }
-        if (Input.GetKeyDown("3"))
         {
             stats.changeHealth(1);
         }
-        if (Input.GetKeyDown("0"))
-            stats.changeAmmo(-1);
-        //if (Input.GetKeyDown("4"))
-        //{
-        //    stats.changeHealth(-1);
-        //}
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (stats.currentHeldItem is ActivatedItem)

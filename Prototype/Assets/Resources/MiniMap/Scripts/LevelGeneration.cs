@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LevelGeneration : MonoBehaviour {
 
+    private MainController MC;
     public Transform[] startingPositions;
     private SizeController SIZE;
     public GameObject[] rooms;

@@ -18,44 +18,36 @@ public class SrBellhopHat : ActivatedItem
 
     private void Start()
     {
-        ThrowingHatPrefab = Resources.Load("Textures/Prefabs/Items/SrBellhopHat");
        // rb = GetComponent<Rigidbody2D>();
     }
     private void Update()
     {
         if (activated)
         {
+            gameObject.SetActive(false);
             boomerangTimer += Time.deltaTime;
             if (boomerangTimer >= 1f)
             {
                 returning = true;
-                if ((ThrowingHat.transform.position - player.transform.position).magnitude < 1f)
+                if ((transform.position - transform.position).magnitude < 1f)
                 {
-                    Destroy(ThrowingHat); //destory if back
+                    Destroy(this.gameObject); //destory if back
                     activated = false;
                 }
             }              
 
             if (!returning)
             {
-                ThrowingHat.transform.Translate(player.transform.up * velocity * Time.deltaTime);
+                transform.Translate(player.transform.up * velocity * Time.deltaTime);
             }
             else
             {
-                ThrowingHat.transform.up = player.transform.position - ThrowingHat.transform.position;
-                ThrowingHat.transform.Translate(Vector2.up * velocity * Time.deltaTime);
+                //ThrowingHat.transform.up = player.transform.position - ThrowingHat.transform.position;
+                transform.Translate(Vector2.up * velocity * Time.deltaTime);
             }
         }     
     }
-    public override void activateItem()
-        {
-        if(!activated)
-        {
-           ThrowingHat = Instantiate(ThrowingHatPrefab) as GameObject;
-            ThrowingHat.transform.position = player.transform.position;
-        }
-        activated = true;
-    }
+    public override void activateItem() { activated = true; }
 
     protected override void setItemInfo()
         {
