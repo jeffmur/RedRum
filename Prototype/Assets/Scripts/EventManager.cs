@@ -77,7 +77,8 @@ public class EventManager : MonoBehaviour
             player.GetComponentInChildren<Light>().color = Color.red;
             player.GetComponentInChildren<Light>().range = 2f;
             player.GetComponentInChildren<Light>().intensity = 20f;
-            if (Timer > .2f && Timer <= .5f)
+
+            if (Timer > .25f && Timer <= .5f)
             {
                 player.GetComponentInChildren<Light>().intensity = 0f;
             }
@@ -85,7 +86,7 @@ public class EventManager : MonoBehaviour
             {
                 player.GetComponentInChildren<Light>().intensity = 20f;
             }
-            if (Timer > 1f)
+            if(Timer > .75f)
             {
                 Timer = 0f;
                 FlashingBegan = false;
