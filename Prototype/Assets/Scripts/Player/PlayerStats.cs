@@ -80,7 +80,6 @@ public class PlayerStats : MonoBehaviour
         {
             return;
         }
-
         currentHealth += value;
         if (currentHealth > maxHealth)
         {

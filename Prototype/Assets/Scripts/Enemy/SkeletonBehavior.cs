@@ -15,7 +15,6 @@ public class SkeletonBehavior : MonoBehaviour
 
     private float myHealth;
 
-    public GameObject myDeadBody;
 
     public float moveSpeed = 5f;
     private float distanceToPlayer;
@@ -40,17 +39,30 @@ public class SkeletonBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         Vector3 dirction = (casper.position - transform.position).normalized;
         movement = dirction;
 
         distanceToPlayer = Vector2.Distance(casper.transform.position, transform.position);
 
-            if (enemyAnimator.GetBool("Die") == false && distanceToPlayer > attackRange)
+        if (enemyAnimator.GetBool("Die") == false && distanceToPlayer > attackRange)
+        {
+            enemyAnimator.SetBool("isAttacking", false);
+            EnemyMove(movement);
+        }
+        else
+        {
+            if (Time.time > (lastAttackTime + attackDelay))
             {
-                EnemyMove(movement);
+                enemyAnimator.SetFloat("Speed", 0);
+                enemyAnimator.SetBool("isAttacking", true);
+                lastAttackTime = Time.time;
+                Debug.Log("Attacking casper");
+                Attack(1);
             }
+        }
     }
+
 
     void EnemyMove(Vector2 direction)
     {
@@ -64,23 +76,9 @@ public class SkeletonBehavior : MonoBehaviour
             enemySprite.flipX = false;
         }
 
-        if (distanceToPlayer <= attackRange)
-        {
-            if (Time.time > (lastAttackTime + attackDelay))
-            {
-                enemyAnimator.SetFloat("Speed", 0);
-                enemyAnimator.SetBool("isAttacking", true);
-                lastAttackTime = Time.time;
-                Debug.Log("Attacking casper");
-                Attack(1);
-            }
-        }
-        else
-        {
-            enemyAnimator.SetBool("isAttacking", false);
-            enemyAnimator.SetFloat("Speed", moveSpeed);
-            rb.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.smoothDeltaTime));
-        }
+        enemyAnimator.SetFloat("Speed", moveSpeed);
+        rb.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.smoothDeltaTime));
+
     }
 
     private void takeDamage(int hit)
@@ -89,19 +87,17 @@ public class SkeletonBehavior : MonoBehaviour
         if (myHealth <= 0)
         {
             enemyAnimator.SetBool("Die", true);
-            Destroy(this.gameObject, 1f);
-            //Instantiate(myDeadBody, transform.position, Quaternion.identity);
-            
+            Destroy(this.gameObject, 0.75f);
         }
     }
 
     private void Attack(int hitDamage)
     {
-        GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<PlayerStats>().changeHealth(hitDamage);
+        casper.GetComponent<PlayerStats>().changeHealth(-hitDamage);
     }
 
 
-    
+
     private void OnTriggerEnter2D(Collider2D collison)
     {
         if (collison.CompareTag("HeroBullet"))

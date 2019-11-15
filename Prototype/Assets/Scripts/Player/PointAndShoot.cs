@@ -44,9 +44,12 @@ public class PointAndShoot : MonoBehaviour
                 Vector2 direction = difference / distance;
                 direction.Normalize();
                 selectedWeapon.GetComponent<Weapon>().FireWeapon(direction, rotationZ);
-                
-            }
 
+            }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 5046bd199673b6f24dcc423564810e1e7a4c816f
             if (Time.time > (lastAttackTime + firerate))
             {
                 float distance = difference.magnitude;
@@ -55,6 +58,9 @@ public class PointAndShoot : MonoBehaviour
                 lastAttackTime = Time.time;
             }
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5046bd199673b6f24dcc423564810e1e7a4c816f
     }
 }
