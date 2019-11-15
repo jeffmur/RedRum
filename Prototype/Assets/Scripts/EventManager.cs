@@ -68,18 +68,24 @@ public class EventManager : MonoBehaviour
             Timer += Time.deltaTime;
             player.GetComponentInChildren<Light>().color = Color.Lerp(Color.red, Color.white, 0.1f);
             player.GetComponentInChildren<Light>().range = 2f;
-            player.GetComponentInChildren<Light>().intensity = 10f;
-            if (Timer > 1f)
+            player.GetComponentInChildren<Light>().intensity = 20f;
+            if (Timer > .5f && Timer <= 1.0f)
             {
-                FlashingBegan = false;
+                player.GetComponentInChildren<Light>().intensity = 0f;
+            }
+            if (Timer > 1.0f)
+            {
+                player.GetComponentInChildren<Light>().intensity = 20f;
+            }
+            if(Timer > 2f)
+            {
                 Timer = 0f;
+                FlashingBegan = false;
             }
         }
         else
         {
-            player.GetComponentInChildren<Light>().intensity = 2f;
-            player.GetComponentInChildren<Light>().range = 3f;
-            player.GetComponentInChildren<Light>().color = Color.white;
+            player.GetComponentInChildren<Light>().intensity = 0f;
         }
 
     }
