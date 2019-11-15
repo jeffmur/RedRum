@@ -15,10 +15,14 @@ public class WallShooterBehavior : MonoBehaviour
     private int direction;
 
     private float timeBtwShot;
+    private float freezeTime = 0f;
     public float shootingCooldown = 2f;
     public float enemyShootingRange = 2f;
     public float moveSpeed = 2f;
     private float myHealth;
+    private Animator enemyAnimator;
+
+    private SpriteRenderer currSprite;
 
     private enum States
     {
@@ -27,6 +31,8 @@ public class WallShooterBehavior : MonoBehaviour
         SideWallAttack
 
     }
+
+
     void Start()
     {
         currentStates = (int)States.Wall;
@@ -34,6 +40,9 @@ public class WallShooterBehavior : MonoBehaviour
         casper = GameObject.Find("Casper");
         direction = Random.Range(0, 4);
         myHealth = GetComponent<EnemyHealthManager>().Health;
+        currSprite = this.GetComponent<SpriteRenderer>();
+        enemyAnimator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -52,6 +61,7 @@ public class WallShooterBehavior : MonoBehaviour
             SideWallAttackState();
         }
         timeBtwShot -= Time.deltaTime;
+        freezeTime -= Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collison)
@@ -60,10 +70,26 @@ public class WallShooterBehavior : MonoBehaviour
         {
             if (direction == 0 || direction == 1)
             {
+                if (direction == 1)
+                {
+                    Sprite change = Resources.Load<Sprite>("Textures/Animations/WallShooterEnemy/WallshooterFaceUp");
+                    enemyAnimator.SetFloat("State", 1);
+                    currSprite.sprite = change;
+                }
+                else
+                    enemyAnimator.SetFloat("State", 0);
                 currentStates = (int)States.TopDownWallAttack;
             }
             else
             {
+                Sprite change = Resources.Load<Sprite>("Textures/Animations/WallShooterEnemy/WallshooterFaceRight");
+                currSprite.sprite = change;
+                if(direction == 3)
+                {
+                    currSprite.flipX = true;
+                }
+
+                enemyAnimator.SetFloat("State", 2);
                 currentStates = (int)States.SideWallAttack;
             }
         }
@@ -100,38 +126,51 @@ public class WallShooterBehavior : MonoBehaviour
 
     void TopDownWallAttackState()
     {
+
         Vector3 chase = new Vector3(casper.transform.position.x, this.transform.position.y, this.transform.position.z);
         Vector2 dirction = (chase - transform.position).normalized;
 
         if (Mathf.Abs(this.transform.position.x - casper.transform.position.x) <= enemyShootingRange)
+        {
             Shooting();
-
-
-        rb.MovePosition((Vector2)transform.position + (dirction * moveSpeed * Time.smoothDeltaTime));
+        }
+        if (freezeTime < 0)
+        {
+            enemyAnimator.SetBool("Attack", false);
+            if(Mathf.Abs(this.transform.position.x - casper.transform.position.x) >= 0.1f)
+            rb.MovePosition((Vector2)transform.position + (dirction * moveSpeed * Time.smoothDeltaTime));
+        }
     }
-
 
     void SideWallAttackState()
     {
+
         Vector3 chase = new Vector3(this.transform.position.x, casper.transform.position.y, this.transform.position.z);
         Vector2 dirction = (chase - transform.position).normalized;
 
-          if(Mathf.Abs(this.transform.position.y - casper.transform.position.y)<= enemyShootingRange)
+        if (Mathf.Abs(this.transform.position.y - casper.transform.position.y) <= enemyShootingRange)
+        {
             Shooting();
+        }
+        if (freezeTime < 0)
+        {
+            enemyAnimator.SetBool("Attack", false);
+            if (Mathf.Abs(this.transform.position.y - casper.transform.position.y) >= 0.1f)
+            rb.MovePosition((Vector2)transform.position + (dirction * moveSpeed * Time.smoothDeltaTime));
+        }
 
-
-        rb.MovePosition((Vector2)transform.position + (dirction * moveSpeed * Time.smoothDeltaTime));
     }
 
     void Shooting()
     {
         if (timeBtwShot < 0)
         {
+            enemyAnimator.SetBool("Attack", true);
             EnemyBullet bullets = Instantiate(BulletPrefab, transform.position, Quaternion.identity).GetComponent<EnemyBullet>();
             bullets.SetBulletDirection(bulletShootDirc);
             timeBtwShot = shootingCooldown;
             moveSpeed = Random.Range(2, 8);
+            freezeTime = 1f;
         }
     }
-
 }
