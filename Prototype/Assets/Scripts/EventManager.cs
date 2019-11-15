@@ -77,9 +77,9 @@ public class EventManager : MonoBehaviour
         }
         else
         {
-            player.GetComponentInChildren<Light>().intensity = 1f;
+            player.GetComponentInChildren<Light>().intensity = 2f;
             player.GetComponentInChildren<Light>().range = 3f;
-            player.GetComponentInChildren<Light>().color = Color.Lerp(player.GetComponentInChildren<Light>().color, Color.white, 0.001f);
+            player.GetComponentInChildren<Light>().color = Color.white;
         }
 
     }
