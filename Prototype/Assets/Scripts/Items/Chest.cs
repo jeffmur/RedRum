@@ -21,13 +21,11 @@ public class Chest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Vector2.Distance(transform.position, casper.position) <= 1f && Input.GetKeyDown("e"))
+        if(Vector2.Distance(transform.position, casper.position) <= 1f && Input.GetKeyDown("e")) { openChest = true;  }
+        if(openChest && rend.sprite != opened)
         {
-            if (rend.sprite != opened)
-            {
-                rend.sprite = opened;
-                spawnRandomItem();
-            }
+            rend.sprite = opened;
+            spawnRandomItem();
         }
     }
 
@@ -43,6 +41,7 @@ public class Chest : MonoBehaviour
     private void spawnRandomItem()
     {
         int i = Random.Range(0, items.Count - 1);
-        Instantiate(items[i], transform.position, Quaternion.identity);
+        GameObject item = Instantiate(items[i], transform.position, Quaternion.identity);
+        item.AddComponent<ItemBehavior>();
     }
 }

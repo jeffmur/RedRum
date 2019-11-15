@@ -13,6 +13,9 @@ public class EventManager : MonoBehaviour
     public delegate void onHealthTriggerDelegate(int value);
     public event onHealthTriggerDelegate onHealthTrigger, onMaxHealthTrigger;
 
+    public delegate void onAmmoChangeDelegate(int val);
+    public event onAmmoChangeDelegate onAmmoChange;
+
     public delegate void onItemPickupTriggerDelegate(Item item);
     public event onItemPickupTriggerDelegate onItemPickupTrigger;
 
@@ -25,6 +28,7 @@ public class EventManager : MonoBehaviour
         stats = player.GetComponent<PlayerStats>();
 
         stats.onHealthChange += triggerHealthChange;
+        stats.onAmmoChange += triggerAmmoChange;
         stats.onMaxHealthChange += triggerMaxHealthChange;
         stats.onItemPickup += triggerItemPickup;
         stats.onItemUse += triggerItemActivate;
@@ -33,6 +37,11 @@ public class EventManager : MonoBehaviour
     public static void TriggerNotification(string notification)
     {
         OnNotifyChange?.Invoke(notification);
+    }
+
+    public void triggerAmmoChange(int value)
+    {
+        onAmmoChange?.Invoke(value);
     }
 
     public void triggerMaxHealthChange(int value)
@@ -45,7 +54,6 @@ public class EventManager : MonoBehaviour
         //Debug.Log("Changing health by " + CurentHealth);
         onHealthTrigger?.Invoke(CurentHealth);
         FlashDamage();
-
     }
 
     private void triggerItemPickup(Item item)
@@ -66,21 +74,26 @@ public class EventManager : MonoBehaviour
         if (FlashingBegan)
         {
             Timer += Time.deltaTime;
-            player.GetComponentInChildren<Light>().color = Color.Lerp(Color.red, Color.white, 0.1f);
+            player.GetComponentInChildren<Light>().color = Color.red;
             player.GetComponentInChildren<Light>().range = 2f;
-            player.GetComponentInChildren<Light>().intensity = 10f;
+            player.GetComponentInChildren<Light>().intensity = 20f;
+            if (Timer > .2f && Timer <= .5f)
+            {
+                player.GetComponentInChildren<Light>().intensity = 0f;
+            }
+            if (Timer > .5f)
+            {
+                player.GetComponentInChildren<Light>().intensity = 20f;
+            }
             if (Timer > 1f)
             {
-                FlashingBegan = false;
                 Timer = 0f;
+                FlashingBegan = false;
             }
         }
         else
         {
-            player.GetComponentInChildren<Light>().intensity = 1f;
-            player.GetComponentInChildren<Light>().range = 3f;
-            player.GetComponentInChildren<Light>().color = Color.Lerp(player.GetComponentInChildren<Light>().color, Color.white, 0.001f);
+            player.GetComponentInChildren<Light>().intensity = 0f;
         }
-
     }
 }
