@@ -2747,58 +2747,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1040225656, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
-      propertyPath: mCamera
-      value: 
-      objectReference: {fileID: 519420031}
-    - target: {fileID: 1701560092, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
-      propertyPath: nextRoom
-      value: 
-      objectReference: {fileID: 6478781016209546251}
-    - target: {fileID: 1701560092, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
-      propertyPath: mHero
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1701560092, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
-      propertyPath: mCamera
-      value: 
-      objectReference: {fileID: 519420031}
-    - target: {fileID: 1803337696, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
-      propertyPath: nextRoom
-      value: 
-      objectReference: {fileID: 6478781016209546251}
-    - target: {fileID: 1803337696, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
-      propertyPath: mHero
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1803337696, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
-      propertyPath: mCamera
-      value: 
-      objectReference: {fileID: 519420031}
-    - target: {fileID: 1514660691, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
-      propertyPath: nextRoom
-      value: 
-      objectReference: {fileID: 6478781016209546251}
-    - target: {fileID: 1514660691, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
-      propertyPath: mHero
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1514660691, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
-      propertyPath: mCamera
-      value: 
-      objectReference: {fileID: 519420031}
-    - target: {fileID: 183174919, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
-      propertyPath: nextRoom
-      value: 
-      objectReference: {fileID: 6478781016209546251}
-    - target: {fileID: 183174919, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
-      propertyPath: mHero
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 183174919, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
-      propertyPath: mCamera
-      value: 
-      objectReference: {fileID: 519420031}
     - target: {fileID: 819693086, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 2.11
@@ -2807,6 +2755,58 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 10.48
       objectReference: {fileID: 0}
+    - target: {fileID: 1040225656, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
+      propertyPath: mCamera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 1803337696, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
+      propertyPath: nextRoom
+      value: 
+      objectReference: {fileID: 6478781016209546251}
+    - target: {fileID: 1803337696, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
+      propertyPath: mHero
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1803337696, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
+      propertyPath: mCamera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 1514660691, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
+      propertyPath: nextRoom
+      value: 
+      objectReference: {fileID: 6478781016209546251}
+    - target: {fileID: 1514660691, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
+      propertyPath: mHero
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514660691, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
+      propertyPath: mCamera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 1701560092, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
+      propertyPath: nextRoom
+      value: 
+      objectReference: {fileID: 6478781016209546251}
+    - target: {fileID: 1701560092, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
+      propertyPath: mHero
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1701560092, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
+      propertyPath: mCamera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 183174919, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
+      propertyPath: nextRoom
+      value: 
+      objectReference: {fileID: 6478781016209546251}
+    - target: {fileID: 183174919, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
+      propertyPath: mHero
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 183174919, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
+      propertyPath: mCamera
+      value: 
+      objectReference: {fileID: 519420031}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
 --- !u!4 &1204812287 stripped
