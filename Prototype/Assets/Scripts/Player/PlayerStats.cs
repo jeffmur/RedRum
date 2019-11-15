@@ -108,7 +108,6 @@ public class PlayerStats : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            
             if (collision.gameObject.tag == "Item")
             {              
                 pickUpItem(collision.gameObject.GetComponent<Item>());
