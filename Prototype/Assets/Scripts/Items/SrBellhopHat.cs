@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//private GameObject ThrowingHat;
 
 public class SrBellhopHat : ActivatedItem
     {
@@ -19,7 +18,16 @@ public class SrBellhopHat : ActivatedItem
     private void Start()
     {
         ThrowingHatPrefab = Resources.Load("Textures/Prefabs/Items/SrBellhopHat");
-       // rb = GetComponent<Rigidbody2D>();
+        // rb = GetComponent<Rigidbody2D>();
+    }
+    public override void activateItem()
+    {
+        if (!activated) //if q is pressed 
+        {
+            gameObject.SetActive(true);
+            transform.position = player.transform.position; //start at the player
+            activated = true;
+        }
     }
     private void Update()
     {
@@ -29,32 +37,23 @@ public class SrBellhopHat : ActivatedItem
             if (boomerangTimer >= 1f)
             {
                 returning = true;
-                if ((ThrowingHat.transform.position - player.transform.position).magnitude < 1f)
+                if ((transform.position - player.transform.position).magnitude < 1f)
                 {
-                    Destroy(ThrowingHat); //destory if back
+                    transform.position = player.transform.position;
+                    gameObject.SetActive(false); ; //Sets to false if back
                     activated = false;
                 }
             }              
-
             if (!returning)
             {
-                ThrowingHat.transform.Translate(player.transform.up * velocity * Time.deltaTime);
+                transform.Translate(player.transform.up * velocity * Time.deltaTime);
             }
             else
             {
-                ThrowingHat.transform.up = player.transform.position - ThrowingHat.transform.position;
-                ThrowingHat.transform.Translate(Vector2.up * velocity * Time.deltaTime);
+                transform.up = player.transform.position - transform.position;
+                transform.Translate(Vector2.up * velocity * Time.deltaTime);
             }
         }     
-    }
-    public override void activateItem()
-        {
-        if(!activated)
-        {
-           ThrowingHat = Instantiate(ThrowingHatPrefab) as GameObject;
-            ThrowingHat.transform.position = player.transform.position;
-        }
-        activated = true;
     }
 
     protected override void setItemInfo()

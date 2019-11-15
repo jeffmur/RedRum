@@ -9,6 +9,5 @@ public abstract class HeldItem : Item
         base.process();
         stats.setHeldItem(this);
     }
-
     public abstract void useHeldItem();
 }
