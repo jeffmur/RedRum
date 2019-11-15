@@ -69,10 +69,12 @@ public class SkeletonBehavior : MonoBehaviour
 
         if (movement.x < 0)
         {
-            enemySprite.flipX = true;
+            enemyAnimator.SetBool("isAttacking", false);
+            EnemyMove(movement);
         }
         else
         {
+
             enemySprite.flipX = false;
         }
 
