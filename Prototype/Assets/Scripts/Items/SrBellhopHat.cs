@@ -5,7 +5,8 @@ using UnityEngine;
 public class SrBellhopHat : ActivatedItem
     {
     public bool activated = false;
-    private float velocity = 5f;
+    private GameObject crosshairs;
+    private float velocity = 15f;
     bool returning = false;
     private float boomerangTimer;
 
@@ -13,12 +14,11 @@ public class SrBellhopHat : ActivatedItem
 
     private Object ThrowingHatPrefab;
     private GameObject ThrowingHat;
-    //private TimeLerped sTimerLerp = new TimeLerped(2f, 2f);
 
     private void Start()
     {
         ThrowingHatPrefab = Resources.Load("Textures/Prefabs/Items/SrBellhopHat");
-        // rb = GetComponent<Rigidbody2D>();
+        crosshairs = GameObject.Find("crossHairs");
     }
     public override void activateItem()
     {
@@ -46,12 +46,13 @@ public class SrBellhopHat : ActivatedItem
             }              
             if (!returning)
             {
-                transform.Translate(player.transform.up * velocity * Time.deltaTime);
+                Vector2 direction = Vector3.Normalize(crosshairs.transform.localPosition - transform.localPosition);
+                transform.Translate(direction * velocity * Time.deltaTime);
             }
             else
             {
                 transform.up = player.transform.position - transform.position;
-                transform.Translate(Vector2.up * velocity * Time.deltaTime);
+                transform.Translate(Vector2.up * 5f * Time.deltaTime);
             }
         }     
     }
