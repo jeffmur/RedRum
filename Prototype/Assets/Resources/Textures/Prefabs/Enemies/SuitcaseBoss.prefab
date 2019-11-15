@@ -143,6 +143,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 300
+  itemDrop: {fileID: 4761729019420387179, guid: 63f16c90f3e1b214e9b567db9d7adcd4,
+    type: 3}
 --- !u!114 &4644436877037681452
 MonoBehaviour:
   m_ObjectHideFlags: 0

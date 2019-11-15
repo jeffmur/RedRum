@@ -13,6 +13,9 @@ public class EventManager : MonoBehaviour
     public delegate void onHealthTriggerDelegate(int value);
     public event onHealthTriggerDelegate onHealthTrigger, onMaxHealthTrigger;
 
+    public delegate void onAmmoChangeDelegate(int val);
+    public event onAmmoChangeDelegate onAmmoChange;
+
     public delegate void onItemPickupTriggerDelegate(Item item);
     public event onItemPickupTriggerDelegate onItemPickupTrigger;
 
@@ -25,6 +28,7 @@ public class EventManager : MonoBehaviour
         stats = player.GetComponent<PlayerStats>();
 
         stats.onHealthChange += triggerHealthChange;
+        stats.onAmmoChange += triggerAmmoChange;
         stats.onMaxHealthChange += triggerMaxHealthChange;
         stats.onItemPickup += triggerItemPickup;
         stats.onItemUse += triggerItemActivate;
@@ -33,6 +37,11 @@ public class EventManager : MonoBehaviour
     public static void TriggerNotification(string notification)
     {
         OnNotifyChange?.Invoke(notification);
+    }
+
+    public void triggerAmmoChange(int value)
+    {
+        onAmmoChange?.Invoke(value);
     }
 
     public void triggerMaxHealthChange(int value)
@@ -45,7 +54,6 @@ public class EventManager : MonoBehaviour
         //Debug.Log("Changing health by " + CurentHealth);
         onHealthTrigger?.Invoke(CurentHealth);
         FlashDamage();
-
     }
 
     private void triggerItemPickup(Item item)
@@ -69,6 +77,7 @@ public class EventManager : MonoBehaviour
             player.GetComponentInChildren<Light>().color = Color.red;
             player.GetComponentInChildren<Light>().range = 2f;
             player.GetComponentInChildren<Light>().intensity = 20f;
+
             if (Timer > .25f && Timer <= .5f)
             {
                 player.GetComponentInChildren<Light>().intensity = 0f;
@@ -87,6 +96,5 @@ public class EventManager : MonoBehaviour
         {
             player.GetComponentInChildren<Light>().intensity = 0f;
         }
-
     }
 }

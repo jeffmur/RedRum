@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    private PlayerStats stats;
     public int Damage;
     public int ClipSize;
     public float BulletSpeed;
@@ -20,8 +21,10 @@ public class Weapon : MonoBehaviour
 
     void Start()
     {
+        stats = GameObject.Find("Casper").GetComponent<PlayerStats>();
         reloadCooldown = GameObject.Find("ReloadCooldown").GetComponent<ReloadCooldown>();
         random = new Random();
+        ClipSize = stats.maxAmmo;
         bulletsInClip = ClipSize;
         timeSinceLastShot = Time.time + FireRate;
         reloadStartTime = -1;
@@ -29,12 +32,18 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
+        // Hot reload
+        if (Input.GetKeyDown(KeyCode.R) && bulletsInClip != ClipSize) {
+            reloadCooldown.StartReload(reloadSpeed);
+            reloadStartTime = Time.time;
+        }
         // check for reload
         if (reloadStartTime != -1)
         {
             if (Time.time - reloadStartTime >= reloadSpeed)
             {
                 bulletsInClip = ClipSize;
+                stats.changeAmmo(bulletsInClip);
                 reloadStartTime = -1;
             }
         }
@@ -42,7 +51,7 @@ public class Weapon : MonoBehaviour
 
     public void FireWeapon(Vector2 direction, float rotationZ)
     {
-        if (bulletsInClip > 0)
+        if (bulletsInClip > 0 && !reloadCooldown.reloading)
         {
             if (Time.time - timeSinceLastShot >= FireRate)
             {
@@ -58,6 +67,7 @@ public class Weapon : MonoBehaviour
                 // update variables
                 timeSinceLastShot = Time.time;
                 bulletsInClip--;
+                stats.changeAmmo(-1);
             }
         }
         else // reload
