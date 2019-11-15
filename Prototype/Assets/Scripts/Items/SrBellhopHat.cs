@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//private GameObject ThrowingHat;
 
 public class SrBellhopHat : ActivatedItem
     {
     public bool activated = false;
-    private float velocity = 5f;
+    private GameObject crosshairs;
+    private float velocity = 15f;
     bool returning = false;
     private float boomerangTimer;
 
@@ -14,11 +14,20 @@ public class SrBellhopHat : ActivatedItem
 
     private Object ThrowingHatPrefab;
     private GameObject ThrowingHat;
-    //private TimeLerped sTimerLerp = new TimeLerped(2f, 2f);
 
     private void Start()
     {
-       // rb = GetComponent<Rigidbody2D>();
+        ThrowingHatPrefab = Resources.Load("Textures/Prefabs/Items/SrBellhopHat");
+        crosshairs = GameObject.Find("crossHairs");
+    }
+    public override void activateItem()
+    {
+        if (!activated) //if q is pressed
+        {
+            gameObject.SetActive(true);
+            transform.position = player.transform.position; //start at the player
+            activated = true;
+        }
     }
     private void Update()
     {
@@ -29,25 +38,25 @@ public class SrBellhopHat : ActivatedItem
             if (boomerangTimer >= 1f)
             {
                 returning = true;
-                if ((transform.position - transform.position).magnitude < 1f)
+                if ((transform.position - player.transform.position).magnitude < 1f)
                 {
-                    Destroy(this.gameObject); //destory if back
+                    transform.position = player.transform.position;
+                    gameObject.SetActive(false); ; //Sets to false if back
                     activated = false;
                 }
-            }              
-
+            }
             if (!returning)
             {
-                transform.Translate(player.transform.up * velocity * Time.deltaTime);
+                Vector2 direction = Vector3.Normalize(crosshairs.transform.localPosition - transform.localPosition);
+                transform.Translate(direction * velocity * Time.deltaTime);
             }
             else
             {
-                //ThrowingHat.transform.up = player.transform.position - ThrowingHat.transform.position;
-                transform.Translate(Vector2.up * velocity * Time.deltaTime);
+                transform.up = player.transform.position - transform.position;
+                transform.Translate(Vector2.up * 5f * Time.deltaTime);
             }
-        }     
+        }
     }
-    public override void activateItem() { activated = true; }
 
     protected override void setItemInfo()
         {

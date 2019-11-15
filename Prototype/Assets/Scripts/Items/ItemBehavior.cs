@@ -12,7 +12,6 @@ public class ItemBehavior : MonoBehaviour
     void Start()
     {
         startPos = transform.localPosition;
-        Debug.Log(name+" started @ "+startPos);
     }
 
     // Update is called once per frame

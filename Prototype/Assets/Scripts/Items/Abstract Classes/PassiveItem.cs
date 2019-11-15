@@ -4,8 +4,7 @@
     {
         base.process();
         modifyStats();
-        player.GetComponent<PlayerStats>().passiveItems.Add(this);
-         
+        player.GetComponent<PlayerStats>().passiveItems.Add(this);    
     }
     public abstract void modifyStats();
 }

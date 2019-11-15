@@ -5,6 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     private PlayerStats stats;
+    private GameObject crosshairs;
     public int Damage;
     public int ClipSize;
     public float BulletSpeed;
