@@ -32,10 +32,10 @@ public class ItemBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
-        {
-            pickedUp = true;
-            casper = collision.transform;
-        }
+        //if (collision.tag == "Player")
+        //{
+        //    pickedUp = true;
+        //    casper = collision.transform;
+        //}
     }
 }

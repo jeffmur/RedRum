@@ -167,8 +167,6 @@ MonoBehaviour:
   attackRange: 1
   damage: 1
   attackDelay: 1
-  myDeadBody: {fileID: 1798092532787938560, guid: 6fca6b1c21bc94904920763f3857daaf,
-    type: 3}
   moveSpeed: 2
 --- !u!114 &513563564860898888
 MonoBehaviour:
@@ -183,3 +181,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 150
+  itemDrop: {fileID: 562611308969471150, guid: 2e116b2405c505d4d96fc9014bf648e4, type: 3}

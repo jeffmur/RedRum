@@ -9,7 +9,6 @@ public class PointAndShoot : MonoBehaviour
     private GameObject crosshairs;
     private WeaponInventory weaponInventory;
     private GameObject selectedWeapon;
-    private Object bulletPrefab;
     private Camera mCamera;
     private float lastAttackTime;
     public float firerate;
@@ -23,7 +22,6 @@ public class PointAndShoot : MonoBehaviour
         weaponInventory = GameObject.Find("WeaponInventory").GetComponent<WeaponInventory>();
         selectedWeapon = weaponInventory.GetSelectedWeapon();
         Debug.Assert(selectedWeapon);
-        bulletPrefab = Resources.Load("Textures/Prefabs/Hero/Bullet");
         mCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 
@@ -46,12 +44,16 @@ public class PointAndShoot : MonoBehaviour
                 Vector2 direction = difference / distance;
                 direction.Normalize();
                 selectedWeapon.GetComponent<Weapon>().FireWeapon(direction, rotationZ);
-                
+
+            }
+
+            if (Time.time > (lastAttackTime + firerate))
+            {
+                float distance = difference.magnitude;
+                Vector2 direction = difference / distance;
+                direction.Normalize();
+                lastAttackTime = Time.time;
             }
         }
-
-        }
-
     }
-
-
+}
