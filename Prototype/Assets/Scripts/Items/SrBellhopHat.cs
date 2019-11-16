@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//private GameObject ThrowingHat;
 
 public class SrBellhopHat : ActivatedItem
     {
     public bool activated = false;
-    private float velocity = 5f;
+    private GameObject crosshairs;
+    private float velocity = 15f;
     bool returning = false;
     private float boomerangTimer;
 
@@ -14,36 +14,46 @@ public class SrBellhopHat : ActivatedItem
 
     private Object ThrowingHatPrefab;
     private GameObject ThrowingHat;
-    //private TimeLerped sTimerLerp = new TimeLerped(2f, 2f);
 
     private void Start()
     {
         ThrowingHatPrefab = Resources.Load("Textures/Prefabs/Items/SrBellhopHat");
-       // rb = GetComponent<Rigidbody2D>();
+        crosshairs = GameObject.Find("crossHairs");
     }
+    //public override void activateItem()
+    //{
+    //    if (!activated) //if q is pressed
+    //    {
+    //        gameObject.SetActive(true);
+    //        transform.position = player.transform.position; //start at the player
+    //        activated = true;
+    //    }
+    //}
     private void Update()
     {
         if (activated)
         {
+            gameObject.SetActive(false);
             boomerangTimer += Time.deltaTime;
             if (boomerangTimer >= 1f)
             {
                 returning = true;
-                if ((ThrowingHat.transform.position - player.transform.position).magnitude < 1f)
+                if ((transform.position - player.transform.position).magnitude < 1f)
                 {
-                    Destroy(ThrowingHat); //destory if back
+                    transform.position = player.transform.position;
+                    gameObject.SetActive(false); ; //Sets to false if back
                     activated = false;
                 }
-            }              
-
+            }
             if (!returning)
             {
-                ThrowingHat.transform.Translate(player.transform.up * velocity * Time.deltaTime);
+                Vector2 direction = Vector3.Normalize(crosshairs.transform.localPosition - transform.localPosition);
+                transform.Translate(direction * velocity * Time.deltaTime);
             }
             else
             {
-                ThrowingHat.transform.up = player.transform.position - ThrowingHat.transform.position;
-                ThrowingHat.transform.Translate(Vector2.up * velocity * Time.deltaTime);
+                transform.up = player.transform.position - transform.position;
+                transform.Translate(Vector2.up * 5f * Time.deltaTime);
             }
         }     
     }
@@ -54,7 +64,6 @@ public class SrBellhopHat : ActivatedItem
            ThrowingHat = Instantiate(ThrowingHatPrefab) as GameObject;
             ThrowingHat.transform.position = player.transform.position;
         }
-        activated = true;
     }
 
     protected override void setItemInfo()

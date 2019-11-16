@@ -11,6 +11,7 @@ public static class Scenes
     {
         DEM = demensions;
         SceneManager.LoadScene(sceneName);
+        displayMessage(demensions);
     }
 
     public static string getDem()
@@ -18,8 +19,21 @@ public static class Scenes
         return DEM;
     }
 
-    public static void setDem(string demensions)
+    public static string nextDem()
     {
-        DEM = demensions;
+        switch (DEM[0])
+        {
+            case '4':
+                return "5x5";
+            case '5':
+                return "6x6";
+            default:
+                return "4x4";
+        }
+    }
+
+    public static void displayMessage(string msg)
+    {
+        EventManager.TriggerNotification(msg);
     }
 }

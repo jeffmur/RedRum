@@ -8,6 +8,7 @@ public class PointAndShoot : MonoBehaviour
     private Vector3 target;
     private GameObject crosshairs;
     private WeaponInventory weaponInventory;
+    private Weapon curWeapon;
     private GameObject selectedWeapon;
     private Camera mCamera;
     private float lastAttackTime;
@@ -16,10 +17,11 @@ public class PointAndShoot : MonoBehaviour
 
     void Start()
     {
-        firerate = 0.5f;
         Cursor.visible = false;
         crosshairs = GameObject.Find("crossHairs");
         weaponInventory = GameObject.Find("WeaponInventory").GetComponent<WeaponInventory>();
+        curWeapon = weaponInventory.GetSelectedWeapon().GetComponent<Weapon>();
+        firerate = curWeapon.FireRate;
         selectedWeapon = weaponInventory.GetSelectedWeapon();
         Debug.Assert(selectedWeapon);
         mCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -46,6 +48,7 @@ public class PointAndShoot : MonoBehaviour
                 selectedWeapon.GetComponent<Weapon>().FireWeapon(direction, rotationZ);
 
             }
+
             if (Time.time > (lastAttackTime + firerate))
             {
                 float distance = difference.magnitude;

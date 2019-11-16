@@ -7,18 +7,33 @@ public partial class RoomManager : MonoBehaviour
     public List<GameObject> Enemies;
     public List<GameObject> Items;
     private DoorSystem sDoorSys;
+    public GameObject chestPrefab;
+    private Chest myChest;
+    bool once = false;
     // Start is called before the first frame update
     void Start()
     {
         sDoorSys = GetComponent<DoorSystem>();
+        if (!once)
+        {
+            GameObject c = Instantiate(chestPrefab, transform.position, Quaternion.identity);
+            myChest = c.GetComponent<Chest>();
+            myChest.initChest(Items);
+            once = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         // No enemies and doors are locked
-        if(allEnemiesDead() && sDoorSys.getStatus() == 0)
+        if(allEnemiesDead() && sDoorSys.getStatus() <= 1)
+        {
             sDoorSys.UnlockAll();
+            myChest.gameObject.SetActive(true);
+            myChest.reStock();
+        }
+            
         // If unlocked and right mouse clicked
         if (sDoorSys.getStatus() == 1 && Input.GetMouseButtonDown(1))
             sDoorSys.OpenAll();
@@ -47,11 +62,14 @@ public partial class RoomManager : MonoBehaviour
 
     private bool allEnemiesDead()
     {
+        if(Enemies.Count == 0) { return true; }
+
         foreach(Transform child in this.transform)
         {
             if (child.tag == "Enemy")
             {
                 GetComponent<DoorSystem>().LockAll();
+                myChest.gameObject.SetActive(false);
                 return false;
             }
         }

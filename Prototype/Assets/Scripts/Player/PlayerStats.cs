@@ -8,6 +8,7 @@ public class PlayerStats : MonoBehaviour
     private float fireRateModifier;
     private float accuracyPercentage;
     public int currentHealth, maxHealth;
+    public int currentAmmo, maxAmmo;
     private float moveSpeed;
     //private float isInvincible;
     private bool isInvincible;
@@ -20,6 +21,9 @@ public class PlayerStats : MonoBehaviour
     public delegate void onHealthCheckDelegate();
     public event onHealthCheckDelegate onDamaged, onHealed;
 
+    public delegate void onAmmoChangeDelegate(int val);
+    public event onAmmoChangeDelegate onAmmoChange;
+
     public delegate void onItemDelegate(Item item);
     public event onItemDelegate onItemPickup;
 
@@ -30,8 +34,12 @@ public class PlayerStats : MonoBehaviour
     void Awake()
     {
         moveSpeed = 5f;
+
         maxHealth = 3;
         currentHealth = maxHealth;
+
+        maxAmmo = 8;
+        currentAmmo = maxAmmo;
     }
 
 
@@ -86,11 +94,14 @@ public class PlayerStats : MonoBehaviour
         currentHealth += value;
         if (currentHealth > maxHealth)
         {
-            currentHealth = maxHealth;
+            maxHealth = currentHealth;
+            onMaxHealthChange?.Invoke(maxHealth);
         }
-        if (currentHealth < 0)
+        if (currentHealth <= 0)
         {
-            currentHealth = 0;
+            
+            Debug.Log("CASPER DEAD");
+            Die();
         }
         onHealthChange?.Invoke(currentHealth);
         if (value > 0)
@@ -112,6 +123,20 @@ public class PlayerStats : MonoBehaviour
         }
         currentActiveItem = item;
         item.gameObject.SetActive(false);
+    }
+
+    public void changeAmmo(int value)
+    {
+        if(value == 0) { return; }
+
+        currentAmmo += value;
+
+        if (currentAmmo > maxAmmo)
+            currentAmmo = maxAmmo;
+
+        if (currentAmmo < 0)
+            currentAmmo = 0;
+        onAmmoChange?.Invoke(currentAmmo);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -138,5 +163,10 @@ public class PlayerStats : MonoBehaviour
     {
         currentActiveItem.activateItem();
         onItemUse?.Invoke(currentActiveItem);
+    }
+
+    private void Die()
+    {
+        Scenes.Load("Alpha", Scenes.nextDem());
     }
 }

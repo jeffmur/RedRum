@@ -18,7 +18,7 @@ public partial class GameWorld : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        testHP();
+        TestController();
     }
 
     public int getStartingHealth()
@@ -26,23 +26,24 @@ public partial class GameWorld : MonoBehaviour
         return stats.MaxHealth;
     }
 
-    public void testHP()
+    public int getStartingAmmo()
     {
+        return stats.maxAmmo;
+    }
+
+    public void TestController()
+    {
+        //if (Input.GetKeyDown("1"))
+        //{
+        //    stats.changeMaxHealth(1);
+        //}
+        //if (Input.GetKeyDown("2"))
+        //{
+        //    stats.changeMaxHealth(-1);
+        //}
         if (Input.GetKeyDown("1"))
         {
-            stats.changeMaxHealth(1);
-        }
-        if (Input.GetKeyDown("2"))
-        {
-            stats.changeMaxHealth(-1);
-        }
-        if (Input.GetKeyDown("3"))
-        {
             stats.changeHealth(1);
-        }
-        if (Input.GetKeyDown("4"))
-        {
-            stats.changeHealth(-1);
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
