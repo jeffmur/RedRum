@@ -9,8 +9,8 @@
     }
     protected override void setItemEffectBehavior()
     {
-        print("3 SECONDS");
-    }
+
+    } 
 
     protected override void setItemDurations()
     {
