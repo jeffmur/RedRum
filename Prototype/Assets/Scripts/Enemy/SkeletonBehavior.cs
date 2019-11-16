@@ -57,7 +57,6 @@ public class SkeletonBehavior : MonoBehaviour
                 enemyAnimator.SetFloat("Speed", 0);
                 enemyAnimator.SetBool("isAttacking", true);
                 lastAttackTime = Time.time;
-                Debug.Log("Attacking casper");
                 Attack(1);
             }
         }
@@ -87,7 +86,7 @@ public class SkeletonBehavior : MonoBehaviour
         if (myHealth <= 0)
         {
             enemyAnimator.SetBool("Die", true);
-            Destroy(this.gameObject, 0.75f);
+            Destroy(gameObject, 2f);
         }
     }
 

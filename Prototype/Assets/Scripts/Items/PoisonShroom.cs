@@ -11,7 +11,12 @@ public class PoisonShroom : PassiveItem
 
     public override void modifyStats()
     {
-        player.transform.localScale = new Vector3(0.8f, 0.8f, 1); //may affect weapon
+        Vector3 ogScale = player.transform.localScale;
+        player.transform.localScale = ogScale * 0.8f;
+        foreach(Transform child in player.transform)
+        {
+            child.localScale = ogScale / 8.0f;
+        }
         player.GetComponent<PlayerStats>().changeMaxHealth(-1);
     }
 }

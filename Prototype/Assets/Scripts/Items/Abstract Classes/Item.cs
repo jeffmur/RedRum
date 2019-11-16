@@ -22,7 +22,7 @@ public abstract class Item : MonoBehaviour
 
     public virtual void process()
     {
-        string message = itemName + "\n" + caption;
+        string message = "Obtained: " + itemName;
         EventManager.TriggerNotification(message);
         gameObject.SetActive(false);
     }

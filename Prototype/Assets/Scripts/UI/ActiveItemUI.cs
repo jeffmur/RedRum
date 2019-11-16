@@ -13,7 +13,9 @@ public class ActiveItemUI : MonoBehaviour
         print(item);
         if (item is HeldItem)
         {
-            itemImage.sprite = item.GetComponent<SpriteRenderer>().sprite;
+            SpriteRenderer rend = item.GetComponent<SpriteRenderer>();
+            itemImage.sprite = rend.sprite;
+            itemImage.color = Color.white;
         }
     }
 
