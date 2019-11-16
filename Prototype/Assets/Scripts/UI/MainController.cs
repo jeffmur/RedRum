@@ -1,7 +1,4 @@
-﻿﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
-using UnityEngine;
+﻿using UnityEngine.UI;
 using UnityEngine;
 
 public class MainController : MonoBehaviour
@@ -50,9 +47,9 @@ public class MainController : MonoBehaviour
         activeItemInfo.displayActiveItem(item);
     }
 
-    private void updateActiveItemUseUI(HeldItem item)
+    private void updateActiveItemUseUI(ActivatedItem item)
     {
-        activeItemInfo.updateItemUI(item);
+        activeItemInfo.updateItemOnActivate(item);
     }
 
     public void updateRoomStatus(string room)

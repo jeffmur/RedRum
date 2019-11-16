@@ -46,10 +46,8 @@ public partial class GameWorld : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (stats.currentHeldItem is ActivatedItem)
-            {
-                stats.currentHeldItem.useHeldItem();
-            }
+            stats.activateItem();
+
         }
     }
 }

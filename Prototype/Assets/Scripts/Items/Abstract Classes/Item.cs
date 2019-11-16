@@ -4,7 +4,7 @@ public abstract class Item : MonoBehaviour
 {
     protected int itemID;
     protected string itemName;
-    public string caption;
+    protected string caption;
     protected GameObject player;
     protected PlayerStats stats;
 

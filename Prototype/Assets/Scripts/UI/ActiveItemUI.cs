@@ -11,21 +11,17 @@ public class ActiveItemUI : MonoBehaviour
     public void displayActiveItem(Item item)
     {
         print(item);
-        if (item is HeldItem)
+        if (item is ActivatedItem)
         {
             itemImage.sprite = item.GetComponent<SpriteRenderer>().sprite;
         }
     }
 
-    public void updateItemUI(HeldItem item)
+    public void updateItemOnActivate(ActivatedItem item)
     {
-        //if (item is OneTimeUseItem)
-        //{
-        //    itemImage.sprite = null;
-        //}
-        //else if (item is CooldownItem)
-        //{
-        //    cooldownBar.echoCooldownBar(item.CooldownTimer);
-        //}
+        if (item.isOneTimeUse())
+        {
+            itemImage.sprite = null;
+        }
     }
 }

@@ -47,7 +47,7 @@ public class SrBellhopHat : ActivatedItem
             }
         }     
     }
-    public override void activateItem()
+    protected override void setActivateItemBehavior()
         {
         if(!activated)
         {
@@ -63,4 +63,9 @@ public class SrBellhopHat : ActivatedItem
             itemName = "SrBellhopHat";
             caption = "Huh, wonder where Gavin went?";
         }
+
+    protected override void setItemDurations()
+    {
+        throw new System.NotImplementedException();
     }
+}
