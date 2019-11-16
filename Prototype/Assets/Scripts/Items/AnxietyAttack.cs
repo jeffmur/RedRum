@@ -9,7 +9,7 @@
     }
     protected override void setItemEffectBehavior()
     {
-
+        print("???????");
     } 
 
     protected override void setItemDurations()

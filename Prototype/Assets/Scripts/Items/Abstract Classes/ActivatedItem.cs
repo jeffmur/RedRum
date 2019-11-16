@@ -3,10 +3,19 @@ public abstract class ActivatedItem : Item
 {
     // set effectDuration to -1 if no lingering effects
     // set cooldownDuration to -1 if item is one time use
-    [SerializeField] 
-    protected float effectDuration, cooldownDuration; // make sure you set these up
+    public float effectDuration, cooldownDuration; // make sure you set these up
     public float effectTimeElapsed, cooldownTimeElapsed;
     public bool isOnCooldown = false, isOnEffect = false;
+
+    public float getCooldownDuration()
+    {
+        return cooldownDuration;
+    }
+
+    public float getEffectDuration()
+    {
+        return effectDuration;
+    }
 
     private void Update()
     {
@@ -16,13 +25,13 @@ public abstract class ActivatedItem : Item
             processEffect();
             return;
         }
-        
+
         // if the item is completely done with its activation
         // and the item is on cooldown
         if (isOnCooldown)
         {
             processCooldown();
-        }      
+        }
     }
 
     protected override void Awake()
@@ -45,13 +54,13 @@ public abstract class ActivatedItem : Item
     {
         if (!isOnCooldown)
         {
+            isOnEffect = true;
+            isOnCooldown = true;
             // do the initial item activation effect, then set the effect and cooldown timer
             // to count down to zero
             setActivateItemBehavior();
             effectTimeElapsed = effectDuration;
             cooldownTimeElapsed = cooldownDuration;
-            isOnEffect = true;
-            isOnCooldown = true;
         }
     }
 
@@ -90,7 +99,7 @@ public abstract class ActivatedItem : Item
         if (cooldownTimeElapsed < 0)
         {
             //cooldown is completed, item is ready to use again
-            isOnCooldown = false; 
+            isOnCooldown = false;
         }
         //invoke some item cooldown UI echo
     }

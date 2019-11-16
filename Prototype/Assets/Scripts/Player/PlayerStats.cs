@@ -118,11 +118,11 @@ public class PlayerStats : MonoBehaviour
     {
         if (currentActiveItem != null)
         {
-            currentActiveItem.gameObject.SetActive(true);
+            currentActiveItem.showItem();
             currentActiveItem.transform.position = transform.position;
         }
         currentActiveItem = item;
-        item.gameObject.SetActive(false);
+        item.hideItem();
     }
 
     public void changeAmmo(int value)
