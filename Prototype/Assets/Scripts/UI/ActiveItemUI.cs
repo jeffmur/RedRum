@@ -1,33 +1,61 @@
-﻿using System;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ActiveItemUI : MonoBehaviour
 {
-    public Image itemImage;
-    //public CooldownBar cooldownBar;
-    private float cooldownTimer;
+    public Image itemImage, cooldownBar;
+    private float cooldownTime, waitTime, cooldownTimeElapsed;
+    private bool onCooldown = false;
+
+    private void Update()
+    {
+        if (cooldownTimeElapsed > 0)
+        {
+            echoCooldown();
+        }
+        else
+        {
+            onCooldown = false;
+        }
+    }
 
     public void displayActiveItem(Item item)
     {
-        print(item);
-        if (item is HeldItem)
+        if (item is ActivatedItem)
         {
             SpriteRenderer rend = item.GetComponent<SpriteRenderer>();
             itemImage.sprite = rend.sprite;
             itemImage.color = Color.white;
+            ActivatedItem actItem = (ActivatedItem)item;
+            cooldownTime = actItem.getCooldownDuration();
+            waitTime = actItem.getEffectDuration();
         }
     }
 
-    public void updateItemUI(HeldItem item)
+    public void updateItemOnActivate(ActivatedItem item)
     {
-        //if (item is OneTimeUseItem)
-        //{
-        //    itemImage.sprite = null;
-        //}
-        //else if (item is CooldownItem)
-        //{
-        //    cooldownBar.echoCooldownBar(item.CooldownTimer);
-        //}
+        if (item.isOneTimeUse())
+        {
+            itemImage.sprite = null;
+        }
+        else if (!onCooldown)
+        {
+            StartCoroutine(initCooldownBar());
+        }
+    }
+
+    private IEnumerator initCooldownBar()
+    {
+        yield return new WaitForSeconds(waitTime);
+        cooldownTimeElapsed = cooldownTime;
+        onCooldown = true;
+    }
+
+    private void echoCooldown()
+    {
+        cooldownTimeElapsed -= Time.deltaTime;
+        float cdBarPercentage = cooldownTimeElapsed / cooldownTime;
+        cooldownBar.fillAmount = cdBarPercentage;
     }
 }
