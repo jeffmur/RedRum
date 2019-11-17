@@ -2307,6 +2307,11 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8518389341730671777, guid: f54e3244447dcce49b3be8a1ad2b43b2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d70e7a8798e363e4f8df248314d59148, type: 2}
     - target: {fileID: 6539579178435093418, guid: f54e3244447dcce49b3be8a1ad2b43b2,
         type: 3}
       propertyPath: mCamera
@@ -4178,6 +4183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemImage: {fileID: 1788079619}
+  cooldownBar: {fileID: 0}
 --- !u!114 &1788079619
 MonoBehaviour:
   m_ObjectHideFlags: 0
