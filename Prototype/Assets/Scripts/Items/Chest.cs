@@ -20,7 +20,7 @@ public class Chest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Vector2.Distance(transform.position, casper.position) <= 3f && Input.GetKeyDown("e")) { openChest = true;  }
+        //if(Vector2.Distance(transform.position, casper.position) <= 3f && Input.GetKeyDown("e")) { openChest = true;  }
         if(openChest && rend.sprite != opened)
         {
             rend.sprite = opened;
@@ -28,24 +28,19 @@ public class Chest : MonoBehaviour
         }
     }
 
-    public void initChest(List<GameObject> items) { myItems = items; gameObject.SetActive(false); }
+    public void initChest(List<GameObject> items) { myItems = items; gameObject.SetActive(false); openChest = false; }
 
-    // NEED TO SAVE STATE || Access saved state
-    public void reStock()
+    public void destroyChest(GameObject old)
     {
-        if(rend.sprite == closed || !openChest) { return; }
-        rend.sprite = closed;
         openChest = false;
+        Destroy(old);
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (rend.sprite != opened)
         {
             openChest = true;
         }
-        else
-            openChest = false;
             
     }
 

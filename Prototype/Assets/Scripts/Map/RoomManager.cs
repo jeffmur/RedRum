@@ -9,18 +9,11 @@ public partial class RoomManager : MonoBehaviour
     private DoorSystem sDoorSys;
     public GameObject chestPrefab;
     private Chest myChest;
-    bool once = false;
+
     // Start is called before the first frame update
     void Start()
     {
         sDoorSys = GetComponent<DoorSystem>();
-        if (!once)
-        {
-            GameObject c = Instantiate(chestPrefab, transform.position, Quaternion.identity);
-            myChest = c.GetComponent<Chest>();
-            myChest.initChest(Items);
-            once = true;
-        }
     }
 
     // Update is called once per frame
@@ -30,8 +23,8 @@ public partial class RoomManager : MonoBehaviour
         if(allEnemiesDead() && sDoorSys.getStatus() <= 1)
         {
             sDoorSys.UnlockAll();
-            myChest.gameObject.SetActive(true);
-            myChest.reStock();
+            if(myChest != null)
+                myChest.gameObject.SetActive(true);
         }
             
         // If unlocked and right mouse clicked
@@ -42,9 +35,22 @@ public partial class RoomManager : MonoBehaviour
 
     public void Initialize()
     {
-            // Random generation of enemies
-            // Between 1 and 5 enemies per room
-            int AmountOFEnemies = Random.Range(1, 5);
+        // Destroy old chest
+        foreach(Transform child in gameObject.transform)
+        {
+            if (child.name == "chest(Clone)")
+                Destroy(child.gameObject);
+        }
+        // Spawn Chest and Hide
+        GameObject c = Instantiate(chestPrefab, transform.position, Quaternion.identity);
+        c.transform.parent = gameObject.transform;
+        myChest = c.GetComponent<Chest>();
+        // Hide
+        myChest.initChest(Items);
+
+        // Random generation of enemies
+        // Between 1 and 5 enemies per room
+        int AmountOFEnemies = Random.Range(1, 5);
             for (int i = 0; AmountOFEnemies > i; i++) //creates a random amount of enemies
             {
                 float x = Random.Range(-5, 5);
