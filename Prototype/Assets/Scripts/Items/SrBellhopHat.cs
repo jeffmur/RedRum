@@ -20,15 +20,15 @@ public class SrBellhopHat : ActivatedItem
         ThrowingHatPrefab = Resources.Load("Textures/Prefabs/Items/SrBellhopHat");
         crosshairs = GameObject.Find("crossHairs");
     }
-    public override void activateItem()
-    {
-        if (!activated) //if q is pressed
-        {
-            gameObject.SetActive(true);
-            transform.position = player.transform.position; //start at the player
-            activated = true;
-        }
-    }
+    //public override void activateItem()
+    //{
+    //    if (!activated) //if q is pressed
+    //    {
+    //        gameObject.SetActive(true);
+    //        transform.position = player.transform.position; //start at the player
+    //        activated = true;
+    //    }
+    //}
     private void Update()
     {
         if (activated)
@@ -55,6 +55,14 @@ public class SrBellhopHat : ActivatedItem
                 transform.up = player.transform.position - transform.position;
                 transform.Translate(Vector2.up * 5f * Time.deltaTime);
             }
+        }     
+    }
+    protected override void setActivateItemBehavior()
+        {
+        if(!activated)
+        {
+           ThrowingHat = Instantiate(ThrowingHatPrefab) as GameObject;
+            ThrowingHat.transform.position = player.transform.position;
         }
     }
 
@@ -64,4 +72,9 @@ public class SrBellhopHat : ActivatedItem
             itemName = "SrBellhopHat";
             caption = "Huh, wonder where Gavin went?";
         }
+
+    protected override void setItemDurations()
+    {
+        throw new System.NotImplementedException();
     }
+}

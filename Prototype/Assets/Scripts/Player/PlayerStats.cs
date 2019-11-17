@@ -13,10 +13,13 @@ public class PlayerStats : MonoBehaviour
     //private float isInvincible;
     private bool isInvincible;
     public List<Item> passiveItems;
-    public HeldItem currentHeldItem;
+    public ActivatedItem currentActiveItem;
 
     public delegate void onHealthChangeDelegate(int value);
     public event onHealthChangeDelegate onHealthChange, onMaxHealthChange;
+
+    public delegate void onHealthCheckDelegate();
+    public event onHealthCheckDelegate onDamaged, onHealed;
 
     public delegate void onAmmoChangeDelegate(int val);
     public event onAmmoChangeDelegate onAmmoChange;
@@ -24,7 +27,7 @@ public class PlayerStats : MonoBehaviour
     public delegate void onItemDelegate(Item item);
     public event onItemDelegate onItemPickup;
 
-    public delegate void onActiveItemDelegate(HeldItem item);
+    public delegate void onActiveItemDelegate(ActivatedItem item);
     public event onActiveItemDelegate onItemUse;
 
     // Start is called before the first frame update
@@ -43,7 +46,7 @@ public class PlayerStats : MonoBehaviour
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
     public int MaxHealth { get => maxHealth; }
     public int CurrentHealth { get => currentHealth; }
-    public HeldItem CurrentActiveItem { get => currentHeldItem; }
+    public ActivatedItem CurrentActiveItem { get => currentActiveItem; }
 
     public void changeMaxHealth(int value)
     {
@@ -101,6 +104,25 @@ public class PlayerStats : MonoBehaviour
             Die();
         }
         onHealthChange?.Invoke(currentHealth);
+        if (value > 0)
+        {
+            onHealed?.Invoke();
+        }
+        else
+        {
+            onDamaged?.Invoke();
+        }
+    }
+
+    public void setActivatedItem(ActivatedItem item)
+    {
+        if (currentActiveItem != null)
+        {
+            currentActiveItem.showItem();
+            currentActiveItem.transform.position = transform.position;
+        }
+        currentActiveItem = item;
+        item.hideItem();
     }
 
     public void changeAmmo(int value)
@@ -115,17 +137,6 @@ public class PlayerStats : MonoBehaviour
         if (currentAmmo < 0)
             currentAmmo = 0;
         onAmmoChange?.Invoke(currentAmmo);
-    }
-
-    public void setHeldItem(HeldItem item)
-    {
-        if (currentHeldItem != null)
-        {
-            currentHeldItem.gameObject.SetActive(true);
-            currentHeldItem.transform.position = transform.position;
-        }
-        currentHeldItem = item;
-        item.gameObject.SetActive(false);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -144,17 +155,14 @@ public class PlayerStats : MonoBehaviour
         }
     }
     private void pickUpItem(Item selectedItem)
-    {
+    {       
         selectedItem.process();
         onItemPickup?.Invoke(selectedItem);
     }
-    private void activateHeldItem()
+    public void activateItem()
     {
-        if (currentHeldItem is ActivatedItem)
-        {
-            
-        }
-        onItemUse?.Invoke(currentHeldItem);
+        currentActiveItem.activateItem();
+        onItemUse?.Invoke(currentActiveItem);
     }
 
     private void Die()

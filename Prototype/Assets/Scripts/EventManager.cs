@@ -19,7 +19,7 @@ public class EventManager : MonoBehaviour
     public delegate void onItemPickupTriggerDelegate(Item item);
     public event onItemPickupTriggerDelegate onItemPickupTrigger;
 
-    public delegate void onItemActivateTriggerDelegate(HeldItem item);
+    public delegate void onItemActivateTriggerDelegate(ActivatedItem item);
     public event onItemActivateTriggerDelegate onItemActivateTrigger;
 
     private void Awake()
@@ -61,7 +61,7 @@ public class EventManager : MonoBehaviour
         onItemPickupTrigger?.Invoke(item);
     }
 
-    private void triggerItemActivate(HeldItem item)
+    private void triggerItemActivate(ActivatedItem item)
     {
         onItemActivateTrigger?.Invoke(item);
     }
