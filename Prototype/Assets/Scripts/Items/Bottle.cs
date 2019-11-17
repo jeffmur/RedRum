@@ -2,23 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bottle : TriggeredItem
+public class Bottle : ActivatedItem
 {
+    protected override void setActivateItemBehavior()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void setItemDurations()
+    {
+        throw new System.NotImplementedException();
+    }
+
     protected override void setItemInfo()
     {
-        itemID = 2;
-        itemName = "Bottle";
-        caption = "Contains a small piece of fairy";
-
-    }
-
-    protected override void setTrigger()
-    {
-        //stats.onHealthChange += triggerItem;
-    }
-
-    protected override void triggerItem()
-    {
-        
+        throw new System.NotImplementedException();
     }
 }

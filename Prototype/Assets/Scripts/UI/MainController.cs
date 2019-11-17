@@ -1,6 +1,3 @@
-﻿﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
 
 public class MainController : MonoBehaviour
@@ -33,7 +30,8 @@ public class MainController : MonoBehaviour
 
     private void sendNotification(string notification)
     {
-        StartCoroutine(notificationPanel.displayMessage(notification));
+        if(this != null)
+            StartCoroutine(notificationPanel.displayMessage(notification));
     }
 
     private void updateAmmoUI(int value)
@@ -56,8 +54,8 @@ public class MainController : MonoBehaviour
         activeItemInfo.displayActiveItem(item);
     }
 
-    private void updateActiveItemUseUI(HeldItem item)
+    private void updateActiveItemUseUI(ActivatedItem item)
     {
-        activeItemInfo.updateItemUI(item);
+        activeItemInfo.updateItemOnActivate(item);
     }
 }

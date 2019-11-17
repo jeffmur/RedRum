@@ -19,9 +19,11 @@ public class EnemyHealthManager : MonoBehaviour
             if (Random.Range(1, 5) > 3 && itemDrop != null)
             {
                 Vector3 loc = new Vector3(transform.position.x, transform.position.y, -1);
-                Instantiate(itemDrop, loc, Quaternion.identity);
+                var item = Instantiate(itemDrop, loc, Quaternion.identity);
+                Destroy(item, 5f);
             }
-            Destroy(this.gameObject);
+            if (name != "Skeleton(Clone)")
+                Destroy(gameObject);
         }
            
     }

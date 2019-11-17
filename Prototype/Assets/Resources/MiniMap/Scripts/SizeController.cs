@@ -18,18 +18,6 @@ public class SizeController : MonoBehaviour
      * 5x5 (25 rooms)
      * 6x6 (36 rooms)
      */
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void setUp(string DEMENSIONS)
     {
         if (DEMENSIONS != null)

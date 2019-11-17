@@ -4,10 +4,21 @@ using UnityEngine;
 
 public class Medkit : ActivatedItem
 {
-    public override void activateItem()
+    protected override void setActivateItemBehavior()
     {
         int full = stats.maxHealth - stats.currentHealth;
         stats.changeHealth(full);
+    }
+
+    protected override void setItemDurations()
+    {
+        effectDuration = -1;
+        cooldownDuration = -1;
+    }
+
+    protected override void setItemEffectBehavior()
+    {
+        return;
     }
 
     protected override void setItemInfo()

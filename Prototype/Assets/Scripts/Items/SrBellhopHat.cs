@@ -20,19 +20,20 @@ public class SrBellhopHat : ActivatedItem
         ThrowingHatPrefab = Resources.Load("Textures/Prefabs/Items/SrBellhopHat");
         crosshairs = GameObject.Find("crossHairs");
     }
-    public override void activateItem()
-    {
-        if (!activated) //if q is pressed 
-        {
-            gameObject.SetActive(true);
-            transform.position = player.transform.position; //start at the player
-            activated = true;
-        }
-    }
+    //public override void activateItem()
+    //{
+    //    if (!activated) //if q is pressed
+    //    {
+    //        gameObject.SetActive(true);
+    //        transform.position = player.transform.position; //start at the player
+    //        activated = true;
+    //    }
+    //}
     private void Update()
     {
         if (activated)
         {
+            gameObject.SetActive(false);
             boomerangTimer += Time.deltaTime;
             if (boomerangTimer >= 1f)
             {
@@ -43,7 +44,7 @@ public class SrBellhopHat : ActivatedItem
                     gameObject.SetActive(false); ; //Sets to false if back
                     activated = false;
                 }
-            }              
+            }
             if (!returning)
             {
                 Vector2 direction = Vector3.Normalize(crosshairs.transform.localPosition - transform.localPosition);
@@ -56,6 +57,14 @@ public class SrBellhopHat : ActivatedItem
             }
         }     
     }
+    protected override void setActivateItemBehavior()
+        {
+        if(!activated)
+        {
+           ThrowingHat = Instantiate(ThrowingHatPrefab) as GameObject;
+            ThrowingHat.transform.position = player.transform.position;
+        }
+    }
 
     protected override void setItemInfo()
         {
@@ -63,4 +72,9 @@ public class SrBellhopHat : ActivatedItem
             itemName = "SrBellhopHat";
             caption = "Huh, wonder where Gavin went?";
         }
+
+    protected override void setItemDurations()
+    {
+        throw new System.NotImplementedException();
     }
+}

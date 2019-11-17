@@ -4,7 +4,7 @@ public abstract class Item : MonoBehaviour
 {
     protected int itemID;
     protected string itemName;
-    public string caption;
+    protected string caption;
     protected GameObject player;
     protected PlayerStats stats;
 
@@ -12,9 +12,7 @@ public abstract class Item : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         stats = player.GetComponent<PlayerStats>();
-        tag = "Item";
-        itemName = "UNTITLED ITEMNAME";
-        caption = "UNTITLED CAPTION";
+        setDefaultInfo();
         gameObject.AddComponent<BoxCollider2D>();
         GetComponent<BoxCollider2D>().isTrigger = true;
         setItemInfo();
@@ -22,10 +20,29 @@ public abstract class Item : MonoBehaviour
 
     public virtual void process()
     {
-        string message = itemName + "\n" + caption;
+        string message = "Obtained: " + itemName;
         EventManager.TriggerNotification(message);
-        gameObject.SetActive(false);
+        hideItem();
     }
 
     protected abstract void setItemInfo();
+
+    private void setDefaultInfo()
+    {
+        tag = "Item";
+        itemName = "UNTITLED ITEMNAME";
+        caption = "UNTITLED CAPTION";
+    }
+
+    public void hideItem()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    public void showItem()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        gameObject.GetComponent<BoxCollider2D>().enabled = true;
+    }
 }
