@@ -52,7 +52,7 @@ public class SkeletonBehavior : MonoBehaviour
         }
         else
         {
-            if (Time.time > (lastAttackTime + attackDelay))
+            if (Time.time > (lastAttackTime + attackDelay) && enemyAnimator.GetBool("Die") == false)
             {
                 enemyAnimator.SetFloat("Speed", 0);
                 enemyAnimator.SetBool("isAttacking", true);

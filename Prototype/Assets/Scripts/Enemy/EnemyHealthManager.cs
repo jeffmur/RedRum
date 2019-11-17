@@ -6,10 +6,6 @@ public class EnemyHealthManager : MonoBehaviour
     public int Health = 125;
     public GameObject itemDrop;
 
-    private void Start()
-    {
-
-    }
 
     public void DecreaseHealth(int damagePoints)
     {
@@ -24,7 +20,13 @@ public class EnemyHealthManager : MonoBehaviour
             }
             if (name != "Skeleton(Clone)")
                 Destroy(gameObject);
-        }
-           
+            //TEMPORARY FOR ALPHA FIX AFTERWARDS
+            if (name == "SuitcaseBoss(Clone)")
+            {
+                string message = "Level 1 Complete! " +
+                 "   Press 5 To Begin Again!";
+                EventManager.TriggerNotification(message);
+            }
+        }      
     }
 }

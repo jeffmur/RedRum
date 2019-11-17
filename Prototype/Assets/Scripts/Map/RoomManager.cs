@@ -10,6 +10,7 @@ public partial class RoomManager : MonoBehaviour
     public GameObject chestPrefab;
     private Chest myChest;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,13 +21,13 @@ public partial class RoomManager : MonoBehaviour
     void Update()
     {
         // No enemies and doors are locked
-        if(allEnemiesDead() && sDoorSys.getStatus() <= 1)
+        if (allEnemiesDead() && sDoorSys.getStatus() <= 1)
         {
             sDoorSys.UnlockAll();
-            if(myChest != null)
+            if (myChest != null)
                 myChest.gameObject.SetActive(true);
         }
-            
+
         // If unlocked and right mouse clicked
         if (sDoorSys.getStatus() == 1 && Input.GetMouseButtonDown(1))
             sDoorSys.OpenAll();
@@ -62,7 +63,7 @@ public partial class RoomManager : MonoBehaviour
                 ChildEnemy.gameObject.SetActive(true);
                 ChildEnemy.transform.parent = transform;
             // Boss Room should only spawn one
-            if (this.name == "Boss Pool") { return; }
+            if (this.name == "Boss Pool") return; 
             }
     }
 

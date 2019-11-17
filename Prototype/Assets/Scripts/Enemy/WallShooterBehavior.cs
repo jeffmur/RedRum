@@ -13,7 +13,6 @@ public class WallShooterBehavior : MonoBehaviour
 
     private Rigidbody2D rb;
     private int direction;
-
     private float timeBtwShot;
     private float freezeTime = 0f;
     public float shootingCooldown = 2f;
@@ -29,10 +28,8 @@ public class WallShooterBehavior : MonoBehaviour
         Wall,
         TopDownWallAttack,
         SideWallAttack
-
     }
-
-
+    
     void Start()
     {
         currentStates = (int)States.Wall;
@@ -95,7 +92,7 @@ public class WallShooterBehavior : MonoBehaviour
         }
         else if (collison.CompareTag("Player"))
         {
-            collison.GetComponent<PlayerStats>().changeHealth(BulletPrefab.GetComponent<EnemyBullet>().bulletDamage);
+            collison.GetComponent<PlayerStats>().changeHealth(-BulletPrefab.GetComponent<EnemyBullet>().bulletDamage);
         }
     }
 

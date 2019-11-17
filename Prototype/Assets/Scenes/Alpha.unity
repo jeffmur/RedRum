@@ -2055,6 +2055,7 @@ MonoBehaviour:
   - {fileID: 7736511681970699034, guid: 285f80424deb9ac4a88feb22f6849d55, type: 3}
   chestPrefab: {fileID: 4761729019420387179, guid: 63f16c90f3e1b214e9b567db9d7adcd4,
     type: 3}
+  message: 
 --- !u!1 &1047958071
 GameObject:
   m_ObjectHideFlags: 0
@@ -2257,6 +2258,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8518389341730671777, guid: f54e3244447dcce49b3be8a1ad2b43b2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d70e7a8798e363e4f8df248314d59148, type: 2}
+    - target: {fileID: 6539579178435093418, guid: f54e3244447dcce49b3be8a1ad2b43b2,
+        type: 3}
+      propertyPath: mCamera
+      value: 
+      objectReference: {fileID: 519420031}
     - target: {fileID: 6539579177579626191, guid: f54e3244447dcce49b3be8a1ad2b43b2,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -2307,16 +2318,6 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8518389341730671777, guid: f54e3244447dcce49b3be8a1ad2b43b2,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: d70e7a8798e363e4f8df248314d59148, type: 2}
-    - target: {fileID: 6539579178435093418, guid: f54e3244447dcce49b3be8a1ad2b43b2,
-        type: 3}
-      propertyPath: mCamera
-      value: 
-      objectReference: {fileID: 519420031}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f54e3244447dcce49b3be8a1ad2b43b2, type: 3}
 --- !u!1 &1110092244
@@ -3066,13 +3067,12 @@ PrefabInstance:
       objectReference: {fileID: 1425913670}
     - target: {fileID: 1425913674, guid: dfa11b5f43429a04f81e674438174970, type: 3}
       propertyPath: Enemies.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1425913674, guid: dfa11b5f43429a04f81e674438174970, type: 3}
       propertyPath: Enemies.Array.data[1]
       value: 
-      objectReference: {fileID: 2209327765211105673, guid: 2a74f9eb821074444832d7b307f58390,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 1425913674, guid: dfa11b5f43429a04f81e674438174970, type: 3}
       propertyPath: Enemies.Array.data[2]
       value: 

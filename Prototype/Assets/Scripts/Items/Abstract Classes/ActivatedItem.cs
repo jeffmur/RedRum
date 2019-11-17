@@ -71,6 +71,7 @@ public abstract class ActivatedItem : Item
         // immediately move to cooldown
         if (effectDuration < -0.9) // basically if duration is -1
         {
+            isOnEffect = false;
             return;
         }
         setItemEffectBehavior(); // do the effect
