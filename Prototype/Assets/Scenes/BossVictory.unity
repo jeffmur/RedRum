@@ -2216,17 +2216,17 @@ PrefabInstance:
     - target: {fileID: 7001711255731996832, guid: f54e3244447dcce49b3be8a1ad2b43b2,
         type: 3}
       propertyPath: Damage
-      value: 100
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7001711255731996832, guid: f54e3244447dcce49b3be8a1ad2b43b2,
         type: 3}
       propertyPath: FireRate
-      value: 0.01
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7001711255731996832, guid: f54e3244447dcce49b3be8a1ad2b43b2,
         type: 3}
       propertyPath: ClipSize
-      value: 20
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6539579178418839301, guid: f54e3244447dcce49b3be8a1ad2b43b2,
         type: 3}
