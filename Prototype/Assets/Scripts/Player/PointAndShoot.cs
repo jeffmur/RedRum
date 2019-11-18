@@ -25,20 +25,18 @@ public class PointAndShoot : MonoBehaviour
         mCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         crosshairs = GameObject.Find("crossHairs");
         mCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        weaponInventory = GameObject.Find("WeaponInventory").GetComponent<WeaponInventory>();
+        selectedWeapon = weaponInventory.GetSelectedWeapon();
+        Debug.Assert(selectedWeapon);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!once)
-        {
-            Cursor.visible = false;
-            weaponInventory = GameObject.Find("WeaponInventory").GetComponent<WeaponInventory>();
-            curWeapon = weaponInventory.GetSelectedWeapon().GetComponent<Weapon>();
-            firerate = curWeapon.FireRate;
-            selectedWeapon = weaponInventory.GetSelectedWeapon();
-            Debug.Assert(selectedWeapon);
-        }
+        Cursor.visible = false;
+        weaponInventory = GameObject.Find("WeaponInventory").GetComponent<WeaponInventory>();
+        selectedWeapon = weaponInventory.GetSelectedWeapon();
+        Debug.Assert(selectedWeapon);
         target = mCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
         crosshairs.transform.position = new Vector3(target.x, target.y, -9f);
         selectedWeapon = weaponInventory.GetSelectedWeapon();
