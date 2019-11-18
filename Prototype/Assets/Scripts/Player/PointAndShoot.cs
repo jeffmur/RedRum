@@ -8,17 +8,23 @@ public class PointAndShoot : MonoBehaviour
     private Vector3 target;
     private GameObject crosshairs;
     private WeaponInventory weaponInventory;
-    private Weapon curWeapon;
     private GameObject selectedWeapon;
+    private Object bulletPrefab;
     private Camera mCamera;
-    private float lastAttackTime;
-    public float firerate;
-    public float bulletSpeed = 5.0f;
-    bool once = false;
+    public float fireRateMultiplier;
 
     void Start()
     {
-        
+        fireRateMultiplier = 1f;
+        Cursor.visible = false;
+        crosshairs = GameObject.Find("crossHairs");
+        weaponInventory = GameObject.Find("WeaponInventory").GetComponent<WeaponInventory>();
+        selectedWeapon = weaponInventory.GetSelectedWeapon();
+        Debug.Assert(selectedWeapon);
+        bulletPrefab = Resources.Load("Textures/Prefabs/Hero/Bullet");
+        mCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        crosshairs = GameObject.Find("crossHairs");
+        mCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 
     // Update is called once per frame
@@ -27,41 +33,27 @@ public class PointAndShoot : MonoBehaviour
         if (!once)
         {
             Cursor.visible = false;
-            crosshairs = GameObject.Find("crossHairs");
             weaponInventory = GameObject.Find("WeaponInventory").GetComponent<WeaponInventory>();
             curWeapon = weaponInventory.GetSelectedWeapon().GetComponent<Weapon>();
             firerate = curWeapon.FireRate;
             selectedWeapon = weaponInventory.GetSelectedWeapon();
             Debug.Assert(selectedWeapon);
-            mCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-            once = true;
         }
-
         target = mCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
         crosshairs.transform.position = new Vector3(target.x, target.y, -9f);
         selectedWeapon = weaponInventory.GetSelectedWeapon();
         if (selectedWeapon != null)
         {
             Vector3 difference = target - selectedWeapon.transform.position;
-            float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-
             if (Input.GetMouseButton(0))
             {
                 selectedWeapon = weaponInventory.GetSelectedWeapon();
                 float distance = difference.magnitude;
                 Vector2 direction = difference / distance;
                 direction.Normalize();
-                selectedWeapon.GetComponent<Weapon>().FireWeapon(direction, rotationZ);
+                selectedWeapon.GetComponent<Weapon>().FireWeapon(direction, fireRateMultiplier);
 
-            }
-
-            if (Time.time > (lastAttackTime + firerate))
-            {
-                float distance = difference.magnitude;
-                Vector2 direction = difference / distance;
-                direction.Normalize();
-                lastAttackTime = Time.time;
-            }
+            }            
         }
     }
 }

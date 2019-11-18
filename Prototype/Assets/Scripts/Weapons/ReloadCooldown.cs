@@ -7,7 +7,8 @@ public class ReloadCooldown : MonoBehaviour
     private GameObject reloadMarker;
     private float reloadStartTime;
     private float reloadSpeed;
-    public bool reloading;
+    private bool reloading;
+
     // Start is called before the first frame update
     void Start()
     {

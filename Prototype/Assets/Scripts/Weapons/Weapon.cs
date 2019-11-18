@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    private PlayerStats stats;
-    private GameObject crosshairs;
+
     public int Damage;
     public int ClipSize;
     public float BulletSpeed;
     public float FireRate = 0.3f;
+    private PlayerStats stats;
+    private GameObject crosshairs;
     public float Accuracy;
     public float reloadSpeed;
     public GameObject BulletPrefab;
@@ -22,6 +23,8 @@ public class Weapon : MonoBehaviour
 
     void Start()
     {
+        reloadCooldown = GameObject.Find("ReloadCooldown").GetComponent<ReloadCooldown>();
+        random = new Random();
         stats = GameObject.Find("Casper").GetComponent<PlayerStats>();
         reloadCooldown = GameObject.Find("ReloadCooldown").GetComponent<ReloadCooldown>();
         random = new Random();
@@ -38,7 +41,6 @@ public class Weapon : MonoBehaviour
             reloadCooldown.StartReload(reloadSpeed);
             reloadStartTime = Time.time;
         }
-        // check for reload
         if (reloadStartTime != -1)
         {
             if (Time.time - reloadStartTime >= reloadSpeed)
@@ -50,11 +52,11 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public void FireWeapon(Vector2 direction, float rotationZ)
+    public void FireWeapon(Vector2 direction, float fireRateMultiplier)
     {
         if (bulletsInClip > 0 && !reloadCooldown.reloading)
         {
-            if (Time.time - timeSinceLastShot >= FireRate)
+            if (Time.time - timeSinceLastShot >= FireRate * fireRateMultiplier)
             {
                 gameObject.GetComponent<AudioSource>().Play();
                 GameObject bullet = Instantiate(BulletPrefab) as GameObject;

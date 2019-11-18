@@ -4,11 +4,9 @@ using UnityEngine;
 
 /**
  * Example: Top_Door
- * Door1: Non-colored door (left side)
- * Door2: Green colored (Not active as default)
- * Door3: Red colored (Active Initally)
- * Backside: Black (opened)
- * Border: Frame of the door
+ * Locked Door: Door Sprite w/ Planks
+ * Unlocked Door: Door Sprite
+ * Open Door: No Door Sprite
  * NOTE: Doors must be ordered in this way,
  *       Otherwise this script with FAIL
  */ 
@@ -57,7 +55,7 @@ public class DoorSystem : MonoBehaviour
     {
         List<GameObject> myChildren = GetAllChildren(mDoor);
         // show Door1
-        myChildren[0].SetActive(true);
+        myChildren[0].SetActive(false);
         // show Door2
         myChildren[1].SetActive(true);
         // hide Door3
@@ -72,7 +70,7 @@ public class DoorSystem : MonoBehaviour
         // hide Door2
         myChildren[1].SetActive(false);
         // show Door3
-        myChildren[2].SetActive(true);
+        myChildren[2].SetActive(false);
     }
 
     private void OpenDoor(GameObject mDoor)
