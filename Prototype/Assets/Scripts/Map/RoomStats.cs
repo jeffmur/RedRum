@@ -116,10 +116,10 @@ public class RoomStats : MonoBehaviour
         switch (side)
         {
             case "TOP":
-                location = new Vector2(tWidth / 2, getHeightVec().y);
+                location = new Vector2(tWidth / 2, getHeightVec().y - 1f);
                 break;
             case "BOTTOM":
-                location = new Vector2(tWidth / 2, getHeightVec().x + 1f);
+                location = new Vector2(tWidth / 2, getHeightVec().x + 2f);
                 break;
             case "RIGHT":
                 location = new Vector2(getWidthVec().y, tHeight / 2);
