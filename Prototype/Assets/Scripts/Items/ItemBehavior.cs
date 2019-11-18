@@ -6,11 +6,12 @@ public class ItemBehavior : MonoBehaviour
 {
     private float spinSpeed = 80f;
     private bool pickedUp = false;
+    private Vector3 startPos;
     private Transform casper;
     // Start is called before the first frame update
     void Start()
     {
-        
+        startPos = transform.localPosition;
     }
 
     // Update is called once per frame
@@ -18,7 +19,7 @@ public class ItemBehavior : MonoBehaviour
     {
         if (!pickedUp)
         {
-            if (transform.position.y <= 0f)
+            if (transform.position.y < 1f + startPos.y)
                 transform.position += Vector3.up * 1f * Time.deltaTime;
             transform.Rotate(Vector3.up * spinSpeed * Time.deltaTime);
         }
@@ -32,10 +33,10 @@ public class ItemBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
-        {
-            pickedUp = true;
-            casper = collision.transform;
-        }
+        //if (collision.tag == "Player")
+        //{
+        //    pickedUp = true;
+        //    casper = collision.transform;
+        //}
     }
 }

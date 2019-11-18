@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+
     public int Damage;
     public int ClipSize;
     public float BulletSpeed;
-    public float FireRate;
+    public float FireRate = 0.3f;
+    private PlayerStats stats;
+    private GameObject crosshairs;
     public float Accuracy;
     public float reloadSpeed;
     public GameObject BulletPrefab;
@@ -22,6 +25,10 @@ public class Weapon : MonoBehaviour
     {
         reloadCooldown = GameObject.Find("ReloadCooldown").GetComponent<ReloadCooldown>();
         random = new Random();
+        stats = GameObject.Find("Casper").GetComponent<PlayerStats>();
+        reloadCooldown = GameObject.Find("ReloadCooldown").GetComponent<ReloadCooldown>();
+        random = new Random();
+        ClipSize = stats.maxAmmo;
         bulletsInClip = ClipSize;
         timeSinceLastShot = Time.time + FireRate;
         reloadStartTime = -1;
@@ -29,12 +36,17 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        // check for reload
+        // Hot reload
+        if (Input.GetKeyDown(KeyCode.R) && bulletsInClip != ClipSize && !reloadCooldown.reloading) {
+            reloadCooldown.StartReload(reloadSpeed);
+            reloadStartTime = Time.time;
+        }
         if (reloadStartTime != -1)
         {
             if (Time.time - reloadStartTime >= reloadSpeed)
             {
                 bulletsInClip = ClipSize;
+                stats.changeAmmo(bulletsInClip);
                 reloadStartTime = -1;
             }
         }
@@ -42,10 +54,11 @@ public class Weapon : MonoBehaviour
 
     public void FireWeapon(Vector2 direction, float fireRateMultiplier)
     {
-        if (bulletsInClip > 0)
+        if (bulletsInClip > 0 && !reloadCooldown.reloading)
         {
             if (Time.time - timeSinceLastShot >= FireRate * fireRateMultiplier)
             {
+                gameObject.GetComponent<AudioSource>().Play();
                 GameObject bullet = Instantiate(BulletPrefab) as GameObject;
                 bullet.transform.position = transform.position;
                 // accuracy 
@@ -58,6 +71,7 @@ public class Weapon : MonoBehaviour
                 // update variables
                 timeSinceLastShot = Time.time;
                 bulletsInClip--;
+                stats.changeAmmo(-1);
             }
         }
         else // reload

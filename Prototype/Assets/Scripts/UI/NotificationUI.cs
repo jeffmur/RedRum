@@ -9,7 +9,7 @@ public class NotificationUI : MonoBehaviour
     
     public IEnumerator displayMessage(string notification)
     {
-        print(notification);
+        //print(notification);
         notificationText.text = notification;
         gameObject.SetActive(true);
         yield return new WaitForSeconds(3);

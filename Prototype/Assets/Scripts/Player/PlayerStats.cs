@@ -8,34 +8,45 @@ public class PlayerStats : MonoBehaviour
     private float fireRateModifier;
     private float accuracyPercentage;
     public int currentHealth, maxHealth;
+    public int currentAmmo, maxAmmo;
     private float moveSpeed;
     //private float isInvincible;
     private bool isInvincible;
     public List<Item> passiveItems;
-    public HeldItem currentHeldItem;
+    public ActivatedItem currentActiveItem;
 
     public delegate void onHealthChangeDelegate(int value);
     public event onHealthChangeDelegate onHealthChange, onMaxHealthChange;
 
+    public delegate void onHealthCheckDelegate();
+    public event onHealthCheckDelegate onDamaged, onHealed;
+
+    public delegate void onAmmoChangeDelegate(int val);
+    public event onAmmoChangeDelegate onAmmoChange;
+
     public delegate void onItemDelegate(Item item);
     public event onItemDelegate onItemPickup;
 
-    public delegate void onActiveItemDelegate(HeldItem item);
+    public delegate void onActiveItemDelegate(ActivatedItem item);
     public event onActiveItemDelegate onItemUse;
 
     // Start is called before the first frame update
     void Awake()
     {
         moveSpeed = 5f;
+
         maxHealth = 3;
         currentHealth = maxHealth;
+
+        maxAmmo = 8;
+        currentAmmo = maxAmmo;
     }
 
 
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
     public int MaxHealth { get => maxHealth; }
     public int CurrentHealth { get => currentHealth; }
-    public HeldItem CurrentActiveItem { get => currentHeldItem; }
+    public ActivatedItem CurrentActiveItem { get => currentActiveItem; }
 
     public void changeMaxHealth(int value)
     {
@@ -80,35 +91,58 @@ public class PlayerStats : MonoBehaviour
         {
             return;
         }
-
         currentHealth += value;
         if (currentHealth > maxHealth)
         {
-            currentHealth = maxHealth;
+            maxHealth = currentHealth;
+            onMaxHealthChange?.Invoke(maxHealth);
         }
-        if (currentHealth < 0)
+        if (currentHealth <= 0)
         {
-            currentHealth = 0;
+            
+            Debug.Log("CASPER DEAD");
+            Die();
         }
         onHealthChange?.Invoke(currentHealth);
+        if (value > 0)
+        {
+            onHealed?.Invoke();
+        }
+        else
+        {
+            onDamaged?.Invoke();
+        }
     }
 
-    public void setHeldItem(HeldItem item)
+    public void setActivatedItem(ActivatedItem item)
     {
-        if (currentHeldItem != null)
+        if (currentActiveItem != null)
         {
-            currentHeldItem.gameObject.SetActive(true);
-            currentHeldItem.transform.position = transform.position;
+            currentActiveItem.showItem();
+            currentActiveItem.transform.position = transform.position;
         }
-        currentHeldItem = item;
-        item.gameObject.SetActive(false);
+        currentActiveItem = item;
+        item.hideItem();
+    }
+
+    public void changeAmmo(int value)
+    {
+        if(value == 0) { return; }
+
+        currentAmmo += value;
+
+        if (currentAmmo > maxAmmo)
+            currentAmmo = maxAmmo;
+
+        if (currentAmmo < 0)
+            currentAmmo = 0;
+        onAmmoChange?.Invoke(currentAmmo);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            
             if (collision.gameObject.tag == "Item")
             {              
                 pickUpItem(collision.gameObject.GetComponent<Item>());
@@ -121,16 +155,18 @@ public class PlayerStats : MonoBehaviour
         }
     }
     private void pickUpItem(Item selectedItem)
-    {
+    {       
         selectedItem.process();
         onItemPickup?.Invoke(selectedItem);
     }
-    private void activateHeldItem()
+    public void activateItem()
     {
-        if (currentHeldItem is ActivatedItem)
-        {
-            
-        }
-        onItemUse?.Invoke(currentHeldItem);
+        currentActiveItem.activateItem();
+        onItemUse?.Invoke(currentActiveItem);
+    }
+
+    private void Die()
+    {
+        Scenes.Load("Alpha", Scenes.nextDem());
     }
 }

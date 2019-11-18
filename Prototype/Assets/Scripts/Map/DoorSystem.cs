@@ -13,9 +13,9 @@ using UnityEngine;
 public class DoorSystem : MonoBehaviour
 {
     // Door STATES: 
-    private bool LOCKED = true;      // 0
-    private bool UNLOCKED = false;   // 1
-    private bool OPEN = false;       // 2
+    private bool LOCKED;     // 0
+    private bool UNLOCKED;   // 1
+    private bool OPEN;       // 2
     public List<GameObject> allDoors;
     private MMController sMMController;
 
@@ -24,12 +24,6 @@ public class DoorSystem : MonoBehaviour
     {
         LockAll();
         sMMController = GameObject.Find("Level Generator").GetComponent<MMController>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
     
     /*
@@ -40,12 +34,13 @@ public class DoorSystem : MonoBehaviour
      */
     public int getStatus()
     {
+        if (LOCKED)
+            return 0;
         if (UNLOCKED)
             return 1;
         if (OPEN)
             return 2;
-        // most common status: LOCKED
-        return 0;
+        return -1;
     }
 
     private static List<GameObject> GetAllChildren(GameObject mDoor)

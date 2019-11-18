@@ -15,6 +15,11 @@ public class SpeedSyringe : PassiveItem
     {
         player.GetComponent<PlayerStats>().MoveSpeed += 1f; //speed up
         player.GetComponent<PointAndShoot>().fireRateMultiplier /= 1.5f; //increase the firerate
-        //accruracy down (when accuracy is implemented)
+        //increase the firerate
+        GameObject.Find("WeaponInventory")
+            .GetComponent<WeaponInventory>()
+            .GetSelectedWeapon()
+            .GetComponent<Weapon>()
+            .FireRate /= 3f; 
     }
 }

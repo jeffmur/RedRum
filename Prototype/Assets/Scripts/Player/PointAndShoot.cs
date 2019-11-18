@@ -23,11 +23,22 @@ public class PointAndShoot : MonoBehaviour
         Debug.Assert(selectedWeapon);
         bulletPrefab = Resources.Load("Textures/Prefabs/Hero/Bullet");
         mCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        crosshairs = GameObject.Find("crossHairs");
+        mCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!once)
+        {
+            Cursor.visible = false;
+            weaponInventory = GameObject.Find("WeaponInventory").GetComponent<WeaponInventory>();
+            curWeapon = weaponInventory.GetSelectedWeapon().GetComponent<Weapon>();
+            firerate = curWeapon.FireRate;
+            selectedWeapon = weaponInventory.GetSelectedWeapon();
+            Debug.Assert(selectedWeapon);
+        }
         target = mCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
         crosshairs.transform.position = new Vector3(target.x, target.y, -9f);
         selectedWeapon = weaponInventory.GetSelectedWeapon();
@@ -41,7 +52,8 @@ public class PointAndShoot : MonoBehaviour
                 Vector2 direction = difference / distance;
                 direction.Normalize();
                 selectedWeapon.GetComponent<Weapon>().FireWeapon(direction, fireRateMultiplier);
-            }
+
+            }            
         }
     }
 }

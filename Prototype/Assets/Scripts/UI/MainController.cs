@@ -1,23 +1,20 @@
-﻿﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
-using UnityEngine;
 using UnityEngine;
 
 public class MainController : MonoBehaviour
 {
     //declare all UI elements and the model
     public HealthUI healthInfo;
+    public BulletUI ammoInfo;
     public ActiveItemUI activeItemInfo;
     public NotificationUI notificationPanel;
     public GameWorld gameWorld;
-    public Text roomStatus;
 
 
     private void Awake()
     {
         notificationPanel.gameObject.SetActive(false);
         EventManager.OnNotifyChange += sendNotification;
+        gameWorld.eventManager.onAmmoChange += updateAmmoUI;
         gameWorld.eventManager.onHealthTrigger += updatehealthUI;
         gameWorld.eventManager.onMaxHealthTrigger += updateMaxHealthUI;
         gameWorld.eventManager.onItemPickupTrigger += updateActiveItemPickupUI;
@@ -28,11 +25,18 @@ public class MainController : MonoBehaviour
     private void Start()
     {
         healthInfo.setStartingHealth(gameWorld.getStartingHealth());
+        ammoInfo.setStartingRounds(gameWorld.getStartingAmmo());
     }
 
     private void sendNotification(string notification)
     {
-        StartCoroutine(notificationPanel.displayMessage(notification));
+        if(this != null)
+            StartCoroutine(notificationPanel.displayMessage(notification));
+    }
+
+    private void updateAmmoUI(int value)
+    {
+        ammoInfo.CurrentAmmo = value;
     }
 
     private void updatehealthUI(int value)
@@ -50,13 +54,8 @@ public class MainController : MonoBehaviour
         activeItemInfo.displayActiveItem(item);
     }
 
-    private void updateActiveItemUseUI(HeldItem item)
+    private void updateActiveItemUseUI(ActivatedItem item)
     {
-        activeItemInfo.updateItemUI(item);
-    }
-
-    public void updateRoomStatus(string room)
-    {
-        roomStatus.text = "Current Room: " + room;
+        activeItemInfo.updateItemOnActivate(item);
     }
 }

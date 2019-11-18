@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private GameObject weaponInventory;
     private GameObject selectedWeapon;
     private SpriteRenderer selectedWeaponRenderer;
-    Vector2 movement;
+    private Vector2 movement;
     private float GUN_PIVOT_X = 0.06f;
     private float GUN_PIVOT_Y = -0.05f;
     private float GUN_SLOT_X = 0.03f;
@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         } 
         else // right direction
         {
-                playerRenderer.flipX = false;
+            playerRenderer.flipX = false;
             if (selectedWeapon != null)
             {
                 selectedWeaponRenderer.flipX = false;
