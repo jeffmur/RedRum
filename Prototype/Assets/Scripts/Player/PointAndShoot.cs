@@ -11,13 +11,11 @@ public class PointAndShoot : MonoBehaviour
     private GameObject selectedWeapon;
     private Object bulletPrefab;
     private Camera mCamera;
-    private float lastAttackTime;
-    public float firerate;
-    public float bulletSpeed = 5.0f;
+    public float fireRateMultiplier;
 
     void Start()
     {
-        firerate = 0.5f;
+        fireRateMultiplier = 1f;
         Cursor.visible = false;
         crosshairs = GameObject.Find("crossHairs");
         weaponInventory = GameObject.Find("WeaponInventory").GetComponent<WeaponInventory>();
@@ -30,22 +28,19 @@ public class PointAndShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         target = mCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
         crosshairs.transform.position = new Vector3(target.x, target.y, -9f);
         selectedWeapon = weaponInventory.GetSelectedWeapon();
         if (selectedWeapon != null)
         {
             Vector3 difference = target - selectedWeapon.transform.position;
-            float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-
             if (Input.GetMouseButton(0))
             {
                 selectedWeapon = weaponInventory.GetSelectedWeapon();
                 float distance = difference.magnitude;
                 Vector2 direction = difference / distance;
                 direction.Normalize();
-                selectedWeapon.GetComponent<Weapon>().FireWeapon(direction, rotationZ);
+                selectedWeapon.GetComponent<Weapon>().FireWeapon(direction, fireRateMultiplier);
             }
         }
     }

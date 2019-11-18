@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         } 
         else // right direction
         {
-            playerRenderer.flipX = false;
+                playerRenderer.flipX = false;
             if (selectedWeapon != null)
             {
                 selectedWeaponRenderer.flipX = false;

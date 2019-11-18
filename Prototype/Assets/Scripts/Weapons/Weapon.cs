@@ -40,11 +40,11 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public void FireWeapon(Vector2 direction, float rotationZ)
+    public void FireWeapon(Vector2 direction, float fireRateMultiplier)
     {
         if (bulletsInClip > 0)
         {
-            if (Time.time - timeSinceLastShot >= FireRate)
+            if (Time.time - timeSinceLastShot >= FireRate * fireRateMultiplier)
             {
                 GameObject bullet = Instantiate(BulletPrefab) as GameObject;
                 bullet.transform.position = transform.position;
