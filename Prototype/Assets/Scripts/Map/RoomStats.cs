@@ -122,10 +122,10 @@ public class RoomStats : MonoBehaviour
                 location = new Vector2(tWidth / 2, getHeightVec().x + 2f);
                 break;
             case "RIGHT":
-                location = new Vector2(getWidthVec().y, tHeight / 2);
+                location = new Vector2(getWidthVec().y , tHeight / 2);
                 break;
             case "LEFT":
-                location = new Vector2(getWidthVec().x, tHeight / 2);
+                location = new Vector2(getWidthVec().x + 2f, tHeight / 2);
                 break;
         }
         return location;

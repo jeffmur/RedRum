@@ -49,5 +49,6 @@ public class Chest : MonoBehaviour
         int i = Random.Range(0, myItems.Count - 1);
         GameObject item = Instantiate(myItems[i], transform.position, Quaternion.identity);
         item.AddComponent<ItemBehavior>();
+        item.transform.parent = gameObject.transform.parent;
     }
 }
