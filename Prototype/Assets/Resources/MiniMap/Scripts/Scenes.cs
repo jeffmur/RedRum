@@ -7,11 +7,18 @@ public static class Scenes
 {
     private static string DEM = "4x4"; // Static demensions
 
-    public static void Load(string sceneName, string demensions)
+    // Victory Case
+    public static void Load(string path, string demensions)
     {
         DEM = demensions;
-        SceneManager.LoadScene(sceneName);
-        displayMessage(demensions);
+        Load(path);
+        //displayMessage(demensions);
+    }
+
+    // Losing/Retry case
+    public static void Load(string path)
+    {
+        SceneManager.LoadScene(path);
     }
 
     public static string getDem()

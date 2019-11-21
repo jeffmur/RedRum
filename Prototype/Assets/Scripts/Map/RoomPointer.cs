@@ -23,6 +23,7 @@ public partial class RoomPointer : MonoBehaviour
     private void RoomSwap(GameObject nextLevel, string doorSide)
     {
         RoomStats next = nextLevel.GetComponent<RoomStats>();
+        nextLevel.GetComponent<DoorSystem>().LockAll();
         if (mm.casperIcon.position != mm.allRooms[0].transform.position)
         {
             foreach (GameObject room in mm.allRooms) // for all the rooms
@@ -40,7 +41,6 @@ public partial class RoomPointer : MonoBehaviour
                 }
             }
         }
-        next.GetComponent<DoorSystem>().LockAll(); //Spawn Enemies
         // Move camera
         next.setCamLocation();
             // Move Hero
@@ -70,22 +70,6 @@ public partial class RoomPointer : MonoBehaviour
         // Re-locate real player location
         RoomSwap(nextRoom, roomDir);
         fromRoom.LockAll();
-    }
-
-    private string oppositeDir(string room)
-    {
-        switch (room)
-        {
-            case "UP":
-                return "DOWN";
-            case "DOWN":
-                return "UP";
-            case "LEFT":
-                return "RIGHT";
-            case "RIGHT":
-                return "LEFT";
-        }
-        return null;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

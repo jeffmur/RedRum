@@ -21,15 +21,15 @@ public partial class RoomManager : MonoBehaviour
     void Update()
     {
         // No enemies and doors are locked
-        if (allEnemiesDead() && sDoorSys.getStatus() <= 1)
+        if (allEnemiesDead() && sDoorSys.getStatus() == 0)
         {
             sDoorSys.UnlockAll();
             if (myChest != null)
                 myChest.gameObject.SetActive(true);
         }
 
-        // If unlocked and right mouse clicked
-        if (sDoorSys.getStatus() == 1 && Input.GetMouseButtonDown(1))
+        // If unlocked
+        if (sDoorSys.getStatus() >= 1)
             sDoorSys.OpenAll();
 
     }

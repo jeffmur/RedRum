@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    private float fireRateModifier;
-    private float accuracyPercentage;
+    public float fireRateModifier;
+    public float accuracyPercentage;
     public int currentHealth, maxHealth;
     public int currentAmmo, maxAmmo;
-    private float moveSpeed;
+    public float moveSpeed;
     //private float isInvincible;
     private bool isInvincible;
     public List<Item> passiveItems;
@@ -31,17 +31,27 @@ public class PlayerStats : MonoBehaviour
     public event onActiveItemDelegate onItemUse;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        moveSpeed = 5f;
-
-        maxHealth = 3;
-        currentHealth = maxHealth;
-
-        maxAmmo = 8;
-        currentAmmo = maxAmmo;
+        moveSpeed = GlobalControl.Instance.moveSpeed;
+        fireRateModifier = GlobalControl.Instance.fireRateModifier;
+        accuracyPercentage = GlobalControl.Instance.accuracyPercentage;
+        currentAmmo = GlobalControl.Instance.currentAmmo;
+        maxAmmo = GlobalControl.Instance.maxAmmo;
+        currentHealth = GlobalControl.Instance.currentHealth;
+        maxHealth = GlobalControl.Instance.maxHealth;
     }
 
+    public void SavePlayer()
+    {
+        GlobalControl.Instance.moveSpeed = moveSpeed;
+        GlobalControl.Instance.fireRateModifier = fireRateModifier;
+        GlobalControl.Instance.accuracyPercentage = accuracyPercentage;
+        GlobalControl.Instance.currentAmmo = currentAmmo;
+        GlobalControl.Instance.maxAmmo = maxAmmo;
+        GlobalControl.Instance.currentHealth = currentHealth;
+        GlobalControl.Instance.maxHealth = maxHealth;
+    }
 
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
     public int MaxHealth { get => maxHealth; }
@@ -161,12 +171,15 @@ public class PlayerStats : MonoBehaviour
     }
     public void activateItem()
     {
-        currentActiveItem.activateItem();
-        onItemUse?.Invoke(currentActiveItem);
+        if (currentActiveItem != null)
+        {
+            currentActiveItem.activateItem();
+            onItemUse?.Invoke(currentActiveItem);
+        }
     }
 
     private void Die()
     {
-        Scenes.Load("Alpha", Scenes.nextDem());
+        Scenes.Load("Alpha");
     }
 }

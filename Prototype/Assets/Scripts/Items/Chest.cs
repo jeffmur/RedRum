@@ -7,7 +7,7 @@ public class Chest : MonoBehaviour
     public Sprite opened;
     public Sprite closed;
     private SpriteRenderer rend;
-    private List<GameObject> myItems;
+    public List<GameObject> myItems;
     public bool openChest = false;
     private Transform casper;
     // Start is called before the first frame update
@@ -24,6 +24,8 @@ public class Chest : MonoBehaviour
         if(openChest && rend.sprite != opened)
         {
             rend.sprite = opened;
+            GetComponent<BoxCollider2D>().isTrigger = true;
+            GetComponentInParent<DoorSystem>().OpenAll();
             spawnRandomItem();
         }
     }
@@ -46,7 +48,13 @@ public class Chest : MonoBehaviour
 
     private void spawnRandomItem()
     {
-        int i = Random.Range(0, myItems.Count - 1);
+        if (myItems.Count == 0)
+            return;
+
+        int i = Random.Range(0, myItems.Count-1);
+
+        if (myItems.Count == 1)
+            i = 0;
         GameObject item = Instantiate(myItems[i], transform.position, Quaternion.identity);
         item.AddComponent<ItemBehavior>();
     }

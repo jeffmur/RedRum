@@ -13,9 +13,9 @@ using UnityEngine;
 public class DoorSystem : MonoBehaviour
 {
     // Door STATES: 
-    private bool LOCKED;     // 0
-    private bool UNLOCKED;   // 1
-    private bool OPEN;       // 2
+    public bool LOCKED = true;      // 0
+    public bool UNLOCKED = false;   // 1
+    public bool OPEN = false;       // 2
     public List<GameObject> allDoors;
     private MMController sMMController;
 

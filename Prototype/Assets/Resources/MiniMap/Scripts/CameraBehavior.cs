@@ -13,24 +13,24 @@ public class CameraBehavior : MonoBehaviour
     void Start()
     {
         SIZE = GetComponent<SizeController>();
-        mCamera.gameObject.SetActive(false);
+        mCamera.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
         adjustCamera();
-        if (Input.GetKeyDown("m"))
-            if (mCamera.gameObject.activeSelf)
-            {
-                mCamera.gameObject.SetActive(false);
-                mapToggle.gameObject.SetActive(true);
-            }
-            else
-            {
-                mCamera.gameObject.SetActive(true);
-                mapToggle.gameObject.SetActive(false);
-            }
+        //if (Input.GetKeyDown("m"))
+        //    if (mCamera.gameObject.activeSelf)
+        //    {
+        //        mCamera.gameObject.SetActive(false);
+        //        mapToggle.gameObject.SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        mCamera.gameObject.SetActive(true);
+        //        mapToggle.gameObject.SetActive(false);
+        //    }
     }
 
     private void adjustCamera()
