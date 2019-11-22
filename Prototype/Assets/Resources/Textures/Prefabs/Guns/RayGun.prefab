@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6386772802401130123}
   - component: {fileID: 7001711256152537813}
   - component: {fileID: 9104100683381347169}
+  - component: {fileID: 200594807}
   m_Layer: 0
   m_Name: RayGun
   m_TagString: Untagged
@@ -95,14 +96,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42dcf97348596334998571e5b35e1e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 20
-  ClipSize: 8
-  BulletSpeed: 8
-  FireRate: 0.3
-  Accuracy: 5
-  reloadSpeed: 1.2
+  Damage: 30
+  ClipSize: 10
+  BulletSpeed: 12
+  FireRate: 0.2
+  Accuracy: 3
+  reloadSpeed: 1.5
   BulletPrefab: {fileID: 870585644736912044, guid: dcaa7ffca667ca34da7a43aef2945b44,
     type: 3}
+  barrelOffset: 0.2
+  heightOffset: 0
 --- !u!82 &9104100683381347169
 AudioSource:
   m_ObjectHideFlags: 0
@@ -199,3 +202,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &200594807
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2441932474463071636}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 779ec5d7df6fcd648a333e045b42ad1a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

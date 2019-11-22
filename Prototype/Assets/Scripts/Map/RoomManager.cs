@@ -41,7 +41,10 @@ public partial class RoomManager : MonoBehaviour
         {
             if (child.name == "chest(Clone)")
                 Destroy(child.gameObject);
+            if (child.tag == "Item")
+                Destroy(child.gameObject);
         }
+
         // Spawn Chest and Hide
         GameObject c = Instantiate(chestPrefab, transform.position, Quaternion.identity);
         c.transform.parent = gameObject.transform;

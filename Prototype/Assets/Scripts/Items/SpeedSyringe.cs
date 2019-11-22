@@ -20,6 +20,6 @@ public class SpeedSyringe : PassiveItem
             .GetComponent<WeaponInventory>()
             .GetSelectedWeapon()
             .GetComponent<Weapon>()
-            .FireRate /= 3f; 
+            .FireRate /= 3f;
     }
 }

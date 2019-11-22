@@ -25,6 +25,9 @@ public class PlayerData
 public class PlayerStats : MonoBehaviour
 {
     public CasperData localCasperData;
+    public TimeManager timeManager;
+    //private float isInvincible;
+    private bool isInvincible;
     public List<Item> passiveItems;
 
     public delegate void onHealthChangeDelegate(int value);
@@ -114,9 +117,9 @@ public class PlayerStats : MonoBehaviour
         }
         if (localCasperData.CurrentHealth <= 0)
         {
-            
             Debug.Log("CASPER DEAD");
-            Die();
+            timeManager.DoSlowMotion();
+            Invoke("Die", 2f); //dies after 5 seconds
         }
         onHealthChange?.Invoke(localCasperData.CurrentHealth);
         if (value > 0)
@@ -159,7 +162,7 @@ public class PlayerStats : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (collision.gameObject.tag == "Item")
-            {              
+            {
                 pickUpItem(collision.gameObject.GetComponent<Item>());
             }
             if (collision.gameObject.tag == "Heart")
@@ -170,7 +173,7 @@ public class PlayerStats : MonoBehaviour
         }
     }
     private void pickUpItem(Item selectedItem)
-    {       
+    {
         selectedItem.process();
         onItemPickup?.Invoke(selectedItem);
     }

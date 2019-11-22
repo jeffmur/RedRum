@@ -14,7 +14,10 @@ public class Weapon : MonoBehaviour
     public float Accuracy;
     public float reloadSpeed;
     public GameObject BulletPrefab;
+    public float barrelOffset = 0;
+    public float heightOffset = 0;
 
+    private Animator animator;
     private ReloadCooldown reloadCooldown;
     private int bulletsInClip;
     private float timeSinceLastShot;
@@ -24,9 +27,9 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         reloadCooldown = GameObject.Find("ReloadCooldown").GetComponent<ReloadCooldown>();
-        random = new Random();
         stats = GameObject.Find("Casper").GetComponent<PlayerStats>();
         reloadCooldown = GameObject.Find("ReloadCooldown").GetComponent<ReloadCooldown>();
+        animator = transform.GetComponent<Animator>();
         random = new Random();
         ClipSize = stats.MaxAmmo;
         bulletsInClip = ClipSize;
@@ -38,6 +41,7 @@ public class Weapon : MonoBehaviour
     {
         // Hot reload
         if (Input.GetKeyDown(KeyCode.R) && bulletsInClip != ClipSize && !reloadCooldown.reloading) {
+            animator.SetBool("Reload", true);
             reloadCooldown.StartReload(reloadSpeed);
             reloadStartTime = Time.time;
         }
@@ -45,6 +49,7 @@ public class Weapon : MonoBehaviour
         {
             if (Time.time - reloadStartTime >= reloadSpeed)
             {
+                animator.SetBool("Reload", false);
                 bulletsInClip = ClipSize;
                 stats.changeAmmo(bulletsInClip);
                 reloadStartTime = -1;
@@ -58,16 +63,28 @@ public class Weapon : MonoBehaviour
         {
             if (Time.time - timeSinceLastShot >= FireRate * fireRateMultiplier)
             {
+                // trigger fire animation
+                animator.SetTrigger("Fire");
+
+                // play audio
                 gameObject.GetComponent<AudioSource>().Play();
+
+                // spawn bullet and set position
                 GameObject bullet = Instantiate(BulletPrefab) as GameObject;
-                bullet.transform.position = transform.position;
-                // accuracy 
+                Vector2 bulletPosition = transform.position;
+                bulletPosition += direction * barrelOffset;
+                Vector2 gunUp = transform.up;
+                bulletPosition += gunUp * heightOffset; 
+                bullet.transform.position = bulletPosition;
+                bullet.GetComponent<bullet>().bulletDamage = Damage;
+
+                // accuracy handling
                 float spread = Random.Range(-Accuracy, Accuracy);
                 Quaternion angle = Quaternion.FromToRotation(bullet.transform.up, direction);
                 bullet.transform.rotation *= angle;
                 bullet.transform.rotation = Quaternion.AngleAxis(spread, transform.forward) * bullet.transform.rotation;
-                bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * BulletSpeed, ForceMode2D.Impulse);
-                bullet.GetComponent<bullet>().bulletDamage = Damage;
+                bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * BulletSpeed, ForceMode2D.Impulse);  
+
                 // update variables
                 timeSinceLastShot = Time.time;
                 bulletsInClip--;
@@ -80,6 +97,7 @@ public class Weapon : MonoBehaviour
             {
                 reloadStartTime = Time.time;
                 reloadCooldown.StartReload(reloadSpeed);
+                animator.SetBool("Reload", true);
             }
         }
     }

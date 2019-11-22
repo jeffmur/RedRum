@@ -57,5 +57,6 @@ public class Chest : MonoBehaviour
             i = 0;
         GameObject item = Instantiate(myItems[i], transform.position, Quaternion.identity);
         item.AddComponent<ItemBehavior>();
+        item.transform.parent = gameObject.transform.parent;
     }
 }

@@ -49,7 +49,6 @@ public partial class GameWorld : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             stats.activateItem();
-
         }
     }
 }

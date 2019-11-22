@@ -20,13 +20,13 @@ public class RoomStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public bool isInRoom(Vector2 location)
     {
-        return maxX > location.x 
-            && minX < location.x 
+        return maxX > location.x
+            && minX < location.x
             && maxY > location.y
             && minY < location.y;
     }
