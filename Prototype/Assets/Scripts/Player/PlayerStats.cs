@@ -101,8 +101,8 @@ public class PlayerStats : MonoBehaviour
         if (currentHealth <= 0)
         {    
             Debug.Log("CASPER DEAD");
-            Invoke("Die", 2f); //dies after 5 seconds
             timeManager.DoSlowMotion();
+            Invoke("Die", 2f); //dies after 5 seconds
         }
         onHealthChange?.Invoke(currentHealth);
         if (value > 0)
