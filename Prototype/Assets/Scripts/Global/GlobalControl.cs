@@ -15,12 +15,10 @@ public class GlobalControl : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             Instance = this;
-            Debug.Log("DONT");
         }      
         else if (Instance != this)
         {
             Destroy(gameObject);
-            Debug.Log("DESTROY "+gameObject.name);
         }
     }
 

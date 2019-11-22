@@ -50,7 +50,8 @@ public class PlayerStats : MonoBehaviour
 
     public void SavePlayer()
     {
-        GlobalControl.Instance.saveItem(HeldItem.gameObject);
+        if(HeldItem != null)
+            GlobalControl.Instance.saveItem(HeldItem.gameObject);
         GlobalControl.Instance.savedCasperData = localCasperData;
     }
 

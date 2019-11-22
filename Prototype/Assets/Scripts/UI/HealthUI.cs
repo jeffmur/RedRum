@@ -62,6 +62,10 @@ public class HealthUI : MonoBehaviour
         Image NewImage = NewObj.AddComponent<Image>(); //Add the Image Component script
         NewImage.GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
         NewImage.sprite = heart; //Set the Sprite of the Image Component on the new GameObject
+
+        if (healthPanel == null)
+            healthPanel = GameObject.Find("PlayerHealth").GetComponent<RectTransform>();
+
         NewObj.GetComponent<RectTransform>().SetParent(healthPanel.transform); //Assign the newly created Image GameObject as a Child of the Parent Panel.
         NewObj.SetActive(true); //Activate the GameObject
         NewObj.transform.localPosition = healthPanel.anchoredPosition + new Vector2(xDisplacement, yDisplacement);
