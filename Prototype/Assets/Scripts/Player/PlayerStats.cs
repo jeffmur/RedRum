@@ -9,6 +9,7 @@ public class PlayerStats : MonoBehaviour
     private float accuracyPercentage;
     public int currentHealth, maxHealth;
     public int currentAmmo, maxAmmo;
+    public TimeManager timeManager;
     private float moveSpeed;
     //private float isInvincible;
     private bool isInvincible;
@@ -98,10 +99,10 @@ public class PlayerStats : MonoBehaviour
             onMaxHealthChange?.Invoke(maxHealth);
         }
         if (currentHealth <= 0)
-        {
-            
+        {    
             Debug.Log("CASPER DEAD");
-            Die();
+            timeManager.DoSlowMotion();
+            Invoke("Die", 2f); //dies after 5 seconds
         }
         onHealthChange?.Invoke(currentHealth);
         if (value > 0)

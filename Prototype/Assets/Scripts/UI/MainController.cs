@@ -7,6 +7,7 @@ public class MainController : MonoBehaviour
     public BulletUI ammoInfo;
     public ActiveItemUI activeItemInfo;
     public NotificationUI notificationPanel;
+    public DeathPanel deathPanel;
     public GameWorld gameWorld;
 
 
@@ -42,6 +43,10 @@ public class MainController : MonoBehaviour
     private void updatehealthUI(int value)
     {
         healthInfo.CurrentHP = value;
+        if(value <= 0)
+        {
+            deathPanel.showHidePanel();
+        }
     }
 
     private void updateMaxHealthUI(int value)

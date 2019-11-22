@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public partial class RoomPointer : MonoBehaviour
 {
     private MMController mm;
+    public Dictionary<int, List<GameObject>> map;
     public DoorSystem fromRoom;
     public GameObject nextRoom;
     private GameObject mHero;
@@ -16,6 +17,7 @@ public partial class RoomPointer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        var map = new Dictionary<int, List<GameObject>>();
         mm = GameObject.Find("Level Generator").GetComponent<MMController>();
         mHero = GameObject.Find("Casper");
     }
@@ -25,8 +27,10 @@ public partial class RoomPointer : MonoBehaviour
         RoomStats next = nextLevel.GetComponent<RoomStats>();
         if (mm.casperIcon.position != mm.allRooms[0].transform.position)
         {
+            int i = 0;
             foreach (GameObject room in mm.allRooms) // for all the rooms
             {
+                i++;
                 if (Vector2.Distance(room.transform.position, mm.casperIcon.position) < 2f) // find the room I am in 
                 {
                     if (room.GetComponent<Room>() != null) //if it is actually a room
@@ -35,7 +39,22 @@ public partial class RoomPointer : MonoBehaviour
                         {
                             room.GetComponent<Room>().isVisited = true; //mark it is visited
                             next.GetComponent<RoomManager>().Initialize(); //make the enemies spawn 
+                            foreach (Transform child in gameObject.transform) //create all the items 
+                            {
+                                if (child.tag == "Items")
+                                    map[i].Add(child.gameObject); //add them to the list of items in the room
+                            }
                         }
+                        //else
+                        //{
+                        //    //for each item in this map
+                        //    foreach(GameObject item in map[i])
+                        //    {
+                        //        Instantiate(item); //put all the items back
+                        //    }
+                        //    //create all the items again
+
+                        //}
                     }
                 }
             }
