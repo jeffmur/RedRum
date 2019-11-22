@@ -1821,7 +1821,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 982888129}
-  - component: {fileID: 982888128}
   - component: {fileID: 982888130}
   - component: {fileID: 982888126}
   m_Layer: 0
@@ -1850,20 +1849,7 @@ MonoBehaviour:
   currentAmmo: 8
   maxAmmo: 8
   moveSpeed: 5
---- !u!114 &982888128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 982888125}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31d9244d06d18dd4a9a5b92ab417322a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventManager: {fileID: 723500245}
-  itemPool: []
+  scale: {x: 6, y: 6, z: 1}
 --- !u!4 &982888129
 Transform:
   m_ObjectHideFlags: 0
@@ -3570,6 +3556,7 @@ GameObject:
   - component: {fileID: 1524478373}
   - component: {fileID: 1524478372}
   - component: {fileID: 1524478371}
+  - component: {fileID: 1524478376}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3593,7 +3580,7 @@ MonoBehaviour:
   ammoInfo: {fileID: 1289221781}
   activeItemInfo: {fileID: 1788079618}
   notificationPanel: {fileID: 1539036958}
-  gameWorld: {fileID: 982888128}
+  gameWorld: {fileID: 1524478376}
 --- !u!114 &1524478372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3678,6 +3665,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1524478376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524478370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31d9244d06d18dd4a9a5b92ab417322a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventManager: {fileID: 723500245}
 --- !u!1001 &1528007876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5248,16 +5248,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6539579177579626177, guid: 3119cfdf03be01e4ca455c8b871291e3,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6539579178418839301, guid: 3119cfdf03be01e4ca455c8b871291e3,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6539579178435093423, guid: 3119cfdf03be01e4ca455c8b871291e3,
         type: 3}
       propertyPath: fireRateModifier
@@ -5287,6 +5277,16 @@ PrefabInstance:
         type: 3}
       propertyPath: moveSpeed
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6539579177579626177, guid: 3119cfdf03be01e4ca455c8b871291e3,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6539579178418839301, guid: 3119cfdf03be01e4ca455c8b871291e3,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3119cfdf03be01e4ca455c8b871291e3, type: 3}

@@ -26,6 +26,7 @@ public class MainController : MonoBehaviour
     {
         healthInfo.setStartingHealth(gameWorld.getStartingHealth());
         ammoInfo.setStartingRounds(gameWorld.getStartingAmmo());
+        updateActiveItemPickupUI(GlobalControl.Instance.savedCasperData.CurrentActiveItem);
     }
 
     private void sendNotification(string notification)

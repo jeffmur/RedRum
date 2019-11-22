@@ -28,7 +28,7 @@ public class Weapon : MonoBehaviour
         stats = GameObject.Find("Casper").GetComponent<PlayerStats>();
         reloadCooldown = GameObject.Find("ReloadCooldown").GetComponent<ReloadCooldown>();
         random = new Random();
-        ClipSize = stats.maxAmmo;
+        ClipSize = stats.MaxAmmo;
         bulletsInClip = ClipSize;
         timeSinceLastShot = Time.time + FireRate;
         reloadStartTime = -1;

@@ -31,7 +31,7 @@ public class PointAndShoot : MonoBehaviour
         Cursor.visible = false;
         weaponInventory = GameObject.Find("WeaponInventory").GetComponent<WeaponInventory>();
         selectedWeapon = weaponInventory.GetSelectedWeapon();
-        fireRateMultiplier = GetComponent<PlayerStats>().fireRateModifier;
+        fireRateMultiplier = GetComponent<PlayerStats>().FireRate;
         Debug.Assert(selectedWeapon);
         target = mCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
         crosshairs.transform.position = new Vector3(target.x, target.y, -9f);

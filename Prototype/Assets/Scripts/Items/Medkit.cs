@@ -6,7 +6,7 @@ public class Medkit : ActivatedItem
 {
     protected override void setActivateItemBehavior()
     {
-        int full = stats.maxHealth - stats.currentHealth;
+        int full = stats.MaxHealth - stats.CurrentHealth;
         stats.changeHealth(full);
     }
 

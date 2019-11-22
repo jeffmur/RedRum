@@ -3,17 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class CasperData
+{
+    public float FireRate = 1f;
+    public int CurrentHealth = 3;
+    public int MaxHealth = 3;
+    public int CurrentAmmo = 8;
+    public int MaxAmmo = 8;
+    public float Speed = 5f;
+    public Vector3 Scale = new Vector3(6, 6, 1);
+    public ActivatedItem CurrentActiveItem;
+}
+public class PlayerData
+{
+    public int roomsCleared;
+    public float accuracy;
+    public int enemiesKilled;
+    // any more?
+}
+
 public class PlayerStats : MonoBehaviour
 {
-    public float fireRateModifier;
-    public float accuracyPercentage;
-    public int currentHealth, maxHealth;
-    public int currentAmmo, maxAmmo;
-    public float moveSpeed;
-    //private float isInvincible;
-    private bool isInvincible;
+    public CasperData localCasperData;
     public List<Item> passiveItems;
-    public ActivatedItem currentActiveItem;
 
     public delegate void onHealthChangeDelegate(int value);
     public event onHealthChangeDelegate onHealthChange, onMaxHealthChange;
@@ -33,30 +45,22 @@ public class PlayerStats : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moveSpeed = GlobalControl.Instance.moveSpeed;
-        fireRateModifier = GlobalControl.Instance.fireRateModifier;
-        accuracyPercentage = GlobalControl.Instance.accuracyPercentage;
-        currentAmmo = GlobalControl.Instance.currentAmmo;
-        maxAmmo = GlobalControl.Instance.maxAmmo;
-        currentHealth = GlobalControl.Instance.currentHealth;
-        maxHealth = GlobalControl.Instance.maxHealth;
+        localCasperData = GlobalControl.Instance.savedCasperData;
     }
 
     public void SavePlayer()
     {
-        GlobalControl.Instance.moveSpeed = moveSpeed;
-        GlobalControl.Instance.fireRateModifier = fireRateModifier;
-        GlobalControl.Instance.accuracyPercentage = accuracyPercentage;
-        GlobalControl.Instance.currentAmmo = currentAmmo;
-        GlobalControl.Instance.maxAmmo = maxAmmo;
-        GlobalControl.Instance.currentHealth = currentHealth;
-        GlobalControl.Instance.maxHealth = maxHealth;
+        GlobalControl.Instance.saveItem(HeldItem.gameObject);
+        GlobalControl.Instance.savedCasperData = localCasperData;
     }
 
-    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
-    public int MaxHealth { get => maxHealth; }
-    public int CurrentHealth { get => currentHealth; }
-    public ActivatedItem CurrentActiveItem { get => currentActiveItem; }
+    public float MoveSpeed { get => localCasperData.Speed; set => localCasperData.Speed = value; }
+    public int MaxHealth { get => localCasperData.MaxHealth; }
+    public int CurrentHealth { get => localCasperData.CurrentHealth; }
+    public int MaxAmmo { get => localCasperData.MaxAmmo; }
+
+    public float FireRate { get => localCasperData.FireRate; set => localCasperData.FireRate = value; }
+    private ActivatedItem HeldItem { get => localCasperData.CurrentActiveItem; set => localCasperData.CurrentActiveItem = value; }
 
     public void changeMaxHealth(int value)
     {
@@ -65,34 +69,34 @@ public class PlayerStats : MonoBehaviour
             return;
         }
 
-        maxHealth += value;
+        localCasperData.MaxHealth += value;
         int healthChanged;
 
         if (value > 0)
         {
-            if (maxHealth > 10)
+            if (localCasperData.MaxHealth > 10)
             {
-                maxHealth = 10;
+                localCasperData.MaxHealth = 10;
             }
             changeHealth(value);
         }
         if (value < 0)
         {
-            if (maxHealth < 1)
+            if (localCasperData.MaxHealth < 1)
             {
-                maxHealth = 1;
-                changeHealth(-(currentHealth - 1));
+                localCasperData.MaxHealth = 1;
+                changeHealth(-(localCasperData.CurrentHealth - 1));
             }
             else
             {
-                int previousMaxHealth = maxHealth - value;
-                int missingHealth = previousMaxHealth - currentHealth;
+                int previousMaxHealth = localCasperData.MaxHealth - value;
+                int missingHealth = previousMaxHealth - localCasperData.CurrentHealth;
                 healthChanged = (missingHealth + value >= 0) ? 0 : value + missingHealth;
-                healthChanged = (currentHealth - healthChanged < 1) ? 1 : healthChanged;
+                healthChanged = (localCasperData.CurrentHealth - healthChanged < 1) ? 1 : healthChanged;
                 changeHealth(-healthChanged);
             }
         }
-        onMaxHealthChange?.Invoke(maxHealth);
+        onMaxHealthChange?.Invoke(localCasperData.MaxHealth);
     }
 
     public void changeHealth(int value)
@@ -101,19 +105,19 @@ public class PlayerStats : MonoBehaviour
         {
             return;
         }
-        currentHealth += value;
-        if (currentHealth > maxHealth)
+        localCasperData.CurrentHealth += value;
+        if (localCasperData.CurrentHealth > localCasperData.MaxHealth)
         {
-            maxHealth = currentHealth;
-            onMaxHealthChange?.Invoke(maxHealth);
+            localCasperData.MaxHealth = localCasperData.CurrentHealth;
+            onMaxHealthChange?.Invoke(localCasperData.MaxHealth);
         }
-        if (currentHealth <= 0)
+        if (localCasperData.CurrentHealth <= 0)
         {
             
             Debug.Log("CASPER DEAD");
             Die();
         }
-        onHealthChange?.Invoke(currentHealth);
+        onHealthChange?.Invoke(localCasperData.CurrentHealth);
         if (value > 0)
         {
             onHealed?.Invoke();
@@ -126,12 +130,12 @@ public class PlayerStats : MonoBehaviour
 
     public void setActivatedItem(ActivatedItem item)
     {
-        if (currentActiveItem != null)
+        if (HeldItem != null)
         {
-            currentActiveItem.showItem();
-            currentActiveItem.transform.position = transform.position;
+            HeldItem.showItem();
+            HeldItem.transform.position = transform.position;
         }
-        currentActiveItem = item;
+        HeldItem = item;
         item.hideItem();
     }
 
@@ -139,14 +143,14 @@ public class PlayerStats : MonoBehaviour
     {
         if(value == 0) { return; }
 
-        currentAmmo += value;
+        localCasperData.CurrentAmmo += value;
 
-        if (currentAmmo > maxAmmo)
-            currentAmmo = maxAmmo;
+        if (localCasperData.CurrentAmmo > localCasperData.MaxAmmo)
+            localCasperData.CurrentAmmo = localCasperData.MaxAmmo;
 
-        if (currentAmmo < 0)
-            currentAmmo = 0;
-        onAmmoChange?.Invoke(currentAmmo);
+        if (localCasperData.CurrentAmmo < 0)
+            localCasperData.CurrentAmmo = 0;
+        onAmmoChange?.Invoke(localCasperData.CurrentAmmo);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -171,15 +175,15 @@ public class PlayerStats : MonoBehaviour
     }
     public void activateItem()
     {
-        if (currentActiveItem != null)
+        if (HeldItem != null)
         {
-            currentActiveItem.activateItem();
-            onItemUse?.Invoke(currentActiveItem);
+            HeldItem.activateItem();
+            onItemUse?.Invoke(HeldItem);
         }
     }
 
     private void Die()
     {
-        Scenes.Load("Alpha");
+        Scenes.Load("Alpha", false);
     }
 }

@@ -8,16 +8,17 @@ public static class Scenes
     private static string DEM = "4x4"; // Static demensions
 
     // Victory Case
-    public static void Load(string path, string demensions)
+    public static void Load(string path, string demensions, bool isCasperAlive)
     {
         DEM = demensions;
-        Load(path);
+        Load(path, isCasperAlive);
         //displayMessage(demensions);
     }
 
     // Losing/Retry case
-    public static void Load(string path)
+    public static void Load(string path, bool isCasperAlive)
     {
+        if(!isCasperAlive) { GlobalControl.Instance.ResetCasper(); }
         SceneManager.LoadScene(path);
     }
 

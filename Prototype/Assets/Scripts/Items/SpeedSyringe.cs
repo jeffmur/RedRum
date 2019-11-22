@@ -14,7 +14,7 @@ public class SpeedSyringe : PassiveItem
     public override void modifyStats()
     {
         player.GetComponent<PlayerStats>().MoveSpeed += 1f; //speed up
-        player.GetComponent<PlayerStats>().fireRateModifier /= 1.2f; //increase the firerate
+        player.GetComponent<PlayerStats>().FireRate /= 1.2f; //increase the firerate
         //increase the firerate
         GameObject.Find("WeaponInventory")
             .GetComponent<WeaponInventory>()

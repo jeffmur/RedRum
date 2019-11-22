@@ -12,6 +12,7 @@ public partial class GameWorld : MonoBehaviour
     void Awake()
     {
         stats = GameObject.Find("Casper").GetComponent<PlayerStats>();
+        eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
         Debug.Assert(stats != null);
     }
 
@@ -28,7 +29,7 @@ public partial class GameWorld : MonoBehaviour
 
     public int getStartingAmmo()
     {
-        return stats.maxAmmo;
+        return stats.MaxAmmo;
     }
 
     public void TestController()
@@ -37,10 +38,10 @@ public partial class GameWorld : MonoBehaviour
         //{
         //    stats.changeMaxHealth(1);
         //}
-        //if (Input.GetKeyDown("2"))
-        //{
-        //    stats.changeMaxHealth(-1);
-        //}
+        if (Input.GetKeyDown("2"))
+        {
+            stats.changeHealth(-1);
+        }
         if (Input.GetKeyDown("1"))
         {
             stats.changeHealth(1);

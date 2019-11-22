@@ -26,12 +26,12 @@ public class LevelManager : MonoBehaviour
     public static void Complete()
     {
         Cursor.visible = true;
-        Scenes.Load("Complete");
+        Scenes.Load("Complete", true);
     }
 
     public void nextLevel()
     {
-        Scenes.Load("Alpha", Scenes.nextDem());
+        Scenes.Load("Alpha", Scenes.nextDem(), true);
     }
 
     public void Fail()
