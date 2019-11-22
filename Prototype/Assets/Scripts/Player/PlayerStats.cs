@@ -115,9 +115,10 @@ public class PlayerStats : MonoBehaviour
             localCasperData.MaxHealth = localCasperData.CurrentHealth;
             onMaxHealthChange?.Invoke(localCasperData.MaxHealth);
         }
-        if (localCasperData.CurrentHealth <= 0)
+        if (CurrentHealth == 1 && name == "Casper") { timeManager.DoSlowMotion(); }
+        if (localCasperData.CurrentHealth <= 0 && name == "Casper")
         {
-            Debug.Log("CASPER DEAD");
+            Debug.Log("CASPER DEAD"); 
             timeManager.DoSlowMotion();
             Invoke("Die", 2f); //dies after 5 seconds
         }

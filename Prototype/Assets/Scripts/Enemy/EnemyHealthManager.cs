@@ -18,14 +18,9 @@ public class EnemyHealthManager : MonoBehaviour
                 var item = Instantiate(itemDrop, loc, Quaternion.identity);
                 Destroy(item, 5f);
             }
-            if (name != "Skeleton(Clone)")
-                Destroy(gameObject);
-            //TEMPORARY FOR ALPHA FIX AFTERWARDS
-            if (name == "SuitcaseBoss(Clone)")
-            {
-                string message = "Level 1 Complete! " +
-                 "   Press 5 To Begin Again!";
-                EventManager.TriggerNotification(message);
+            else {
+                if (name == "Skeleton(Clone)") { Destroy(gameObject, 2f); }
+                else { Destroy(gameObject); }
             }
         }      
     }
