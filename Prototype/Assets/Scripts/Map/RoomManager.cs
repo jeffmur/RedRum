@@ -42,9 +42,7 @@ public partial class RoomManager : MonoBehaviour
             if (child.name == "chest(Clone)")
                 Destroy(child.gameObject);
             if (child.tag == "Item")
-            {
                 Destroy(child.gameObject);
-            }
         }
 
         // Spawn Chest and Hide

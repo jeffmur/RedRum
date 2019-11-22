@@ -39,7 +39,7 @@ public partial class RoomPointer : MonoBehaviour
                         {
                             room.GetComponent<Room>().isVisited = true; //mark it is visited
                             next.GetComponent<RoomManager>().Initialize(); //make the enemies spawn 
-                            foreach (Transform child in gameObject.transform)
+                            foreach (Transform child in gameObject.transform) //create all the items 
                             {
                                 if (child.tag == "Items")
                                     map[i].Add(child.gameObject); //add them to the list of items in the room
