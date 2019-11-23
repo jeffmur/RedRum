@@ -10,11 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2209327765211105676}
   - component: {fileID: 2209327765211105677}
-  - component: {fileID: 3012560519593599363}
-  - component: {fileID: 2209327765211105678}
   - component: {fileID: 2209327765211105679}
   - component: {fileID: 2209327765211105672}
   - component: {fileID: 665416239163148428}
+  - component: {fileID: -2017617574434819304}
   m_Layer: 0
   m_Name: Wallshooter
   m_TagString: Enemy
@@ -86,37 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3012560519593599363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2209327765211105673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a8f6099468e60849b1bb1a66b4173c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 125
-  itemDrop: {fileID: 0}
---- !u!114 &2209327765211105678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2209327765211105673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b1a8e285b88548cdbfc1859bfb5791b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BulletPrefab: {fileID: 1508283065333119966, guid: 9b53420a65f9fe24bbcaf95443aa3f60,
-    type: 3}
-  shootingCooldown: 2
-  enemyShootingRange: 2
-  moveSpeed: 2
 --- !u!50 &2209327765211105679
 Rigidbody2D:
   serializedVersion: 4
@@ -173,3 +141,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-2017617574434819304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2209327765211105673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 642b7f88083bb9945bd26d91172e9979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

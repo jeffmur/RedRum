@@ -57,8 +57,8 @@ public partial class RoomManager : MonoBehaviour
         int AmountOFEnemies = Random.Range(1, 5);
             for (int i = 0; AmountOFEnemies > i; i++) //creates a random amount of enemies
             {
-                float x = Random.Range(-5, 5);
-                float y = Random.Range(-5, 5);
+                float x = Random.Range(-4, 4);
+                float y = Random.Range(-4, 4);
                 int typeOfEnemy = Random.Range(0, Enemies.Count); //number of types of enemies 
                 if (Enemies[typeOfEnemy] == null) { typeOfEnemy--; }
                 GameObject enemy = Enemies[typeOfEnemy];

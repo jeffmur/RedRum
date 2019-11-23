@@ -32,7 +32,7 @@ public class Weapon : MonoBehaviour
         animator = transform.GetComponent<Animator>();
         random = new Random();
         ClipSize = stats.MaxAmmo;
-        bulletsInClip = ClipSize;
+        bulletsInClip = stats.CurrentAmmo;
         timeSinceLastShot = Time.time + FireRate;
         reloadStartTime = -1;
     }
@@ -40,7 +40,7 @@ public class Weapon : MonoBehaviour
     void Update()
     {
         // Hot reload
-        if (Input.GetKeyDown(KeyCode.R) && bulletsInClip != ClipSize && !reloadCooldown.reloading) {
+        if (Input.GetKeyDown(KeyCode.R) && bulletsInClip < ClipSize && !reloadCooldown.reloading) {
             animator.SetBool("Reload", true);
             reloadCooldown.StartReload(reloadSpeed);
             reloadStartTime = Time.time;

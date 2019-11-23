@@ -3053,6 +3053,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5901873888240618777, guid: 16f49d2876a51f8409d485baa5cf5c5c,
         type: 3}
+    - target: {fileID: 1425913674, guid: dfa11b5f43429a04f81e674438174970, type: 3}
+      propertyPath: Enemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 9020371315429474563, guid: 9e9afb926b6181f41a3bb153d81c32fa,
+        type: 3}
     - target: {fileID: 2625331760265370041, guid: dfa11b5f43429a04f81e674438174970,
         type: 3}
       propertyPath: nextRoom
@@ -3419,7 +3424,7 @@ PrefabInstance:
     - target: {fileID: 1425913674, guid: dfa11b5f43429a04f81e674438174970, type: 3}
       propertyPath: Enemies.Array.data[3]
       value: 
-      objectReference: {fileID: 2209327765211105673, guid: 2a74f9eb821074444832d7b307f58390,
+      objectReference: {fileID: 2209327765211105673, guid: 8016457c5d020e34ca151082a3e024c5,
         type: 3}
     - target: {fileID: 1425913674, guid: dfa11b5f43429a04f81e674438174970, type: 3}
       propertyPath: Items.Array.data[0]
@@ -3919,6 +3924,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7001711256152537813, guid: 37fc0c54bad00e14b912ac7fc7c5d03d,
+        type: 3}
+      propertyPath: Damage
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37fc0c54bad00e14b912ac7fc7c5d03d, type: 3}
@@ -5861,22 +5871,22 @@ PrefabInstance:
     - target: {fileID: 1425913674, guid: dfa11b5f43429a04f81e674438174970, type: 3}
       propertyPath: Enemies.Array.data[1]
       value: 
-      objectReference: {fileID: 1410281307740306776, guid: 46aabfdfa09d30243955d312c619ca9f,
+      objectReference: {fileID: 416837339725389614, guid: 9d9a5828c7e857f48af406e434b294f6,
         type: 3}
     - target: {fileID: 1425913674, guid: dfa11b5f43429a04f81e674438174970, type: 3}
       propertyPath: Enemies.Array.data[2]
       value: 
-      objectReference: {fileID: 8166224377027415747, guid: 9cda156ec8840448999b3761728b161b,
+      objectReference: {fileID: 1410281307740306776, guid: 46aabfdfa09d30243955d312c619ca9f,
         type: 3}
     - target: {fileID: 1425913674, guid: dfa11b5f43429a04f81e674438174970, type: 3}
       propertyPath: Enemies.Array.data[0]
       value: 
-      objectReference: {fileID: 416837339725389614, guid: 9d9a5828c7e857f48af406e434b294f6,
+      objectReference: {fileID: 8166224377027415747, guid: 9cda156ec8840448999b3761728b161b,
         type: 3}
     - target: {fileID: 1425913674, guid: dfa11b5f43429a04f81e674438174970, type: 3}
       propertyPath: Enemies.Array.data[3]
       value: 
-      objectReference: {fileID: 2209327765211105673, guid: 2a74f9eb821074444832d7b307f58390,
+      objectReference: {fileID: 2209327765211105673, guid: 8016457c5d020e34ca151082a3e024c5,
         type: 3}
     - target: {fileID: 1425913674, guid: dfa11b5f43429a04f81e674438174970, type: 3}
       propertyPath: Items.Array.data[0]

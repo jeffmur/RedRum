@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 8166224377027415746}
   - component: {fileID: 8166224377027415769}
   - component: {fileID: 8166224377027415750}
-  - component: {fileID: 8166224377027415751}
-  - component: {fileID: 513563564860898888}
+  - component: {fileID: 2056141374}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Enemy
@@ -152,7 +151,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.85374117, y: 1.5738239}
   m_EdgeRadius: 0
---- !u!114 &8166224377027415751
+--- !u!114 &2056141374
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,24 +160,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8166224377027415747}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 105e9760af5511f49a86590a439608c8, type: 3}
+  m_Script: {fileID: 11500000, guid: bc98c209cf8ce498e8285e6172600063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 1
-  damage: 1
-  attackDelay: 1
-  moveSpeed: 2
---- !u!114 &513563564860898888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8166224377027415747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a8f6099468e60849b1bb1a66b4173c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 150
-  itemDrop: {fileID: 562611308969471150, guid: 2e116b2405c505d4d96fc9014bf648e4, type: 3}
