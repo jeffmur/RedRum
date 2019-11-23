@@ -87,7 +87,7 @@ public class GhostBehavior : MonoBehaviour
     private void AngerState()
     {
         if (timeSinceAngerStarted <= -1)
-            timeSinceAngerStarted = Time.time;
+            timeSinceAngerStarted = Time.fixedDeltaTime;
         else if (Time.time - timeSinceAngerStarted >= AngerStateTimeLimit)
         {
             GetChaseDirection();
@@ -101,7 +101,7 @@ public class GhostBehavior : MonoBehaviour
     {
         float distance = Vector3.Distance(casper.transform.position, transform.position);
         if (distance <= 20)
-            rb.MovePosition(rb.position + direction * Speed * Time.fixedDeltaTime);
+            rb.MovePosition(rb.position + direction * Speed * Time.deltaTime);
         else
             state = (int)States.Idle;
     }

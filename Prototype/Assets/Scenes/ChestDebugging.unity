@@ -722,6 +722,7 @@ GameObject:
   - component: {fileID: 360057752}
   - component: {fileID: 360057754}
   - component: {fileID: 360057753}
+  - component: {fileID: 360057755}
   m_Layer: 5
   m_Name: DeathPanel
   m_TagString: Untagged
@@ -785,51 +786,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 360057751}
   m_CullTransparentMesh: 0
---- !u!1 &463139487
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 463139489}
-  - component: {fileID: 463139488}
-  m_Layer: 0
-  m_Name: TimeManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &463139488
+--- !u!114 &360057755
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 463139487}
+  m_GameObject: {fileID: 360057751}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c45be52d76c6822408b4c446428ebb52, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f0b83c09ce92104d920c8d68167b8d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowdownFactor: 0.05
-  slowdownLength: 2
---- !u!4 &463139489
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 463139487}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.80324864, y: 1.2640665, z: -493.09064}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 17
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  Panel: {fileID: 360057751}
 --- !u!1 &464588160
 GameObject:
   m_ObjectHideFlags: 0
@@ -1018,10 +987,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f0b83c09ce92104d920c8d68167b8d9, type: 3}
+  m_Script: {fileID: 11500000, guid: c45be52d76c6822408b4c446428ebb52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Panel: {fileID: 360057751}
+  slowdownFactor: 0.05
+  slowdownLength: 2
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -2053,7 +2023,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventManager: {fileID: 723500245}
-  itemPool: []
 --- !u!4 &982888129
 Transform:
   m_ObjectHideFlags: 0
@@ -3778,7 +3747,7 @@ MonoBehaviour:
   ammoInfo: {fileID: 1289221781}
   activeItemInfo: {fileID: 1788079618}
   notificationPanel: {fileID: 1539036958}
-  deathPanel: {fileID: 519420030}
+  deathPanel: {fileID: 360057755}
   gameWorld: {fileID: 982888128}
 --- !u!114 &1524478372
 MonoBehaviour:
@@ -5458,7 +5427,7 @@ PrefabInstance:
         type: 3}
       propertyPath: timeManager
       value: 
-      objectReference: {fileID: 463139488}
+      objectReference: {fileID: 519420030}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3119cfdf03be01e4ca455c8b871291e3, type: 3}
 --- !u!4 &2035382636 stripped

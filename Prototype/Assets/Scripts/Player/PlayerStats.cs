@@ -57,11 +57,11 @@ public class PlayerStats : MonoBehaviour
             GlobalControl.Instance.saveItem(HeldItem.gameObject);
         GlobalControl.Instance.savedCasperData = localCasperData;
     }
-
+    
     public float MoveSpeed { get => localCasperData.Speed; set => localCasperData.Speed = value; }
     public int MaxHealth { get => localCasperData.MaxHealth; }
     public int CurrentHealth { get => localCasperData.CurrentHealth; }
-    public int MaxAmmo { get => localCasperData.MaxAmmo; }
+    public int MaxAmmo { get => localCasperData.MaxAmmo; } //error
 
     public float FireRate { get => localCasperData.FireRate; set => localCasperData.FireRate = value; }
     private ActivatedItem HeldItem { get => localCasperData.CurrentActiveItem; set => localCasperData.CurrentActiveItem = value; }
@@ -115,11 +115,11 @@ public class PlayerStats : MonoBehaviour
             localCasperData.MaxHealth = localCasperData.CurrentHealth;
             onMaxHealthChange?.Invoke(localCasperData.MaxHealth);
         }
-        if (CurrentHealth == 1 && name == "Casper") { timeManager.DoSlowMotion(); }
+        if (CurrentHealth == 1 && name == "Casper") { timeManager.DoSlowMotion(2); }
         if (localCasperData.CurrentHealth <= 0 && name == "Casper")
         {
             Debug.Log("CASPER DEAD"); 
-            timeManager.DoSlowMotion();
+            timeManager.DoSlowMotion(2);
             Invoke("Die", 2f); //dies after 5 seconds
         }
         onHealthChange?.Invoke(localCasperData.CurrentHealth);
