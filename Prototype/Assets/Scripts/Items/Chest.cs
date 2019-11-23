@@ -49,13 +49,12 @@ public class Chest : MonoBehaviour
 
     private void spawnRandomItem()
     {
-        if (myItems.Count == 0)
-            return;
+        if (myItems.Count == 0) return;
 
         int i = Random.Range(0, myItems.Count-1);
 
-        if (myItems.Count == 1)
-            i = 0;
+        if (myItems.Count == 1) i = 0;
+
         GameObject item = Instantiate(myItems[i], transform.position, Quaternion.identity);
         item.AddComponent<ItemBehavior>();
         item.AddComponent<RoomRegister>().RoomIndex = RoomIndex;

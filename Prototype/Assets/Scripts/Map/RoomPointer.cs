@@ -33,29 +33,30 @@ public partial class RoomPointer : MonoBehaviour
                 {
                     if (room.GetComponent<Room>() != null) //if it is actually a room
                     {
+                        int index = room.GetComponent<Room>().RoomIndex;
                         if (!room.GetComponent<Room>().isVisited) //if the room is not visited
                         {
-                            int index = room.GetComponent<Room>().RoomIndex;
                             room.GetComponent<Room>().isVisited = true; //mark it is visited
                             next.GetComponent<RoomManager>().Initialize(index); //make the enemies spawn 
-                            // Get items in room
-                            Transform real = fromRoom.gameObject.transform;
+                            // Hide all (if any) items in new room
+                            Transform real = next.transform;
                             foreach (Transform item in real)
                             {
-                                // Check roomIndex matches
+                                // Check roomIndex matches - Hide all items
                                 if(item.tag == "Item")
-                                    if (index == item.GetComponent<RoomRegister>().RoomIndex) // Show item
-                                        item.GetComponent<SpriteRenderer>().enabled = true;
+                                    item.GetComponent<SpriteRenderer>().enabled = false;
                             }
                         }
-                        else
+                        else // Visited Room (more likely to have items)
                         {
-                            //New room, hide all items
                             Transform real = next.transform;
                             foreach (Transform item in real)
                             {
                                 if(item.tag == "Item")
-                                    item.GetComponent<SpriteRenderer>().enabled = false;
+                                    if(index == item.GetComponent<RoomRegister>().RoomIndex)
+                                        item.GetComponent<SpriteRenderer>().enabled = true;
+                                    else
+                                        item.GetComponent<SpriteRenderer>().enabled = false;
                             }
                         }
                     }
