@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,18 +20,18 @@ public class BulletUI : MonoBehaviour
         }
     }
 
-    public void setStartingRounds(int ammo)
+    public void setStartingRounds(Tuple<int,int> ammo)
     {
         rounds = new List<GameObject>();
-        curAmmo = ammo;
-        maxAmmo = ammo;
+        curAmmo = ammo.Item1;
+        maxAmmo = ammo.Item2;
         setBulletUI();
     }
 
     private void setBulletUI()
     {
         xDisplacement = 50f;
-
+        if (rounds == null) { return; }
         foreach (GameObject b in rounds)
         {
             GameObject.Destroy(b);

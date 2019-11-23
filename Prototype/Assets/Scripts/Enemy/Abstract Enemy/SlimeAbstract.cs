@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlimeBehavior : MonoBehaviour
+public class SlimeAbstract : Enemy
 {
-    public GameObject BulletPrefab;
-    private float BulletCooldown = 1f;
-    private float timeSinceFire;
+    // Start is called before the first frame update
+    
     private bool fireDiagonal;
+    private float BulletCooldown = 1f;
+
     private readonly Vector3 northWest = Vector3.up + Vector3.left;
     private readonly Vector3 northEast = Vector3.up + Vector3.right;
     private readonly Vector3 southWest = Vector3.down + Vector3.left;
     private readonly Vector3 southEast = Vector3.down + Vector3.right;
-    // Update is called once per frame
     void Start()
     {
+        enemyHealth = 150;
+
+        BulletPrefab = Resources.Load<GameObject>("Textures/Prefabs/Enemies/SlimeBullet");
         StartCoroutine(FireSlimes());
     }
 
@@ -23,11 +26,11 @@ public class SlimeBehavior : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(BulletCooldown);
-            Fire();
+            Attack(1);
         }
     }
 
-    private void Fire()
+    protected override void Attack(int damage)
     {
         EnemyBullet[] bullets = CreateBullets();
         if (!fireDiagonal)
@@ -58,15 +61,22 @@ public class SlimeBehavior : MonoBehaviour
         return bullets;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected override void DecreeasHealth(int damage)
     {
-        if (other.CompareTag("Player"))
+        base.DecreeasHealth(damage);
+        if (enemyHealth < 0)
         {
-            other.gameObject.GetComponent<PlayerStats>().changeHealth(1);
+            Destroy(gameObject);
         }
-        else if (other.CompareTag("HeroBullet"))
+    }
+
+    // Update is called once per frame
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        base.OnTriggerEnter2D(collision);
+        if (collision.CompareTag("Player"))
         {
-            this.GetComponent<EnemyHealthManager>().DecreaseHealth(other.transform.GetComponent<bullet>().bulletDamage);
+            collision.gameObject.GetComponent<PlayerStats>().changeHealth(-1);
         }
     }
 }

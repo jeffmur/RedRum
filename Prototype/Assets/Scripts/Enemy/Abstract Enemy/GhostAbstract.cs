@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GhostBehavior : MonoBehaviour
+public class GhostAbstract : Enemy
 {
-    public float AngerDistance = 3;
-    public float Speed = 5;
-    public float AngerStateTimeLimit = 5f;
-    private Rigidbody2D rb;
-    private Animator animator;
-    private SpriteRenderer spriteRenderer;
-    private EnemyHealthManager enemyHealth;
-    private GameObject casper;
+    // Start is called before the first frame update
+    private float AngerDistance = 2f;
+    private float AngerStateTimeLimit = 1f;
+
+
     private Vector2 direction;
     private float timeSinceAngerStarted;
     private int state;
@@ -21,23 +18,23 @@ public class GhostBehavior : MonoBehaviour
         Anger,
         Chase
     }
-
-    // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        enemyHealth = 200;
+        speed = 5f;
+
+        base.Start();
         state = (int)States.Idle;
-        casper = GameObject.Find("Casper");
+        enemySprite = transform.GetComponent<SpriteRenderer>();
         rb = transform.GetComponent<Rigidbody2D>();
-        animator = transform.GetComponent<Animator>();
-        animator.SetFloat("State", (float)States.Idle);
-        spriteRenderer = transform.GetComponent<SpriteRenderer>();
-        enemyHealth = transform.GetComponent<EnemyHealthManager>();
+        enemyAnimator = transform.GetComponent<Animator>();
+        enemyAnimator.SetFloat("State", (float)States.Idle);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (state == (int)States.Idle) 
+        if (state == (int)States.Idle)
         {
             IdleState();
         }
@@ -51,49 +48,59 @@ public class GhostBehavior : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected override void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Wall"))
         {
             state = (int)States.Anger;
-            animator.SetFloat("State", (float)States.Anger);
+            enemyAnimator.SetFloat("State", (float)States.Anger);
         }
         else if (other.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerStats>().changeHealth(-1);
+            casper.GetComponent<PlayerStats>().changeHealth(-1);
         }
         else if (other.CompareTag("HeroBullet"))
         {
-            this.GetComponent<EnemyHealthManager>().DecreaseHealth(other.transform.GetComponent<bullet>().bulletDamage);
+            Destroy(other.gameObject);
+            DecreeasHealth(other.transform.GetComponent<bullet>().bulletDamage);
             if (state != (int)States.Chase)
             {
                 state = (int)States.Anger;
-                animator.SetFloat("State", (float)States.Anger);
+                enemyAnimator.SetFloat("State", (float)States.Anger);
             }
+        }
+    }
+
+    protected override void DecreeasHealth(int damage)
+    {
+        base.DecreeasHealth(damage);
+        if (enemyHealth < 0)
+        {
+            Destroy(gameObject);
         }
     }
 
     private void IdleState()
     {
         // "Casper touches ghost"
-        if (Vector2.Distance(casper.transform.localPosition, transform.position) <= AngerDistance) 
+        if (Vector2.Distance(casper.transform.localPosition, transform.position) <= AngerDistance)
         {
             state = (int)States.Anger;
-            animator.SetFloat("State", (float)States.Anger);
+            enemyAnimator.SetFloat("State", (float)States.Anger);
         }
         else
-            animator.SetFloat("State", (float)States.Idle);
+            enemyAnimator.SetFloat("State", (float)States.Idle);
     }
 
     private void AngerState()
     {
         if (timeSinceAngerStarted <= -1)
-            timeSinceAngerStarted = Time.deltaTime;
+            timeSinceAngerStarted = Time.time;
         else if (Time.time - timeSinceAngerStarted >= AngerStateTimeLimit)
         {
             GetChaseDirection();
             state = (int)States.Chase;
-            animator.SetFloat("State", (float)States.Chase);
+            enemyAnimator.SetFloat("State", (float)States.Chase);
             timeSinceAngerStarted = -1;
         }
     }
@@ -102,7 +109,7 @@ public class GhostBehavior : MonoBehaviour
     {
         float distance = Vector3.Distance(casper.transform.position, transform.position);
         if (distance <= 20)
-            rb.MovePosition(rb.position + direction * Speed * Time.deltaTime);
+            rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
         else
             state = (int)States.Idle;
     }
@@ -112,11 +119,11 @@ public class GhostBehavior : MonoBehaviour
         direction = Vector3.Normalize(casper.transform.localPosition - transform.position);
         if (direction.x < 0)
         {
-            spriteRenderer.flipX = true;
+            enemySprite.flipX = true;
         }
         else
         {
-            spriteRenderer.flipX = false;
+            enemySprite.flipX = false;
         }
     }
 }

@@ -61,7 +61,8 @@ public class PlayerStats : MonoBehaviour
     public float MoveSpeed { get => localCasperData.Speed; set => localCasperData.Speed = value; }
     public int MaxHealth { get => localCasperData.MaxHealth; }
     public int CurrentHealth { get => localCasperData.CurrentHealth; }
-    public int MaxAmmo { get => localCasperData.MaxAmmo; }
+    public int MaxAmmo { get => localCasperData.MaxAmmo; set => localCasperData.MaxAmmo = value; }
+    public int CurrentAmmo { get => localCasperData.CurrentAmmo; set => localCasperData.CurrentAmmo = value; }
 
     public float FireRate { get => localCasperData.FireRate; set => localCasperData.FireRate = value; }
     private ActivatedItem HeldItem { get => localCasperData.CurrentActiveItem; set => localCasperData.CurrentActiveItem = value; }
@@ -115,10 +116,11 @@ public class PlayerStats : MonoBehaviour
             localCasperData.MaxHealth = localCasperData.CurrentHealth;
             onMaxHealthChange?.Invoke(localCasperData.MaxHealth);
         }
-        if (localCasperData.CurrentHealth <= 0)
+        if (CurrentHealth == 1 && name == "Casper") { timeManager.DoSlowMotion(5); }
+        if (localCasperData.CurrentHealth <= 0 && name == "Casper")
         {
-            Debug.Log("CASPER DEAD");
-            timeManager.DoSlowMotion();
+            Debug.Log("CASPER DEAD"); 
+            timeManager.DoSlowMotion(2);
             Invoke("Die", 2f); //dies after 5 seconds
         }
         onHealthChange?.Invoke(localCasperData.CurrentHealth);
@@ -184,6 +186,7 @@ public class PlayerStats : MonoBehaviour
             HeldItem.activateItem();
             onItemUse?.Invoke(HeldItem);
         }
+        HeldItem = null;
     }
 
     private void Die()

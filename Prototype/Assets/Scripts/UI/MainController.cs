@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MainController : MonoBehaviour
@@ -25,6 +26,11 @@ public class MainController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        StartCoroutine(LateStart(1f));
+    }
+    IEnumerator LateStart(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
         healthInfo.setStartingHealth(gameWorld.getStartingHealth());
         ammoInfo.setStartingRounds(gameWorld.getStartingAmmo());
         updateActiveItemPickupUI(GlobalControl.Instance.savedCasperData.CurrentActiveItem);

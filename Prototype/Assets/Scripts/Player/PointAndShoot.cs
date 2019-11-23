@@ -5,7 +5,6 @@ using UnityEngine;
 public class PointAndShoot : MonoBehaviour
 {
     // Start is called before the first frame update
-    private Vector3 target;
     private GameObject crosshairs;
     private WeaponInventory weaponInventory;
     private GameObject selectedWeapon;
@@ -16,6 +15,9 @@ public class PointAndShoot : MonoBehaviour
     void Start()
     {
         Cursor.visible = false;
+        crosshairs = GameObject.Find("crossHairs");
+        weaponInventory = GameObject.Find("WeaponInventory").GetComponent<WeaponInventory>();
+        selectedWeapon = weaponInventory.GetSelectedWeapon();
         bulletPrefab = Resources.Load("Textures/Prefabs/Hero/Bullet");
         mCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
@@ -24,11 +26,7 @@ public class PointAndShoot : MonoBehaviour
     void Update()
     {
         Cursor.visible = false;
-        weaponInventory = GameObject.Find("WeaponInventory").GetComponent<WeaponInventory>();
-        selectedWeapon = weaponInventory.GetSelectedWeapon();
-        fireRateMultiplier = GetComponent<PlayerStats>().FireRate;
-        Debug.Assert(selectedWeapon);
-        target = mCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
+        Vector3 target = mCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
         crosshairs.transform.position = new Vector3(target.x, target.y, -9f);
         selectedWeapon = weaponInventory.GetSelectedWeapon();
         if (selectedWeapon != null)

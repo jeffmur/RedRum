@@ -3,57 +3,56 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SuitcaseBossBehavior : MonoBehaviour
+public class SuitcaseBossAbstract : Enemy
 {
 
-    public float EnemySpeed = 1f;
-    public GameObject BulletPrefab;
-    private GameObject Casper;
     private float BulletCooldown = 3f;
-    private TimedLerp lerp;
-    private SpriteRenderer renderer;
     private Vector3 direction;
+    private GameObject healthBar;
 
-    public GameObject healthBar;
-    // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        enemyHealth = 500;
+        speed = 1f;
+
+        base.Start();
         healthBar = GameObject.Find("HealthBarSlider");
-        Casper = GameObject.Find("Casper");
+        BulletPrefab = Resources.Load<GameObject>("Textures/Prefabs/Enemies/SuitcaseBullet_Variant");
+        enemySprite = transform.GetComponent<SpriteRenderer>();
         StartCoroutine(FireShots());
-        lerp = new TimedLerp(5f, 45f);
         healthBar.SetActive(true);
-        renderer = transform.GetComponent<SpriteRenderer>();
-        healthBar.GetComponent<Slider>().maxValue = transform.GetComponent<EnemyHealthManager>().Health;
+        healthBar.GetComponent<Slider>().maxValue = enemyHealth;
+
+
     }
-    
+
+    // Update is called once per frame
     void Update()
     {
-        direction = Vector3.Normalize(Casper.transform.position - transform.position);
-        float distance = Vector3.Distance(Casper.transform.position, transform.position);
+        direction = Vector3.Normalize(casper.transform.position - transform.position);
+        float distance = Vector3.Distance(casper.transform.position, transform.position);
         if (distance <= 15f && distance >= 1)
-            transform.position += EnemySpeed * direction * Time.deltaTime;
+            transform.position += speed * direction * Time.deltaTime;
         if (direction.x < 0)
         {
-            renderer.flipX = false;
+            enemySprite.flipX = false;
         }
         else
         {
-            renderer.flipX = true;
+            enemySprite.flipX = true;
         }
-        healthBar.GetComponent<Slider>().value = transform.GetComponent<EnemyHealthManager>().Health;
+        healthBar.GetComponent<Slider>().value = enemyHealth;
     }
-    
     private IEnumerator FireShots()
     {
         while (true)
         {
             yield return new WaitForSeconds(BulletCooldown);
-            Fire();
+            Attack(1);
         }
     }
 
-    private void Fire()
+    protected override void Attack(int damage)
     {
         EnemyBullet[] bullets = CreateBullets(6);
         float spread = 10f;
@@ -77,15 +76,29 @@ public class SuitcaseBossBehavior : MonoBehaviour
         return bullets;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected override void OnTriggerEnter2D(Collider2D other)
     {
+        base.OnTriggerEnter2D(other);
         if (other.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerStats>().changeHealth(1);
-        }
-        else if (other.CompareTag("HeroBullet"))
-        {
-            this.GetComponent<EnemyHealthManager>().DecreaseHealth(other.transform.GetComponent<bullet>().bulletDamage);
+            other.gameObject.GetComponent<PlayerStats>().changeHealth(-1);
         }
     }
+
+    protected override void DecreeasHealth(int damage)
+    {
+        base.DecreeasHealth(damage);
+        if (enemyHealth < 0)
+        {
+            Destroy(gameObject);
+        }
+        else if(enemyHealth< (healthBar.GetComponent<Slider>().maxValue / 2))
+        {
+            enemySprite.color = Color.red;
+            speed = 2f;
+            BulletCooldown = 1.5f;
+
+        }
+    }
+
 }

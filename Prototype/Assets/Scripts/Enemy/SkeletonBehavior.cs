@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -52,7 +52,9 @@ public class SkeletonBehavior : MonoBehaviour
         }
         else
         {
+
             if (Time.time > (lastAttackTime + attackDelay) && enemyAnimator.GetBool("Die") == false)
+
             {
                 enemyAnimator.SetFloat("Speed", 0);
                 enemyAnimator.SetBool("isAttacking", true);
@@ -68,10 +70,12 @@ public class SkeletonBehavior : MonoBehaviour
 
         if (movement.x < 0)
         {
-            enemySprite.flipX = true;
+            enemyAnimator.SetBool("isAttacking", false);
+            EnemyMove(movement);
         }
         else
         {
+
             enemySprite.flipX = false;
         }
 

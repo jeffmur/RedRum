@@ -4,11 +4,13 @@ using UnityEngine;
 
 public partial class RoomManager : MonoBehaviour
 {
+    public int RoomIndex;
     public List<GameObject> Enemies;
     public List<GameObject> Items;
     private DoorSystem sDoorSys;
     public GameObject chestPrefab;
     private Chest myChest;
+    bool chestOpen = false;
 
 
     // Start is called before the first frame update
@@ -20,29 +22,43 @@ public partial class RoomManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // No enemies and doors are locked
-        if (allEnemiesDead() && sDoorSys.getStatus() == 0)
+        
+        // No enemies - UNLOCK
+        if (allEnemiesDead())
         {
             sDoorSys.UnlockAll();
             if (myChest != null)
                 myChest.gameObject.SetActive(true);
+
+            // If Chest is opened
+            if (chestOpen || myChest == null)
+                sDoorSys.OpenAll();
+        }
+        // Enemies in room - LOCK
+        else
+        {
+            chestOpen = false;
+            sDoorSys.LockAll();
         }
 
-        // If unlocked
-        if (sDoorSys.getStatus() >= 1)
-            sDoorSys.OpenAll();
-
+        // Room unlocked and Check for chest status
+        if (sDoorSys.getStatus() == 1 && myChest != null)
+        {
+            chestOpen = myChest.openChest;
+        }
+        
     }
 
-    public void Initialize()
+    public void Initialize(int atIndex)
     {
+        RoomIndex = atIndex;
         // Destroy old chest
         foreach(Transform child in gameObject.transform)
         {
             if (child.name == "chest(Clone)")
                 Destroy(child.gameObject);
             if (child.tag == "Item")
-                Destroy(child.gameObject);
+                child.GetComponent<SpriteRenderer>().enabled = false;
         }
 
         // Spawn Chest and Hide
@@ -50,15 +66,16 @@ public partial class RoomManager : MonoBehaviour
         c.transform.parent = gameObject.transform;
         myChest = c.GetComponent<Chest>();
         // Hide
-        myChest.initChest(Items);
-
+        myChest.initChest(Items, atIndex);
+        // Set State
+        sDoorSys.LockAll();
         // Random generation of enemies
         // Between 1 and 5 enemies per room
         int AmountOFEnemies = Random.Range(1, 5);
             for (int i = 0; AmountOFEnemies > i; i++) //creates a random amount of enemies
             {
-                float x = Random.Range(-5, 5);
-                float y = Random.Range(-5, 5);
+                float x = Random.Range(-4, 4);
+                float y = Random.Range(-4, 4);
                 int typeOfEnemy = Random.Range(0, Enemies.Count); //number of types of enemies 
                 if (Enemies[typeOfEnemy] == null) { typeOfEnemy--; }
                 GameObject enemy = Enemies[typeOfEnemy];
@@ -78,7 +95,7 @@ public partial class RoomManager : MonoBehaviour
         {
             if (child.tag == "Enemy")
             {
-                GetComponent<DoorSystem>().LockAll();
+                sDoorSys.LockAll();
                 myChest.gameObject.SetActive(false);
                 return false;
             }

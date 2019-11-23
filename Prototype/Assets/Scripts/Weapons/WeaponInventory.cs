@@ -18,14 +18,14 @@ public class WeaponInventory : MonoBehaviour
     {
         // weapon switch handling
         int previousWeapon = selectedWeapon;
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
         {
             if (selectedWeapon <= 0)
                 selectedWeapon = transform.childCount - 1;
             else
                 selectedWeapon--;
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forwards
         {
             if (selectedWeapon >= transform.childCount - 1)
                 selectedWeapon = 0;
