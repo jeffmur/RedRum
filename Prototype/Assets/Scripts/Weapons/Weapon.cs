@@ -24,23 +24,27 @@ public class Weapon : MonoBehaviour
     private float reloadStartTime;
     private Random random;
 
+    IEnumerator GetStats()
+    {
+        yield return new WaitForSeconds(1);
+        ClipSize = stats.MaxAmmo;
+        bulletsInClip = stats.CurrentAmmo;
+    }
     void Start()
     {
         reloadCooldown = GameObject.Find("ReloadCooldown").GetComponent<ReloadCooldown>();
         stats = GameObject.Find("Casper").GetComponent<PlayerStats>();
-        reloadCooldown = GameObject.Find("ReloadCooldown").GetComponent<ReloadCooldown>();
         animator = transform.GetComponent<Animator>();
         random = new Random();
-        ClipSize = stats.MaxAmmo;
-        bulletsInClip = stats.CurrentAmmo;
         timeSinceLastShot = Time.time + FireRate;
         reloadStartTime = -1;
+        StartCoroutine(GetStats());
     }
 
     void Update()
     {
         // Hot reload
-        if (Input.GetKeyDown(KeyCode.R) && bulletsInClip < ClipSize && !reloadCooldown.reloading) {
+        if (Input.GetKeyDown(KeyCode.R) && bulletsInClip != ClipSize && !reloadCooldown.reloading) {
             animator.SetBool("Reload", true);
             reloadCooldown.StartReload(reloadSpeed);
             reloadStartTime = Time.time;

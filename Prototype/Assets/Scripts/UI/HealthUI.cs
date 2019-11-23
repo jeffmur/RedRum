@@ -1,4 +1,5 @@
-﻿﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,11 +28,11 @@ public class HealthUI : MonoBehaviour
         }
     }
 
-    public void setStartingHealth(int activeHearts)
+    public void setStartingHealth(Tuple<int, int> health)
     {
         currentHearts = new List<GameObject>();
-        currentHP = activeHearts;
-        maxHP = activeHearts;
+        currentHP = health.Item1;
+        maxHP = health.Item2;
         setHealthUI();
     }
 
@@ -39,7 +40,7 @@ public class HealthUI : MonoBehaviour
     {
         xDisplacement = 50f;
         yDisplacement = 25f;
-
+        if (currentHearts == null) { return; }
         foreach (GameObject heart in currentHearts)
         {
             GameObject.Destroy(heart);

@@ -29,6 +29,8 @@ public class GlobalControl : MonoBehaviour
 
     public void saveItem(GameObject obj)
     {
+        if (obj.transform.parent != null)
+            obj.transform.parent = null;
         DontDestroyOnLoad(obj);
     }
 }

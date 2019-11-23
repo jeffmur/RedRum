@@ -22,14 +22,14 @@ public partial class GameWorld : MonoBehaviour
         TestController();
     }
 
-    public int getStartingHealth()
+    public Tuple<int, int> getStartingHealth()
     {
-        return stats.MaxHealth;
+        return Tuple.Create(stats.CurrentHealth, stats.MaxHealth);
     }
 
-    public int getStartingAmmo()
+    public Tuple<int,int> getStartingAmmo()
     {
-        return stats.MaxAmmo;
+        return Tuple.Create(stats.CurrentAmmo, stats.MaxAmmo);
     }
 
     public void TestController()

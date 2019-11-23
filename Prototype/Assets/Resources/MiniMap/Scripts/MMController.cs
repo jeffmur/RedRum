@@ -38,9 +38,22 @@ public class MMController : MonoBehaviour
         {
             // Add all dangling (not organized rooms) to Critical Path
             allRooms = GameObject.FindGameObjectsWithTag("Rooms");
+            int i = 0;
             foreach (GameObject room in allRooms)
+            {
+                // Assign to critical
                 room.transform.parent = criticalPath.transform;
 
+                // ROOMS
+                Room rm;
+                room.TryGetComponent<Room>(out rm);
+                // Find room
+                if(rm != null)
+                {
+                    rm.RoomIndex = i;
+                    i++;
+                }                
+            }
 
             // All icons to Icons
             allIcons = GameObject.FindGameObjectsWithTag("Icon");
@@ -68,7 +81,7 @@ public class MMController : MonoBehaviour
         // In Critical Path
         foreach(Transform child in criticalPath.transform)
         {
-            if (atLocation == (Vector2)child.position)
+            if (atLocation == (Vector2)child.position && child.GetComponent<Room>() != null)
                 result = child;
         }
         // In Extra Room
@@ -93,6 +106,14 @@ public class MMController : MonoBehaviour
         if(room != null)
             return room.name.Replace("(Clone)", "");
         return "";
+    }
+
+    public int getRoomIndex(Vector2 atLocation)
+    {
+        Transform room = getRoom(atLocation);
+        if (room != null)
+            return room.GetComponent<Room>().RoomIndex;
+        return -1;
     }
 
     /**

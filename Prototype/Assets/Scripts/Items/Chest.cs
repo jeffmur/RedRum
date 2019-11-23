@@ -9,6 +9,7 @@ public class Chest : MonoBehaviour
     private SpriteRenderer rend;
     public List<GameObject> myItems;
     public bool openChest = false;
+    public int RoomIndex;
     private Transform casper;
     // Start is called before the first frame update
     void Start()
@@ -30,13 +31,13 @@ public class Chest : MonoBehaviour
         }
     }
 
-    public void initChest(List<GameObject> items) { myItems = items; gameObject.SetActive(false); openChest = false; }
-
-    public void destroyChest(GameObject old)
-    {
+    public void initChest(List<GameObject> items, int index) { 
+        myItems = items; 
+        gameObject.SetActive(false); 
         openChest = false;
-        Destroy(old);
+        RoomIndex = index;
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (rend.sprite != opened)
@@ -57,6 +58,7 @@ public class Chest : MonoBehaviour
             i = 0;
         GameObject item = Instantiate(myItems[i], transform.position, Quaternion.identity);
         item.AddComponent<ItemBehavior>();
+        item.AddComponent<RoomRegister>().RoomIndex = RoomIndex;
         item.transform.parent = gameObject.transform.parent;
     }
 }

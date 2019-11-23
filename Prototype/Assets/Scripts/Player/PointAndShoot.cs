@@ -15,18 +15,17 @@ public class PointAndShoot : MonoBehaviour
     void Start()
     {
         Cursor.visible = false;
-        bulletPrefab = Resources.Load("Textures/Prefabs/Hero/Bullet");
-        mCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         crosshairs = GameObject.Find("crossHairs");
         weaponInventory = GameObject.Find("WeaponInventory").GetComponent<WeaponInventory>();
         selectedWeapon = weaponInventory.GetSelectedWeapon();
+        bulletPrefab = Resources.Load("Textures/Prefabs/Hero/Bullet");
+        mCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        fireRateMultiplier = GetComponent<PlayerStats>().FireRate;
-        Debug.Assert(selectedWeapon);
+        Cursor.visible = false;
         Vector3 target = mCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
         crosshairs.transform.position = new Vector3(target.x, target.y, -9f);
         selectedWeapon = weaponInventory.GetSelectedWeapon();

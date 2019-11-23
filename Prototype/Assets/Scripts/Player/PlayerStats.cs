@@ -186,6 +186,7 @@ public class PlayerStats : MonoBehaviour
             HeldItem.activateItem();
             onItemUse?.Invoke(HeldItem);
         }
+        HeldItem = null;
     }
 
     private void Die()
