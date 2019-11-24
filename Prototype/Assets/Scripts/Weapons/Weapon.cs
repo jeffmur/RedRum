@@ -90,10 +90,19 @@ public class Weapon : MonoBehaviour
     {
         // trigger fire animation
         animator.SetTrigger("Fire");
+        PlayAudio();
+        GameObject bullet = SpawnBullet(direction);
 
-        // play audio
-        gameObject.GetComponent<AudioSource>().Play();
+        // accuracy handling
+        float spread = Random.Range(-Accuracy, Accuracy);
+        Quaternion angle = Quaternion.FromToRotation(bullet.transform.up, direction);
+        bullet.transform.rotation *= angle;
+        bullet.transform.rotation = Quaternion.AngleAxis(spread, transform.forward) * bullet.transform.rotation;
+        bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * BulletSpeed, ForceMode2D.Impulse);
+    }
 
+    private GameObject SpawnBullet(Vector2 direction)
+    {
         // spawn bullet and set position
         GameObject bullet = Instantiate(BulletPrefab) as GameObject;
         Vector2 bulletPosition = transform.position;
@@ -102,12 +111,12 @@ public class Weapon : MonoBehaviour
         bulletPosition += gunUp * heightOffset;
         bullet.transform.position = bulletPosition;
         bullet.GetComponent<bullet>().bulletDamage = Damage;
+        return bullet;
+    }
 
-        // accuracy handling
-        float spread = Random.Range(-Accuracy, Accuracy);
-        Quaternion angle = Quaternion.FromToRotation(bullet.transform.up, direction);
-        bullet.transform.rotation *= angle;
-        bullet.transform.rotation = Quaternion.AngleAxis(spread, transform.forward) * bullet.transform.rotation;
-        bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * BulletSpeed, ForceMode2D.Impulse);
+    private void PlayAudio()
+    {
+        // play audio
+        gameObject.GetComponent<AudioSource>().Play();
     }
 }
