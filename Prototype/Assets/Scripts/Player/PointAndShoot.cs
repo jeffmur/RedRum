@@ -38,9 +38,13 @@ public class PointAndShoot : MonoBehaviour
                 float distance = difference.magnitude;
                 Vector2 direction = difference / distance;
                 direction.Normalize();
-                selectedWeapon.GetComponent<Weapon>().FireWeapon(direction, fireRateMultiplier);
+                selectedWeapon.GetComponent<Weapon>().ProcessFireWeapon(direction, fireRateMultiplier);
 
             }
         }
+    }
+    public Weapon getSelectedWeapon()
+    {
+        return selectedWeapon.GetComponent<Weapon>();
     }
 }

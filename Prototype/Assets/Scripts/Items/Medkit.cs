@@ -16,7 +16,7 @@ public class Medkit : ActivatedItem
         cooldownDuration = -1;
     }
 
-    protected override void setItemEffectBehavior()
+    protected override void doItemEffect()
     {
         return;
     }

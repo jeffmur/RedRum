@@ -26,7 +26,6 @@ public class PlayerStats : MonoBehaviour
 {
     public CasperData localCasperData;
     public TimeManager timeManager;
-    //private float isInvincible;
     private bool isInvincible;
     public List<Item> passiveItems;
 
@@ -181,12 +180,11 @@ public class PlayerStats : MonoBehaviour
     }
     public void activateItem()
     {
-        if (HeldItem != null)
+        if (HeldItem != null && !HeldItem.isOnCooldown)
         {
             HeldItem.activateItem();
             onItemUse?.Invoke(HeldItem);
         }
-        HeldItem = null;
     }
 
     private void Die()

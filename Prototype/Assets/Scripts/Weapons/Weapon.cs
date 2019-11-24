@@ -61,33 +61,13 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public void FireWeapon(Vector2 direction, float fireRateMultiplier)
+    public void ProcessFireWeapon(Vector2 direction, float fireRateMultiplier)
     {
         if (bulletsInClip > 0 && !reloadCooldown.reloading)
         {
             if (Time.time - timeSinceLastShot >= FireRate * fireRateMultiplier)
             {
-                // trigger fire animation
-                animator.SetTrigger("Fire");
-
-                // play audio
-                gameObject.GetComponent<AudioSource>().Play();
-
-                // spawn bullet and set position
-                GameObject bullet = Instantiate(BulletPrefab) as GameObject;
-                Vector2 bulletPosition = transform.position;
-                bulletPosition += direction * barrelOffset;
-                Vector2 gunUp = transform.up;
-                bulletPosition += gunUp * heightOffset; 
-                bullet.transform.position = bulletPosition;
-                bullet.GetComponent<bullet>().bulletDamage = Damage;
-
-                // accuracy handling
-                float spread = Random.Range(-Accuracy, Accuracy);
-                Quaternion angle = Quaternion.FromToRotation(bullet.transform.up, direction);
-                bullet.transform.rotation *= angle;
-                bullet.transform.rotation = Quaternion.AngleAxis(spread, transform.forward) * bullet.transform.rotation;
-                bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * BulletSpeed, ForceMode2D.Impulse);  
+                FireWeapon(direction);
 
                 // update variables
                 timeSinceLastShot = Time.time;
@@ -104,5 +84,30 @@ public class Weapon : MonoBehaviour
                 animator.SetBool("Reload", true);
             }
         }
+    }
+
+    public void FireWeapon(Vector2 direction)
+    {
+        // trigger fire animation
+        animator.SetTrigger("Fire");
+
+        // play audio
+        gameObject.GetComponent<AudioSource>().Play();
+
+        // spawn bullet and set position
+        GameObject bullet = Instantiate(BulletPrefab) as GameObject;
+        Vector2 bulletPosition = transform.position;
+        bulletPosition += direction * barrelOffset;
+        Vector2 gunUp = transform.up;
+        bulletPosition += gunUp * heightOffset;
+        bullet.transform.position = bulletPosition;
+        bullet.GetComponent<bullet>().bulletDamage = Damage;
+
+        // accuracy handling
+        float spread = Random.Range(-Accuracy, Accuracy);
+        Quaternion angle = Quaternion.FromToRotation(bullet.transform.up, direction);
+        bullet.transform.rotation *= angle;
+        bullet.transform.rotation = Quaternion.AngleAxis(spread, transform.forward) * bullet.transform.rotation;
+        bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * BulletSpeed, ForceMode2D.Impulse);
     }
 }

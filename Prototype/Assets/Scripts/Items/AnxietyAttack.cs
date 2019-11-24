@@ -1,20 +1,30 @@
-﻿public class AnxietyAttack : ActivatedItem
-{
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
 
+public class AnxietyAttack : ActivatedItem
+{
+    private Weapon weapon;
     protected override void setItemInfo()
     {
         itemName = "Anxiety Attack";
         itemID = 10;
-        caption = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+        caption = "AAAAAAAAAAAAAAAAAA";
     }
-    protected override void setItemEffectBehavior()
+    protected override void doItemEffect()
     {
-        print("???????");
+        float x = Random.Range(-1f, 1f);
+        float y = Random.Range(-1f, 1f);
+        Vector2 direction = new Vector2(x, y);
+        weapon = player.GetComponent<PointAndShoot>().getSelectedWeapon();
+        weapon.FireWeapon(direction);
     } 
 
     protected override void setItemDurations()
     {
         cooldownDuration = 3;
         effectDuration = 3;
+        frameTick = 10;
     }
 }
