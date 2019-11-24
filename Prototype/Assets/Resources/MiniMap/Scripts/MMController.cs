@@ -6,7 +6,9 @@ public class MMController : MonoBehaviour
 {
     // Setting up Rooms (placing them into child folders)
     bool once = false;
-    public GameObject[] allRooms;
+    bool second = false;
+    int roomIndex = 0;
+    public List<GameObject> allRooms;
     public GameObject[] allIcons;
 
     // CHILD FOLDERS
@@ -30,43 +32,83 @@ public class MMController : MonoBehaviour
         SIZE = GetComponent<SizeController>();
     }
 
+    void initialSetUp()
+    {
+        // Add all dangling (not organized rooms) to Critical Path
+        GameObject[] temp = GameObject.FindGameObjectsWithTag("Rooms");
+        foreach (GameObject room in temp)
+        {
+            // Add to allRooms
+            if (room.GetComponent<Room>() != null)
+            {
+                room.transform.parent = criticalPath.transform;
+                allRooms.Add(room);
+            }
+
+            // ROOM INDEX
+            Room rm;
+            room.TryGetComponent<Room>(out rm);
+            // Find room
+            if (rm != null)
+            {
+                rm.RoomIndex = roomIndex;
+                roomIndex++;
+            }
+        }
+
+        // All icons to Icons
+        allIcons = GameObject.FindGameObjectsWithTag("Icon");
+        foreach (GameObject icon in allIcons)
+            icon.transform.parent = icons.transform;
+
+        // Set Icons
+        casperIcon = icons.transform.GetChild(0);
+        bossIcon = icons.transform.GetChild(1);
+        entryRoom = getRoom(casperIcon.position);
+
+        // Only run once
+        once = true;
+    }
+
+    IEnumerator afterSetUp(float time)
+    {
+        yield return new WaitForSeconds(time);
+        // Wait for inital setup & all rooms have spawned
+        if (once && !second)
+        {
+            // Delete all SpawnPoints
+            GameObject[] temp = GameObject.FindGameObjectsWithTag("Rooms");
+            foreach (GameObject room in temp)
+            {
+                if (room.GetComponent<SpawnPoint>() != null)
+                    Destroy(room);
+
+                // ROOM INDEX
+                Room rm;
+                room.TryGetComponent<Room>(out rm);
+                // Find room
+                if (rm != null && room.transform.parent != criticalPath.transform)
+                {
+                    // Add extras to all Rooms
+                    room.transform.parent = extraRooms.transform;
+                    allRooms.Add(room);
+                    // Keep incrementing index
+                    rm.RoomIndex = roomIndex;
+                    roomIndex++;
+                }
+            }
+            second = true;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         // waits until map is spawned and only called once
         if (!once && GetComponent<LevelGeneration>().stopGeneration)
         {
-            // Add all dangling (not organized rooms) to Critical Path
-            allRooms = GameObject.FindGameObjectsWithTag("Rooms");
-            int i = 0;
-            foreach (GameObject room in allRooms)
-            {
-                // Assign to critical
-                room.transform.parent = criticalPath.transform;
-
-                // ROOMS
-                Room rm;
-                room.TryGetComponent<Room>(out rm);
-                // Find room
-                if(rm != null)
-                {
-                    rm.RoomIndex = i;
-                    i++;
-                }                
-            }
-
-            // All icons to Icons
-            allIcons = GameObject.FindGameObjectsWithTag("Icon");
-            foreach (GameObject icon in allIcons)
-                icon.transform.parent = icons.transform;
-
-            // Set Icons
-            casperIcon = icons.transform.GetChild(0);
-            bossIcon = icons.transform.GetChild(1);
-            entryRoom = getRoom(casperIcon.position);
-
-            // Only run once
-            once = true;
+            initialSetUp();
+            StartCoroutine(afterSetUp(2f));
         }
     }
 
