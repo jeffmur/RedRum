@@ -25,7 +25,8 @@ public partial class RoomPointer : MonoBehaviour
     {
         RoomStats next = nextLevel.GetComponent<RoomStats>();
         nextLevel.GetComponent<DoorSystem>().LockAll();
-        if (mm.casperIcon.position != mm.allRooms[0].transform.position)
+        
+        if (mm.casperIcon.position != mm.allRooms[0].transform.position) // Ignores Welcome Room
         {
             foreach (GameObject room in mm.allRooms) // for all the rooms
             {
@@ -38,17 +39,6 @@ public partial class RoomPointer : MonoBehaviour
                         {
                             room.GetComponent<Room>().isVisited = true; //mark it is visited
                             next.GetComponent<RoomManager>().Initialize(index); //make the enemies spawn 
-                            // Hide all (if any) items in new room
-                            Transform real = next.transform;
-                            foreach (Transform item in real)
-                            {
-                                // Check roomIndex matches - Hide all items
-                                if(item.tag == "Item")
-                                {
-                                    item.GetComponent<BoxCollider2D>().enabled = false;
-                                    item.GetComponent<SpriteRenderer>().enabled = false;
-                                }
-                            }
                         }
                         else // Visited Room (more likely to have items)
                         {
@@ -71,7 +61,7 @@ public partial class RoomPointer : MonoBehaviour
         }
         // Move camera
         next.setCamLocation();
-            // Move Hero
+        // Move Hero
         mHero.transform.position = next.sendPlayerToDoor(doorSide);
     }
 

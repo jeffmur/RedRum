@@ -5,11 +5,16 @@ using UnityEngine;
 public class SpawnPoint : MonoBehaviour {
 
     public GameObject[] objectsToSpawn;
+    bool spawnedRoom;
 
     private void Start()
     {
-        int rand = Random.Range(0, objectsToSpawn.Length);
-        GameObject instance = Instantiate(objectsToSpawn[rand], transform.position, Quaternion.identity);
-        instance.transform.parent = transform;
+        if (objectsToSpawn[0].tag == "Rooms")
+            spawnedRoom = true;
+
+        GameObject instance = Instantiate(objectsToSpawn[0], transform.position, Quaternion.identity);
+
+        if(!spawnedRoom)
+            instance.transform.parent = transform;
     }
 }
