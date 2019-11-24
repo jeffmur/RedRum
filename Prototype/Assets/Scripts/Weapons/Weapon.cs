@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour
     public int ClipSize;
     public float BulletSpeed;
     public float FireRate = 0.3f;
+    public int BulletsPerShot = 1;
     private PlayerStats stats;
     private GameObject crosshairs;
     public float Accuracy;
@@ -68,22 +69,24 @@ public class Weapon : MonoBehaviour
 
                 // play audio
                 gameObject.GetComponent<AudioSource>().Play();
+                for (int i = 0; i < BulletsPerShot; i++)
+                {
+                    // spawn bullet and set position
+                    GameObject bullet = Instantiate(BulletPrefab) as GameObject;
+                    Vector2 bulletPosition = transform.position;
+                    bulletPosition += direction * barrelOffset;
+                    Vector2 gunUp = transform.up;
+                    bulletPosition += gunUp * heightOffset;
+                    bullet.transform.position = bulletPosition;
+                    bullet.GetComponent<bullet>().bulletDamage = Damage;
 
-                // spawn bullet and set position
-                GameObject bullet = Instantiate(BulletPrefab) as GameObject;
-                Vector2 bulletPosition = transform.position;
-                bulletPosition += direction * barrelOffset;
-                Vector2 gunUp = transform.up;
-                bulletPosition += gunUp * heightOffset; 
-                bullet.transform.position = bulletPosition;
-                bullet.GetComponent<bullet>().bulletDamage = Damage;
-
-                // accuracy handling
-                float spread = Random.Range(-Accuracy, Accuracy);
-                Quaternion angle = Quaternion.FromToRotation(bullet.transform.up, direction);
-                bullet.transform.rotation *= angle;
-                bullet.transform.rotation = Quaternion.AngleAxis(spread, transform.forward) * bullet.transform.rotation;
-                bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * BulletSpeed, ForceMode2D.Impulse);  
+                    // accuracy handling
+                    float spread = Random.Range(-Accuracy, Accuracy);
+                    Quaternion angle = Quaternion.FromToRotation(bullet.transform.up, direction);
+                    bullet.transform.rotation *= angle;
+                    bullet.transform.rotation = Quaternion.AngleAxis(spread, transform.forward) * bullet.transform.rotation;
+                    bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * BulletSpeed, ForceMode2D.Impulse);
+                }
 
                 // update variables
                 timeSinceLastShot = Time.time;
