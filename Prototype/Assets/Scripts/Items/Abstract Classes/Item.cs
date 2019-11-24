@@ -8,6 +8,8 @@ public abstract class Item : MonoBehaviour
     protected GameObject player;
     protected PlayerStats stats;
 
+    protected GameObject FlotingPointPrefab;
+    private float distanceToPlayer;
     protected virtual void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -16,6 +18,18 @@ public abstract class Item : MonoBehaviour
         gameObject.AddComponent<BoxCollider2D>();
         GetComponent<BoxCollider2D>().isTrigger = true;
         setItemInfo();
+
+        FlotingPointPrefab = Resources.Load<GameObject>("UI/flotingText");
+    }
+
+    protected virtual void Update()
+    {
+        distanceToPlayer = Vector2.Distance(player.transform.position, transform.position);
+        if (distanceToPlayer < 1f)
+        {
+            showFloatingText();
+        }
+
     }
 
     public virtual void process()
@@ -44,5 +58,12 @@ public abstract class Item : MonoBehaviour
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
         gameObject.GetComponent<BoxCollider2D>().enabled = true;
+    }
+
+    public void showFloatingText()
+    {
+        var text = Instantiate(FlotingPointPrefab, transform.position, Quaternion.identity, transform);
+        text.GetComponent<TMPro.TextMeshPro>().text = (itemName +"\n"+ caption);
+        Destroy(text, 1f);
     }
 }
