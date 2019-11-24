@@ -44,7 +44,10 @@ public partial class RoomPointer : MonoBehaviour
                             {
                                 // Check roomIndex matches - Hide all items
                                 if(item.tag == "Item")
+                                {
+                                    item.GetComponent<BoxCollider2D>().enabled = false;
                                     item.GetComponent<SpriteRenderer>().enabled = false;
+                                }
                             }
                         }
                         else // Visited Room (more likely to have items)
@@ -52,11 +55,14 @@ public partial class RoomPointer : MonoBehaviour
                             Transform real = next.transform;
                             foreach (Transform item in real)
                             {
-                                if(item.tag == "Item")
-                                    if(index == item.GetComponent<RoomRegister>().RoomIndex)
+                                if (item.tag == "Item")
+                                    if (index == item.GetComponent<RoomRegister>().RoomIndex)
                                         item.GetComponent<SpriteRenderer>().enabled = true;
                                     else
+                                    {
+                                        item.GetComponent<BoxCollider2D>().enabled = false;
                                         item.GetComponent<SpriteRenderer>().enabled = false;
+                                    }
                             }
                         }
                     }
