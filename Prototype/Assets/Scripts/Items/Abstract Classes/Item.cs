@@ -25,6 +25,7 @@ public abstract class Item : MonoBehaviour
 
     public virtual void Update()
     {
+        if(player == null) { return; }
         distanceToPlayer = Vector2.Distance(player.transform.position, transform.position);
         if (distanceToPlayer < 1f)
         {

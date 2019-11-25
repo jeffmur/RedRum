@@ -5,24 +5,30 @@ using UnityEngine.UI;
 
 public class EndGameStats : MonoBehaviour
 {
-
-    public GameObject accuracy;
-    public GameObject roomsCompleted;
-    public GameObject shotsFired;
-    public GameObject ItemsPickedUp;
+    public Text accuracy;
+    public Text roomsCompleted;
+    public Text shotsFired;
+    public Text ItemsPickedUp;
     // Start is called before the first frame update
     void Start()
     {
-        GlobalControl TotalStats = GlobalControl.Instance;
-        shotsFired = GameObject.Find("ShotsFired");
-        accuracy = GameObject.Find("Accuracy");
-        roomsCompleted = GameObject.Find("RoomsCompleted");
-        ItemsPickedUp = GameObject.Find("ItemsPickedUp");
-        shotsFired.GetComponent<Text>().text = "SHOTS FIRED: " + TotalStats.savedPlayerData.totalShots.ToString();
-        accuracy.GetComponent<Text>().text = "Accuracy: " + (TotalStats.savedPlayerData.totalShots/TotalStats.savedPlayerData.bulletsHit).ToString() + "%";
-        roomsCompleted.GetComponent<Text>().text = "RoomsCompleted: " + TotalStats.savedPlayerData.roomsCleared.ToString();
-        ItemsPickedUp.GetComponent<Text>().text = "ItemsPicked Up: " + TotalStats.savedPlayerData.itemsPickedUp.ToString();
+        accuracy = GameObject.Find("Accuracy").GetComponent<Text>();
+        roomsCompleted = GameObject.Find("RoomsCompleted").GetComponent<Text>();
+        shotsFired = GameObject.Find("ShotsFired").GetComponent<Text>();
+        ItemsPickedUp = GameObject.Find("ItemsPickedUp").GetComponent<Text>();
+        if (GlobalControl.Instance != null)
+            showStats();
+    }
 
+    void showStats()
+    {
+        float accuracyCalc = ((float)GlobalControl.Instance.savedPlayerData.bulletsHit/GlobalControl.Instance.savedPlayerData.totalShots) * 100f;
+        Debug.Log("Accuracy: " + accuracyCalc);
+        shotsFired.text = "SHOTS FIRED: " + GlobalControl.Instance.savedPlayerData.totalShots;
+        accuracy.text = "Accuracy: " + (int)accuracyCalc + "%";
+
+        roomsCompleted.text = "RoomsCompleted: " + GlobalControl.Instance.savedPlayerData.roomsCleared;
+        ItemsPickedUp.text = "ItemsPicked Up: " + GlobalControl.Instance.savedPlayerData.itemsPickedUp;
     }
 
 }

@@ -21,8 +21,6 @@ public class bullet : MonoBehaviour
         {
             GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
             Destroy(effect, 0.5f);
-            GlobalControl.Instance.savedPlayerData.bulletsHit += 1; // increasing for stats
-            //other.GetComponent<EnemyHealthManager>().DecreaseHealth(bulletDamage);
             Destroy(this.gameObject);
         }
     }

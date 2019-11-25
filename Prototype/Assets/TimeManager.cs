@@ -34,11 +34,6 @@ public class TimeManager : MonoBehaviour
         Time.timeScale = slowdownFactor;
         Time.fixedDeltaTime = Time.unscaledDeltaTime;
     }
-    public void ResetTime()
-    {
-        Time.timeScale = 1f;
-        Time.fixedDeltaTime = Time.timeScale;
-    }
 
     public void ResetTime()
     {

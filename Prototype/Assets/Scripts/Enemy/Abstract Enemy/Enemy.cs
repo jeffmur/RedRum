@@ -24,6 +24,7 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void DecreeasHealth(int damage)
     {
         enemyHealth -= damage;
+        GlobalControl.Instance.savedPlayerData.bulletsHit += 1; // increasing for stats
         if (enemyHealth < 0)
         {
             if (Random.Range(1, 5) > 3 && itemDrop != null)

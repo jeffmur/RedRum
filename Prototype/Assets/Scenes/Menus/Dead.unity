@@ -776,7 +776,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 287055093}
-        m_MethodName: nextLevel
+        m_MethodName: retryLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1019,9 +1019,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 434425221c245b44caa1896d1975c618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accuracy: {fileID: 0}
-  roomsCompleted: {fileID: 0}
-  shotsFired: {fileID: 1230757508}
+  accuracy: {fileID: 1905036993}
+  roomsCompleted: {fileID: 2053827922}
+  shotsFired: {fileID: 1230757510}
+  ItemsPickedUp: {fileID: 1005437191}
 --- !u!1 &1869832906
 GameObject:
   m_ObjectHideFlags: 0

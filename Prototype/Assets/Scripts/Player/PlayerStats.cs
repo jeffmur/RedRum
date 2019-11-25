@@ -13,6 +13,7 @@ public class CasperData
     public float Speed = 5f;
     public Vector3 Scale = new Vector3(6, 6, 1);
     public ActivatedItem CurrentActiveItem;
+    public bool[] WeaponInventory;
 }
 public class PlayerData
 {
@@ -57,7 +58,7 @@ public class PlayerStats : MonoBehaviour
         localPlayerData = GlobalControl.Instance.savedPlayerData;
     }
 
-    public void SavePlayer()
+    public void SaveData()
     {
         if(HeldItem != null)
             GlobalControl.Instance.saveItem(HeldItem.gameObject);
@@ -74,6 +75,7 @@ public class PlayerStats : MonoBehaviour
     public float FireRate { get => localCasperData.FireRate; set => localCasperData.FireRate = value; }
     private ActivatedItem HeldItem { get => localCasperData.CurrentActiveItem; set => localCasperData.CurrentActiveItem = value; }
 
+    public bool[] WeaponInventory { get => localCasperData.WeaponInventory; set => localCasperData.WeaponInventory = value; }
     public void changeMaxHealth(int value)
     {
         if (value == 0)

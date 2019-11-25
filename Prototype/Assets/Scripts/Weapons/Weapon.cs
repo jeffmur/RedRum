@@ -75,6 +75,9 @@ public class Weapon : MonoBehaviour
                 // trigger fire animation
                 animator.SetTrigger("Fire");
 
+                // Successful shot
+                stats.localPlayerData.totalShots += 1;
+
                 // play audio
                 gameObject.GetComponent<AudioSource>().Play();
                 for (int i = 0; i < BulletsPerShot; i++)

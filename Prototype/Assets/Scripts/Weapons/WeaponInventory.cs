@@ -12,6 +12,13 @@ public class WeaponInventory : MonoBehaviour
     void Start()
     {
         // NUMBER OF WEAPONS = 3
+        StartCoroutine(LateStart());
+    }
+
+    IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(0.001f);
+        CurrentInventory = GlobalControl.Instance.savedCasperData.WeaponInventory;
         setInitial(transform.childCount);
         SelectWeapon();
     }
@@ -50,11 +57,14 @@ public class WeaponInventory : MonoBehaviour
         Destroy(clone);
         setWeapon(true, picked);
         SelectWeapon();
+        GlobalControl.Instance.savedCasperData.WeaponInventory = CurrentInventory;
     }
 
     private void setInitial(int size)
     {
-        CurrentInventory = new bool[size];
+        if(CurrentInventory == null)
+            CurrentInventory = new bool[size];
+
         CurrentInventory[0] = true;
     }
     private void setWeapon(bool active, char first)
