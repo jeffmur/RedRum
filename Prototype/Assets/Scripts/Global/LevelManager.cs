@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public GameObject Info;
-    public GameObject MainMenu;
-    public GameObject Controls;
-
     public static void Complete()
     {
         Cursor.visible = true;
@@ -32,25 +28,6 @@ public class LevelManager : MonoBehaviour
     public void nextLevel()
     {
         Scenes.Load("Alpha", Scenes.nextDem(), true);
-    }
-
-    public void info()
-    {
-        Info.SetActive(true);
-        MainMenu.SetActive(false);
-    }
-
-    public void controls()
-    {
-        Controls.SetActive(true);
-        MainMenu.SetActive(false);
-    }
-
-    public void backToMenu()
-    {
-        Info.SetActive(false);
-        Controls.SetActive(false);
-        MainMenu.SetActive(true);
     }
 
     public void QuitGame() 

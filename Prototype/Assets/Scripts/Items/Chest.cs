@@ -11,12 +11,14 @@ public class Chest : MonoBehaviour
     public bool openChest = false;
     public int RoomIndex;
     private Transform casper;
+    private GameObject key;
     // Start is called before the first frame update
     void Start()
     {
         rend = GetComponent<SpriteRenderer>();
         casper = GameObject.FindGameObjectWithTag("Player").transform;
         itemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
+        key = Resources.Load("Textures/Prefabs/Items/Key") as GameObject;
     }
 
     // Update is called once per frame
@@ -65,9 +67,11 @@ public class Chest : MonoBehaviour
         //    size = new Vector3(2, 2, 1); gun = true;
         //if (myItems[i].name == "Shotgun")
         //    size = new Vector3(1, 1, 1); gun = true;
-
-
-        GameObject item = Instantiate(itemManager.SpawnRandomItem(), transform.position, Quaternion.identity);
+        GameObject item;
+        if (transform.parent.name != "Boss Pool")
+            item = Instantiate(itemManager.SpawnRandomItem(), transform.position, Quaternion.identity);
+        else
+            item = Instantiate(key, transform.position, Quaternion.identity);
         //item.transform.localScale = size;
         item.AddComponent<ItemBehavior>(); // rotate and "float up"
         item.AddComponent<RoomRegister>().RoomIndex = RoomIndex; // assigns item to roomIndex

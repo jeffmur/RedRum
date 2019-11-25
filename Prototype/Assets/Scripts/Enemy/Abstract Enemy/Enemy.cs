@@ -19,6 +19,7 @@ public abstract class Enemy : MonoBehaviour
     {
         casper = GameObject.Find("Casper");
         itemDrop = Resources.Load<GameObject>("Textures/Prefabs/Items/Heart");
+        enemySprite = GetComponent<SpriteRenderer>();
     }
 
     protected virtual void DecreaseHealth(int damage)
@@ -28,7 +29,7 @@ public abstract class Enemy : MonoBehaviour
         if (enemyHealth < 0)
         {
             GlobalControl.Instance.savedPlayerData.enemiesKilled += 1;
-            if (Random.Range(1, 5) > 3 && itemDrop != null)
+            if (Random.Range(1, 5) > 3 && itemDrop != null) 
             {
                 Vector3 loc = new Vector3(transform.position.x, transform.position.y, -1);
                 var item = Instantiate(itemDrop, loc, Quaternion.identity);

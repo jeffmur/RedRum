@@ -9,7 +9,7 @@ public class SuitcaseBossBehavior : MonoBehaviour
     public float EnemySpeed = 1f;
     public GameObject BulletPrefab;
     private GameObject Casper;
-    private float BulletCooldown = 3f;
+    private float BulletCooldown = 2f;
     private TimedLerp lerp;
     private SpriteRenderer renderer;
     private Vector3 direction;
@@ -18,7 +18,7 @@ public class SuitcaseBossBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        healthBar = GameObject.Find("HealthBarSlider");
+        
         Casper = GameObject.Find("Casper");
         StartCoroutine(FireShots());
         lerp = new TimedLerp(5f, 45f);
@@ -85,7 +85,7 @@ public class SuitcaseBossBehavior : MonoBehaviour
         }
         else if (other.CompareTag("HeroBullet"))
         {
-            this.GetComponent<EnemyHealthManager>().DecreaseHealth(other.transform.GetComponent<bullet>().bulletDamage);
+            transform.GetComponent<EnemyHealthManager>().DecreaseHealth(other.transform.GetComponent<bullet>().bulletDamage);
         }
     }
 }
