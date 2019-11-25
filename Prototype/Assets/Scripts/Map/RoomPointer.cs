@@ -36,6 +36,7 @@ public partial class RoomPointer : MonoBehaviour
                         int index = room.GetComponent<Room>().RoomIndex;
                         if (!room.GetComponent<Room>().isVisited) //if the room is not visited
                         {
+                            GlobalControl.Instance.savedPlayerData.roomsCleared += 1;
                             room.GetComponent<Room>().isVisited = true; //mark it is visited
                             next.GetComponent<RoomManager>().Initialize(index); //make the enemies spawn 
                             // Hide all (if any) items in new room
@@ -44,7 +45,10 @@ public partial class RoomPointer : MonoBehaviour
                             {
                                 // Check roomIndex matches - Hide all items
                                 if(item.tag == "Item")
+                                {
+                                    item.GetComponent<BoxCollider2D>().enabled = false;
                                     item.GetComponent<SpriteRenderer>().enabled = false;
+                                }
                             }
                         }
                         else // Visited Room (more likely to have items)
@@ -52,11 +56,19 @@ public partial class RoomPointer : MonoBehaviour
                             Transform real = next.transform;
                             foreach (Transform item in real)
                             {
-                                if(item.tag == "Item")
-                                    if(index == item.GetComponent<RoomRegister>().RoomIndex)
+                                if (item.tag == "Item")
+                                {
+                                    if (index == item.GetComponent<RoomRegister>().RoomIndex)
+                                    {
+                                        item.GetComponent<BoxCollider2D>().enabled = true;
                                         item.GetComponent<SpriteRenderer>().enabled = true;
+                                    }
                                     else
+                                    {
+                                        item.GetComponent<BoxCollider2D>().enabled = false;
                                         item.GetComponent<SpriteRenderer>().enabled = false;
+                                    }
+                                }
                             }
                         }
                     }

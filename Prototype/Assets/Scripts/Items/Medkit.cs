@@ -25,6 +25,6 @@ public class Medkit : ActivatedItem
     {
         itemID = 3;
         itemName = "Medkit";
-        caption = "I NEED MEDIC";
+        caption = "Press Q to use it";
     }
 }

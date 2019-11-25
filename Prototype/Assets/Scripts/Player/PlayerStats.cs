@@ -13,18 +13,24 @@ public class CasperData
     public float Speed = 5f;
     public Vector3 Scale = new Vector3(6, 6, 1);
     public ActivatedItem CurrentActiveItem;
+    public bool[] WeaponInventory;
 }
 public class PlayerData
 {
+    public int totalShots;
     public int roomsCleared;
-    public float accuracy;
+    public int bulletsHit;
+    public int itemsPickedUp;
+    //public float accuracy = totalShots / bulletsHit;
     public int enemiesKilled;
+
     // any more?
 }
 
 public class PlayerStats : MonoBehaviour
 {
     public CasperData localCasperData;
+    public PlayerData localPlayerData;
     public TimeManager timeManager;
     private bool isInvincible;
     public List<Item> passiveItems;
@@ -48,13 +54,15 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         localCasperData = GlobalControl.Instance.savedCasperData;
+        localPlayerData = GlobalControl.Instance.savedPlayerData;
     }
 
-    public void SavePlayer()
+    public void SaveData()
     {
         if(HeldItem != null)
             GlobalControl.Instance.saveItem(HeldItem.gameObject);
         GlobalControl.Instance.savedCasperData = localCasperData;
+        GlobalControl.Instance.savedPlayerData = localPlayerData;
     }
 
     public float MoveSpeed { get => localCasperData.Speed; set => localCasperData.Speed = value; }
@@ -66,6 +74,7 @@ public class PlayerStats : MonoBehaviour
     public float FireRate { get => localCasperData.FireRate; set => localCasperData.FireRate = value; }
     private ActivatedItem HeldItem { get => localCasperData.CurrentActiveItem; set => localCasperData.CurrentActiveItem = value; }
 
+    public bool[] WeaponInventory { get => localCasperData.WeaponInventory; set => localCasperData.WeaponInventory = value; }
     public void changeMaxHealth(int value)
     {
         if (value == 0)
@@ -118,7 +127,7 @@ public class PlayerStats : MonoBehaviour
         if (CurrentHealth == 1 && name == "Casper") { timeManager.DoSlowMotion(5); }
         if (localCasperData.CurrentHealth <= 0 && name == "Casper")
         {
-            Debug.Log("CASPER DEAD"); 
+            Debug.Log("CASPER DEAD");
             timeManager.DoSlowMotion(2);
             Invoke("Die", 2f); //dies after 5 seconds
         }
@@ -138,9 +147,11 @@ public class PlayerStats : MonoBehaviour
         if (HeldItem != null)
         {
             HeldItem.showItem();
+            HeldItem.tag = "Item";
             HeldItem.transform.position = transform.position;
         }
         HeldItem = item;
+        HeldItem.tag = "PickedUp";
         item.hideItem();
     }
 
@@ -148,13 +159,17 @@ public class PlayerStats : MonoBehaviour
     {
         if(value == 0) { return; }
 
-        localCasperData.CurrentAmmo += value;
+        if(value == -1)
+            localCasperData.CurrentAmmo += value;
+        else
+            localCasperData.CurrentAmmo = value;
 
         if (localCasperData.CurrentAmmo > localCasperData.MaxAmmo)
             localCasperData.CurrentAmmo = localCasperData.MaxAmmo;
 
         if (localCasperData.CurrentAmmo < 0)
             localCasperData.CurrentAmmo = 0;
+
         onAmmoChange?.Invoke(localCasperData.CurrentAmmo);
     }
 
@@ -189,6 +204,6 @@ public class PlayerStats : MonoBehaviour
 
     private void Die()
     {
-        Scenes.Load("Alpha", false);
+        LevelManager.Dead();
     }
 }

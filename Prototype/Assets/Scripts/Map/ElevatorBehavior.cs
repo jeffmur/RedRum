@@ -24,7 +24,7 @@ public class ElevatorBehavior : MonoBehaviour
     {
         if (collision.name == "Casper" && Input.GetKeyDown(KeyCode.E))
         {
-            collision.GetComponent<PlayerStats>().SavePlayer();
+            collision.GetComponent<PlayerStats>().SaveData();
             collision.gameObject.SetActive(false);
             animator.SetBool("Show", false);
             LevelManager.Complete();

@@ -10,7 +10,6 @@ public class PointAndShoot : MonoBehaviour
     private GameObject selectedWeapon;
     private Object bulletPrefab;
     private Camera mCamera;
-    public float fireRateMultiplier;
 
     void Start()
     {
@@ -38,7 +37,7 @@ public class PointAndShoot : MonoBehaviour
                 float distance = difference.magnitude;
                 Vector2 direction = difference / distance;
                 direction.Normalize();
-                selectedWeapon.GetComponent<Weapon>().ProcessFireWeapon(direction, fireRateMultiplier);
+                selectedWeapon.GetComponent<Weapon>().FireWeapon(direction);
 
             }
         }

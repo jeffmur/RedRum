@@ -37,7 +37,7 @@ public class GhostBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (state == (int)States.Idle) 
+        if (state == (int)States.Idle)
         {
             IdleState();
         }
@@ -76,7 +76,7 @@ public class GhostBehavior : MonoBehaviour
     private void IdleState()
     {
         // "Casper touches ghost"
-        if (Vector2.Distance(casper.transform.localPosition, transform.position) <= AngerDistance) 
+        if (Vector2.Distance(casper.transform.localPosition, transform.position) <= AngerDistance)
         {
             state = (int)States.Anger;
             animator.SetFloat("State", (float)States.Anger);
@@ -89,6 +89,7 @@ public class GhostBehavior : MonoBehaviour
     {
         if (timeSinceAngerStarted <= -1)
             timeSinceAngerStarted = Time.deltaTime;
+            //timeSinceAngerStarted = Time.fixedDeltaTime;
         else if (Time.time - timeSinceAngerStarted >= AngerStateTimeLimit)
         {
             GetChaseDirection();

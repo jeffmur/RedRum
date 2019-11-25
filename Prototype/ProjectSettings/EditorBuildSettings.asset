@@ -5,16 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/Scenes/ChestDebugging.unity
-    guid: 2664211c634d8754f900326e14269e50
   - enabled: 1
     path: Assets/Scenes/Alpha.unity
     guid: dfcbb4444b62efd41a1add8d9711453b
   - enabled: 1
     path: Assets/Scenes/Menus/Complete.unity
     guid: f7ed29a57da4e874483ee7cce3be12ef
+  - enabled: 1
+    path: Assets/Scenes/Menus/Dead.unity
+    guid: 6e35da6d8a8c8774f9441ef614bda6d9
   m_configObjects: {}

@@ -32,13 +32,4 @@ public class ItemBehavior : MonoBehaviour
             transform.rotation = casper.rotation;
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        //if (collision.tag == "Player")
-        //{
-        //    pickedUp = true;
-        //    casper = collision.transform;
-        //}
-    }
 }

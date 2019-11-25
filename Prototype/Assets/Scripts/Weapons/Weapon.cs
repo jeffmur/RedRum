@@ -8,7 +8,8 @@ public class Weapon : MonoBehaviour
     public int Damage;
     public int ClipSize;
     public float BulletSpeed;
-    public float FireRate = 0.3f;
+    public float FireRate;
+    public int BulletsPerShot = 1;
     private PlayerStats stats;
     private GameObject crosshairs;
     public float Accuracy;
@@ -23,15 +24,19 @@ public class Weapon : MonoBehaviour
     private float timeSinceLastShot;
     private float reloadStartTime;
     private Random random;
+    private GameObject pickupUI;
+    private WeaponInventory WI;
 
-    IEnumerator GetStats()
+    public IEnumerator GetStats()
     {
-        yield return new WaitForSeconds(1);
-        ClipSize = stats.MaxAmmo;
-        bulletsInClip = stats.CurrentAmmo;
+        yield return new WaitForSeconds(0.001f);
+        stats.MaxAmmo = ClipSize;
+        stats.changeAmmo(bulletsInClip);
     }
     void Start()
     {
+        WI = GameObject.Find("WeaponInventory").GetComponent<WeaponInventory>();
+        pickupUI = Resources.Load<GameObject>("UI/flotingText");
         reloadCooldown = GameObject.Find("ReloadCooldown").GetComponent<ReloadCooldown>();
         stats = GameObject.Find("Casper").GetComponent<PlayerStats>();
         animator = transform.GetComponent<Animator>();
@@ -61,13 +66,38 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public void ProcessFireWeapon(Vector2 direction, float fireRateMultiplier)
+    public void FireWeapon(Vector2 direction)
     {
         if (bulletsInClip > 0 && !reloadCooldown.reloading)
         {
-            if (Time.time - timeSinceLastShot >= FireRate * fireRateMultiplier)
+            if (Time.time - timeSinceLastShot >= FireRate)
             {
-                FireWeapon(direction);
+                // trigger fire animation
+                animator.SetTrigger("Fire");
+
+                // Successful shot
+                stats.localPlayerData.totalShots += 1;
+
+                // play audio
+                gameObject.GetComponent<AudioSource>().Play();
+                for (int i = 0; i < BulletsPerShot; i++)
+                {
+                    // spawn bullet and set position
+                    GameObject bullet = Instantiate(BulletPrefab) as GameObject;
+                    Vector2 bulletPosition = transform.position;
+                    bulletPosition += direction * barrelOffset;
+                    Vector2 gunUp = transform.up;
+                    bulletPosition += gunUp * heightOffset;
+                    bullet.transform.position = bulletPosition;
+                    bullet.GetComponent<bullet>().bulletDamage = Damage;
+
+                    // accuracy handling
+                    float spread = Random.Range(-Accuracy, Accuracy);
+                    Quaternion angle = Quaternion.FromToRotation(bullet.transform.up, direction);
+                    bullet.transform.rotation *= angle;
+                    bullet.transform.rotation = Quaternion.AngleAxis(spread, transform.forward) * bullet.transform.rotation;
+                    bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * BulletSpeed, ForceMode2D.Impulse);
+                }
 
                 // update variables
                 timeSinceLastShot = Time.time;
@@ -86,37 +116,22 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public void FireWeapon(Vector2 direction)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        // trigger fire animation
-        animator.SetTrigger("Fire");
-        PlayAudio();
-        GameObject bullet = SpawnBullet(direction);
+        if(collision.tag == "Player")
+        {
+            Quaternion stay = new Quaternion(0, 0, 0, 0);
+            var text = Instantiate(pickupUI, transform.position, stay);
 
-        // accuracy handling
-        float spread = Random.Range(-Accuracy, Accuracy);
-        Quaternion angle = Quaternion.FromToRotation(bullet.transform.up, direction);
-        bullet.transform.rotation *= angle;
-        bullet.transform.rotation = Quaternion.AngleAxis(spread, transform.forward) * bullet.transform.rotation;
-        bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * BulletSpeed, ForceMode2D.Impulse);
-    }
+            text.transform.localScale = new Vector3(0.5f, 0.5f, 0);
 
-    private GameObject SpawnBullet(Vector2 direction)
-    {
-        // spawn bullet and set position
-        GameObject bullet = Instantiate(BulletPrefab) as GameObject;
-        Vector2 bulletPosition = transform.position;
-        bulletPosition += direction * barrelOffset;
-        Vector2 gunUp = transform.up;
-        bulletPosition += gunUp * heightOffset;
-        bullet.transform.position = bulletPosition;
-        bullet.GetComponent<bullet>().bulletDamage = Damage;
-        return bullet;
-    }
+            text.GetComponent<TMPro.TextMeshPro>().text = "Press E to equipt";
+            Destroy(text, .1f);
 
-    private void PlayAudio()
-    {
-        // play audio
-        gameObject.GetComponent<AudioSource>().Play();
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                WI.AddWeaponToInventory(gameObject);
+            }
+        }
     }
 }

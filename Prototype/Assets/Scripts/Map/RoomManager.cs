@@ -67,12 +67,10 @@ public partial class RoomManager : MonoBehaviour
         myChest = c.GetComponent<Chest>();
         // Hide
         myChest.initChest(Items, atIndex);
-        // Set State
-        sDoorSys.LockAll();
         // Random generation of enemies
         // Between 1 and 5 enemies per room
         int AmountOFEnemies = Random.Range(1, 5);
-            for (int i = 0; AmountOFEnemies > i; i++) //creates a random amount of enemies
+        for (int i = 0; AmountOFEnemies > i; i++) //creates a random amount of enemies
             {
                 float x = Random.Range(-4, 4);
                 float y = Random.Range(-4, 4);

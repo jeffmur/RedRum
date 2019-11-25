@@ -5,11 +5,21 @@ using UnityEngine;
 public class WeaponInventory : MonoBehaviour
 {
     public int selectedWeapon = 0;
-    private GameObject selectedWeaponObject = null; 
+    private GameObject selectedWeaponObject = null;
+    private bool[] CurrentInventory;
 
     // Start is called before the first frame update
     void Start()
     {
+        // NUMBER OF WEAPONS = 3
+        StartCoroutine(LateStart());
+    }
+
+    IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(0.001f);
+        CurrentInventory = GlobalControl.Instance.savedCasperData.WeaponInventory;
+        setInitial(transform.childCount);
         SelectWeapon();
     }
 
@@ -33,17 +43,49 @@ public class WeaponInventory : MonoBehaviour
                 selectedWeapon++;
         }
 
-        if (selectedWeapon != previousWeapon)
+        if (selectedWeapon != previousWeapon && CurrentInventory[selectedWeapon])
         {
             SelectWeapon();
         }
     }
 
     // function to be called when a weapon is picked up
-    public void AddWeaponToInventory(GameObject weapon)
+    public void AddWeaponToInventory(GameObject clone)
     {
-        transform.parent = weapon.transform;
+        // Get char & destroy
+        char picked = clone.name[0];
+        Destroy(clone);
+        setWeapon(true, picked);
         SelectWeapon();
+        GlobalControl.Instance.savedCasperData.WeaponInventory = CurrentInventory;
+    }
+
+    private void setInitial(int size)
+    {
+        if(CurrentInventory == null)
+            CurrentInventory = new bool[size];
+
+        CurrentInventory[0] = true;
+    }
+    private void setWeapon(bool active, char first)
+    {
+        int i = 0;
+        foreach (Transform wp in transform)
+        {
+            if (first == wp.name[0])
+                CurrentInventory[i] = active;
+            i++;
+        }
+            
+    }
+
+    public int numOfWeapons()
+    {
+        int r = 0;
+        for (int i = 0; i < CurrentInventory.Length; i++)
+            if (CurrentInventory[i] == true)
+                r++;
+        return r;
     }
 
     // returns selected weapon
@@ -61,6 +103,7 @@ public class WeaponInventory : MonoBehaviour
                 if (i == selectedWeapon)
                 {
                     weapon.gameObject.SetActive(true);
+                    StartCoroutine(weapon.GetComponent<Weapon>().GetStats());
                     selectedWeaponObject = weapon.gameObject;
                 }
                 else

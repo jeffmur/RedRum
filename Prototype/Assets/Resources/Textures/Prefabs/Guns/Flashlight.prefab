@@ -119,6 +119,7 @@ MonoBehaviour:
   ClipSize: 8
   BulletSpeed: 8
   FireRate: 0.3
+  BulletsPerShot: 1
   Accuracy: 5
   reloadSpeed: 1.2
   BulletPrefab: {fileID: 1776094037467586170, guid: c54bdf953bae027429086f2c8c75c8dc,
