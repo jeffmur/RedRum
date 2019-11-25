@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 200594807}
   m_Layer: 0
   m_Name: RayGun
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,6 +100,7 @@ MonoBehaviour:
   ClipSize: 10
   BulletSpeed: 12
   FireRate: 0.2
+  BulletsPerShot: 1
   Accuracy: 3
   reloadSpeed: 1.5
   BulletPrefab: {fileID: 870585644736912044, guid: dcaa7ffca667ca34da7a43aef2945b44,

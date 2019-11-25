@@ -5,6 +5,7 @@ public abstract class Item : MonoBehaviour
     protected int itemID;
     protected string itemName;
     protected string caption;
+    private string hintPickUp;
     protected GameObject player;
     protected PlayerStats stats;
 
@@ -22,12 +23,13 @@ public abstract class Item : MonoBehaviour
         FlotingPointPrefab = Resources.Load<GameObject>("UI/flotingText");
     }
 
-    protected virtual void Update()
+    public virtual void Update()
     {
         distanceToPlayer = Vector2.Distance(player.transform.position, transform.position);
         if (distanceToPlayer < 1f)
         {
-            showFloatingText();
+            if(GetComponent<SpriteRenderer>().enabled == true)
+                showFloatingText();
         }
 
     }
@@ -46,6 +48,7 @@ public abstract class Item : MonoBehaviour
         tag = "Item";
         itemName = "UNTITLED ITEMNAME";
         caption = "UNTITLED CAPTION";
+        hintPickUp = "Press E to pick up";
     }
 
     public void hideItem()
@@ -62,8 +65,12 @@ public abstract class Item : MonoBehaviour
 
     public void showFloatingText()
     {
-        var text = Instantiate(FlotingPointPrefab, transform.position, Quaternion.identity, transform);
-        text.GetComponent<TMPro.TextMeshPro>().text = (itemName +"\n"+ caption);
-        Destroy(text, 1f);
+        Quaternion stay = new Quaternion(0, 0, 0, 0);
+        var text = Instantiate(FlotingPointPrefab, transform.position, stay);
+
+        text.transform.localScale = new Vector3(0.5f, 0.5f, 0);
+
+        text.GetComponent<TMPro.TextMeshPro>().text = (hintPickUp);
+        Destroy(text, .1f);
     }
 }

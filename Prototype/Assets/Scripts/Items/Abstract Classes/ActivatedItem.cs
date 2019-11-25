@@ -16,9 +16,9 @@ public abstract class ActivatedItem : Item
     {
         return effectDuration;
     }
-
-    private void Update()
+    public override void Update()
     {
+        base.Update();
         // if the item is activated and is doing its effect
         if (isOnEffect)
         {

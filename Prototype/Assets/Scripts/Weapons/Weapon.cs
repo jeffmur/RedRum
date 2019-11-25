@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour
     public int Damage;
     public int ClipSize;
     public float BulletSpeed;
-    public float FireRate = 0.3f;
+    public float FireRate;
     public int BulletsPerShot = 1;
     private PlayerStats stats;
     private GameObject crosshairs;
@@ -24,15 +24,19 @@ public class Weapon : MonoBehaviour
     private float timeSinceLastShot;
     private float reloadStartTime;
     private Random random;
+    private GameObject pickupUI;
+    private WeaponInventory WI;
 
-    IEnumerator GetStats()
+    public IEnumerator GetStats()
     {
-        yield return new WaitForSeconds(1);
-        ClipSize = stats.MaxAmmo;
-        bulletsInClip = stats.CurrentAmmo;
+        yield return new WaitForSeconds(0.001f);
+        stats.MaxAmmo = ClipSize;
+        stats.changeAmmo(bulletsInClip);
     }
     void Start()
     {
+        WI = GameObject.Find("WeaponInventory").GetComponent<WeaponInventory>();
+        pickupUI = Resources.Load<GameObject>("UI/flotingText");
         reloadCooldown = GameObject.Find("ReloadCooldown").GetComponent<ReloadCooldown>();
         stats = GameObject.Find("Casper").GetComponent<PlayerStats>();
         animator = transform.GetComponent<Animator>();
@@ -62,11 +66,11 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public void FireWeapon(Vector2 direction, float fireRateMultiplier)
+    public void FireWeapon(Vector2 direction)
     {
         if (bulletsInClip > 0 && !reloadCooldown.reloading)
         {
-            if (Time.time - timeSinceLastShot >= FireRate * fireRateMultiplier)
+            if (Time.time - timeSinceLastShot >= FireRate)
             {
                 // trigger fire animation
                 animator.SetTrigger("Fire");
@@ -105,6 +109,25 @@ public class Weapon : MonoBehaviour
                 reloadStartTime = Time.time;
                 reloadCooldown.StartReload(reloadSpeed);
                 animator.SetBool("Reload", true);
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.tag == "Player")
+        {
+            Quaternion stay = new Quaternion(0, 0, 0, 0);
+            var text = Instantiate(pickupUI, transform.position, stay);
+
+            text.transform.localScale = new Vector3(0.5f, 0.5f, 0);
+
+            text.GetComponent<TMPro.TextMeshPro>().text = "Press E to equipt";
+            Destroy(text, .1f);
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                WI.AddWeaponToInventory(gameObject);
             }
         }
     }

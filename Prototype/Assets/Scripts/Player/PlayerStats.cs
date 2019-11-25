@@ -139,9 +139,11 @@ public class PlayerStats : MonoBehaviour
         if (HeldItem != null)
         {
             HeldItem.showItem();
+            HeldItem.tag = "Item";
             HeldItem.transform.position = transform.position;
         }
         HeldItem = item;
+        HeldItem.tag = "PickedUp";
         item.hideItem();
     }
 
@@ -149,13 +151,17 @@ public class PlayerStats : MonoBehaviour
     {
         if(value == 0) { return; }
 
-        localCasperData.CurrentAmmo += value;
+        if(value == -1)
+            localCasperData.CurrentAmmo += value;
+        else
+            localCasperData.CurrentAmmo = value;
 
         if (localCasperData.CurrentAmmo > localCasperData.MaxAmmo)
             localCasperData.CurrentAmmo = localCasperData.MaxAmmo;
 
         if (localCasperData.CurrentAmmo < 0)
             localCasperData.CurrentAmmo = 0;
+
         onAmmoChange?.Invoke(localCasperData.CurrentAmmo);
     }
 
