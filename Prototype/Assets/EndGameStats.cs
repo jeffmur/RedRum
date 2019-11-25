@@ -27,8 +27,8 @@ public class EndGameStats : MonoBehaviour
         EnemiesKilled.GetComponent<Text>().text = "Enemies Killed: " + TotalStats.savedPlayerData.enemiesKilled.ToString();
 
 
-        roomsCompleted.text = "RoomsCompleted: " + GlobalControl.Instance.savedPlayerData.roomsCleared;
-        ItemsPickedUp.text = "ItemsPicked Up: " + GlobalControl.Instance.savedPlayerData.itemsPickedUp;
+        //roomsCompleted.text = "RoomsCompleted: " + GlobalControl.Instance.savedPlayerData.roomsCleared;
+        //ItemsPickedUp.text = "ItemsPicked Up: " + GlobalControl.Instance.savedPlayerData.itemsPickedUp;
     }
 
 }
