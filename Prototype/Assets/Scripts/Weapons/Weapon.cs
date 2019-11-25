@@ -70,40 +70,11 @@ public class Weapon : MonoBehaviour
     {
         if (bulletsInClip > 0 && !reloadCooldown.reloading)
         {
-            if (Time.time - timeSinceLastShot >= FireRate)
-            {
-                // trigger fire animation
-                animator.SetTrigger("Fire");
-
-                // Successful shot
-                stats.localPlayerData.totalShots += 1;
-
-                // play audio
-                gameObject.GetComponent<AudioSource>().Play();
-                for (int i = 0; i < BulletsPerShot; i++)
-                {
-                    // spawn bullet and set position
-                    GameObject bullet = Instantiate(BulletPrefab) as GameObject;
-                    Vector2 bulletPosition = transform.position;
-                    bulletPosition += direction * barrelOffset;
-                    Vector2 gunUp = transform.up;
-                    bulletPosition += gunUp * heightOffset;
-                    bullet.transform.position = bulletPosition;
-                    bullet.GetComponent<bullet>().bulletDamage = Damage;
-
-                    // accuracy handling
-                    float spread = Random.Range(-Accuracy, Accuracy);
-                    Quaternion angle = Quaternion.FromToRotation(bullet.transform.up, direction);
-                    bullet.transform.rotation *= angle;
-                    bullet.transform.rotation = Quaternion.AngleAxis(spread, transform.forward) * bullet.transform.rotation;
-                    bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * BulletSpeed, ForceMode2D.Impulse);
-                }
-
-                // update variables
-                timeSinceLastShot = Time.time;
-                bulletsInClip--;
-                stats.changeAmmo(-1);
-            }
+            Shoot(direction);
+            // update variables
+            timeSinceLastShot = Time.time;
+            bulletsInClip--;
+            stats.changeAmmo(-1);
         }
         else // reload
         {
@@ -112,6 +83,39 @@ public class Weapon : MonoBehaviour
                 reloadStartTime = Time.time;
                 reloadCooldown.StartReload(reloadSpeed);
                 animator.SetBool("Reload", true);
+            }
+        }
+    }
+
+    public void Shoot(Vector2 direction)
+    {
+        if (Time.time - timeSinceLastShot >= FireRate)
+        {
+            // trigger fire animation
+            animator.SetTrigger("Fire");
+
+            // Successful shot
+            stats.localPlayerData.totalShots += 1;
+
+            // play audio
+            gameObject.GetComponent<AudioSource>().Play();
+            for (int i = 0; i < BulletsPerShot; i++)
+            {
+                // spawn bullet and set position
+                GameObject bullet = Instantiate(BulletPrefab) as GameObject;
+                Vector2 bulletPosition = transform.position;
+                bulletPosition += direction * barrelOffset;
+                Vector2 gunUp = transform.up;
+                bulletPosition += gunUp * heightOffset;
+                bullet.transform.position = bulletPosition;
+                bullet.GetComponent<bullet>().bulletDamage = Damage;
+
+                // accuracy handling
+                float spread = Random.Range(-Accuracy, Accuracy);
+                Quaternion angle = Quaternion.FromToRotation(bullet.transform.up, direction);
+                bullet.transform.rotation *= angle;
+                bullet.transform.rotation = Quaternion.AngleAxis(spread, transform.forward) * bullet.transform.rotation;
+                bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * BulletSpeed, ForceMode2D.Impulse);
             }
         }
     }

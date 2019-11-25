@@ -18,7 +18,7 @@ public class AnxietyAttack : ActivatedItem
         float y = Random.Range(-1f, 1f);
         Vector2 direction = new Vector2(x, y);
         weapon = player.GetComponent<PointAndShoot>().getSelectedWeapon();
-        weapon.FireWeapon(direction);
+        weapon.Shoot(direction);
     } 
 
     protected override void setItemDurations()
