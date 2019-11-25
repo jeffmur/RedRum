@@ -42,4 +42,8 @@ public class PointAndShoot : MonoBehaviour
             }
         }
     }
+    public Weapon getSelectedWeapon()
+    {
+        return selectedWeapon.GetComponent<Weapon>();
+    }
 }

@@ -6,7 +6,6 @@ public partial class RoomManager : MonoBehaviour
 {
     public int RoomIndex;
     public List<GameObject> Enemies;
-    public List<GameObject> Items;
     private DoorSystem sDoorSys;
     public GameObject chestPrefab;
     private Chest myChest;
@@ -66,7 +65,7 @@ public partial class RoomManager : MonoBehaviour
         c.transform.parent = gameObject.transform;
         myChest = c.GetComponent<Chest>();
         // Hide
-        myChest.initChest(Items, atIndex);
+        myChest.initChest(atIndex);
         // Random generation of enemies
         // Between 1 and 5 enemies per room
         int AmountOFEnemies = Random.Range(1, 5);

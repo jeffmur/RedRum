@@ -77,4 +77,14 @@ public class SrBellhopHat : ActivatedItem
     {
         throw new System.NotImplementedException();
     }
+
+    protected override void doItemEffect()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void endItemEffect()
+    {
+        throw new System.NotImplementedException();
+    }
 }
