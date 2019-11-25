@@ -41,6 +41,7 @@ public class ActiveItemUI : MonoBehaviour
         }
         else if (!onCooldown)
         {
+            cooldownBar.fillAmount = 0;
             StartCoroutine(initCooldownBar());
         }
     }
@@ -56,6 +57,6 @@ public class ActiveItemUI : MonoBehaviour
     {
         cooldownTimeElapsed -= Time.deltaTime;
         float cdBarPercentage = cooldownTimeElapsed / cooldownTime;
-        cooldownBar.fillAmount = cdBarPercentage;
+        cooldownBar.fillAmount = 1 - cdBarPercentage;
     }
 }

@@ -6,7 +6,7 @@ public class PoisonShroom : PassiveItem
     {
         itemID = 1;
         itemName = "Poison Shroom";
-        caption = "GOTY since 1976";
+        caption = "A donkey's favorite food";
     }
 
     public override void modifyStats()

@@ -61,9 +61,9 @@ public class SlimeAbstract : Enemy
         return bullets;
     }
 
-    protected override void DecreeasHealth(int damage)
+    protected override void DecreaseHealth(int damage)
     {
-        base.DecreeasHealth(damage);
+        base.DecreaseHealth(damage);
         if (enemyHealth < 0)
         {
             Destroy(gameObject);

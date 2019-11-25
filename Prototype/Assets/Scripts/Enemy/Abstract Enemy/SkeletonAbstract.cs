@@ -48,7 +48,7 @@ public class SkeletonAbstract : Enemy
         }
     }
 
-    protected override void DecreeasHealth(int damage)
+    protected override void DecreaseHealth(int damage)
     {
         base.DecreeasHealth(damage);
         if (enemyHealth < 0 && enemyAnimator.GetBool("Die") == false  && counter < 1)

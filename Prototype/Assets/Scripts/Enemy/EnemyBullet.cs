@@ -7,7 +7,7 @@ public class EnemyBullet : MonoBehaviour
     public GameObject hitEffect;
     public int bulletDamage = 1;
     public float bulletSpeed = 3f;
-    private Vector3 bulletDirection;
+    public Vector3 bulletDirection;
 
     void Update()
     {
@@ -27,13 +27,16 @@ public class EnemyBullet : MonoBehaviour
         {
             GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
             Destroy(effect, 0.5f);
-            other.GetComponent<PlayerStats>().changeHealth(-bulletDamage);
+            if (tag != "HeroBullet")
+            {
+                other.GetComponent<PlayerStats>().changeHealth(-bulletDamage);
+            }
             Destroy(gameObject);
         }
     }
 
     public void SetBulletDirection(Vector3 direction)
     {
-        bulletDirection = direction;
+        bulletDirection = direction.normalized;
     }
 }
