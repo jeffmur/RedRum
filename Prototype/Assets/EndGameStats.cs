@@ -14,6 +14,7 @@ public class EndGameStats : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         GlobalControl TotalStats = GlobalControl.Instance;
         shotsFired = GameObject.Find("ShotsFired");
         accuracy = GameObject.Find("Accuracy");
