@@ -62,7 +62,7 @@ public class GhostAbstract : Enemy
         else if (other.CompareTag("HeroBullet"))
         {
             Destroy(other.gameObject);
-            DecreeasHealth(other.transform.GetComponent<bullet>().bulletDamage);
+            DecreaseHealth(other.transform.GetComponent<bullet>().bulletDamage);
             if (state != (int)States.Chase)
             {
                 state = (int)States.Anger;
@@ -71,9 +71,9 @@ public class GhostAbstract : Enemy
         }
     }
 
-    protected override void DecreeasHealth(int damage)
+    protected override void DecreaseHealth(int damage)
     {
-        base.DecreeasHealth(damage);
+        base.DecreaseHealth(damage);
         if (enemyHealth < 0)
         {
             Destroy(gameObject);

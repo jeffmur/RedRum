@@ -6,7 +6,7 @@ public abstract class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
     protected GameObject casper;
-    protected int enemyHealth = 100;
+    public int enemyHealth = 100;
     protected GameObject BulletPrefab;
     protected int damage = 1;
     protected GameObject itemDrop;
@@ -21,7 +21,7 @@ public abstract class Enemy : MonoBehaviour
         itemDrop = Resources.Load<GameObject>("Textures/Prefabs/Items/Heart");
     }
 
-    protected virtual void DecreeasHealth(int damage)
+    protected virtual void DecreaseHealth(int damage)
     {
         enemyHealth -= damage;
         GlobalControl.Instance.savedPlayerData.bulletsHit += 1; // increasing for stats
@@ -52,7 +52,13 @@ public abstract class Enemy : MonoBehaviour
         if (collision.CompareTag("HeroBullet"))
         {
             Destroy(collision.gameObject);
-            DecreeasHealth(collision.transform.GetComponent<bullet>().bulletDamage);
+            if (collision.transform.GetComponent<bullet>())
+                DecreaseHealth(collision.transform.GetComponent<bullet>().bulletDamage);
+            //why can't all bullets be the same, just with different tags?
+            if (collision.transform.GetComponent<EnemyBullet>())
+            {
+                DecreaseHealth(collision.transform.GetComponent<EnemyBullet>().bulletDamage);
+            }
         }
     }
 }

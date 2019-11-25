@@ -8,7 +8,7 @@ public class SpeedSyringe : PassiveItem
     {
         itemID = 4;
         itemName = "Speed Syringe";
-        caption = "SPEED IS KEY!";
+        caption = "Gotta Go Fast";
     }
 
     public override void modifyStats()

@@ -109,7 +109,7 @@ public class Weapon : MonoBehaviour
             Vector2 gunUp = transform.up;
             bulletPosition += gunUp * heightOffset;
             bullet.transform.position = bulletPosition;
-            bullet.GetComponent<bullet>().bulletDamage = Damage;
+            bullet.GetComponent<bullet>().bulletDamage = (int)(Damage * stats.localCasperData.damageModifier);
 
             // accuracy handling
             float spread = Random.Range(-Accuracy, Accuracy);
@@ -124,14 +124,6 @@ public class Weapon : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            Quaternion stay = new Quaternion(0, 0, 0, 0);
-            var text = Instantiate(pickupUI, transform.position, stay);
-
-            text.transform.localScale = new Vector3(0.5f, 0.5f, 0);
-
-            text.GetComponent<TMPro.TextMeshPro>().text = "Press E to equipt";
-            Destroy(text, .1f);
-
             if (Input.GetKeyDown(KeyCode.E))
             {
                 WI.AddWeaponToInventory(gameObject);

@@ -6,11 +6,12 @@ using UnityEngine;
 public class CasperData
 {
     public float FireRate = 1f;
-    public int CurrentHealth = 3;
-    public int MaxHealth = 3;
+    public int CurrentHealth = 5;
+    public int MaxHealth = 5;
     public int CurrentAmmo = 8;
     public int MaxAmmo = 8;
     public float Speed = 5f;
+    public float damageModifier = 1;
     public Vector3 Scale = new Vector3(6, 6, 1);
     public ActivatedItem CurrentActiveItem;
     public bool[] WeaponInventory;
@@ -87,9 +88,9 @@ public class PlayerStats : MonoBehaviour
 
         if (value > 0)
         {
-            if (localCasperData.MaxHealth > 10)
+            if (localCasperData.MaxHealth > 20)
             {
-                localCasperData.MaxHealth = 10;
+                localCasperData.MaxHealth = 20;
             }
             changeHealth(value);
         }
@@ -121,8 +122,7 @@ public class PlayerStats : MonoBehaviour
         localCasperData.CurrentHealth += value;
         if (localCasperData.CurrentHealth > localCasperData.MaxHealth)
         {
-            localCasperData.MaxHealth = localCasperData.CurrentHealth;
-            onMaxHealthChange?.Invoke(localCasperData.MaxHealth);
+            localCasperData.CurrentHealth = localCasperData.MaxHealth;
         }
         if (CurrentHealth == 1 && name == "Casper") { timeManager.DoSlowMotion(5); }
         if (localCasperData.CurrentHealth <= 0 && name == "Casper")
@@ -173,13 +173,37 @@ public class PlayerStats : MonoBehaviour
         onAmmoChange?.Invoke(localCasperData.CurrentAmmo);
     }
 
+    public ItemFloatingText hint;
+
     private void OnTriggerStay2D(Collider2D collision)
     {
+
+        if (collision.gameObject.tag == "Item")
+        {
+            if (collision.gameObject.GetComponent<SpriteRenderer>())
+            {
+                string message = "Press E to pick up";
+                hint.showFloatingText(collision.gameObject.transform.position, message);
+            }
+        }
+        if (collision.gameObject.tag == "Weapon")
+        {
+            if (collision.gameObject.GetComponent<SpriteRenderer>())
+            {
+                string message = "Press E to equip";
+                hint.showFloatingText(collision.gameObject.transform.position, message);
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (collision.gameObject.tag == "Item")
             {
-                pickUpItem(collision.gameObject.GetComponent<Item>());
+                if (collision.gameObject.GetComponent<SpriteRenderer>())
+                {
+                    pickUpItem(collision.gameObject.GetComponent<Item>());
+                    hint.gameObject.SetActive(false);
+                }
             }
             if (collision.gameObject.tag == "Heart")
             {
@@ -188,6 +212,15 @@ public class PlayerStats : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Item" || collision.gameObject.tag == "Weapon")
+        {
+            hint.gameObject.SetActive(false);
+        }
+    }
+
     private void pickUpItem(Item selectedItem)
     {
         selectedItem.process();

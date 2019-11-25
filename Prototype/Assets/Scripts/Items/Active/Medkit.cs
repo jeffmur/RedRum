@@ -25,6 +25,11 @@ public class Medkit : ActivatedItem
     {
         itemID = 3;
         itemName = "Medkit";
-        caption = "Press Q to use it";
+        caption = "Did someone call a doctor?";
+    }
+
+    protected override void endItemEffect()
+    {
+        return;
     }
 }
