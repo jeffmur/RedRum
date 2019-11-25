@@ -116,6 +116,12 @@ public class PlayerStats : MonoBehaviour
         {
             return;
         }
+
+        if (value < 0 && isInvincible)
+        {
+            print("Casper is invincible");
+            return;
+        }
         localCasperData.CurrentHealth += value;
         if (localCasperData.CurrentHealth > localCasperData.MaxHealth)
         {
@@ -134,8 +140,16 @@ public class PlayerStats : MonoBehaviour
         }
         else
         {
+            StartCoroutine(ToggleInvincibility());
             onDamaged?.Invoke();
         }
+    }
+
+    public IEnumerator ToggleInvincibility()
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(1);
+        isInvincible = false;
     }
 
     public void setActivatedItem(ActivatedItem item)
