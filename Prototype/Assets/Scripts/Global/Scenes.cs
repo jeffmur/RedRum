@@ -22,6 +22,11 @@ public static class Scenes
         SceneManager.LoadScene(path);
     }
 
+    public static void Load(string path)
+    {
+        SceneManager.LoadScene(path);
+    }
+
     public static string getDem()
     {
         return DEM;

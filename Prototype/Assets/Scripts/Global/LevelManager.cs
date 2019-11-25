@@ -4,18 +4,9 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    // Update is called once per frame
-    void Update()
-    {
-        // TODO: Change to demo scene for alpha Testing
-        // Testing Level Generation
-        //if (Input.GetKeyDown("4"))
-        //    Scenes.Load("Alpha", "4x4");
-        //if (Input.GetKeyDown("5"))
-        //    Scenes.Load("Alpha", "5x5");
-        //if (Input.GetKeyDown("6"))
-        //    Scenes.Load("Alpha", "6x6");
-    }
+    public GameObject Info;
+    public GameObject MainMenu;
+    public GameObject Controls;
 
     public static void Complete()
     {
@@ -33,9 +24,33 @@ public class LevelManager : MonoBehaviour
         Scenes.Load("Alpha", Scenes.getDem(), false);
     }
 
+    public void initGame()
+    {
+        Scenes.Load("Alpha");
+    }
+
     public void nextLevel()
     {
         Scenes.Load("Alpha", Scenes.nextDem(), true);
+    }
+
+    public void info()
+    {
+        Info.SetActive(true);
+        MainMenu.SetActive(false);
+    }
+
+    public void controls()
+    {
+        Controls.SetActive(true);
+        MainMenu.SetActive(false);
+    }
+
+    public void backToMenu()
+    {
+        Info.SetActive(false);
+        Controls.SetActive(false);
+        MainMenu.SetActive(true);
     }
 
     public void QuitGame() 

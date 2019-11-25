@@ -50,7 +50,5 @@ public partial class GameWorld : MonoBehaviour
         {
             stats.activateItem();
         }
-        if (Input.GetKeyDown("3"))
-            GameObject.Find("Main Camera").GetComponent<TimeManager>().PermSlow(0.1f);
     }
 }
