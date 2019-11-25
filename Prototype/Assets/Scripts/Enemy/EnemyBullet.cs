@@ -11,6 +11,11 @@ public class EnemyBullet : MonoBehaviour
 
     void Update()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player.GetComponent<PlayerStats>().IsEtherial)
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player.GetComponent<Collider2D>(), true);
+        }
         if (bulletDirection != null)
             transform.localPosition +=  bulletDirection * bulletSpeed * Time.deltaTime;
     }

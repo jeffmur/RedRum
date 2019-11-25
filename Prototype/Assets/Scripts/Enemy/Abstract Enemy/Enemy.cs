@@ -38,6 +38,12 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+    protected virtual void Update()
+    {
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), casper.GetComponent<Collider2D>(), 
+            casper.GetComponent<PlayerStats>().IsEtherial);
+    }
+
     protected virtual void Attack(int damage)
     {
 

@@ -26,7 +26,6 @@ public class ActiveItemUI : MonoBehaviour
         {
             SpriteRenderer rend = item.GetComponent<SpriteRenderer>();
             itemImage.sprite = rend.sprite;
-            itemImage.color = Color.white;
             ActivatedItem actItem = (ActivatedItem)item;
             cooldownTime = actItem.getCooldownDuration();
             waitTime = actItem.getEffectDuration();
