@@ -76,7 +76,7 @@ public class MysteryPotion : ActivatedItem
     {
         crRunning = true;
         Vector3 prevSize = player.transform.localScale;
-        player.transform.localScale *= 3;
+        player.transform.localScale *= 2;
         yield return new WaitForSecondsRealtime(Random.Range(2, 6));
         player.transform.localScale = prevSize;
         crRunning = false;
