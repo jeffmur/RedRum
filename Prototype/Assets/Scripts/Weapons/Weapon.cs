@@ -81,7 +81,8 @@ public class Weapon : MonoBehaviour
                 // play audio
                 gameObject.GetComponent<AudioSource>().Play();
                 for (int i = 0; i < BulletsPerShot; i++)
-                {
+                { 
+                    GlobalControl.Instance.savedPlayerData.totalShots += 1;
                     // spawn bullet and set position
                     GameObject bullet = Instantiate(BulletPrefab) as GameObject;
                     Vector2 bulletPosition = transform.position;

@@ -27,6 +27,8 @@ public abstract class Enemy : MonoBehaviour
         GlobalControl.Instance.savedPlayerData.bulletsHit += 1; // increasing for stats
         if (enemyHealth < 0)
         {
+            GlobalControl.Instance.savedPlayerData.enemiesKilled += 1;
+            Debug.Log("Enemies killed " + GlobalControl.Instance.savedPlayerData.enemiesKilled);
             if (Random.Range(1, 5) > 3 && itemDrop != null)
             {
                 Vector3 loc = new Vector3(transform.position.x, transform.position.y, -1);
@@ -51,6 +53,7 @@ public abstract class Enemy : MonoBehaviour
     {
         if (collision.CompareTag("HeroBullet"))
         {
+            GlobalControl.Instance.savedPlayerData.bulletsHit += 1;
             Destroy(collision.gameObject);
             DecreeasHealth(collision.transform.GetComponent<bullet>().bulletDamage);
         }
