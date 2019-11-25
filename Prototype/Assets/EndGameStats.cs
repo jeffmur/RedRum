@@ -5,27 +5,27 @@ using UnityEngine.UI;
 
 public class EndGameStats : MonoBehaviour
 {
-    public Text accuracy;
-    public Text roomsCompleted;
-    public Text shotsFired;
-    public Text ItemsPickedUp;
+
+    public GameObject accuracy;
+    public GameObject roomsCompleted;
+    public GameObject shotsFired;
+    public GameObject ItemsPickedUp;
+    public GameObject EnemiesKilled;
     // Start is called before the first frame update
     void Start()
     {
-        accuracy = GameObject.Find("Accuracy").GetComponent<Text>();
-        roomsCompleted = GameObject.Find("RoomsCompleted").GetComponent<Text>();
-        shotsFired = GameObject.Find("ShotsFired").GetComponent<Text>();
-        ItemsPickedUp = GameObject.Find("ItemsPickedUp").GetComponent<Text>();
-        if (GlobalControl.Instance != null)
-            showStats();
-    }
+        GlobalControl TotalStats = GlobalControl.Instance;
+        shotsFired = GameObject.Find("ShotsFired");
+        accuracy = GameObject.Find("Accuracy");
+        roomsCompleted = GameObject.Find("RoomsCompleted");
+        ItemsPickedUp = GameObject.Find("ItemsPickedUp");
+        EnemiesKilled = GameObject.Find("EnemiesKilled");
+        shotsFired.GetComponent<Text>().text = "SHOTS FIRED: " + TotalStats.savedPlayerData.totalShots.ToString();
+        accuracy.GetComponent<Text>().text = "Accuracy: " + ((TotalStats.savedPlayerData.bulletsHit/TotalStats.savedPlayerData.totalShots)*100).ToString() + "%";
+        roomsCompleted.GetComponent<Text>().text = "Rooms Completed: " + TotalStats.savedPlayerData.roomsCleared.ToString();
+        ItemsPickedUp.GetComponent<Text>().text = "Items Picked Up: " + TotalStats.savedPlayerData.itemsPickedUp.ToString();
+        EnemiesKilled.GetComponent<Text>().text = "Enemies Killed: " + TotalStats.savedPlayerData.enemiesKilled.ToString();
 
-    void showStats()
-    {
-        float accuracyCalc = ((float)GlobalControl.Instance.savedPlayerData.bulletsHit/GlobalControl.Instance.savedPlayerData.totalShots) * 100f;
-        Debug.Log("Accuracy: " + accuracyCalc);
-        shotsFired.text = "SHOTS FIRED: " + GlobalControl.Instance.savedPlayerData.totalShots;
-        accuracy.text = "Accuracy: " + (int)accuracyCalc + "%";
 
         roomsCompleted.text = "RoomsCompleted: " + GlobalControl.Instance.savedPlayerData.roomsCleared;
         ItemsPickedUp.text = "ItemsPicked Up: " + GlobalControl.Instance.savedPlayerData.itemsPickedUp;

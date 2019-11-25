@@ -7,16 +7,16 @@ public class SkeletonAbstract : Enemy
 
     private float attackDelay = 1f;
     private float attackRange = 1f;
-
     private float lastAttackTime;
     private float distanceToPlayer;
+    private int counter;
     private Vector2 movement;
 
     protected override void Start()
     {
         enemyHealth = 150;
         speed = 2f;
-
+        counter = 0;
         base.Start();
         rb = this.GetComponent<Rigidbody2D>();
         enemySprite = GetComponent<SpriteRenderer>();
@@ -50,9 +50,10 @@ public class SkeletonAbstract : Enemy
 
     protected override void DecreaseHealth(int damage)
     {
-        base.DecreaseHealth(damage);
-        if (enemyHealth < 0)
+        base.DecreeasHealth(damage);
+        if (enemyHealth < 0 && enemyAnimator.GetBool("Die") == false  && counter < 1)
         {
+            counter++;
             enemyAnimator.SetBool("Die", true);
             Destroy(gameObject, 0.75f);
         }
