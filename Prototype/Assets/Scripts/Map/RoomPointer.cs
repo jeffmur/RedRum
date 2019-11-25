@@ -36,6 +36,7 @@ public partial class RoomPointer : MonoBehaviour
                         int index = room.GetComponent<Room>().RoomIndex;
                         if (!room.GetComponent<Room>().isVisited) //if the room is not visited
                         {
+                            GlobalControl.Instance.savedPlayerData.roomsCleared += 1;
                             room.GetComponent<Room>().isVisited = true; //mark it is visited
                             next.GetComponent<RoomManager>().Initialize(index); //make the enemies spawn 
                             // Hide all (if any) items in new room

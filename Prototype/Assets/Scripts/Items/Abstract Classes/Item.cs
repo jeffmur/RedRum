@@ -39,6 +39,7 @@ public abstract class Item : MonoBehaviour
         string message = "Obtained: " + itemName;
         EventManager.TriggerNotification(message);
         hideItem();
+        GlobalControl.Instance.savedPlayerData.itemsPickedUp += 1;
     }
 
     protected abstract void setItemInfo();
