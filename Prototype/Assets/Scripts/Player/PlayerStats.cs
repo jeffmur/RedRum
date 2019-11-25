@@ -119,7 +119,7 @@ public class PlayerStats : MonoBehaviour
         if (CurrentHealth == 1 && name == "Casper") { timeManager.DoSlowMotion(5); }
         if (localCasperData.CurrentHealth <= 0 && name == "Casper")
         {
-            Debug.Log("CASPER DEAD"); 
+            Debug.Log("CASPER DEAD");
             timeManager.DoSlowMotion(2);
             Invoke("Die", 2f); //dies after 5 seconds
         }

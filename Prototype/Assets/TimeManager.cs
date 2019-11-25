@@ -18,7 +18,7 @@ public class TimeManager : MonoBehaviour
             if (Time.timeScale == 1f)
                 ResetTime();
         }
-        
+
     }
 
     public void PermSlow(float slowFactor)
@@ -32,7 +32,12 @@ public class TimeManager : MonoBehaviour
     {
         slowdownLength = length;
         Time.timeScale = slowdownFactor;
-        Time.fixedDeltaTime = Time.timeScale * 0.02f;
+        Time.fixedDeltaTime = Time.unscaledDeltaTime;
+    }
+    public void ResetTime()
+    {
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = Time.timeScale;
     }
 
     public void ResetTime()

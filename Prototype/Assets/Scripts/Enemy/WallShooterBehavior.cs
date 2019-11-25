@@ -11,6 +11,7 @@ public class WallShooterBehavior : MonoBehaviour
     public GameObject BulletPrefab;
     private Vector3 bulletShootDirc;
 
+    private TimeManager timeManager;
     private Rigidbody2D rb;
     private int direction;
     private float timeBtwShot;
@@ -45,7 +46,8 @@ public class WallShooterBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentStates == (int)States.Wall)
+
+        if (currentStates == (int)States.Wall)
         {
             WallState();
         }

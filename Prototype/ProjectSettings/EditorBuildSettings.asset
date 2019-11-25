@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ChestDebugging.unity
     guid: 2664211c634d8754f900326e14269e50
   - enabled: 1
