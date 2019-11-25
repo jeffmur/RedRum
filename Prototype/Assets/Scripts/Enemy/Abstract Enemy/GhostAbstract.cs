@@ -63,6 +63,7 @@ public class GhostAbstract : Enemy
         {
             Destroy(other.gameObject);
             DecreeasHealth(other.transform.GetComponent<bullet>().bulletDamage);
+            GlobalControl.Instance.savedPlayerData.bulletsHit += 1;
             if (state != (int)States.Chase)
             {
                 state = (int)States.Anger;

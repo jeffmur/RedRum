@@ -16,14 +16,11 @@ public class CasperData
 }
 public class PlayerData
 {
-    public int totalShots;
-    public int roomsCleared;
-    public int bulletsHit;
-    public int itemsPickedUp;
-    //public float accuracy = totalShots / bulletsHit;
-    public int enemiesKilled;
-
-    // any more?
+    public float totalShots = 0;
+    public int roomsCleared = -1;
+    public float bulletsHit = 0;
+    public int itemsPickedUp = 0;
+    public int enemiesKilled = 0;
 }
 
 public class PlayerStats : MonoBehaviour
@@ -126,7 +123,6 @@ public class PlayerStats : MonoBehaviour
         if (CurrentHealth == 1 && name == "Casper") { timeManager.DoSlowMotion(5); }
         if (localCasperData.CurrentHealth <= 0 && name == "Casper")
         {
-            Debug.Log("CASPER DEAD"); 
             timeManager.DoSlowMotion(2);
             Invoke("Die", 2f); //dies after 5 seconds
         }
