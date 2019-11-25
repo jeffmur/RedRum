@@ -16,15 +16,20 @@ public class CasperData
 }
 public class PlayerData
 {
+    public int totalShots;
     public int roomsCleared;
-    public float accuracy;
+    public int bulletsHit;
+    public int itemsPickedUp;
+    //public float accuracy = totalShots / bulletsHit;
     public int enemiesKilled;
+
     // any more?
 }
 
 public class PlayerStats : MonoBehaviour
 {
     public CasperData localCasperData;
+    public PlayerData localPlayerData;
     public TimeManager timeManager;
     //private float isInvincible;
     private bool isInvincible;
@@ -49,6 +54,7 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         localCasperData = GlobalControl.Instance.savedCasperData;
+        localPlayerData = GlobalControl.Instance.savedPlayerData;
     }
 
     public void SavePlayer()
@@ -56,6 +62,7 @@ public class PlayerStats : MonoBehaviour
         if(HeldItem != null)
             GlobalControl.Instance.saveItem(HeldItem.gameObject);
         GlobalControl.Instance.savedCasperData = localCasperData;
+        GlobalControl.Instance.savedPlayerData = localPlayerData;
     }
 
     public float MoveSpeed { get => localCasperData.Speed; set => localCasperData.Speed = value; }
@@ -191,6 +198,6 @@ public class PlayerStats : MonoBehaviour
 
     private void Die()
     {
-        Scenes.Load("Alpha", false);
+        LevelManager.Dead();
     }
 }

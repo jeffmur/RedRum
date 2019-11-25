@@ -26,7 +26,6 @@ public class GlobalControl : MonoBehaviour
     {
         savedCasperData = new CasperData();
     }
-
     public void saveItem(GameObject obj)
     {
         if (obj.transform.parent != null)

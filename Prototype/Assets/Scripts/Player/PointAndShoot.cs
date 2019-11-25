@@ -10,6 +10,7 @@ public class PointAndShoot : MonoBehaviour
     private GameObject selectedWeapon;
     private Object bulletPrefab;
     private Camera mCamera;
+    private PlayerStats stats;
     public float fireRateMultiplier;
 
     void Start()
@@ -20,6 +21,8 @@ public class PointAndShoot : MonoBehaviour
         selectedWeapon = weaponInventory.GetSelectedWeapon();
         bulletPrefab = Resources.Load("Textures/Prefabs/Hero/Bullet");
         mCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        stats = GameObject.Find("Casper").GetComponent<PlayerStats>();
+
     }
 
     // Update is called once per frame
@@ -34,12 +37,12 @@ public class PointAndShoot : MonoBehaviour
             Vector3 difference = target - selectedWeapon.transform.position;
             if (Input.GetMouseButton(0))
             {
+                stats.localPlayerData.totalShots += 1;
                 selectedWeapon = weaponInventory.GetSelectedWeapon();
                 float distance = difference.magnitude;
                 Vector2 direction = difference / distance;
                 direction.Normalize();
                 selectedWeapon.GetComponent<Weapon>().FireWeapon(direction, fireRateMultiplier);
-
             }
         }
     }

@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -27,6 +21,12 @@ public class LevelManager : MonoBehaviour
     {
         Cursor.visible = true;
         Scenes.Load("Complete", true);
+    }
+    public static void Dead()
+    {
+        Cursor.visible = true;
+        Scenes.Load("Dead", false);
+
     }
 
     public void nextLevel()
