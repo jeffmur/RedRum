@@ -27,8 +27,9 @@ public class SuitcaseBossAbstract : Enemy
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         direction = Vector3.Normalize(casper.transform.position - transform.position);
         float distance = Vector3.Distance(casper.transform.position, transform.position);
         if (distance <= 15f && distance >= 1)

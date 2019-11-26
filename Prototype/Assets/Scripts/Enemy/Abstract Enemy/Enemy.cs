@@ -17,7 +17,8 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void Start()
     {
-        casper = GameObject.Find("Casper");
+        casper = GameObject.FindGameObjectWithTag("Player");
+        Debug.Assert(casper != null);
         itemDrop = Resources.Load<GameObject>("Textures/Prefabs/Items/Heart");
         enemySprite = GetComponent<SpriteRenderer>();
     }
@@ -36,6 +37,15 @@ public abstract class Enemy : MonoBehaviour
                 Destroy(item, 5f);
             }
         }
+    }
+
+    protected virtual void Update()
+    {
+        Collider2D playerCol = casper.GetComponent<Collider2D>();
+        Collider2D enemyCol = GetComponent<Collider2D>();
+        Debug.Assert(playerCol != null);
+        Debug.Assert(enemyCol != null);
+        Physics2D.IgnoreCollision(playerCol, enemyCol, casper.GetComponent<PlayerStats>().IsEtherial);
     }
 
     protected virtual void Attack(int damage)

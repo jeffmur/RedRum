@@ -11,7 +11,7 @@ public class SuitcaseBossBehavior : MonoBehaviour
     private GameObject Casper;
     private float BulletCooldown = 2f;
     private TimedLerp lerp;
-    private SpriteRenderer renderer;
+    private SpriteRenderer sprRenderer;
     private Vector3 direction;
 
     public GameObject healthBar;
@@ -23,7 +23,7 @@ public class SuitcaseBossBehavior : MonoBehaviour
         StartCoroutine(FireShots());
         lerp = new TimedLerp(5f, 45f);
         healthBar.SetActive(true);
-        renderer = transform.GetComponent<SpriteRenderer>();
+        sprRenderer = transform.GetComponent<SpriteRenderer>();
         healthBar.GetComponent<Slider>().maxValue = transform.GetComponent<EnemyHealthManager>().Health;
     }
     
@@ -35,11 +35,11 @@ public class SuitcaseBossBehavior : MonoBehaviour
             transform.position += EnemySpeed * direction * Time.deltaTime;
         if (direction.x < 0)
         {
-            renderer.flipX = false;
+            sprRenderer.flipX = false;
         }
         else
         {
-            renderer.flipX = true;
+            sprRenderer.flipX = true;
         }
         healthBar.GetComponent<Slider>().value = transform.GetComponent<EnemyHealthManager>().Health;
     }

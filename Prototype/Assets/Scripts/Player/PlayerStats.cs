@@ -13,8 +13,10 @@ public class CasperData
     public float Speed = 5f;
     public float damageModifier = 1;
     public Vector3 Scale = new Vector3(6, 6, 1);
+    public bool isInvincible = false;
     public ActivatedItem CurrentActiveItem;
     public bool[] WeaponInventory;
+
 }
 public class PlayerData
 {
@@ -30,8 +32,9 @@ public class PlayerStats : MonoBehaviour
     public CasperData localCasperData;
     public PlayerData localPlayerData;
     public TimeManager timeManager;
-    private bool isInvincible;
     public List<Item> passiveItems;
+
+    private bool isEtherial; //need player collider
 
     public delegate void onHealthChangeDelegate(int value);
     public event onHealthChangeDelegate onHealthChange, onMaxHealthChange;
@@ -73,6 +76,12 @@ public class PlayerStats : MonoBehaviour
     private ActivatedItem HeldItem { get => localCasperData.CurrentActiveItem; set => localCasperData.CurrentActiveItem = value; }
 
     public bool[] WeaponInventory { get => localCasperData.WeaponInventory; set => localCasperData.WeaponInventory = value; }
+    public bool IsEtherial { get => isEtherial; set { 
+            isEtherial = value;
+            GetComponent<Collider2D>().isTrigger = value;
+        } 
+    }
+
     public void changeMaxHealth(int value)
     {
         if (value == 0)
@@ -116,6 +125,12 @@ public class PlayerStats : MonoBehaviour
         {
             return;
         }
+
+        if (value < 0 && (localCasperData.isInvincible || IsEtherial))
+        {
+            print("Casper is invincible");
+            return;
+        }
         localCasperData.CurrentHealth += value;
         if (localCasperData.CurrentHealth > localCasperData.MaxHealth)
         {
@@ -134,8 +149,16 @@ public class PlayerStats : MonoBehaviour
         }
         else
         {
+            StartCoroutine(ToggleInvincibility());
             onDamaged?.Invoke();
         }
+    }
+
+    public IEnumerator ToggleInvincibility()
+    {
+        localCasperData.isInvincible = true;
+        yield return new WaitForSeconds(1);
+        localCasperData.isInvincible = false;
     }
 
     public void setActivatedItem(ActivatedItem item)
@@ -171,9 +194,9 @@ public class PlayerStats : MonoBehaviour
 
     public ItemFloatingText hint;
 
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-
         if (collision.gameObject.tag == "Item")
         {
             if (collision.gameObject.GetComponent<SpriteRenderer>())

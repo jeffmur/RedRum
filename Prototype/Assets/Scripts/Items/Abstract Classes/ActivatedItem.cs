@@ -18,13 +18,13 @@ public abstract class ActivatedItem : Item
     {
         return effectDuration;
     }
-    protected void Update()
+    protected virtual void Update()
     {
         // if the item is activated and is doing its effect
         if (isOnEffect)
         {
-                processEffect();
-                return;
+            processEffect();
+            return;
         }
         // if the item is completely done with its activation
         // and the item is on cooldown
