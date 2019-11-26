@@ -29,8 +29,9 @@ public class SrBellhopHat : ActivatedItem
     //        activated = true;
     //    }
     //}
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if (activated)
         {
             gameObject.SetActive(false);

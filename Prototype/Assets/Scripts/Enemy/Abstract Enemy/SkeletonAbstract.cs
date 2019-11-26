@@ -24,8 +24,9 @@ public class SkeletonAbstract : Enemy
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         movement = (casper.transform.position - transform.position).normalized;
         
         distanceToPlayer = Vector2.Distance(casper.transform.position, transform.position);
