@@ -26,7 +26,6 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void DecreaseHealth(int damage)
     {
         enemyHealth -= damage;
-        GlobalControl.Instance.savedPlayerData.bulletsHit += 1; // increasing for stats
         if (enemyHealth < 0)
         {
             GlobalControl.Instance.savedPlayerData.enemiesKilled += 1;
@@ -63,7 +62,7 @@ public abstract class Enemy : MonoBehaviour
     {
         if (collision.CompareTag("HeroBullet"))
         {
-            GlobalControl.Instance.savedPlayerData.bulletsHit += 1;
+            GlobalControl.Instance.savedPlayerData.bulletsHit += 1; //increment them being hit
             Destroy(collision.gameObject);
             if (collision.transform.GetComponent<bullet>())
                 DecreaseHealth(collision.transform.GetComponent<bullet>().bulletDamage);

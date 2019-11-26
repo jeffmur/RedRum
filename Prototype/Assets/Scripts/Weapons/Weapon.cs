@@ -104,6 +104,7 @@ public class Weapon : MonoBehaviour
         {
             // spawn bullet and set position
             GameObject bullet = Instantiate(BulletPrefab) as GameObject;
+           // GlobalControl.Instance.savedPlayerData.totalShots += 1f;
             Vector2 bulletPosition = transform.position;
             bulletPosition += direction * barrelOffset;
             Vector2 gunUp = transform.up;

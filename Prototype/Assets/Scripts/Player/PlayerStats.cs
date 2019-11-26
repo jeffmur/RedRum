@@ -29,7 +29,8 @@ public class PlayerData
 
 public class PlayerStats : MonoBehaviour
 {
-    public Camera mCamera;
+    public Camera mCamera; //maincamera
+    private GameObject crosshairs;
     public Transform CaspersPosition;
     public CasperData localCasperData;
     public PlayerData localPlayerData;
@@ -60,10 +61,11 @@ public class PlayerStats : MonoBehaviour
         localPlayerData = GlobalControl.Instance.savedPlayerData;
         CaspersPosition = GameObject.Find("Casper").GetComponent<Transform>();
         mCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        crosshairs = GameObject.Find("crossHairs");
     }
     private void FixedUpdate()
-    {
-        Vector3 desiredPosition = new Vector3(CaspersPosition.localPosition.x , CaspersPosition.localPosition.y,-10f);
+    { 
+        Vector3 desiredPosition = new Vector3(CaspersPosition.localPosition.x, CaspersPosition.localPosition.y, -10f);
         Vector3 smoothedPostion = Vector3.Lerp(mCamera.transform.position, desiredPosition, 0.125f);
         mCamera.transform.position = smoothedPostion;
     }
