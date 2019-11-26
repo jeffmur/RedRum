@@ -1053,6 +1053,14 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1192024515}
   m_CullTransparentMesh: 0
+--- !u!222 &1251782643
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285345614}
+  m_CullTransparentMesh: 0
 --- !u!1 &1285345614
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,8 +1070,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1285345615}
-  - component: {fileID: 1285345617}
   - component: {fileID: 1285345616}
+  - component: {fileID: 1251782643}
   m_Layer: 5
   m_Name: ItemsPickedUp
   m_TagString: Untagged
@@ -1122,14 +1130,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Items Picked Up:'
---- !u!222 &1251782643
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1285345614}
-  m_CullTransparentMesh: 0
 --- !u!1 &1458623848
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,11 +1251,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 434425221c245b44caa1896d1975c618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accuracy: {fileID: 0}
-  roomsCompleted: {fileID: 0}
-  shotsFired: {fileID: 0}
-  ItemsPickedUp: {fileID: 0}
-  EnemiesKilled: {fileID: 0}
+  accuracy: {fileID: 9604523}
+  roomsCompleted: {fileID: 958138360}
+  shotsFired: {fileID: 1064982105}
+  ItemsPickedUp: {fileID: 1285345614}
+  EnemiesKilled: {fileID: 629231510}
 --- !u!1 &1869832906
 GameObject:
   m_ObjectHideFlags: 0
