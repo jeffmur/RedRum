@@ -29,6 +29,8 @@ public class PlayerData
 
 public class PlayerStats : MonoBehaviour
 {
+    public Camera mCamera;
+    public Transform CaspersPosition;
     public CasperData localCasperData;
     public PlayerData localPlayerData;
     public TimeManager timeManager;
@@ -56,6 +58,14 @@ public class PlayerStats : MonoBehaviour
     {
         localCasperData = GlobalControl.Instance.savedCasperData;
         localPlayerData = GlobalControl.Instance.savedPlayerData;
+        CaspersPosition = GameObject.Find("Casper").GetComponent<Transform>();
+        mCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+    }
+    private void FixedUpdate()
+    {
+        Vector3 desiredPosition = new Vector3(CaspersPosition.localPosition.x , CaspersPosition.localPosition.y,-10f);
+        Vector3 smoothedPostion = Vector3.Lerp(mCamera.transform.position, desiredPosition, 0.125f);
+        mCamera.transform.position = smoothedPostion;
     }
 
     public void SaveData()

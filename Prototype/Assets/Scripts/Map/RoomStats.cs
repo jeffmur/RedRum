@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RoomStats : MonoBehaviour
 {
-    public Camera mCamera;
+    //public Camera mCamera;
     public List<GameObject> mWalls;
     private float maxY;
     private float minY;
@@ -14,14 +14,9 @@ public class RoomStats : MonoBehaviour
     void Start()
     {
         setWallDemensions();
-        mCamera.ResetAspect();
+      //  mCamera.ResetAspect();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public bool isInRoom(Vector2 location)
     {
@@ -105,7 +100,7 @@ public class RoomStats : MonoBehaviour
         // center is exactly between both
         Vector2 target = (x + y) / 2f;
         // assign camera position
-        mCamera.transform.position = new Vector3(target.x, target.y, -30f);
+        //mCamera.transform.position = new Vector3(target.x, target.y, -30f);
     }
 
     public Vector2 sendPlayerToDoor(string side)
