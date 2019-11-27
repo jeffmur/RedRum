@@ -79,7 +79,6 @@ public class Weapon : MonoBehaviour
                 bulletsInClip--;
                 stats.changeAmmo(-1);
                 // Successful shot
-                stats.localPlayerData.totalShots += 1;
             }
         }
         else // reload
@@ -104,7 +103,7 @@ public class Weapon : MonoBehaviour
         {
             // spawn bullet and set position
             GameObject bullet = Instantiate(BulletPrefab) as GameObject;
-           // GlobalControl.Instance.savedPlayerData.totalShots += 1f;
+            GlobalControl.Instance.savedPlayerData.totalShots += 1f;
             Vector2 bulletPosition = transform.position;
             bulletPosition += direction * barrelOffset;
             Vector2 gunUp = transform.up;
