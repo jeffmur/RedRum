@@ -76,10 +76,7 @@ public class PlayerStats : MonoBehaviour
     private ActivatedItem HeldItem { get => localCasperData.CurrentActiveItem; set => localCasperData.CurrentActiveItem = value; }
 
     public bool[] WeaponInventory { get => localCasperData.WeaponInventory; set => localCasperData.WeaponInventory = value; }
-    public bool IsEtherial { get => isEtherial; set { 
-            isEtherial = value;
-            GetComponent<Collider2D>().isTrigger = value;
-        } 
+    public bool IsEtherial { get => isEtherial; set { isEtherial = value; } 
     }
 
     public void changeMaxHealth(int value)

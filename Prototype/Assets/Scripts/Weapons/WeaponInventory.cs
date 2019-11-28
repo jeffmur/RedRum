@@ -73,7 +73,11 @@ public class WeaponInventory : MonoBehaviour
         foreach (Transform wp in transform)
         {
             if (first == wp.name[0])
+            {
                 CurrentInventory[i] = active;
+                selectedWeapon = i;
+            }
+                
             i++;
         }
             

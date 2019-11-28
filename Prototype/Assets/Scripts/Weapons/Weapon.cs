@@ -42,7 +42,7 @@ public class Weapon : MonoBehaviour
         animator = transform.GetComponent<Animator>();
         random = new Random();
         timeSinceLastShot = Time.time + FireRate;
-        reloadStartTime = -1;
+        reloadStartTime = -2;
         StartCoroutine(GetStats());
     }
 
