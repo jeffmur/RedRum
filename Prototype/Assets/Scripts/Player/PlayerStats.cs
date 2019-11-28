@@ -31,7 +31,6 @@ public class PlayerStats : MonoBehaviour
 {
     public CasperData localCasperData;
     public PlayerData localPlayerData;
-    public TimeManager timeManager;
     public List<Item> passiveItems;
 
     private bool isEtherial; //need player collider
@@ -136,10 +135,10 @@ public class PlayerStats : MonoBehaviour
         {
             localCasperData.CurrentHealth = localCasperData.MaxHealth;
         }
-        if (CurrentHealth == 1 && name == "Casper") { timeManager.DoSlowMotion(5); }
+        if (CurrentHealth == 1 && name == "Casper") { StartCoroutine(SlowMotion.DoSlowMotion(5, 0.05f)); }
         if (localCasperData.CurrentHealth <= 0 && name == "Casper")
         {
-            timeManager.DoSlowMotion(2);
+            StartCoroutine(SlowMotion.DoSlowMotion(2, 0.05f));
             Invoke("Die", 2f); //dies after 5 seconds
         }
         onHealthChange?.Invoke(localCasperData.CurrentHealth);

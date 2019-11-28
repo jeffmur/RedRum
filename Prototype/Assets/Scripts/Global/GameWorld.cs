@@ -55,6 +55,10 @@ public partial class GameWorld : MonoBehaviour
             stats.activateItem();
         }
         if (Input.GetKeyDown("5"))
-            GameObject.Find("Main Camera").GetComponent<TimeManager>().PermSlow(0.1f);
+        {
+            Debug.Log("yeeeet");
+            //GameObject.Find("Main Camera").GetComponent<TimeManager>().PermSlow(0.1f);
+            SlowMotion.DoSlowMotion(5, 0.1f);
+        }
     }
 }

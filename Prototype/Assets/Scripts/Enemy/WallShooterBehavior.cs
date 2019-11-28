@@ -11,7 +11,6 @@ public class WallShooterBehavior : MonoBehaviour
     public GameObject BulletPrefab;
     private Vector3 bulletShootDirc;
 
-    private TimeManager timeManager;
     private Rigidbody2D rb;
     private int direction;
     private float timeBtwShot;
