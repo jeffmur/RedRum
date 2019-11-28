@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
-
-public class EventManager : MonoBehaviour
+public class EventManager : SceneSingleton<EventManager>
 {
     private GameObject player;
-    private PlayerStats stats;
-    private float Timer;
-    private bool FlashingBegan;
+    private Casper casper;
 
     public delegate void onNotifyChangeDelegate(string notification);
     public static event onNotifyChangeDelegate OnNotifyChange;
@@ -25,13 +22,13 @@ public class EventManager : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        stats = player.GetComponent<PlayerStats>();
+        casper = player.GetComponent<Casper>();
 
-        stats.onHealthChange += triggerHealthChange;
-        stats.onAmmoChange += triggerAmmoChange;
-        stats.onMaxHealthChange += triggerMaxHealthChange;
-        stats.onItemPickup += triggerItemPickup;
-        stats.onItemUse += triggerItemActivate;
+        casper.onHealthChange += triggerHealthChange;
+        casper.onAmmoChange += triggerAmmoChange;
+        casper.onMaxHealthChange += triggerMaxHealthChange;
+        casper.onItemPickup += triggerItemPickup;
+        casper.onItemUse += triggerItemActivate;
     }
 
     public static void TriggerNotification(string notification)
@@ -65,6 +62,11 @@ public class EventManager : MonoBehaviour
     {
         onItemActivateTrigger?.Invoke(item);
     }
+
+
+
+    private float Timer;
+    private bool FlashingBegan;
     private void FlashDamage()
     {
         FlashingBegan = true;

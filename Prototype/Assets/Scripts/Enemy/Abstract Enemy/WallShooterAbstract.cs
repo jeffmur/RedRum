@@ -89,7 +89,7 @@ public class WallShooterAbstract : Enemy
         }
         else if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlayerStats>().changeHealth(-BulletPrefab.GetComponent<EnemyBullet>().bulletDamage);
+            other.GetComponent<Casper>().changeHealth(-BulletPrefab.GetComponent<EnemyBullet>().bulletDamage);
         }
     }
     void WallState()

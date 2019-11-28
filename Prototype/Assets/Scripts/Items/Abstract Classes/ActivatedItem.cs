@@ -49,7 +49,7 @@ public abstract class ActivatedItem : Item
     public override void process()
     {
         base.process();
-        stats.setActivatedItem(this);
+        casperData.setActivatedItem(this);
     }
 
     public void activateItem()

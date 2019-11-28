@@ -27,7 +27,7 @@ public class EmergencyStopwatch : PassiveEffect
 
     protected override void Update()
     {
-        circle.transform.localPosition = player.transform.position;
+        circle.transform.localPosition = casper.transform.position;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -36,7 +36,17 @@ public class EmergencyStopwatch : PassiveEffect
         {
             if (collision.gameObject.tag == "EnemyBullet" || collision.gameObject.tag == "Enemy")
             {
-                Time.timeScale = 0.7f;
+                Time.timeScale = 0.5f;
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (gameObject.name == "EmergencyStopwatch")
+        {
+            if (collision.gameObject.tag == "EnemyBullet" || collision.gameObject.tag == "Enemy")
+            {
+                Time.timeScale = 1f;
             }
         }
     }

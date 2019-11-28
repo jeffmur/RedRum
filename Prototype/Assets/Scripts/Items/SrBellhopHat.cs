@@ -39,9 +39,9 @@ public class SrBellhopHat : ActivatedItem
             if (boomerangTimer >= 1f)
             {
                 returning = true;
-                if ((transform.position - player.transform.position).magnitude < 1f)
+                if ((transform.position - casper.transform.position).magnitude < 1f)
                 {
-                    transform.position = player.transform.position;
+                    transform.position = casper.transform.position;
                     gameObject.SetActive(false); ; //Sets to false if back
                     activated = false;
                 }
@@ -53,7 +53,7 @@ public class SrBellhopHat : ActivatedItem
             }
             else
             {
-                transform.up = player.transform.position - transform.position;
+                transform.up = casper.transform.position - transform.position;
                 transform.Translate(Vector2.up * 5f * Time.deltaTime);
             }
         }     
@@ -63,7 +63,7 @@ public class SrBellhopHat : ActivatedItem
         if(!activated)
         {
            ThrowingHat = Instantiate(ThrowingHatPrefab) as GameObject;
-            ThrowingHat.transform.position = player.transform.position;
+            ThrowingHat.transform.position = casper.transform.position;
         }
     }
 

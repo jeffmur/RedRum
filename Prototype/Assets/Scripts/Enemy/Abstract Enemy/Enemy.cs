@@ -45,7 +45,7 @@ public abstract class Enemy : MonoBehaviour
         Collider2D enemyCol = GetComponent<Collider2D>();
         Debug.Assert(playerCol != null);
         Debug.Assert(enemyCol != null);
-        Physics2D.IgnoreCollision(playerCol, enemyCol, casper.GetComponent<PlayerStats>().IsEtherial);
+        Physics2D.IgnoreCollision(playerCol, enemyCol, casper.GetComponent<Casper>().IsEtherial);
     }
 
     protected virtual void Attack(int damage)

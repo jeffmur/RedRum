@@ -5,15 +5,15 @@ using UnityEngine;
 
 public partial class GameWorld : MonoBehaviour
 {
-    private PlayerStats stats;
+    private Casper casper;
     public EventManager eventManager;
 
     // Start is called before the first frame update
     void Awake()
     {
-        stats = GameObject.Find("Casper").GetComponent<PlayerStats>();
+        casper = GameObject.Find("Casper").GetComponent<Casper>();
         eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
-        Debug.Assert(stats != null);
+        Debug.Assert(casper != null);
     }
 
     // Update is called once per frame
@@ -24,40 +24,38 @@ public partial class GameWorld : MonoBehaviour
 
     public Tuple<int, int> getStartingHealth()
     {
-        return Tuple.Create(stats.CurrentHealth, stats.MaxHealth);
+        return Tuple.Create(casper.CurrentHealth, casper.MaxHealth);
     }
 
     public Tuple<int,int> getStartingAmmo()
     {
-        return Tuple.Create(stats.CurrentAmmo, stats.MaxAmmo);
+        return Tuple.Create(casper.CurrentAmmo, casper.MaxAmmo);
     }
 
     public void TestController()
     {
         if (Input.GetKeyDown("1"))
         {
-            stats.changeHealth(1);
+            casper.changeHealth(1);
         }
         if (Input.GetKeyDown("2"))
         {
-            stats.changeHealth(-1);
+            casper.changeHealth(-1);
         }
         if (Input.GetKeyDown("3"))
         {
-            stats.changeMaxHealth(1);
+            casper.changeMaxHealth(1);
         }
         if (Input.GetKeyDown("4"))
         {
-            stats.changeMaxHealth(-1);
+            casper.changeMaxHealth(-1);
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            stats.activateItem();
+            casper.activateItem();
         }
         if (Input.GetKeyDown("5"))
         {
-            Debug.Log("yeeeet");
-            //GameObject.Find("Main Camera").GetComponent<TimeManager>().PermSlow(0.1f);
             SlowMotion.DoSlowMotion(5, 0.1f);
         }
     }

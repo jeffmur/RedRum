@@ -13,8 +13,12 @@ public class Heart : MonoBehaviour
     {
         if(collision.name == "Casper")
         {
-            collision.GetComponent<PlayerStats>().changeHealth(1);
-            Destroy(this.gameObject);
+            Casper casper = collision.GetComponent<Casper>();
+            if (casper.CurrentHealth != casper.MaxHealth)
+            {
+                collision.GetComponent<Casper>().changeHealth(1);
+                Destroy(this.gameObject);
+            }
         }
         
     }

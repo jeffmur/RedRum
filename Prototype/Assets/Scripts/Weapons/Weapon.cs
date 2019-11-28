@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour
     public float BulletSpeed;
     public float FireRate;
     public int BulletsPerShot = 1;
-    private PlayerStats stats;
+    private Casper stats;
     private GameObject crosshairs;
     public float Accuracy;
     public float reloadSpeed;
@@ -38,7 +38,7 @@ public class Weapon : MonoBehaviour
         WI = GameObject.Find("WeaponInventory").GetComponent<WeaponInventory>();
         pickupUI = Resources.Load<GameObject>("UI/flotingText");
         reloadCooldown = GameObject.Find("ReloadCooldown").GetComponent<ReloadCooldown>();
-        stats = GameObject.Find("Casper").GetComponent<PlayerStats>();
+        stats = GameObject.Find("Casper").GetComponent<Casper>();
         animator = transform.GetComponent<Animator>();
         random = new Random();
         timeSinceLastShot = Time.time + FireRate;

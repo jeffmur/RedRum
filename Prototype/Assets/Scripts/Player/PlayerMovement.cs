@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private GameObject crosshairs;
     private Rigidbody2D rb;
     private Animator animator;
-    private PlayerStats playerStats;
+    private Casper playerStats;
     private SpriteRenderer playerRenderer;
     private GameObject weaponInventory;
     private GameObject selectedWeapon;
@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        playerStats = gameObject.GetComponentInChildren<PlayerStats>();
+        playerStats = gameObject.GetComponentInChildren<Casper>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         crosshairs = GameObject.Find("crossHairs");

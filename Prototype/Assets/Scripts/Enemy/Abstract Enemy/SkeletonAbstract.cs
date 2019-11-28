@@ -79,7 +79,7 @@ public class SkeletonAbstract : Enemy
 
     protected override void Attack(int damage)
     {
-        casper.GetComponent<PlayerStats>().changeHealth(-damage);
+        casper.GetComponent<Casper>().changeHealth(-damage);
     }
 
 }
