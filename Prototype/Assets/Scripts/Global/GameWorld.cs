@@ -3,22 +3,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class GameWorld : MonoBehaviour
+public partial class GameWorld : SceneSingleton<GameWorld>
 {
-    private Casper casper;
+    public Casper casper;
+    public Camera mCamera;
     public EventManager eventManager;
+    public GameObject crosshairs;
 
     // Start is called before the first frame update
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         casper = GameObject.Find("Casper").GetComponent<Casper>();
-        eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
         Debug.Assert(casper != null);
+
+        Cursor.visible = false;
+        crosshairs = GameObject.Find("crossHairs");
+        mCamera = Camera.main;
+        //DontDestroyOnLoad(mCamera.gameObject);
+        //DontDestroyOnLoad(crosshairs);
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        PositionCrosshair();
         TestController();
     }
 
@@ -58,5 +67,20 @@ public partial class GameWorld : MonoBehaviour
         {
             SlowMotion.DoSlowMotion(5, 0.1f);
         }
+        if (Input.GetMouseButton(0))
+        {
+            casper.FireEquippedGun(PositionCrosshair());
+        }
+        if (Input.GetMouseButton(1))
+        {
+            LevelManager.Complete();
+        }
+    }
+
+    private Vector3 PositionCrosshair()
+    {
+        Vector3 target = mCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
+        crosshairs.transform.position = new Vector3(target.x, target.y, -9f);
+        return crosshairs.transform.position;
     }
 }

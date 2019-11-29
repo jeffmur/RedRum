@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class MainController : MonoBehaviour
+public class MainController : SceneSingleton<MainController>
 {
     //declare all UI elements and the model
     public HealthUI healthInfo;
@@ -12,15 +12,16 @@ public class MainController : MonoBehaviour
     public GameWorld gameWorld;
 
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         notificationPanel.gameObject.SetActive(false);
         EventManager.OnNotifyChange += sendNotification;
         gameWorld.eventManager.onAmmoChange += updateAmmoUI;
         gameWorld.eventManager.onHealthTrigger += updatehealthUI;
         gameWorld.eventManager.onMaxHealthTrigger += updateMaxHealthUI;
         gameWorld.eventManager.onItemPickupTrigger += updateActiveItemPickupUI;
-        gameWorld.eventManager.onItemActivateTrigger += updateActiveItemUseUI;
+        gameWorld.eventManager.onItemActivateTrigger += updateActiveItemUseUI;        
     }
 
     // Start is called before the first frame update

@@ -3,14 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class Casper : MonoBehaviour
+public partial class Casper : SceneSingleton<Casper>
 {
     public CasperData localCasperData;
     public PlayerData localPlayerData;
     public List<Item> passiveItems;
-
-    public delegate void onAmmoChangeDelegate(int val);
-    public event onAmmoChangeDelegate onAmmoChange;
 
     // Start is called before the first frame update
     void Start()
@@ -50,27 +47,6 @@ public partial class Casper : MonoBehaviour
         yield return new WaitForSeconds(time);
         localCasperData.isInvincible = false;
     }
-
-
-    public void changeAmmo(int value)
-    {
-        if(value == 0) { return; }
-
-        if(value == -1)
-            localCasperData.CurrentAmmo += value;
-        else
-            localCasperData.CurrentAmmo = value;
-
-        if (localCasperData.CurrentAmmo > localCasperData.MaxAmmo)
-            localCasperData.CurrentAmmo = localCasperData.MaxAmmo;
-
-        if (localCasperData.CurrentAmmo < 0)
-            localCasperData.CurrentAmmo = 0;
-
-        onAmmoChange?.Invoke(localCasperData.CurrentAmmo);
-    }
-
-
 
     private IEnumerator Die()
     {

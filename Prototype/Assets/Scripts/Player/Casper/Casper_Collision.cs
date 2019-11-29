@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class Casper : MonoBehaviour
+public partial class Casper
 {
     public ItemFloatingText hint;
 

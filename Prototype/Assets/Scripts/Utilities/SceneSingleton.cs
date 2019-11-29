@@ -2,19 +2,15 @@
 public class SceneSingleton<T> : MonoBehaviour where T : SceneSingleton<T>
 {
     private static T m_Instance = null;
-    public static T Instance
+
+    protected virtual void Awake()
     {
-        get
-        {
             if (m_Instance == null)
             {
-                m_Instance = FindObjectOfType<T>();
-                // fallback, might not be necessary.
-                if (m_Instance == null)
-                    m_Instance = new GameObject(typeof(T).Name).AddComponent<T>();
-                DontDestroyOnLoad(m_Instance.gameObject);
+                m_Instance = gameObject.GetComponent<T>(); // In first scene, make us the singleton.
+                DontDestroyOnLoad(gameObject);
             }
-            return m_Instance;
-        }
+            else if (m_Instance != this)
+                Destroy(gameObject); // On reload, singleton already set, so destroy duplicate.
     }
 }

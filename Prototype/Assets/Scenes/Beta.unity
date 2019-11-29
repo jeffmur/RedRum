@@ -2129,6 +2129,7 @@ GameObject:
   - component: {fileID: 982888129}
   - component: {fileID: 982888130}
   - component: {fileID: 982888126}
+  - component: {fileID: 982888127}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2148,6 +2149,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8593081ad76cef34da62595f7f83f81f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &982888127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 982888125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31d9244d06d18dd4a9a5b92ab417322a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  casper: {fileID: 0}
+  mCamera: {fileID: 0}
+  eventManager: {fileID: 723500245}
+  crosshairs: {fileID: 0}
 --- !u!4 &982888129
 Transform:
   m_ObjectHideFlags: 0
@@ -4282,7 +4299,6 @@ GameObject:
   - component: {fileID: 1524478373}
   - component: {fileID: 1524478372}
   - component: {fileID: 1524478371}
-  - component: {fileID: 1524478376}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -4307,7 +4323,6 @@ MonoBehaviour:
   activeItemInfo: {fileID: 1788079618}
   notificationPanel: {fileID: 1539036958}
   deathPanel: {fileID: 1952793665}
-  gameWorld: {fileID: 1524478376}
 --- !u!114 &1524478372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4393,19 +4408,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1524478376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524478370}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31d9244d06d18dd4a9a5b92ab417322a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventManager: {fileID: 723500245}
 --- !u!1001 &1528007876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4748,6 +4750,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   levelGen: {fileID: 851671937}
+--- !u!114 &1640093516 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6539579177956660202, guid: 3119cfdf03be01e4ca455c8b871291e3,
+    type: 3}
+  m_PrefabInstance: {fileID: 2035382635}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dceb13a297dbc144ad65cfc531c1fd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1647847088 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4734044632158848, guid: 789cb061bf280cd4a9e7a6e7f610341f,
@@ -6121,6 +6135,11 @@ PrefabInstance:
       propertyPath: hint
       value: 
       objectReference: {fileID: 1305677226}
+    - target: {fileID: 6539579178435093423, guid: 3119cfdf03be01e4ca455c8b871291e3,
+        type: 3}
+      propertyPath: weaponInventory
+      value: 
+      objectReference: {fileID: 1640093516}
     - target: {fileID: 6539579177579626177, guid: 3119cfdf03be01e4ca455c8b871291e3,
         type: 3}
       propertyPath: m_SortingOrder
@@ -6136,7 +6155,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5bb900fc31df7e84b8b73cd418b7c3d6, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6539579178435093418, guid: 3119cfdf03be01e4ca455c8b871291e3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3119cfdf03be01e4ca455c8b871291e3, type: 3}
 --- !u!4 &2035382636 stripped
 Transform:

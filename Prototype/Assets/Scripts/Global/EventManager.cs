@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 public class EventManager : SceneSingleton<EventManager>
 {
-    private GameObject player;
-    private Casper casper;
+    public Casper casper;
 
     public delegate void onNotifyChangeDelegate(string notification);
     public static event onNotifyChangeDelegate OnNotifyChange;
@@ -19,10 +18,10 @@ public class EventManager : SceneSingleton<EventManager>
     public delegate void onItemActivateTriggerDelegate(ActivatedItem item);
     public event onItemActivateTriggerDelegate onItemActivateTrigger;
 
-    private void Awake()
+    protected override void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        casper = player.GetComponent<Casper>();
+        base.Awake();
+        casper = GameObject.FindGameObjectWithTag("Player").GetComponent<Casper>();
 
         casper.onHealthChange += triggerHealthChange;
         casper.onAmmoChange += triggerAmmoChange;
@@ -50,7 +49,7 @@ public class EventManager : SceneSingleton<EventManager>
     {
         //Debug.Log("Changing health by " + CurentHealth);
         onHealthTrigger?.Invoke(CurentHealth);
-        FlashDamage();
+        //FlashDamage();
     }
 
     private void triggerItemPickup(Item item)
@@ -65,38 +64,38 @@ public class EventManager : SceneSingleton<EventManager>
 
 
 
-    private float Timer;
-    private bool FlashingBegan;
-    private void FlashDamage()
-    {
-        FlashingBegan = true;
-    }
-    private void Update()
-    {
-        if (FlashingBegan)
-        {
-            Timer += Time.deltaTime;
-            player.GetComponentInChildren<Light>().color = Color.red;
-            player.GetComponentInChildren<Light>().range = 2f;
-            player.GetComponentInChildren<Light>().intensity = 20f;
+    //private float Timer;
+    //private bool FlashingBegan;
+    //private void FlashDamage()
+    //{
+    //    FlashingBegan = true;
+    //}
+    //private void Update()
+    //{
+    //    if (FlashingBegan)
+    //    {
+    //        Timer += Time.deltaTime;
+    //        player.GetComponentInChildren<Light>().color = Color.red;
+    //        player.GetComponentInChildren<Light>().range = 2f;
+    //        player.GetComponentInChildren<Light>().intensity = 20f;
 
-            if (Timer > .25f && Timer <= .5f)
-            {
-                player.GetComponentInChildren<Light>().intensity = 0f;
-            }
-            if (Timer > .5f)
-            {
-                player.GetComponentInChildren<Light>().intensity = 20f;
-            }
-            if(Timer > .75f)
-            {
-                Timer = 0f;
-                FlashingBegan = false;
-            }
-        }
-        else
-        {
-            player.GetComponentInChildren<Light>().intensity = 0f;
-        }
-    }
+    //        if (Timer > .25f && Timer <= .5f)
+    //        {
+    //            player.GetComponentInChildren<Light>().intensity = 0f;
+    //        }
+    //        if (Timer > .5f)
+    //        {
+    //            player.GetComponentInChildren<Light>().intensity = 20f;
+    //        }
+    //        if(Timer > .75f)
+    //        {
+    //            Timer = 0f;
+    //            FlashingBegan = false;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        player.GetComponentInChildren<Light>().intensity = 0f;
+    //    }
+    //}
 }
