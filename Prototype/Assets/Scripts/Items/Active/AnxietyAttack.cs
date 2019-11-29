@@ -12,7 +12,7 @@ public class AnxietyAttack : ActivatedItem
         float x = Random.Range(-1f, 1f);
         float y = Random.Range(-1f, 1f);
         Vector2 direction = new Vector2(x, y);
-        weapon = casper.GetComponent<PointAndShoot>().getSelectedWeapon();
+        weapon = casper.transform.Find("WeaponInventory").GetComponent<WeaponInventory>().GetSelectedWeapon().GetComponent<Weapon>();
         weapon.Shoot(direction);
     }
 
