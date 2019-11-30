@@ -4,40 +4,22 @@ using UnityEngine;
 
 public partial class Casper
 {
-    public delegate void onAmmoChangeDelegate(int val);
-    public event onAmmoChangeDelegate onAmmoChange;
 
-    public WeaponInventory weaponInventory;
-    public GameObject selectedWeapon;
+    //public void changeAmmo(int value)
+    //{
+    //    if (value == 0) { return; }
 
-    private void Update()
-    {
-        selectedWeapon = weaponInventory.GetSelectedWeapon();
-    }
+    //    if (value == -1)
+    //        localCasperData.CurrentAmmo += value;
+    //    else
+    //        localCasperData.CurrentAmmo = value;
 
-    public void changeAmmo(int value)
-    {
-        if (value == 0) { return; }
+    //    if (localCasperData.CurrentAmmo > localCasperData.MaxAmmo)
+    //        localCasperData.CurrentAmmo = localCasperData.MaxAmmo;
 
-        if (value == -1)
-            localCasperData.CurrentAmmo += value;
-        else
-            localCasperData.CurrentAmmo = value;
+    //    if (localCasperData.CurrentAmmo < 0)
+    //        localCasperData.CurrentAmmo = 0;
 
-        if (localCasperData.CurrentAmmo > localCasperData.MaxAmmo)
-            localCasperData.CurrentAmmo = localCasperData.MaxAmmo;
-
-        if (localCasperData.CurrentAmmo < 0)
-            localCasperData.CurrentAmmo = 0;
-
-        onAmmoChange?.Invoke(localCasperData.CurrentAmmo);
-    }
-
-    public void FireEquippedGun(Vector3 target)
-    {
-        selectedWeapon = weaponInventory.GetSelectedWeapon();
-        Vector3 difference = target - selectedWeapon.transform.position;
-        Vector2 direction = difference.normalized; // distance;
-        selectedWeapon.GetComponent<Weapon>().FireWeapon(direction);
-    }
+    //    onAmmoChange?.Invoke(localCasperData.CurrentAmmo);
+    //}
 }

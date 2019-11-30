@@ -10,17 +10,15 @@ public class StatsUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        string currentHealth = Casper.Instance.localCasperData.CurrentHealth.ToString();
-        string maxHealth = Casper.Instance.localCasperData.MaxHealth.ToString();
-        string currentAmmo = Casper.Instance.localCasperData.CurrentAmmo.ToString();
-        string maxAmmo = Casper.Instance.localCasperData.MaxAmmo.ToString();
-        string uiCurrentAmmo = bulletui.curAmmo.ToString();
-        string uiMaxAmmo = bulletui.maxAmmo.ToString();
-        text.text = "Current Health: " + currentHealth + '\n' +
-            "Max Health: " + maxHealth + '\n' +
-            "Current Ammo: " + currentAmmo + '\n' +
-            "Current Ammo UI: " + uiCurrentAmmo + '\n' +
-            "Max Ammo: " + maxAmmo + '\n' +
-            "Max Ammo UI: " + uiMaxAmmo + '\n';
+        string totalShots = Casper.Instance.localPlayerData.totalShots.ToString();
+        string roomsCleared = Casper.Instance.localPlayerData.roomsCleared.ToString();
+        string bulletsHit = Casper.Instance.localPlayerData.bulletsHit.ToString();
+        string itemsPickedUp = Casper.Instance.localPlayerData.itemsPickedUp.ToString();
+        string enemiesKilled = Casper.Instance.localPlayerData.enemiesKilled.ToString();
+    text.text = "Total Shots: " + totalShots + '\n' +
+            "Rooms Cleared: " + roomsCleared + '\n' +
+            "Bullets Hit: " + bulletsHit + '\n' +
+            "Items Picked Up: " + itemsPickedUp + '\n' +
+            "Enemies Killed: " + enemiesKilled + '\n';
     }
 }

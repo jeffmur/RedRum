@@ -40,7 +40,7 @@ public class BulletUI : MonoBehaviour
 
         for (int i = 0; i < curAmmo; i++)
         {
-            generateBullet(bullet);
+            generateBullet(Casper.Instance.weaponInventory.GetSelectedWeapon().BulletPrefab.GetComponent<SpriteRenderer>().sprite);
         }
     }
 

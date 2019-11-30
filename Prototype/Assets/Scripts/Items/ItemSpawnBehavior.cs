@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemBehavior : MonoBehaviour
+public class ItemSpawnBehavior : MonoBehaviour
 {
     private float spinSpeed = 80f;
     private bool pickedUp = false;

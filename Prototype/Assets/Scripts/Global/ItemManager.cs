@@ -10,12 +10,17 @@ public class ItemManager : MonoBehaviour
     private void Awake()
     {
         Object[] items = Resources.LoadAll("Textures/Prefabs/Items/PickupItems");
+        Object[] weapons = Resources.LoadAll("Textures/Prefabs/Guns/SpawnableGuns");
 
         foreach (Object t in items)
         {
             GameObject item = (GameObject)t;
-            listOfItems.Add(item);
-
+            //listOfItems.Add(item);
+        }
+        foreach (Object t in weapons)
+        {
+            GameObject weapon = (GameObject)t;
+            listOfItems.Add(weapon);
         }
     }
     public GameObject SpawnRandomItem()

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public partial class Casper
 {
-    public ItemFloatingText hint;
+    public bool isHovering = false;
+    Collider2D itemCollision;
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,44 +17,53 @@ public partial class Casper
                 Physics2D.IgnoreCollision(collision, gameObject.GetComponent<Collider2D>());
             }
         }
+        if (collision.gameObject.tag == "Item" || collision.gameObject.tag == "Weapon")
+        {
+            isHovering = true;
+            itemCollision = collision;
+            if (collision.gameObject.GetComponent<SpriteRenderer>())
+            {
+                string message;
+                if (collision.gameObject.tag == "Item")
+                {
+                    message = "Press E to pick up";
+                }
+                else
+                {
+                    message = "Press E to equip";
+                }
+                GameWorld.Instance.hint.showFloatingText(collision.gameObject.transform.position, message);
+            }
+        }        
     }
-
-    private void OnTriggerStay2D(Collider2D collision)
+    private void ObtainEquipment(Collider2D collision)
     {
         if (collision.gameObject.tag == "Item")
         {
             if (collision.gameObject.GetComponent<SpriteRenderer>())
             {
-                string message = "Press E to pick up";
-                hint.showFloatingText(collision.gameObject.transform.position, message);
+                pickUpItem(collision.gameObject.GetComponent<Item>());
+                GameWorld.Instance.hint.gameObject.SetActive(false);
+                isHovering = false;
             }
         }
         if (collision.gameObject.tag == "Weapon")
         {
-            //if (collision.gameObject.GetComponent<SpriteRenderer>())
+            if (collision.gameObject.GetComponent<SpriteRenderer>())
             {
-                string message = "Press E to equip";
-                hint.showFloatingText(collision.gameObject.transform.position, message);
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (collision.gameObject.tag == "Item")
-            {
-                if (collision.gameObject.GetComponent<SpriteRenderer>())
-                {
-                    pickUpItem(collision.gameObject.GetComponent<Item>());
-                    hint.gameObject.SetActive(false);
-                }
+                weaponInventory.AddWeaponToInventory(collision.gameObject.GetComponent<Weapon>());
+                GameWorld.Instance.hint.gameObject.SetActive(false);
+                isHovering = false;
             }
         }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Item" || collision.gameObject.tag == "Weapon")
         {
-            hint.gameObject.SetActive(false);
+            GameWorld.Instance.hint.gameObject.SetActive(false);
+            isHovering = false;
         }
     }
 }

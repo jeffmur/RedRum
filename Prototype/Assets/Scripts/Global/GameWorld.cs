@@ -7,6 +7,7 @@ public partial class GameWorld : SceneSingleton<GameWorld>
 {
     private Casper casper;
     private GameObject crosshairs;
+    public ItemFloatingText hint;
 
     // Start is called before the first frame update
     protected override void Awake()
@@ -35,10 +36,8 @@ public partial class GameWorld : SceneSingleton<GameWorld>
 
     public Tuple<int,int> getStartingAmmo()
     {
-        print("GETSTARTINGAMMO " + Tuple.Create(GlobalControl.Instance.savedCasperData.CurrentAmmo,
-            GlobalControl.Instance.savedCasperData.MaxAmmo));
-        return Tuple.Create(GlobalControl.Instance.savedCasperData.CurrentAmmo, 
-            GlobalControl.Instance.savedCasperData.MaxAmmo);
+        Weapon playerWeapon = Casper.Instance.weaponInventory.GetSelectedWeapon();
+        return Tuple.Create(playerWeapon.bulletsInClip, playerWeapon.ClipSize);
     }
 
     public void TestController()
@@ -65,8 +64,7 @@ public partial class GameWorld : SceneSingleton<GameWorld>
         }
         if (Input.GetKeyDown("5"))
         {
-            casper.localCasperData.print();
-            //SlowMotion.DoSlowMotion(5, 0.1f);
+            SlowMotion.DoSlowMotion(5, 0.1f);
         }
         if (Input.GetMouseButton(0))
         {

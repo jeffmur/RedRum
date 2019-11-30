@@ -23,7 +23,7 @@ public class EventManager : SceneSingleton<EventManager>
         base.Awake();
 
         Casper.Instance.onHealthChange += TriggerHealthChange;
-        Casper.Instance.onAmmoChange += TriggerAmmoChange;
+        Casper.Instance.weaponInventory.onWeaponUse += TriggerAmmoChange;
         Casper.Instance.onMaxHealthChange += TriggerMaxHealthChange;
         Casper.Instance.onItemPickup += TriggerItemPickup;
         Casper.Instance.onItemUse += TriggerItemActivate;

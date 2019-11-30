@@ -26,7 +26,6 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void DecreaseHealth(int damage)
     {
         enemyHealth -= damage;
-        GlobalControl.Instance.savedPlayerData.bulletsHit += 1; // increasing for stats
         if (enemyHealth < 0)
         {
             GlobalControl.Instance.savedPlayerData.enemiesKilled += 1;

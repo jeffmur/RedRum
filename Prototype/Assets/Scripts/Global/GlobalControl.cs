@@ -28,8 +28,6 @@ public class GlobalControl : MonoBehaviour
             savedCasperData = new CasperData();
             Casper.Instance.changeHealth(Casper.Instance.MaxHealth);
         }
-        Weapon curWep = Casper.Instance.selectedWeapon.GetComponent<Weapon>();
-        curWep.bulletsInClip = curWep.ClipSize; 
         Casper.Instance.transform.position = Vector3.zero;
         Camera.main.transform.position = new Vector3(0, 0, -10);
     }

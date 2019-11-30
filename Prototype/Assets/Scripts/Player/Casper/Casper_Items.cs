@@ -16,17 +16,21 @@ public partial class Casper
         if (HeldItem != null)
         {
             HeldItem.showItem();
-            HeldItem.tag = "Item";
-            HeldItem.transform.position = transform.position;
+            HeldItem.tag = "Item";            
+            HeldItem.transform.position = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+            HeldItem.transform.parent = null;
         }
         HeldItem = item;
         HeldItem.tag = "PickedUp";
         item.hideItem();
+        item.transform.parent = gameObject.transform;
     }
 
     private void pickUpItem(Item selectedItem)
     {
         selectedItem.process();
+        Destroy(selectedItem.GetComponent<ItemSpawnBehavior>());
+  
         onItemPickup?.Invoke(selectedItem);
     }
 

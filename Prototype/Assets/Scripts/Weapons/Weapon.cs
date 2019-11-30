@@ -10,39 +10,31 @@ public class Weapon : MonoBehaviour
     public float BulletSpeed;
     public float FireRate;
     public int BulletsPerShot = 1;
-    private Casper casper;
     public float Accuracy;
     public float reloadSpeed;
     public GameObject BulletPrefab;
     public float barrelOffset = 0;
     public float heightOffset = 0;
+    public float equipScale;
 
     private Animator animator;
     private ReloadCooldown reloadCooldown;
     public int bulletsInClip;
     private float timeSinceLastShot;
     private float reloadStartTime;
-    private Random random;
-    private GameObject pickupUI;
-    private WeaponInventory WI;
 
-    public IEnumerator GetStats()
-    {
-        yield return new WaitForSeconds(0.001f);
-        casper.MaxAmmo = ClipSize;
-        casper.changeAmmo(bulletsInClip);
-    }
+    public delegate void onAmmoChangeDelegate();
+    public event onAmmoChangeDelegate onAmmoChange;
+
     void Start()
     {
-        WI = GameObject.Find("WeaponInventory").GetComponent<WeaponInventory>();
-        pickupUI = Resources.Load<GameObject>("UI/flotingText");
+        gameObject.AddComponent<BoxCollider2D>();
+        GetComponent<BoxCollider2D>().isTrigger = true;
+        gameObject.tag = "Weapon";
         reloadCooldown = GameObject.Find("ReloadCooldown").GetComponent<ReloadCooldown>();
-        casper = GameObject.Find("Casper").GetComponent<Casper>();
         animator = transform.GetComponent<Animator>();
-        random = new Random();
         timeSinceLastShot = Time.time + FireRate;
-        reloadStartTime = -2;
-        //StartCoroutine(GetStats());
+        reloadStartTime = -2; //nice one, daddy
     }
 
     void Update()
@@ -59,13 +51,13 @@ public class Weapon : MonoBehaviour
             {
                 animator.SetBool("Reload", false);
                 bulletsInClip = ClipSize;
-                casper.changeAmmo(bulletsInClip);
                 reloadStartTime = -1;
+                onAmmoChange?.Invoke();
             }
         }
     }
 
-    public void FireWeapon(Vector2 direction)
+    public bool FireWeapon(Vector2 direction)
     {
         if (bulletsInClip > 0 && !reloadCooldown.reloading)
         {
@@ -76,9 +68,8 @@ public class Weapon : MonoBehaviour
                 // update variables
                 timeSinceLastShot = Time.time;
                 bulletsInClip--;
-                casper.changeAmmo(-1);
-                // Successful shot
-                casper.localPlayerData.totalShots += 1;
+                onAmmoChange?.Invoke();
+                return true;
             }
         }
         else // reload
@@ -88,8 +79,10 @@ public class Weapon : MonoBehaviour
                 reloadStartTime = Time.time;
                 reloadCooldown.StartReload(reloadSpeed);
                 animator.SetBool("Reload", true);
+                onAmmoChange?.Invoke();
             }
         }
+        return false;
     }
 
     public void Shoot(Vector2 direction)
@@ -108,7 +101,7 @@ public class Weapon : MonoBehaviour
             Vector2 gunUp = transform.up;
             bulletPosition += gunUp * heightOffset;
             bullet.transform.position = bulletPosition;
-            bullet.GetComponent<bullet>().bulletDamage = (int)(Damage * casper.localCasperData.damageModifier);
+            bullet.GetComponent<bullet>().bulletDamage = (int)(Damage * Casper.Instance.localCasperData.damageModifier);
 
             // accuracy handling
             float spread = Random.Range(-Accuracy, Accuracy);
@@ -119,14 +112,8 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    public bool IsReloading()
     {
-        if(collision.tag == "Player")
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                WI.AddWeaponToInventory(gameObject);
-            }
-        }
+        return reloadCooldown.reloading;
     }
 }
