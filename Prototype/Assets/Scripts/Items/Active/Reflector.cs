@@ -17,8 +17,8 @@ public class Reflector : ActivatedItem
 
     protected override void doItemEffect()
     {
-        reflector.transform.position = player.transform.position;
-        sphere.transform.position = player.transform.position;
+        reflector.transform.position = casper.transform.position;
+        sphere.transform.position = casper.transform.position;
     }
 
     protected override void endItemEffect()
@@ -55,7 +55,7 @@ public class Reflector : ActivatedItem
     {
         EnemyBullet bullet = obj.GetComponent<EnemyBullet>();
         Vector3 inDirection = bullet.bulletDirection;
-        Vector3 inNormal = player.transform.position - obj.transform.position;
+        Vector3 inNormal = casper.transform.position - obj.transform.position;
         bullet.bulletDirection = Vector3.Reflect(inDirection, inNormal);
         bullet.tag = "HeroBullet";
         bullet.bulletDamage = 50;

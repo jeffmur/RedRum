@@ -325,7 +325,6 @@ GameObject:
   - component: {fileID: 7663654366640398467}
   - component: {fileID: 7663654366640398526}
   - component: {fileID: 7663654366640398527}
-  - component: {fileID: 6539579178435093418}
   - component: {fileID: 6539579178435093423}
   - component: {fileID: 757006895555644381}
   m_Layer: 0
@@ -370,7 +369,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d70e7a8798e363e4f8df248314d59148, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -469,19 +468,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.24}
   m_EdgeRadius: 0
---- !u!114 &6539579178435093418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7663654366640398469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fc59911245f3b640b527e1efe401b1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireRateMultiplier: 0
 --- !u!114 &6539579178435093423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,12 +480,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe40c53610c9d5d4cbc357aca80b0962, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 0
-  currentAmmo: 0
-  maxAmmo: 0
+  isPersistant: 0
   passiveItems: []
-  currentActiveItem: {fileID: 0}
+  hint: {fileID: 0}
+  weaponInventory: {fileID: 0}
+  selectedWeapon: {fileID: 0}
 --- !u!114 &757006895555644381
 MonoBehaviour:
   m_ObjectHideFlags: 0

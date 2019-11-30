@@ -82,7 +82,7 @@ public class SuitcaseBossAbstract : Enemy
         base.OnTriggerEnter2D(other);
         if (other.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerStats>().changeHealth(-1);
+            other.gameObject.GetComponent<Casper>().changeHealth(-1);
         }
     }
 

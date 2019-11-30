@@ -13,7 +13,7 @@ public class SuperShroom : PassiveItem
 
     public override void modifyStats()
     {
-        player.transform.localScale *= 1.2f;
-        player.GetComponent<PlayerStats>().changeMaxHealth(2);
+        casper.transform.localScale *= 1.2f;
+        casper.GetComponent<Casper>().changeMaxHealth(2);
     }
 }

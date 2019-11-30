@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RoomStats : MonoBehaviour
 {
-    public Camera mCamera;
+    private Camera mCamera;
     public List<GameObject> mWalls;
     private float maxY;
     private float minY;
@@ -13,6 +13,7 @@ public class RoomStats : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mCamera = Camera.main;
         setWallDemensions();
         mCamera.ResetAspect();
     }

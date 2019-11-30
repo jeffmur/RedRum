@@ -1,119 +1,97 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponInventory : MonoBehaviour
 {
-    public int selectedWeapon = 0;
-    private GameObject selectedWeaponObject = null;
-    private bool[] CurrentInventory;
+    public int selectedWeaponIndex = 0;
+    public List<Weapon> CurrentInventory;
+    public Weapon startingWeapon;
+
+    public delegate void onWeaponUseDelegate(int bulletsRemaining);
+    public event onWeaponUseDelegate onWeaponUse;
+
+    public delegate void weaponEventDelegate();
+    public event onWeaponUseDelegate onWeaponFired, onWeaponReload;
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        // NUMBER OF WEAPONS = 3
-        StartCoroutine(LateStart());
-    }
-
-    IEnumerator LateStart()
-    {
-        yield return new WaitForSeconds(0.001f);
-        CurrentInventory = GlobalControl.Instance.savedCasperData.WeaponInventory;
-        setInitial(transform.childCount);
-        SelectWeapon();
+        InitializeInventory();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
+    {
+        TrackSelectedWeapon();
+    }
+
+    private void TrackSelectedWeapon()
     {
         // weapon switch handling
-        int previousWeapon = selectedWeapon;
+        if (CurrentInventory.Count == 1)
+        {
+            return;
+        }
         if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
         {
-            if (selectedWeapon <= 0)
-                selectedWeapon = transform.childCount - 1;
+            if (selectedWeaponIndex <= 0)
+                selectedWeaponIndex = CurrentInventory.Count - 1;
             else
-                selectedWeapon--;
+                selectedWeaponIndex--;
         }
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forwards
         {
-            if (selectedWeapon >= transform.childCount - 1)
-                selectedWeapon = 0;
+            if (selectedWeaponIndex >= CurrentInventory.Count - 1)
+                selectedWeaponIndex = 0;
             else
-                selectedWeapon++;
+                selectedWeaponIndex++;
         }
-
-        if (selectedWeapon != previousWeapon && CurrentInventory[selectedWeapon])
-        {
-            SelectWeapon();
-        }
+        SetSelectedWeapon();
     }
 
     // function to be called when a weapon is picked up
-    public void AddWeaponToInventory(GameObject clone)
+    public void AddWeaponToInventory(Weapon weapon)
     {
-        // Get char & destroy
-        char picked = clone.name[0];
-        Destroy(clone);
-        setWeapon(true, picked);
-        SelectWeapon();
-        GlobalControl.Instance.savedCasperData.WeaponInventory = CurrentInventory;
+        CurrentInventory.Add(weapon);
+        Destroy(weapon.GetComponent<ItemSpawnBehavior>());
+        weapon.onAmmoChange += TriggerAmmoChange;
+        weapon.transform.parent = gameObject.transform;
+        weapon.transform.localScale = new Vector3(weapon.equipScale, weapon.equipScale, 1);
+        weapon.transform.eulerAngles = gameObject.transform.eulerAngles;
+        selectedWeaponIndex = CurrentInventory.Count - 1;
+        SetSelectedWeapon();
     }
 
-    private void setInitial(int size)
+    private void InitializeInventory()
     {
         if(CurrentInventory == null)
-            CurrentInventory = new bool[size];
-
-        CurrentInventory[0] = true;
-    }
-    private void setWeapon(bool active, char first)
-    {
-        int i = 0;
-        foreach (Transform wp in transform)
-        {
-            if (first == wp.name[0])
-            {
-                CurrentInventory[i] = active;
-                selectedWeapon = i;
-            }
-                
-            i++;
-        }
-            
-    }
-
-    public int numOfWeapons()
-    {
-        int r = 0;
-        for (int i = 0; i < CurrentInventory.Length; i++)
-            if (CurrentInventory[i] == true)
-                r++;
-        return r;
+            CurrentInventory = new List<Weapon>();
+        AddWeaponToInventory(startingWeapon);
+        selectedWeaponIndex = 0;
     }
 
     // returns selected weapon
-    public GameObject GetSelectedWeapon()
+    public Weapon GetSelectedWeapon()
     {
-        return selectedWeaponObject;
+        return CurrentInventory[selectedWeaponIndex];
     }
 
-    private void SelectWeapon()
+    private void SetSelectedWeapon()
     {
-        int i = 0;
-        if (transform.childCount > 0) { 
-            foreach (Transform weapon in transform)
-            {
-                if (i == selectedWeapon)
-                {
-                    weapon.gameObject.SetActive(true);
-                    StartCoroutine(weapon.GetComponent<Weapon>().GetStats());
-                    selectedWeaponObject = weapon.gameObject;
-                }
-                else
-                    weapon.gameObject.SetActive(false);
-                i++;
-            }
+
+        for (int i = 0; i < CurrentInventory.Count; i++)
+        {
+            if (i != selectedWeaponIndex)
+            { CurrentInventory[i].gameObject.SetActive(false); }
+            else { CurrentInventory[i].gameObject.SetActive(true); }
         }
+        onWeaponUse?.Invoke(GetSelectedWeapon().bulletsInClip);
+    }
+
+    public void TriggerAmmoChange()
+    {
+        onWeaponUse?.Invoke(GetSelectedWeapon().bulletsInClip);
     }
 }

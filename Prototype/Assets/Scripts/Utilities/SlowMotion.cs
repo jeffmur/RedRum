@@ -11,7 +11,6 @@ public static class SlowMotion
         Time.fixedDeltaTime = Time.unscaledDeltaTime;
         while (Time.timeScale < 1f)
         {
-            Debug.Log(Time.timeScale);
             // linearly increase the timescale
             Time.timeScale += (1f / length) * Time.unscaledDeltaTime;
             Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);

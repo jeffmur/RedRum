@@ -58,7 +58,7 @@ public class GhostAbstract : Enemy
         }
         else if (other.CompareTag("Player"))
         {
-            casper.GetComponent<PlayerStats>().changeHealth(-1);
+            casper.GetComponent<Casper>().changeHealth(-1);
         }
         else if (other.CompareTag("HeroBullet"))
         {

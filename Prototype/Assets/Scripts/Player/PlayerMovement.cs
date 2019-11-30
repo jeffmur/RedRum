@@ -7,10 +7,10 @@ public class PlayerMovement : MonoBehaviour
     private GameObject crosshairs;
     private Rigidbody2D rb;
     private Animator animator;
-    private PlayerStats playerStats;
+    private Casper casper;
     private SpriteRenderer playerRenderer;
     private GameObject weaponInventory;
-    private GameObject selectedWeapon;
+    private Weapon selectedWeapon;
     private SpriteRenderer selectedWeaponRenderer;
     private Vector2 movement;
     private float GUN_PIVOT_X = 0.06f;
@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        playerStats = gameObject.GetComponentInChildren<PlayerStats>();
+        casper = Casper.Instance;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         crosshairs = GameObject.Find("crossHairs");
@@ -80,6 +80,6 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // Movement
-        rb.MovePosition(rb.position + movement * playerStats.MoveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement * casper.MoveSpeed * Time.fixedDeltaTime);
     }
 }

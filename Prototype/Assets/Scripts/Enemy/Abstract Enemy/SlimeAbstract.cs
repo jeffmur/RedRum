@@ -77,7 +77,7 @@ public class SlimeAbstract : Enemy
         base.OnTriggerEnter2D(collision);
         if (collision.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerStats>().changeHealth(-1);
+            collision.gameObject.GetComponent<Casper>().changeHealth(-1);
         }
     }
 }

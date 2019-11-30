@@ -6,11 +6,18 @@ public class MysteryPotion : ActivatedItem
 {
     private bool crRunning = false;
 
+    protected override void setItemInfo()
+    {
+        itemName = "Potion of Mysteries";
+        itemID = 8;
+        caption = "My greatest creation";
+    }
+
     protected override void doItemEffect()
     {
         if (!crRunning)
         {
-            int effectIndex = Random.Range(0, 4);
+            int effectIndex = Random.Range(0, 5);
             switch(effectIndex)
             {
                 case (0):
@@ -25,6 +32,9 @@ public class MysteryPotion : ActivatedItem
                 case (3):
                     StartCoroutine(smallBoi());
                     break;
+                case (4):
+                    StartCoroutine(shiftRealities());
+                    break;
             }
         }
     }
@@ -36,66 +46,68 @@ public class MysteryPotion : ActivatedItem
 
     protected override void setActivateItemBehavior()
     {
-        return;
+        casperData.changeMaxHealth(Random.Range(0, 3));
+        casperData.MoveSpeed += Random.Range(0f, 0.5f);
+        casperData.FireRate /= 1.2f;
     }
 
     protected override void setItemDurations()
     {
         effectDuration = 180;
-        cooldownDuration = 0;
+        cooldownDuration = -1;
     }
 
     private IEnumerator turnInvisible()
     {
         crRunning = true;
-        stats.IsEtherial = true;
-        Color blah = player.GetComponent<SpriteRenderer>().color;
-        blah.a = 0.25f;
-        player.GetComponent<SpriteRenderer>().color = blah;
-
+        casperData.IsEtherial = true;
         yield return new WaitForSecondsRealtime(Random.Range(2, 6));
-
-        stats.IsEtherial = false;
-        Color color = player.GetComponent<SpriteRenderer>().color;
-        color.a = 1f;
-        player.GetComponent<SpriteRenderer>().color = color;
+        casperData.IsEtherial = false;
         crRunning = false;
     }
 
     private IEnumerator sonicSpeed()
     {
         crRunning = true;
-        float prevSpeed = stats.MoveSpeed;
-        stats.MoveSpeed = 20;
+        float prevSpeed = casperData.MoveSpeed;
+        casperData.MoveSpeed = 20;
         yield return new WaitForSecondsRealtime(Random.Range(2, 6));
-        stats.MoveSpeed = prevSpeed;
+        casperData.MoveSpeed = prevSpeed;
         crRunning = false;
     }
 
     private IEnumerator bigBoy()
     {
         crRunning = true;
-        Vector3 prevSize = player.transform.localScale;
-        player.transform.localScale *= 2;
+        Vector3 prevSize = casper.transform.localScale;
+        casper.transform.localScale *= 2;
         yield return new WaitForSecondsRealtime(Random.Range(2, 6));
-        player.transform.localScale = prevSize;
+        casper.transform.localScale = prevSize;
         crRunning = false;
     }
 
     private IEnumerator smallBoi()
     {
         crRunning = true;
-        Vector3 prevSize = player.transform.localScale;
-        player.transform.localScale /= 3;
+        Vector3 prevSize = casper.transform.localScale;
+        casper.transform.localScale /= 3;
         yield return new WaitForSecondsRealtime(Random.Range(2, 6));
-        player.transform.localScale = prevSize;
+        casper.transform.localScale = prevSize;
         crRunning = false;
     }
 
-    protected override void setItemInfo()
+    private IEnumerator shiftRealities()
     {
-        itemName = "Potion of Mysteries";
-        itemID = 8;
-        caption = "My greatest creation";
+        crRunning = true;
+        float timer = (float)Random.Range(2, 6);
+        while (timer > 0)
+        {
+            Vector3 rotation = new Vector3(Random.Range(-180f, 180f), Random.Range(-180f, 180f), Random.Range(-180f, 180f));
+            casper.transform.eulerAngles = rotation;
+            yield return new WaitForSeconds(.25f);
+            timer -= .25f;
+        }
+        casper.transform.eulerAngles = Vector3.zero;
+        crRunning = false;
     }
 }

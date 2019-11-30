@@ -6,8 +6,8 @@ public class Medkit : ActivatedItem
 {
     protected override void setActivateItemBehavior()
     {
-        int full = stats.MaxHealth - stats.CurrentHealth;
-        stats.changeHealth(full);
+        int full = casperData.MaxHealth - casperData.CurrentHealth;
+        casperData.changeHealth(full);
     }
 
     protected override void setItemDurations()

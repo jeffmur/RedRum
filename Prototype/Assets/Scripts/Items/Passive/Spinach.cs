@@ -6,7 +6,7 @@ public class Spinach : PassiveItem
 {
     public override void modifyStats()
     {
-        stats.localCasperData.damageModifier += 0.75f;
+        casperData.localCasperData.damageModifier += 0.75f;
     }
     protected override void setItemInfo()
     {

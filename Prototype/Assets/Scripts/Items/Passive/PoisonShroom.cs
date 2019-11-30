@@ -11,12 +11,12 @@ public class PoisonShroom : PassiveItem
 
     public override void modifyStats()
     {
-        Vector3 ogScale = player.transform.localScale;
-        player.transform.localScale = ogScale * 0.8f;
-        foreach(Transform child in player.transform)
+        Vector3 ogScale = casper.transform.localScale;
+        casper.transform.localScale = ogScale * 0.8f;
+        foreach(Transform child in casper.transform)
         {
             child.localScale = ogScale / 8.0f;
         }
-        player.GetComponent<PlayerStats>().changeMaxHealth(-1);
+        casper.GetComponent<Casper>().changeMaxHealth(-1);
     }
 }

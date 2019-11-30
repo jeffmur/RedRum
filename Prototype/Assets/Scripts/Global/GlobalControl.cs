@@ -22,9 +22,14 @@ public class GlobalControl : MonoBehaviour
         }
     }
 
-    public void ResetCasper()
+    public void ResetCasper(bool isAlive)
     {
-        savedCasperData = new CasperData();
+        if (!isAlive) { 
+            savedCasperData = new CasperData();
+            Casper.Instance.changeHealth(Casper.Instance.MaxHealth);
+        }
+        Casper.Instance.transform.position = Vector3.zero;
+        Camera.main.transform.position = new Vector3(0, 0, -10);
     }
     public void saveItem(GameObject obj)
     {

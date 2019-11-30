@@ -23,7 +23,7 @@ public class BulletUI : MonoBehaviour
     public void setStartingRounds(Tuple<int,int> ammo)
     {
         rounds = new List<GameObject>();
-        curAmmo = ammo.Item1;
+        CurrentAmmo = ammo.Item1;
         maxAmmo = ammo.Item2;
         setBulletUI();
     }
@@ -40,7 +40,7 @@ public class BulletUI : MonoBehaviour
 
         for (int i = 0; i < curAmmo; i++)
         {
-            generateBullet(bullet);
+            generateBullet(Casper.Instance.weaponInventory.GetSelectedWeapon().BulletPrefab.GetComponent<SpriteRenderer>().sprite);
         }
     }
 

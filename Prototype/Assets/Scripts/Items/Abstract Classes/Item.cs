@@ -5,15 +5,15 @@ public abstract class Item : MonoBehaviour
     protected int itemID;
     protected string itemName;
     protected string caption;
-    protected GameObject player;
-    protected PlayerStats stats;
+    protected GameObject casper;
+    protected Casper casperData;
 
     protected GameObject FlotingPointPrefab;
 
     protected virtual void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        stats = player.GetComponent<PlayerStats>();
+        casper = GameObject.FindGameObjectWithTag("Player");
+        casperData = casper.GetComponent<Casper>();
         setDefaultInfo();
         gameObject.AddComponent<BoxCollider2D>();
         GetComponent<BoxCollider2D>().isTrigger = true;
@@ -24,7 +24,7 @@ public abstract class Item : MonoBehaviour
     public virtual void process()
     {
         string message = "Obtained: " + itemName + '\n' + '\n' + caption;
-        EventManager.TriggerNotification(message);
+        EventManager.Instance.TriggerNotification(message);
         hideItem();
         GlobalControl.Instance.savedPlayerData.itemsPickedUp += 1;
     }

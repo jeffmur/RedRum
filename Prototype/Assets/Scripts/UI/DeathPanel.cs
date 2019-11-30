@@ -9,8 +9,12 @@ public class DeathPanel : MonoBehaviour
     {
         Panel.gameObject.SetActive(false); 
     }
-    public void showHidePanel()
+    public void ShowPanel()
     {
         Panel.gameObject.SetActive(true);
+    }
+    public void HidePanel()
+    {
+        Panel.gameObject.SetActive(false);
     }
 }

@@ -11,11 +11,6 @@ public class EnemyBullet : MonoBehaviour
 
     void Update()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player.GetComponent<PlayerStats>().IsEtherial)
-        {
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), player.GetComponent<Collider2D>(), true);
-        }
         if (bulletDirection != null)
             transform.localPosition +=  bulletDirection * bulletSpeed * Time.deltaTime;
     }
@@ -30,13 +25,17 @@ public class EnemyBullet : MonoBehaviour
         }
         else if (other.CompareTag("Player"))
         {
-            GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-            Destroy(effect, 0.5f);
-            if (tag != "HeroBullet")
+            Casper casper = other.GetComponent<Casper>();
+            if (!casper.IsEtherial)
             {
-                other.GetComponent<PlayerStats>().changeHealth(-bulletDamage);
+                GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+                Destroy(effect, 0.5f);
+                if (tag != "HeroBullet")
+                {
+                    casper.changeHealth(-bulletDamage);
+                }
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
         }
     }
 
