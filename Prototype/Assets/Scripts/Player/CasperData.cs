@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class CasperData
-{
+{ 
     public float FireRate = 1f;
     public int CurrentHealth = 5;
     public int MaxHealth = 5;
@@ -14,4 +14,13 @@ public class CasperData
     public bool isEtherial = false;
     public ActivatedItem CurrentActiveItem;
     public bool[] WeaponInventory;
+
+    // summin fishy is going on with these values
+    public void print()
+    {
+        Debug.Log("Current hp: " + CurrentHealth);
+        Debug.Log("Max hp: " + MaxHealth);
+        Debug.Log("Current ammo: " + CurrentAmmo);
+        Debug.Log("Max ammo: " + MaxAmmo);
+    }
 }

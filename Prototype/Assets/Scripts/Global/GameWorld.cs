@@ -5,23 +5,19 @@ using UnityEngine;
 
 public partial class GameWorld : SceneSingleton<GameWorld>
 {
-    public Casper casper;
-    public Camera mCamera;
-    public EventManager eventManager;
-    public GameObject crosshairs;
+    private Casper casper;
+    private GameObject crosshairs;
 
     // Start is called before the first frame update
     protected override void Awake()
     {
         base.Awake();
-        casper = GameObject.Find("Casper").GetComponent<Casper>();
+        casper = Casper.Instance;
         Debug.Assert(casper != null);
 
         Cursor.visible = false;
         crosshairs = GameObject.Find("crossHairs");
-        mCamera = Camera.main;
-        //DontDestroyOnLoad(mCamera.gameObject);
-        //DontDestroyOnLoad(crosshairs);
+
     }
 
     // Update is called once per frame
@@ -33,12 +29,16 @@ public partial class GameWorld : SceneSingleton<GameWorld>
 
     public Tuple<int, int> getStartingHealth()
     {
-        return Tuple.Create(casper.CurrentHealth, casper.MaxHealth);
+        return Tuple.Create(GlobalControl.Instance.savedCasperData.CurrentHealth, 
+            GlobalControl.Instance.savedCasperData.MaxHealth);
     }
 
     public Tuple<int,int> getStartingAmmo()
     {
-        return Tuple.Create(casper.CurrentAmmo, casper.MaxAmmo);
+        print("GETSTARTINGAMMO " + Tuple.Create(GlobalControl.Instance.savedCasperData.CurrentAmmo,
+            GlobalControl.Instance.savedCasperData.MaxAmmo));
+        return Tuple.Create(GlobalControl.Instance.savedCasperData.CurrentAmmo, 
+            GlobalControl.Instance.savedCasperData.MaxAmmo);
     }
 
     public void TestController()
@@ -65,7 +65,8 @@ public partial class GameWorld : SceneSingleton<GameWorld>
         }
         if (Input.GetKeyDown("5"))
         {
-            SlowMotion.DoSlowMotion(5, 0.1f);
+            casper.localCasperData.print();
+            //SlowMotion.DoSlowMotion(5, 0.1f);
         }
         if (Input.GetMouseButton(0))
         {
@@ -79,8 +80,8 @@ public partial class GameWorld : SceneSingleton<GameWorld>
 
     private Vector3 PositionCrosshair()
     {
-        Vector3 target = mCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
+        Vector3 target = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
         crosshairs.transform.position = new Vector3(target.x, target.y, -9f);
-        return crosshairs.transform.position;
+        return crosshairs.transform.localPosition;
     }
 }

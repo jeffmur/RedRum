@@ -10,8 +10,7 @@ public class Weapon : MonoBehaviour
     public float BulletSpeed;
     public float FireRate;
     public int BulletsPerShot = 1;
-    private Casper stats;
-    private GameObject crosshairs;
+    private Casper casper;
     public float Accuracy;
     public float reloadSpeed;
     public GameObject BulletPrefab;
@@ -20,7 +19,7 @@ public class Weapon : MonoBehaviour
 
     private Animator animator;
     private ReloadCooldown reloadCooldown;
-    private int bulletsInClip;
+    public int bulletsInClip;
     private float timeSinceLastShot;
     private float reloadStartTime;
     private Random random;
@@ -30,20 +29,20 @@ public class Weapon : MonoBehaviour
     public IEnumerator GetStats()
     {
         yield return new WaitForSeconds(0.001f);
-        stats.MaxAmmo = ClipSize;
-        stats.changeAmmo(bulletsInClip);
+        casper.MaxAmmo = ClipSize;
+        casper.changeAmmo(bulletsInClip);
     }
     void Start()
     {
         WI = GameObject.Find("WeaponInventory").GetComponent<WeaponInventory>();
         pickupUI = Resources.Load<GameObject>("UI/flotingText");
         reloadCooldown = GameObject.Find("ReloadCooldown").GetComponent<ReloadCooldown>();
-        stats = GameObject.Find("Casper").GetComponent<Casper>();
+        casper = GameObject.Find("Casper").GetComponent<Casper>();
         animator = transform.GetComponent<Animator>();
         random = new Random();
         timeSinceLastShot = Time.time + FireRate;
         reloadStartTime = -2;
-        StartCoroutine(GetStats());
+        //StartCoroutine(GetStats());
     }
 
     void Update()
@@ -60,7 +59,7 @@ public class Weapon : MonoBehaviour
             {
                 animator.SetBool("Reload", false);
                 bulletsInClip = ClipSize;
-                stats.changeAmmo(bulletsInClip);
+                casper.changeAmmo(bulletsInClip);
                 reloadStartTime = -1;
             }
         }
@@ -77,9 +76,9 @@ public class Weapon : MonoBehaviour
                 // update variables
                 timeSinceLastShot = Time.time;
                 bulletsInClip--;
-                stats.changeAmmo(-1);
+                casper.changeAmmo(-1);
                 // Successful shot
-                stats.localPlayerData.totalShots += 1;
+                casper.localPlayerData.totalShots += 1;
             }
         }
         else // reload
@@ -109,7 +108,7 @@ public class Weapon : MonoBehaviour
             Vector2 gunUp = transform.up;
             bulletPosition += gunUp * heightOffset;
             bullet.transform.position = bulletPosition;
-            bullet.GetComponent<bullet>().bulletDamage = (int)(Damage * stats.localCasperData.damageModifier);
+            bullet.GetComponent<bullet>().bulletDamage = (int)(Damage * casper.localCasperData.damageModifier);
 
             // accuracy handling
             float spread = Random.Range(-Accuracy, Accuracy);

@@ -8,11 +8,11 @@ public partial class Casper
     public event onAmmoChangeDelegate onAmmoChange;
 
     public WeaponInventory weaponInventory;
-    public Weapon selectedWeapon;
+    public GameObject selectedWeapon;
 
     private void Update()
     {
-        selectedWeapon = weaponInventory.GetSelectedWeapon().GetComponent<Weapon>();
+        selectedWeapon = weaponInventory.GetSelectedWeapon();
     }
 
     public void changeAmmo(int value)
@@ -35,9 +35,9 @@ public partial class Casper
 
     public void FireEquippedGun(Vector3 target)
     {
-        selectedWeapon = weaponInventory.GetSelectedWeapon().GetComponent<Weapon>();
+        selectedWeapon = weaponInventory.GetSelectedWeapon();
         Vector3 difference = target - selectedWeapon.transform.position;
         Vector2 direction = difference.normalized; // distance;
-        selectedWeapon.FireWeapon(direction);
+        selectedWeapon.GetComponent<Weapon>().FireWeapon(direction);
     }
 }

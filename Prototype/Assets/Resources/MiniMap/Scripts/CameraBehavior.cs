@@ -40,7 +40,7 @@ public class CameraBehavior : MonoBehaviour
         Vector2 target = (min + max) / 2f;
 
         mCamera.transform.position = new Vector3(target.x, target.y, -10f);
-        switch (Scenes.getDem()[0])
+        switch (Scenes.getDimension()[0])
         {
             case '5': // 5x5
                 mCamera.orthographicSize = 30;

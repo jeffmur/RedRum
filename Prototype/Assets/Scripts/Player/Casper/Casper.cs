@@ -9,6 +9,16 @@ public partial class Casper : SceneSingleton<Casper>
     public PlayerData localPlayerData;
     public List<Item> passiveItems;
 
+
+    protected override void Awake()
+    {
+        base.Awake();
+        selectedWeapon = weaponInventory.GetSelectedWeapon();
+        
+        //MaxAmmo = selectedWeapon.GetComponent<Weapon>().ClipSize;
+        //changeAmmo(MaxAmmo);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,13 +35,14 @@ public partial class Casper : SceneSingleton<Casper>
     }
 
     public float MoveSpeed { get => localCasperData.Speed; set => localCasperData.Speed = value; }
-    public int MaxHealth { get => localCasperData.MaxHealth; }
-    public int CurrentHealth { get => localCasperData.CurrentHealth; }
+    public int MaxHealth { get => localCasperData.MaxHealth; private set => localCasperData.MaxHealth = value; }
+    public int CurrentHealth { get => localCasperData.CurrentHealth; private set => localCasperData.CurrentHealth = value; }
     public int MaxAmmo { get => localCasperData.MaxAmmo; set => localCasperData.MaxAmmo = value; }
     public int CurrentAmmo { get => localCasperData.CurrentAmmo; set => localCasperData.CurrentAmmo = value; }
     public float FireRate { get => localCasperData.FireRate; set => localCasperData.FireRate = value; }
     private ActivatedItem HeldItem { get => localCasperData.CurrentActiveItem; set => localCasperData.CurrentActiveItem = value; }
     public bool[] WeaponInventory { get => localCasperData.WeaponInventory; set => localCasperData.WeaponInventory = value; }
+    public bool IsInvincible { get => localCasperData.isInvincible; set => localCasperData.isInvincible = value; }
     public bool IsEtherial { get => localCasperData.isEtherial; 
         set { 
             localCasperData.isEtherial = value;
@@ -43,9 +54,9 @@ public partial class Casper : SceneSingleton<Casper>
 
     public IEnumerator ToggleInvincibility(float time)
     {
-        localCasperData.isInvincible = true;
+        IsInvincible = true;
         yield return new WaitForSeconds(time);
-        localCasperData.isInvincible = false;
+        IsInvincible = false;
     }
 
     private IEnumerator Die()

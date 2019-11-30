@@ -9,9 +9,10 @@ public class WeaponInventory : MonoBehaviour
     private bool[] CurrentInventory;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // NUMBER OF WEAPONS = 3
+        //StartCoroutine(LateStart());
         StartCoroutine(LateStart());
     }
 

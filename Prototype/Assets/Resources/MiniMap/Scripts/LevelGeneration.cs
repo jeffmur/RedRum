@@ -37,7 +37,7 @@ public class LevelGeneration : MonoBehaviour {
         // Set up Camera, Demensions (Scenes.cs)
         // @param 4x4, 5x5, 6x6
         SIZE = GetComponent<SizeController>();
-        SIZE.setUp(Scenes.getDem());
+        SIZE.setUp(Scenes.getDimension());
         direction = Random.Range(1, 6);
     }
 

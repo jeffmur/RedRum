@@ -5,21 +5,21 @@ using UnityEngine;
 
 public static class Scenes
 {
-    private static string DEM = "4x4"; // Static demensions
+    private static string roomDimension = "4x4"; // Static demensions
 
     // Victory Case
-    public static void Load(string path, string demensions, bool isCasperAlive)
+    public static void Load(string path, string dimension, bool isCasperAlive)
     {
-        DEM = demensions;
+        roomDimension = dimension;
         Load(path, isCasperAlive);
-        //displayMessage(demensions);
+        //displayMessage(dimensions);
     }
 
     // Losing/Retry case
     public static void Load(string path, bool isCasperAlive)
     {
-        if(!isCasperAlive) { GlobalControl.Instance.ResetCasper(); }
         SceneManager.LoadScene(path);
+        GlobalControl.Instance.ResetCasper(isCasperAlive);
     }
 
     public static void Load(string path)
@@ -27,14 +27,14 @@ public static class Scenes
         SceneManager.LoadScene(path);
     }
 
-    public static string getDem()
+    public static string getDimension()
     {
-        return DEM;
+        return roomDimension;
     }
 
-    public static string nextDem()
+    public static string nextDimension()
     {
-        switch (DEM[0])
+        switch (roomDimension[0])
         {
             case '4':
                 return "5x5";
@@ -47,6 +47,6 @@ public static class Scenes
 
     public static void displayMessage(string msg)
     {
-        EventManager.TriggerNotification(msg);
+        EventManager.Instance.TriggerNotification(msg);
     }
 }

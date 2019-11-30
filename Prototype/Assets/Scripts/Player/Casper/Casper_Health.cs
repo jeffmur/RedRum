@@ -17,34 +17,34 @@ public partial class Casper
             return;
         }
 
-        localCasperData.MaxHealth += value;
+        MaxHealth += value;
         int healthChanged;
 
         if (value > 0)
         {
-            if (localCasperData.MaxHealth > 20)
+            if (MaxHealth > 20)
             {
-                localCasperData.MaxHealth = 20;
+                MaxHealth = 20;
             }
             changeHealth(value);
         }
         if (value < 0)
         {
-            if (localCasperData.MaxHealth < 1)
+            if (MaxHealth < 1)
             {
-                localCasperData.MaxHealth = 1;
-                changeHealth(-(localCasperData.CurrentHealth - 1));
+                MaxHealth = 1;
+                changeHealth(-(CurrentHealth - 1));
             }
             else
             {
-                int previousMaxHealth = localCasperData.MaxHealth - value;
-                int missingHealth = previousMaxHealth - localCasperData.CurrentHealth;
+                int previousMaxHealth = MaxHealth - value;
+                int missingHealth = previousMaxHealth - CurrentHealth;
                 healthChanged = (missingHealth + value >= 0) ? 0 : value + missingHealth;
-                healthChanged = (localCasperData.CurrentHealth - healthChanged < 1) ? 1 : healthChanged;
+                healthChanged = (CurrentHealth - healthChanged < 1) ? 1 : healthChanged;
                 changeHealth(-healthChanged);
             }
         }
-        onMaxHealthChange?.Invoke(localCasperData.MaxHealth);
+        onMaxHealthChange?.Invoke(MaxHealth);
     }
 
     public void changeHealth(int value)
@@ -54,30 +54,35 @@ public partial class Casper
             return;
         }
 
-        if (value < 0 && (localCasperData.isInvincible || IsEtherial))
+        if (value < 0 && (IsInvincible || IsEtherial))
         {
             print("Casper is invincible");
             return;
         }
-        localCasperData.CurrentHealth += value;
-        if (localCasperData.CurrentHealth > localCasperData.MaxHealth)
+        CurrentHealth += value;
+        if (CurrentHealth > MaxHealth)
         {
-            localCasperData.CurrentHealth = localCasperData.MaxHealth;
+            CurrentHealth = MaxHealth;
         }
+        if (CurrentHealth < 0)
+        {
+            CurrentHealth = 0;
+        }
+
         if (CurrentHealth == 1) { StartCoroutine(SlowMotion.DoSlowMotion(5, 0.05f)); }
-        if (localCasperData.CurrentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             StartCoroutine(SlowMotion.DoSlowMotion(2, 0.05f));
             StartCoroutine(Die());
         }
-        onHealthChange?.Invoke(localCasperData.CurrentHealth);
+        onHealthChange?.Invoke(CurrentHealth);
         if (value > 0)
         {
             onHealed?.Invoke();
         }
         else
         {
-            StartCoroutine(ToggleInvincibility(1));
+            //StartCoroutine(ToggleInvincibility(1));
             onDamaged?.Invoke();
         }
     }

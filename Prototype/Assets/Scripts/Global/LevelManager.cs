@@ -15,20 +15,18 @@ public class LevelManager : MonoBehaviour
         Cursor.visible = true;
         Scenes.Load("Dead", false);
     }
-
-    public void retryLevel()
-    {
-        Scenes.Load(GAME, Scenes.getDem(), false);
-    }
-
     public void initGame()
     {
         Scenes.Load(GAME);
     }
+    public void retryLevel()
+    {
+        Scenes.Load(GAME, Scenes.getDimension(), false);
+    }
 
     public void nextLevel()
     {
-        Scenes.Load(GAME, Scenes.nextDem(), true);
+        Scenes.Load(GAME, Scenes.nextDimension(), true);
     }
 
     public void QuitGame() 

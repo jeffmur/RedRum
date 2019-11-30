@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 public class SceneSingleton<T> : MonoBehaviour where T : SceneSingleton<T>
 {
-    private static T m_Instance = null;
+    private static T m_Instance;
+
+    public static T Instance { get => m_Instance; private set => m_Instance = value; }
 
     protected virtual void Awake()
     {
-            if (m_Instance == null)
+            if (Instance == null)
             {
-                m_Instance = gameObject.GetComponent<T>(); // In first scene, make us the singleton.
+                Instance = gameObject.GetComponent<T>(); // In first scene, make us the singleton.
                 DontDestroyOnLoad(gameObject);
             }
-            else if (m_Instance != this)
+            else if (Instance != this)
                 Destroy(gameObject); // On reload, singleton already set, so destroy duplicate.
     }
 }

@@ -24,7 +24,7 @@ public abstract class Item : MonoBehaviour
     public virtual void process()
     {
         string message = "Obtained: " + itemName + '\n' + '\n' + caption;
-        EventManager.TriggerNotification(message);
+        EventManager.Instance.TriggerNotification(message);
         hideItem();
         GlobalControl.Instance.savedPlayerData.itemsPickedUp += 1;
     }
