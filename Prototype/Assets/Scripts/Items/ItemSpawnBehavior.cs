@@ -7,7 +7,6 @@ public class ItemSpawnBehavior : MonoBehaviour
     private float spinSpeed = 80f;
     private bool pickedUp = false;
     private Vector3 startPos;
-    private Transform casper;
     private Vector3 endPos;
     // Start is called before the first frame update
     void Start()
@@ -24,12 +23,6 @@ public class ItemSpawnBehavior : MonoBehaviour
             if (transform.localPosition.y < endPos.y)
                 transform.position += Vector3.up * 1f * Time.deltaTime;
             transform.Rotate(Vector3.up * spinSpeed * Time.deltaTime);
-        }
-        else
-        {
-            transform.position = new Vector3(casper.position.x + 0.4f, casper.position.y - 0.3f, 0f);
-            transform.localScale = new Vector3(3, 3, 1);
-            transform.rotation = casper.rotation;
         }
     }
 }

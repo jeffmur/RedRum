@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class WeaponInventory : MonoBehaviour
 {
-    public int selectedWeaponIndex = 0;
-    public List<Weapon> CurrentInventory;
+    private int selectedWeaponIndex = 0;
+    private List<Weapon> CurrentInventory;
     public Weapon startingWeapon;
 
     public delegate void onWeaponUseDelegate(int bulletsRemaining);

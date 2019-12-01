@@ -4,7 +4,6 @@ using UnityEngine;
 
 public partial class Casper
 {
-
     public delegate void onItemDelegate(Item item);
     public event onItemDelegate onItemPickup;
 

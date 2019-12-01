@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-
-    public List<GameObject> listOfItems;
+    [SerializeField]
+    private List<GameObject> listOfItems = null;
     // Start is called before the first frame update
     private void Awake()
     {

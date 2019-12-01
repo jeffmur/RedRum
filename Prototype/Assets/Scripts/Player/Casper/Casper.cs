@@ -8,7 +8,6 @@ public partial class Casper : SceneSingleton<Casper>
     public CasperData localCasperData;
     public PlayerData localPlayerData;
     public WeaponInventory weaponInventory;
-    public List<Item> passiveItems;
 
     public delegate void CasperEventDelegate();
 
