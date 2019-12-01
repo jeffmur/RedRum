@@ -26,6 +26,9 @@ public class Weapon : MonoBehaviour
     public delegate void onAmmoChangeDelegate();
     public event onAmmoChangeDelegate onAmmoChange;
 
+    public delegate void weaponEventDelegate();
+    public event weaponEventDelegate onWeaponFired, onWeaponReload;
+
     void Start()
     {
         gameObject.AddComponent<BoxCollider2D>();
@@ -53,6 +56,7 @@ public class Weapon : MonoBehaviour
                 bulletsInClip = ClipSize;
                 reloadStartTime = -1;
                 onAmmoChange?.Invoke();
+                onWeaponReload?.Invoke();
             }
         }
     }
@@ -69,6 +73,7 @@ public class Weapon : MonoBehaviour
                 timeSinceLastShot = Time.time;
                 bulletsInClip--;
                 onAmmoChange?.Invoke();
+                onWeaponFired?.Invoke();
                 return true;
             }
         }
@@ -80,6 +85,7 @@ public class Weapon : MonoBehaviour
                 reloadCooldown.StartReload(reloadSpeed);
                 animator.SetBool("Reload", true);
                 onAmmoChange?.Invoke();
+                onWeaponReload?.Invoke();
             }
         }
         return false;
@@ -94,22 +100,32 @@ public class Weapon : MonoBehaviour
         gameObject.GetComponent<AudioSource>().Play();
         for (int i = 0; i < BulletsPerShot; i++)
         {
-            // spawn bullet and set position
-            GameObject bullet = Instantiate(BulletPrefab) as GameObject;
-            Vector2 bulletPosition = transform.position;
-            bulletPosition += direction * barrelOffset;
-            Vector2 gunUp = transform.up;
-            bulletPosition += gunUp * heightOffset;
-            bullet.transform.position = bulletPosition;
-            bullet.GetComponent<bullet>().bulletDamage = (int)(Damage * Casper.Instance.localCasperData.damageModifier);
-
-            // accuracy handling
-            float spread = Random.Range(-Accuracy, Accuracy);
-            Quaternion angle = Quaternion.FromToRotation(bullet.transform.up, direction);
-            bullet.transform.rotation *= angle;
-            bullet.transform.rotation = Quaternion.AngleAxis(spread, transform.forward) * bullet.transform.rotation;
-            bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * BulletSpeed, ForceMode2D.Impulse);
+            GameObject bullet = SpawnBullet(direction);
+            CalculateAccuracy(direction, bullet);
         }
+    }
+
+    public GameObject SpawnBullet(Vector2 direction)
+    {
+        // spawn bullet and set position
+        GameObject bullet = Instantiate(BulletPrefab) as GameObject;
+        Vector2 bulletPosition = transform.position;
+        bulletPosition += direction * barrelOffset;
+        Vector2 gunUp = transform.up;
+        bulletPosition += gunUp * heightOffset;
+        bullet.transform.position = bulletPosition;
+        bullet.GetComponent<bullet>().bulletDamage = (int)(Damage * Casper.Instance.localCasperData.damageModifier);
+        return bullet;
+    }
+
+    private void CalculateAccuracy(Vector2 direction, GameObject bullet)
+    {
+        // accuracy handling
+        float spread = Random.Range(-Accuracy, Accuracy);
+        Quaternion angle = Quaternion.FromToRotation(bullet.transform.up, direction);
+        bullet.transform.rotation *= angle;
+        bullet.transform.rotation = Quaternion.AngleAxis(spread, transform.forward) * bullet.transform.rotation;
+        bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * BulletSpeed, ForceMode2D.Impulse);
     }
 
     public bool IsReloading()

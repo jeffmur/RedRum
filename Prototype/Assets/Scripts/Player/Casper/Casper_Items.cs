@@ -11,6 +11,8 @@ public partial class Casper
     public delegate void onActiveItemDelegate(ActivatedItem item);
     public event onActiveItemDelegate onItemUse;
 
+    public event CasperEventDelegate ItemUseEvent, ItemPickupEvent;
+
     public void setActivatedItem(ActivatedItem item)
     {
         if (HeldItem != null)
@@ -32,6 +34,7 @@ public partial class Casper
         Destroy(selectedItem.GetComponent<ItemSpawnBehavior>());
   
         onItemPickup?.Invoke(selectedItem);
+        ItemPickupEvent?.Invoke();
     }
 
     public void activateItem()
@@ -40,6 +43,7 @@ public partial class Casper
         {
             HeldItem.activateItem();
             onItemUse?.Invoke(HeldItem);
+            ItemUseEvent?.Invoke();
         }
     }
 }

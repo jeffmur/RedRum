@@ -36,11 +36,6 @@ public class MainController : SceneSingleton<MainController>
         healthInfo.setStartingHealth(gameWorld.getStartingHealth());
         ammoInfo.setStartingRounds(gameWorld.getStartingAmmo());
         updateActiveItemPickupUI(GlobalControl.Instance.savedCasperData.CurrentActiveItem);
-        //StartCoroutine(LateStart(1f));
-    }
-    public IEnumerator LateStart(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
     }
 
     private void SendNotification(string notification)
