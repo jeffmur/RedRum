@@ -18,82 +18,41 @@ public class EventManager : SceneSingleton<EventManager>
     public delegate void onItemActivateTriggerDelegate(ActivatedItem item);
     public event onItemActivateTriggerDelegate onItemActivateTrigger;
 
+    public delegate void gameEventListener();
+    public event gameEventListener onWeaponAdded, onWeaponFired, onWeaponReloaded, onHealed, onDamaged, onItemUse, onItemPickup;
+
     protected override void Awake()
     {
         base.Awake();
 
         Casper.Instance.onHealthChange += TriggerHealthChange;
-        Casper.Instance.weaponInventory.onWeaponUse += TriggerAmmoChange;
         Casper.Instance.onMaxHealthChange += TriggerMaxHealthChange;
+        Casper.Instance.weaponInventory.onWeaponUse += TriggerAmmoChange;
         Casper.Instance.onItemPickup += TriggerItemPickup;
         Casper.Instance.onItemUse += TriggerItemActivate;
+
+        //generic event listeners
+        Casper.Instance.CasperHealedEvent += TriggerOnHealed;
+        Casper.Instance.CasperDamageEvent += TriggerOnDamaged;
+        Casper.Instance.weaponInventory.WeaponAddedEvent += TriggerWeaponAdded;
+        Casper.Instance.weaponInventory.WeaponFiredEvent += TriggerWeaponFired;
+        Casper.Instance.weaponInventory.WeaponReloadEvent += TriggerWeaponReloaded;
+        Casper.Instance.ItemUseEvent += TriggerItemUse;
+        Casper.Instance.ItemPickupEvent += TriggerItemPickup;
     }
 
-    public void TriggerNotification(string notification)
-    {
-        OnNotifyChange?.Invoke(notification);
-    }
+    public void TriggerNotification(string notification) { OnNotifyChange?.Invoke(notification); }
+    private void TriggerAmmoChange(int value) { onAmmoChange?.Invoke(value); }
+    private void TriggerWeaponAdded() { onWeaponAdded?.Invoke(); }
+    private void TriggerWeaponFired() { onWeaponFired?.Invoke(); }
+    private void TriggerWeaponReloaded() { onWeaponReloaded?.Invoke(); }
+    private void TriggerMaxHealthChange(int value) { onMaxHealthTrigger?.Invoke(value); }
+    private void TriggerHealthChange(int CurentHealth) { onHealthTrigger?.Invoke(CurentHealth); }
+    private void TriggerOnHealed() { onHealed?.Invoke(); }
+    private void TriggerOnDamaged() { onDamaged?.Invoke(); }
+    private void TriggerItemPickup(Item item) { onItemPickupTrigger?.Invoke(item); }
+    private void TriggerItemPickup() { onItemPickup?.Invoke(); }
+    private void TriggerItemActivate(ActivatedItem item) { onItemActivateTrigger?.Invoke(item); }
+    private void TriggerItemUse() { onItemUse?.Invoke(); }
 
-    public void TriggerAmmoChange(int value)
-    {
-        onAmmoChange?.Invoke(value);
-    }
-
-    public void TriggerMaxHealthChange(int value)
-    {
-        onMaxHealthTrigger?.Invoke(value);
-    }
-
-    public void TriggerHealthChange(int CurentHealth)
-    {
-        onHealthTrigger?.Invoke(CurentHealth);
-        FlashDamage();
-    }
-
-    private void TriggerItemPickup(Item item)
-    {
-        onItemPickupTrigger?.Invoke(item);
-    }
-
-    private void TriggerItemActivate(ActivatedItem item)
-    {
-        onItemActivateTrigger?.Invoke(item);
-    }
-
-
-
-    private float Timer;
-    private bool FlashingBegan;
-    private void FlashDamage()
-    {
-        FlashingBegan = true;
-    }
-    private void Update()
-    {
-        if (FlashingBegan)
-        {
-            Timer += Time.deltaTime;
-            Casper.Instance.GetComponentInChildren<Light>().color = Color.red;
-            Casper.Instance.GetComponentInChildren<Light>().range = 2f;
-            Casper.Instance.GetComponentInChildren<Light>().intensity = 20f;
-
-            if (Timer > .25f && Timer <= .5f)
-            {
-                Casper.Instance.GetComponentInChildren<Light>().intensity = 0f;
-            }
-            if (Timer > .5f)
-            {
-                Casper.Instance.GetComponentInChildren<Light>().intensity = 20f;
-            }
-            if (Timer > .75f)
-            {
-                Timer = 0f;
-                FlashingBegan = false;
-            }
-        }
-        else
-        {
-            Casper.Instance.GetComponentInChildren<Light>().intensity = 0f;
-        }
-    }
 }

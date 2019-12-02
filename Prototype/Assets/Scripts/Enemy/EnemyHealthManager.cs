@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyHealthManager : MonoBehaviour
 {
     public int Health = 125;
-    private GameObject itemDrop;
+    private GameObject itemDrop = null;
 
     public void DecreaseHealth(int damagePoints)
     {

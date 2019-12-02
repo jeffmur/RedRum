@@ -8,7 +8,8 @@ public partial class Casper : SceneSingleton<Casper>
     public CasperData localCasperData;
     public PlayerData localPlayerData;
     public WeaponInventory weaponInventory;
-    public List<Item> passiveItems;
+
+    public delegate void CasperEventDelegate();
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,7 @@ public partial class Casper : SceneSingleton<Casper>
         {
             ObtainEquipment(itemCollision);
         }
-
+        CheckCasperFlash();
     }
 
     public void SaveData()

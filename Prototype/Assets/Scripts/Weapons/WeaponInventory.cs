@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class WeaponInventory : MonoBehaviour
 {
-    public int selectedWeaponIndex = 0;
-    public List<Weapon> CurrentInventory;
+    private int selectedWeaponIndex = 0;
+    private List<Weapon> CurrentInventory;
     public Weapon startingWeapon;
 
     public delegate void onWeaponUseDelegate(int bulletsRemaining);
     public event onWeaponUseDelegate onWeaponUse;
 
-    public delegate void weaponEventDelegate();
-    public event onWeaponUseDelegate onWeaponFired, onWeaponReload;
+    public delegate void weaponListenerDelegate();
+    public event weaponListenerDelegate WeaponFiredEvent, WeaponReloadEvent, WeaponAddedEvent;
 
     // Start is called before the first frame update
     private void Awake()
@@ -55,13 +55,26 @@ public class WeaponInventory : MonoBehaviour
     public void AddWeaponToInventory(Weapon weapon)
     {
         CurrentInventory.Add(weapon);
+        SubscribeWeaponToEvents(weapon);
+        AlignWeaponTransform(weapon);
+        selectedWeaponIndex = CurrentInventory.Count - 1;
+        SetSelectedWeapon();
+        WeaponAddedEvent?.Invoke();
+    }
+
+    private void AlignWeaponTransform(Weapon weapon)
+    {
         Destroy(weapon.GetComponent<ItemSpawnBehavior>());
-        weapon.onAmmoChange += TriggerAmmoChange;
         weapon.transform.parent = gameObject.transform;
         weapon.transform.localScale = new Vector3(weapon.equipScale, weapon.equipScale, 1);
         weapon.transform.eulerAngles = gameObject.transform.eulerAngles;
-        selectedWeaponIndex = CurrentInventory.Count - 1;
-        SetSelectedWeapon();
+    }
+
+    private void SubscribeWeaponToEvents(Weapon weapon)
+    {
+        weapon.onAmmoChange += TriggerAmmoChange;
+        weapon.onWeaponReload += TriggerWeaponReloaded;
+        weapon.onWeaponFired += TriggerWeaponFired;
     }
 
     private void InitializeInventory()
@@ -93,5 +106,15 @@ public class WeaponInventory : MonoBehaviour
     public void TriggerAmmoChange()
     {
         onWeaponUse?.Invoke(GetSelectedWeapon().bulletsInClip);
+    }
+
+    public void TriggerWeaponFired()
+    {
+        WeaponFiredEvent?.Invoke();
+    }
+
+    public void TriggerWeaponReloaded()
+    {
+        WeaponReloadEvent?.Invoke();
     }
 }

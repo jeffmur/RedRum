@@ -6,9 +6,7 @@ public partial class Casper
 {
     public delegate void onHealthChangeDelegate(int value);
     public event onHealthChangeDelegate onHealthChange, onMaxHealthChange;
-
-    public delegate void onHealthCheckDelegate();
-    public event onHealthCheckDelegate onDamaged, onHealed;
+    public event CasperEventDelegate CasperDamageEvent, CasperHealedEvent;
 
     public void changeMaxHealth(int value)
     {
@@ -49,6 +47,7 @@ public partial class Casper
 
     public void changeHealth(int value)
     {
+        int prevCurrentHealth = CurrentHealth;
         if (value == 0)
         {
             return;
@@ -76,14 +75,15 @@ public partial class Casper
             StartCoroutine(Die());
         }
         onHealthChange?.Invoke(CurrentHealth);
-        if (value > 0)
+        if (CurrentHealth > prevCurrentHealth)
         {
-            onHealed?.Invoke();
+            CasperHealedEvent?.Invoke();
         }
-        else
+        else if (CurrentHealth < prevCurrentHealth)
         {
-            //StartCoroutine(ToggleInvincibility(1));
-            onDamaged?.Invoke();
+            StartCoroutine(ToggleInvincibility(1));
+            FlashDamage();
+            CasperDamageEvent?.Invoke();
         }
     }
 }

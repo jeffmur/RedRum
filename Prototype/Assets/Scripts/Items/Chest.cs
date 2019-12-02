@@ -10,13 +10,11 @@ public class Chest : MonoBehaviour
     public ItemManager itemManager;
     public bool openChest = false;
     public int RoomIndex;
-    private Transform casper;
     private GameObject key;
     // Start is called before the first frame update
     void Start()
     {
         rend = GetComponent<SpriteRenderer>();
-        casper = GameObject.FindGameObjectWithTag("Player").transform;
         itemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
         key = Resources.Load("Textures/Prefabs/Items/Key") as GameObject;
     }
@@ -35,7 +33,6 @@ public class Chest : MonoBehaviour
     }
 
     public void initChest(int index) { 
-        //myItems = items; 
         gameObject.SetActive(false); 
         openChest = false;
         RoomIndex = index;
