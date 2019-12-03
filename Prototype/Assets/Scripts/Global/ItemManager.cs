@@ -6,8 +6,10 @@ public class ItemManager : MonoBehaviour
 {
     [SerializeField]
     private List<GameObject> listOfItems = null;
-    // Start is called before the first frame update
-    private void Awake()
+
+    private void Awake() { Initialize(); }
+
+    private void Initialize()
     {
         Object[] items = Resources.LoadAll("Textures/Prefabs/Items/PickupItems");
         Object[] weapons = Resources.LoadAll("Textures/Prefabs/Guns/SpawnableGuns");
@@ -15,7 +17,7 @@ public class ItemManager : MonoBehaviour
         foreach (Object t in items)
         {
             GameObject item = (GameObject)t;
-            //listOfItems.Add(item);
+            listOfItems.Add(item);
         }
         foreach (Object t in weapons)
         {
@@ -32,6 +34,10 @@ public class ItemManager : MonoBehaviour
             listOfItems.RemoveAt(index);
             return selectedItem;
         }
-        return null;
+        else
+        {
+            Initialize();
+            return SpawnRandomItem();
+        }        
     }
 }

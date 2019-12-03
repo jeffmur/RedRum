@@ -36,6 +36,7 @@ public class Chest : MonoBehaviour
         gameObject.SetActive(false); 
         openChest = false;
         RoomIndex = index;
+        Casper.Instance.currentRoomIndex = index;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -57,6 +58,6 @@ public class Chest : MonoBehaviour
 
         item.AddComponent<ItemSpawnBehavior>(); // rotate and "float up"
         item.AddComponent<RoomRegister>().RoomIndex = RoomIndex; // assigns item to roomIndex
-        item.transform.parent = gameObject.transform.parent; // child of room           
+        item.transform.parent = gameObject.transform.parent; // child of room   
     }
 }

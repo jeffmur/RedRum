@@ -77,6 +77,7 @@ public partial class RoomManager : MonoBehaviour
                 if (Enemies[typeOfEnemy] == null) { typeOfEnemy--; }
                 GameObject enemy = Enemies[typeOfEnemy];
                 GameObject ChildEnemy = Instantiate(enemy, new Vector2(transform.position.x + x, transform.position.y + y), Quaternion.identity);
+                ChildEnemy.AddComponent<RoomRegister>().RoomIndex = atIndex; // assigns item to roomIndex
                 ChildEnemy.gameObject.SetActive(true);
                 ChildEnemy.transform.parent = transform;
             // Boss Room should only spawn one
