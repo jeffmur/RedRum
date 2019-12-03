@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 public class EventManager : SceneSingleton<EventManager>
 {
-    public Casper casper;
-
     public delegate void onNotifyChangeDelegate(string notification);
     public event onNotifyChangeDelegate OnNotifyChange;
 
@@ -21,10 +19,8 @@ public class EventManager : SceneSingleton<EventManager>
     public delegate void gameEventListener();
     public event gameEventListener onWeaponAdded, onWeaponFired, onWeaponReloaded, onHealed, onDamaged, onItemUse, onItemPickup;
 
-    protected override void Awake()
+    private void Start()
     {
-        base.Awake();
-
         Casper.Instance.onHealthChange += TriggerHealthChange;
         Casper.Instance.onMaxHealthChange += TriggerMaxHealthChange;
         Casper.Instance.weaponInventory.onWeaponUse += TriggerAmmoChange;

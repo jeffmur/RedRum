@@ -13,12 +13,16 @@ public partial class GameWorld : SceneSingleton<GameWorld>
     protected override void Awake()
     {
         base.Awake();
-        casper = Casper.Instance;
-        Debug.Assert(casper != null);
 
         Cursor.visible = false;
         crosshairs = GameObject.Find("crossHairs");
 
+    }
+
+    private void Start()
+    {
+        casper = Casper.Instance;
+        Debug.Assert(casper != null);
     }
 
     // Update is called once per frame
@@ -26,6 +30,7 @@ public partial class GameWorld : SceneSingleton<GameWorld>
     {
         PositionCrosshair();
         TestController();
+        Debug.Assert(casper != null);
     }
 
     public Tuple<int, int> getStartingHealth()
