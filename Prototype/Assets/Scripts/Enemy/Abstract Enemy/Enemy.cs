@@ -14,6 +14,7 @@ public abstract class Enemy : MonoBehaviour
     protected SpriteRenderer enemySprite;
     protected Animator enemyAnimator;
     protected Rigidbody2D rb;
+    private Chest myChest;
 
     protected virtual void Start()
     {
@@ -33,7 +34,9 @@ public abstract class Enemy : MonoBehaviour
             {
                 Vector3 loc = new Vector3(transform.position.x, transform.position.y, -1);
                 var item = Instantiate(itemDrop, loc, Quaternion.identity);
-                Destroy(item, 5f);
+                item.AddComponent<RoomRegister>().RoomIndex = GetComponent<RoomRegister>().RoomIndex;
+                item.transform.parent = transform.parent; // add to room as child
+                item.tag = "Item"; 
             }
         }
     }

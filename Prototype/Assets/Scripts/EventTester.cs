@@ -22,7 +22,7 @@ public class EventTester : MonoBehaviour
     }
     void printonWeaponFired()
     {
-        print("WEAPON FIRED");
+        //print("WEAPON FIRED");
     }
     void printonWeaponReloaded()
     {

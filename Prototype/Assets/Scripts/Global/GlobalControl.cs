@@ -30,6 +30,7 @@ public class GlobalControl : MonoBehaviour
         }
         Casper.Instance.transform.position = Vector3.zero;
         Camera.main.transform.position = new Vector3(0, 0, -10);
+        Casper.Instance.gameObject.SetActive(true);
     }
     public void saveItem(GameObject obj)
     {

@@ -44,7 +44,7 @@ public partial class RoomPointer : MonoBehaviour
                             foreach (Transform item in real)
                             {
                                 // Check roomIndex matches - Hide all items
-                                if(item.tag == "Item")
+                                if(item.tag == "Item" || item.tag == "Weapon")
                                 {
                                     item.GetComponent<BoxCollider2D>().enabled = false;
                                     item.GetComponent<SpriteRenderer>().enabled = false;
@@ -56,7 +56,7 @@ public partial class RoomPointer : MonoBehaviour
                             Transform real = next.transform;
                             foreach (Transform item in real)
                             {
-                                if (item.tag == "Item")
+                                if (item.tag == "Item" || item.tag == "Weapon")
                                 {
                                     if (index == item.GetComponent<RoomRegister>().RoomIndex)
                                     {
