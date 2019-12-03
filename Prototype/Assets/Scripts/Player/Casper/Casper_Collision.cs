@@ -23,12 +23,12 @@ public partial class Casper
             itemCollision = collision;
             if (collision.gameObject.GetComponent<SpriteRenderer>())
             {
-                string message;
-                if (collision.gameObject.tag == "Item")
+                string message = "";
+                if (collision.gameObject.tag == "Item" && collision.gameObject.name != "Heart(Clone)")
                 {
                     message = "Press E to pick up";
                 }
-                else
+                else if(collision.gameObject.tag == "Weapon")
                 {
                     message = "Press E to equip";
                 }
