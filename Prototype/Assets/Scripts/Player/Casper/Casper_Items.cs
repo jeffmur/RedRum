@@ -18,12 +18,7 @@ public partial class Casper
     {
         if (HeldItem != null)
         {
-            HeldItem.showItem();
-            HeldItem.tag = "Item";            
-            HeldItem.transform.position = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-            HeldItem.transform.parent = item.transform.parent; // Back in Room
-            HeldItem.transform.rotation = Quaternion.Euler(0, 0, 0);
-            updateCache(HeldItem);
+            DropItem(item);
         }
         HeldItem = item;
         HeldItem.tag = "PickedUp";
@@ -40,6 +35,16 @@ public partial class Casper
         ItemPickupEvent?.Invoke();
     }
 
+    private void DropItem(ActivatedItem item)
+    {
+        HeldItem.showItem();
+        HeldItem.tag = "Item";
+        HeldItem.transform.position = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+        HeldItem.transform.parent = item.transform.parent; // Back in Room
+        HeldItem.transform.rotation = Quaternion.Euler(0, 0, 0);
+        updateCache(HeldItem);
+    }
+
     public void activateItem()
     {
         if (HeldItem != null && !HeldItem.isOnCooldown)
@@ -50,7 +55,7 @@ public partial class Casper
         }
     }
 
-    public void updateCache(Item obj)
+    private void updateCache(Item obj)
     {
         // TODO: allow to getcurrentRoomIndex
         if (obj.GetComponent<RoomRegister>() == null)

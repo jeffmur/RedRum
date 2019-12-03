@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemManager : MonoBehaviour
+public class ItemManager : SceneSingleton<ItemManager>
 {
     [SerializeField]
     private List<GameObject> listOfItems = null;
 
-    private void Awake() { Initialize(); }
+    protected override void Awake() 
+    {
+        base.Awake();
+        Initialize(); 
+    }
 
     private void Initialize()
     {
