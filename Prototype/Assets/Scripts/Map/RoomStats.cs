@@ -41,7 +41,7 @@ public class RoomStats : MonoBehaviour
                 float offset = loc.x - maxX - 2;
                 return new Vector2(loc.x - offset, loc.y);
             }
-            if (minX >= loc.x || loc.x - minX <= 3)
+            if (minX >= loc.x || loc.x - minX <= 5)
             {
                 float offset = minX - loc.x + 2;
                 return new Vector2(loc.x + offset, loc.y);
