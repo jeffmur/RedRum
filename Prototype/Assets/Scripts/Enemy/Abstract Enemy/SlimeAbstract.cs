@@ -13,8 +13,9 @@ public class SlimeAbstract : Enemy
     private readonly Vector3 northEast = Vector3.up + Vector3.right;
     private readonly Vector3 southWest = Vector3.down + Vector3.left;
     private readonly Vector3 southEast = Vector3.down + Vector3.right;
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         enemyHealth = 150;
 
         BulletPrefab = Resources.Load<GameObject>("Textures/Prefabs/Enemies/SlimeBullet");

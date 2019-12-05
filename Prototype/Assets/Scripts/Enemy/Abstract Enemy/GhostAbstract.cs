@@ -50,6 +50,7 @@ public class GhostAbstract : Enemy
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
+        base.OnTriggerEnter2D(other);
         if (other.CompareTag("Wall"))
         {
             state = (int)States.Anger;
@@ -61,8 +62,6 @@ public class GhostAbstract : Enemy
         }
         else if (other.CompareTag("HeroBullet"))
         {
-            Destroy(other.gameObject);
-            DecreeasHealth(other.transform.GetComponent<bullet>().bulletDamage);
             if (state != (int)States.Chase)
             {
                 state = (int)States.Anger;
