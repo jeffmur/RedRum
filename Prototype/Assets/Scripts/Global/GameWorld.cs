@@ -8,12 +8,12 @@ public partial class GameWorld : SceneSingleton<GameWorld>
     private Casper casper;
     private GameObject crosshairs;
     public ItemFloatingText hint;
+    private GameObject mCamera;
 
     // Start is called before the first frame update
     protected override void Awake()
     {
         base.Awake();
-
         Cursor.visible = false;
         crosshairs = GameObject.Find("crossHairs");
 
@@ -23,6 +23,20 @@ public partial class GameWorld : SceneSingleton<GameWorld>
     {
         casper = Casper.Instance;
         Debug.Assert(casper != null);
+    }
+
+    private void FixedUpdate()
+    {
+        
+        if(mCamera != null)
+        {
+            Vector3 desiredPosition = new Vector3(casper.transform.localPosition.x, casper.transform.localPosition.y, -10f);
+            Vector3 smoothedPostion = Vector3.Lerp(mCamera.transform.position, desiredPosition, 0.125f);
+            mCamera.transform.position = smoothedPostion;
+        }
+        else
+            mCamera = GameObject.Find("Main Camera");
+        
     }
 
     // Update is called once per frame

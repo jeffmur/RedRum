@@ -17,6 +17,7 @@ public partial class Casper : SceneSingleton<Casper>
         localCasperData = GlobalControl.Instance.savedCasperData;
         localPlayerData = GlobalControl.Instance.savedPlayerData;
     }
+
     private void Update()
     {
         //selectedWeapon = weaponInventory.GetSelectedWeapon();
