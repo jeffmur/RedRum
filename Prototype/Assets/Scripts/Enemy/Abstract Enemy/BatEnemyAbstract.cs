@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BatEnemy : Enemy
+public class BatEnemyAbstract : Enemy
 {
     // Start is called before the first frame update
     private float fraquency = 5f;

@@ -35,24 +35,23 @@ public class RoomStats : MonoBehaviour
         // Is within bounds
         if (!isInRoom(loc))
         {
-            Debug.Log("CAUGHT OUT OF BOUNDS ENEMY"); // DOES NOT WORK I NEED COFFEE
             // Check each side
-            if (maxX < loc.x)
+            if (maxX <= loc.x)
             {
                 float offset = loc.x - maxX - 2;
                 return new Vector2(loc.x - offset, loc.y);
             }
-            if (minX > loc.x)
+            if (minX >= loc.x || loc.x - minX <= 3)
             {
                 float offset = minX - loc.x + 2;
                 return new Vector2(loc.x + offset, loc.y);
             }
-            if (maxY < loc.x)
+            if (maxY <= loc.x)
             {
                 float offset = loc.y - maxY - 2;
                 return new Vector2(loc.x, loc.y - offset);
             }
-            if (minY > loc.x)
+            if (minY >= loc.x)
             {
                 float offset = minY - loc.y + 2;
                 return new Vector2(loc.x, loc.y + offset);

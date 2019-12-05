@@ -35,5 +35,6 @@ public class Key : Item
     {
         itemID = 4;
         itemName = "Key";
+        caption = "DJ KHALID";
     }
 }

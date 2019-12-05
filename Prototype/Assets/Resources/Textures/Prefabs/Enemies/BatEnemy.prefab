@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6625413921381131799}
   - component: {fileID: 6625413921381131798}
   - component: {fileID: 6625413921381131797}
-  - component: {fileID: 6625413921381131796}
   - component: {fileID: 6625413921381131795}
   - component: {fileID: 6625413921381131794}
+  - component: {fileID: 1993923263208870353}
   m_Layer: 0
   m_Name: BatEnemy
   m_TagString: Enemy
@@ -108,19 +108,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6625413921381131796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6625413921381131793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5740cd9a131464c0aae558ff17c1e0fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyHealth: 1
 --- !u!50 &6625413921381131795
 Rigidbody2D:
   serializedVersion: 4
@@ -160,3 +147,17 @@ CircleCollider2D:
   m_Offset: {x: -0.01709795, y: 0.2678846}
   serializedVersion: 2
   m_Radius: 0.28503108
+--- !u!114 &1993923263208870353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6625413921381131793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f37d9d9fdc282d4787c21b33aab1a79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHealth: 1
+  isMath: 0

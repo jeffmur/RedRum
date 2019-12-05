@@ -60,6 +60,6 @@ public class BatSpawner : MonoBehaviour
         bat.transform.parent = transform.parent; // Room Child
         bat.AddComponent<RoomRegister>().RoomIndex = RoomIndex;
         if(Random.Range(0, 2) >= 1)
-            bat.GetComponent<BatEnemy>().isMath = true;
+            bat.GetComponent<BatEnemyAbstract>().isMath = true;
     }
 }
