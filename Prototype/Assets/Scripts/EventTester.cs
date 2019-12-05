@@ -18,7 +18,7 @@ public class EventTester : MonoBehaviour
 
     void printonWeaponAdded()
     {
-        print("WEAPON ADDED");
+        //print("WEAPON ADDED");
     }
     void printonWeaponFired()
     {
@@ -26,15 +26,15 @@ public class EventTester : MonoBehaviour
     }
     void printonWeaponReloaded()
     {
-        print("WEAPON RELOADED");
+        //print("WEAPON RELOADED");
     }
     void printonHealed()
     {
-        print("CASPER HEALED");
+        //print("CASPER HEALED");
     }
     void printonDamaged()
     {
-        print("CASPER HAS BOOBOO");
+       // print("CASPER HAS BOOBOO");
     }
     void printonItemUse()
     {

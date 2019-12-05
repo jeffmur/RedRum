@@ -28,8 +28,10 @@ public partial class Casper
 
     private void pickUpItem(Item selectedItem)
     {
+        if(selectedItem == null) { return; }
         selectedItem.process();
         Destroy(selectedItem.GetComponent<ItemSpawnBehavior>());
+        updateCache(selectedItem);
   
         onItemPickup?.Invoke(selectedItem);
         ItemPickupEvent?.Invoke();
@@ -40,7 +42,7 @@ public partial class Casper
         HeldItem.showItem();
         HeldItem.tag = "Item";
         HeldItem.transform.position = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-        HeldItem.transform.parent = item.transform.parent; // Back in Room
+        HeldItem.transform.parent = returnToRoom(); // Back in Room
         HeldItem.transform.rotation = Quaternion.Euler(0, 0, 0);
         updateCache(HeldItem);
     }
@@ -57,12 +59,38 @@ public partial class Casper
 
     private void updateCache(Item obj)
     {
-        // TODO: allow to getcurrentRoomIndex
-        if (obj.GetComponent<RoomRegister>() == null)
-            obj.gameObject.AddComponent<RoomRegister>().RoomIndex = currentRoomIndex;
+        RoomRegister rr = obj.GetComponent<RoomRegister>();
+        if (rr == null)
+        {
+            rr = obj.gameObject.AddComponent<RoomRegister>();
+            // has not been pickedup
+            rr.RoomIndex = currentRoomIndex;
+            rr.OriginalScale = obj.transform.localScale * 6f;
+        }
+        // Already has been spawned || being dropped
         else
-            obj.GetComponent<RoomRegister>().RoomIndex = currentRoomIndex;
+        {
+            rr.RoomIndex = currentRoomIndex;
+            if(rr.OriginalScale != Vector3.zero)
+                obj.transform.localScale = rr.OriginalScale;
+        }
         // Hide/Show
         obj.tag = "Item";
+    }
+
+    private Transform returnToRoom()
+    {
+        Debug.Log("Placing item in Room: " + currentRoomIndex);
+        // Assumption 2 swap rooms
+        // Returns for removing dropped item from DONTDESTROYONLOAD
+        switch(currentRoomIndex % 2)
+        {
+            case 0:
+                return GameObject.Find("Swap_2").transform;
+            case 1:
+                return GameObject.Find("Swap_1").transform;
+            default:
+                return null;
+        }
     }
 }
