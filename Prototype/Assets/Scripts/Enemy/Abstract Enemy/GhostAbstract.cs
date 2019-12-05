@@ -48,20 +48,22 @@ public class GhostAbstract : Enemy
         }
     }
 
-    protected override void OnTriggerEnter2D(Collider2D other)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        base.OnTriggerEnter2D(other);
-        if (other.CompareTag("Wall"))
+
+        if (collision.CompareTag("Wall"))
         {
             state = (int)States.Anger;
             enemyAnimator.SetFloat("State", (float)States.Anger);
         }
-        else if (other.CompareTag("Player"))
+        else if (collision.CompareTag("Player"))
         {
             casper.GetComponent<PlayerStats>().changeHealth(-1);
         }
-        else if (other.CompareTag("HeroBullet"))
+        else if (collision.CompareTag("HeroBullet"))
         {
+            Destroy(collision.gameObject);
+            DecreeasHealth(collision.transform.GetComponent<bullet>().bulletDamage);
             if (state != (int)States.Chase)
             {
                 state = (int)States.Anger;
