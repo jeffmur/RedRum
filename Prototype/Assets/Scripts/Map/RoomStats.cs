@@ -5,7 +5,7 @@ using UnityEngine;
 public class RoomStats : MonoBehaviour
 {
     private Camera mCamera;
-    public List<GameObject> mWalls;
+    public List<GameObject> mDoors;
     private float maxY;
     private float minY;
     private float maxX;
@@ -13,8 +13,14 @@ public class RoomStats : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        foreach(Transform folder in this.transform)
+        {
+            if (folder.name == "Doors")
+                foreach (Transform doors in folder)
+                    mDoors.Add(doors.gameObject);
+        }
         mCamera = Camera.main;
-        setWallDemensions();
+        setDemensions();
         mCamera.ResetAspect();
     }
 
@@ -54,24 +60,24 @@ public class RoomStats : MonoBehaviour
         }
         return location;
     }
-    private void setWallDemensions()
+    private void setDemensions()
     {
-        for(int i = 0; i < mWalls.Count; i++)
+        for (int i = 0; i < mDoors.Count; i++)
         {
-            string name = mWalls[i].name;
+            string name = mDoors[i].name;
             switch (name)
             {
-                case "left_wall":
-                    minX = mWalls[0].transform.position.x;
+                case "Top_Door":
+                    maxY = mDoors[i].transform.position.y;
                     break;
-                case "right_wall":
-                    maxX = mWalls[1].transform.position.x;
+                case "Right_Door":
+                    maxX = mDoors[i].transform.position.x;
                     break;
-                case "top_wall":
-                    maxY = mWalls[2].transform.position.y;
+                case "Bottom_Door":
+                    minY = mDoors[i].transform.position.y;
                     break;
-                case "bot_wall":
-                    minY = mWalls[3].transform.position.y;
+                case "Left_Door":
+                    minX = mDoors[i].transform.position.x;
                     break;
             }
         }
@@ -84,17 +90,6 @@ public class RoomStats : MonoBehaviour
     private float getWidthDem()
     {
         return maxX - minX;
-    }
-
-
-    public Vector2 getHeightVec()
-    {
-        return new Vector2(minY, maxY);
-    }
-
-    public Vector2 getWidthVec()
-    {
-        return new Vector2(minX, maxX);
     }
 
     public void setCamLocation()
@@ -111,24 +106,22 @@ public class RoomStats : MonoBehaviour
 
     public Vector2 sendPlayerToDoor(string side)
     {
-        Vector2 location = new Vector2(0,0);
-        float tHeight = getHeightVec().x + getHeightVec().y;
-        float tWidth = getWidthVec().x + getWidthVec().y;
+        Vector2 center = transform.position;
         switch (side)
         {
             case "TOP":
-                location = new Vector2(tWidth / 2, getHeightVec().y - 2f);
+                center = new Vector2(center.x, maxY - 2f);
                 break;
             case "BOTTOM":
-                location = new Vector2(tWidth / 2, getHeightVec().x + 2f);
+                center = new Vector2(center.x, minY + 2f);
                 break;
             case "RIGHT":
-                location = new Vector2(getWidthVec().y - 2f, tHeight / 2);
+                center = new Vector2(maxX - 2f, center.y);
                 break;
             case "LEFT":
-                location = new Vector2(getWidthVec().x + 2f, tHeight / 2);
+                center = new Vector2(minX + 2f, center.y);
                 break;
         }
-        return location;
+        return center;
     }
 }

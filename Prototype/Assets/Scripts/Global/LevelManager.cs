@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    string GAME = "Beta";
+    static string[] GAME = { "Level1", "Level2" };
+    int Level = 0;
     public static void Complete()
     {
         Cursor.visible = true;
@@ -17,16 +18,17 @@ public class LevelManager : MonoBehaviour
     }
     public void initGame()
     {
-        Scenes.Load(GAME);
+        Scenes.Load(GAME[0]);
     }
     public void retryLevel()
     {
-        Scenes.Load(GAME, Scenes.getDimension(), false);
+        Scenes.Load(GAME[Level], Scenes.getDimension(), false);
     }
 
     public void nextLevel()
     {
-        Scenes.Load(GAME, Scenes.nextDimension(), true);
+        Level++;
+        Scenes.Load(GAME[Level], Scenes.nextDimension(), true);
     }
 
     public void QuitGame() 

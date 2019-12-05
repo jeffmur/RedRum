@@ -67,6 +67,7 @@ public partial class RoomManager : MonoBehaviour
         // Hide
         myChest.initChest(atIndex);
         // Random generation of enemies
+        if(Enemies.Count == 0) { return; }
         // Between 1 and 5 enemies per room
         int AmountOFEnemies = Random.Range(1, 5);
         for (int i = 0; AmountOFEnemies > i; i++) //creates a random amount of enemies
