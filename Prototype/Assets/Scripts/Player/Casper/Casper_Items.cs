@@ -65,7 +65,7 @@ public partial class Casper
             rr = obj.gameObject.AddComponent<RoomRegister>();
             // has not been pickedup
             rr.RoomIndex = currentRoomIndex;
-            rr.OriginalScale = obj.transform.localScale * 6f;
+            rr.OriginalScale = obj.transform.localScale * transform.localScale.x;
         }
         // Already has been spawned || being dropped
         else
@@ -80,17 +80,15 @@ public partial class Casper
 
     private Transform returnToRoom()
     {
-        Debug.Log("Placing item in Room: " + currentRoomIndex);
-        // Assumption 2 swap rooms
-        // Returns for removing dropped item from DONTDESTROYONLOAD
-        switch(currentRoomIndex % 2)
+        // Find all rooms?
+        var myRooms = FindObjectsOfType<RoomStats>();
+        // Iterate through each component <RoomStats>
+        for(int i = 0; i < myRooms.Length; i++)
         {
-            case 0:
-                return GameObject.Find("Swap_2").transform;
-            case 1:
-                return GameObject.Find("Swap_1").transform;
-            default:
-                return null;
+            if (myRooms[i].isInRoom(transform.position))
+                return myRooms[i].transform;
         }
+        return null;
+        // return transform when true
     }
 }

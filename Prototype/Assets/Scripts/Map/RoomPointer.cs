@@ -25,49 +25,48 @@ public partial class RoomPointer : MonoBehaviour
     {
         RoomStats next = nextLevel.GetComponent<RoomStats>();
         nextLevel.GetComponent<DoorSystem>().LockAll();
-        if (mm.casperIcon.position != mm.allRooms[0].transform.position)
+        foreach (GameObject room in mm.allRooms) // for all the rooms
         {
-            foreach (GameObject room in mm.allRooms) // for all the rooms
+            if (Vector2.Distance(room.transform.position, mm.casperIcon.position) < 2f) // find the room I am in 
             {
-                if (Vector2.Distance(room.transform.position, mm.casperIcon.position) < 2f) // find the room I am in 
+                if (room.GetComponent<Room>() != null) //if it is actually a room
                 {
-                    if (room.GetComponent<Room>() != null) //if it is actually a room
+                    int index = room.GetComponent<Room>().RoomIndex;
+                    Debug.Log("ROOM NUMBER: " + index);
+                    next.GetComponent<RoomManager>().RoomIndex = index;
+                    if (!room.GetComponent<Room>().isVisited && index != 0) //if the room is not visited
                     {
-                        int index = room.GetComponent<Room>().RoomIndex;
-                        if (!room.GetComponent<Room>().isVisited) //if the room is not visited
+                        GlobalControl.Instance.savedPlayerData.roomsCleared += 1;
+                        room.GetComponent<Room>().isVisited = true; //mark it is visited
+                        next.GetComponent<RoomManager>().Initialize(); //make the enemies spawn 
+                        // Hide all (if any) items in new room
+                        Transform real = next.transform;
+                        foreach (Transform item in real)
                         {
-                            GlobalControl.Instance.savedPlayerData.roomsCleared += 1;
-                            room.GetComponent<Room>().isVisited = true; //mark it is visited
-                            next.GetComponent<RoomManager>().Initialize(index); //make the enemies spawn 
-                            // Hide all (if any) items in new room
-                            Transform real = next.transform;
-                            foreach (Transform item in real)
+                            // Check roomIndex matches - Hide all items
+                            if(item.tag == "Item" || item.tag == "Weapon")
                             {
-                                // Check roomIndex matches - Hide all items
-                                if(item.tag == "Item" || item.tag == "Weapon")
+                                item.GetComponent<BoxCollider2D>().enabled = false;
+                                item.GetComponent<SpriteRenderer>().enabled = false;
+                            }
+                        }
+                    }
+                    else // Visited Room (more likely to have items)
+                    {
+                        Transform real = next.transform;
+                        foreach (Transform item in real)
+                        {
+                            if (item.tag == "Item" || item.tag == "Weapon")
+                            {
+                                if (index == item.GetComponent<RoomRegister>().RoomIndex)
+                                {
+                                    item.GetComponent<BoxCollider2D>().enabled = true;
+                                    item.GetComponent<SpriteRenderer>().enabled = true;
+                                }
+                                else
                                 {
                                     item.GetComponent<BoxCollider2D>().enabled = false;
                                     item.GetComponent<SpriteRenderer>().enabled = false;
-                                }
-                            }
-                        }
-                        else // Visited Room (more likely to have items)
-                        {
-                            Transform real = next.transform;
-                            foreach (Transform item in real)
-                            {
-                                if (item.tag == "Item" || item.tag == "Weapon")
-                                {
-                                    if (index == item.GetComponent<RoomRegister>().RoomIndex)
-                                    {
-                                        item.GetComponent<BoxCollider2D>().enabled = true;
-                                        item.GetComponent<SpriteRenderer>().enabled = true;
-                                    }
-                                    else
-                                    {
-                                        item.GetComponent<BoxCollider2D>().enabled = false;
-                                        item.GetComponent<SpriteRenderer>().enabled = false;
-                                    }
                                 }
                             }
                         }

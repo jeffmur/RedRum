@@ -4,12 +4,13 @@ using UnityEngine;
 
 public partial class RoomManager : MonoBehaviour
 {
-    public int RoomIndex;
     public List<GameObject> Enemies;
     private DoorSystem sDoorSys;
     public GameObject chestPrefab;
     private Chest myChest;
     bool chestOpen = false;
+    public int roomNum = 0;
+    public int RoomIndex { get => roomNum; set => roomNum = value; }
 
 
     // Start is called before the first frame update
@@ -48,9 +49,9 @@ public partial class RoomManager : MonoBehaviour
         
     }
 
-    public void Initialize(int atIndex)
+    public void Initialize()
     {
-        RoomIndex = atIndex;
+        //RoomIndex = atIndex;
         // Destroy old chest
         foreach(Transform child in gameObject.transform)
         {
@@ -65,7 +66,7 @@ public partial class RoomManager : MonoBehaviour
         c.transform.parent = gameObject.transform;
         myChest = c.GetComponent<Chest>();
         // Hide
-        myChest.initChest(atIndex);
+        myChest.initChest(roomNum);
         // Random generation of enemies
         if(Enemies.Count == 0) { return; }
         // Between 1 and 5 enemies per room
@@ -78,7 +79,7 @@ public partial class RoomManager : MonoBehaviour
                 if (Enemies[typeOfEnemy] == null) { typeOfEnemy--; }
                 GameObject enemy = Enemies[typeOfEnemy];
                 GameObject ChildEnemy = Instantiate(enemy, new Vector2(transform.position.x + x, transform.position.y + y), Quaternion.identity);
-                ChildEnemy.AddComponent<RoomRegister>().RoomIndex = atIndex; // assigns item to roomIndex
+                ChildEnemy.AddComponent<RoomRegister>().RoomIndex = roomNum; // assigns item to roomIndex
                 ChildEnemy.gameObject.SetActive(true);
                 ChildEnemy.transform.parent = transform;
             // Boss Room should only spawn one

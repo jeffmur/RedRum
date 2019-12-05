@@ -113,7 +113,7 @@ public class RoomStats : MonoBehaviour
                 center = new Vector2(center.x, maxY - 2f);
                 break;
             case "BOTTOM":
-                center = new Vector2(center.x, minY + 2f);
+                center = new Vector2(center.x, minY + 3f);
                 break;
             case "RIGHT":
                 center = new Vector2(maxX - 2f, center.y);

@@ -379,7 +379,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.028168678, y: 1.2260818}
+  m_Offset: {x: -0.028168678, y: 1.182313}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -390,7 +390,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4620242, y: 0.8124809}
+  m_Size: {x: 1.4620242, y: 0.72494316}
   m_EdgeRadius: 0
 --- !u!114 &3504626300661121142
 MonoBehaviour:
@@ -2765,13 +2765,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a7671807b9eb5542b41bf031bc7f694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoomIndex: 0
   Enemies:
   - {fileID: 1410281307740306776, guid: 46aabfdfa09d30243955d312c619ca9f, type: 3}
   - {fileID: 8166224377027415747, guid: 9cda156ec8840448999b3761728b161b, type: 3}
   - {fileID: 416837339725389614, guid: 9d9a5828c7e857f48af406e434b294f6, type: 3}
   chestPrefab: {fileID: 4760892660590095382, guid: 63f16c90f3e1b214e9b567db9d7adcd4,
     type: 3}
+  roomNum: 0
 --- !u!1 &1419975876939138989
 GameObject:
   m_ObjectHideFlags: 0
