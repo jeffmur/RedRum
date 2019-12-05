@@ -32,6 +32,11 @@ public static class Scenes
         return roomDimension;
     }
 
+    public static int getInt()
+    {
+        return int.Parse(roomDimension[0].ToString());
+    }
+
     public static string nextDimension()
     {
         switch (roomDimension[0])

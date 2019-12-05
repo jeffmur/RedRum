@@ -34,7 +34,7 @@ public class WallShooterAbstract : Enemy
         enemyAnimator = GetComponent<Animator>();
         rb = this.GetComponent<Rigidbody2D>();
         enemySprite = GetComponent<SpriteRenderer>();
-        BulletPrefab = Resources.Load<GameObject>("Textures/Prefabs/Enemies/SlimeBullet");
+        BulletPrefab = Resources.Load<GameObject>("Textures/Projectiles/SlimeBullet");
     }
 
     // Update is called once per frame

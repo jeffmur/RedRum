@@ -30,6 +30,39 @@ public class RoomStats : MonoBehaviour
 
     }
 
+    public Vector2 spawnEnemyInBounds(Vector2 loc)
+    {
+        // Is within bounds
+        if (!isInRoom(loc))
+        {
+            Debug.Log("CAUGHT OUT OF BOUNDS ENEMY"); // DOES NOT WORK I NEED COFFEE
+            // Check each side
+            if (maxX < loc.x)
+            {
+                float offset = loc.x - maxX - 2;
+                return new Vector2(loc.x - offset, loc.y);
+            }
+            if (minX > loc.x)
+            {
+                float offset = minX - loc.x + 2;
+                return new Vector2(loc.x + offset, loc.y);
+            }
+            if (maxY < loc.x)
+            {
+                float offset = loc.y - maxY - 2;
+                return new Vector2(loc.x, loc.y - offset);
+            }
+            if (minY > loc.x)
+            {
+                float offset = minY - loc.y + 2;
+                return new Vector2(loc.x, loc.y + offset);
+            }
+        }
+        return loc;
+
+        // See OnTriggerEnter2D for enemy overlap
+    }
+
     public bool isInRoom(Vector2 location)
     {
         return maxX > location.x

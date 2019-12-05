@@ -17,7 +17,7 @@ public class SuitcaseBossAbstract : Enemy
 
         base.Start();
         healthBar = GameObject.Find("HealthBarSlider");
-        BulletPrefab = Resources.Load<GameObject>("Textures/Prefabs/Enemies/SuitcaseBullet_Variant");
+        BulletPrefab = Resources.Load<GameObject>("Textures/Projectiles/SuitcaseBullet_Variant");
         enemySprite = transform.GetComponent<SpriteRenderer>();
         StartCoroutine(FireShots());
         healthBar.SetActive(true);

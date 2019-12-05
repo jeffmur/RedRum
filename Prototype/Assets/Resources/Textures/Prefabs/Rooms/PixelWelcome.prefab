@@ -4355,6 +4355,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 370a534bcbf13eb40bc7fd306dac28bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LOCKED: 1
+  UNLOCKED: 0
+  OPEN: 0
   allDoors:
   - {fileID: 1837869373701438}
   - {fileID: 1471255291486316}
@@ -4372,12 +4375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd285174f3c28245aff0daaf6a5e02a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCamera: {fileID: 0}
-  mWalls:
-  - {fileID: 1556098264106108}
-  - {fileID: 1963027273295438}
-  - {fileID: 1762529655683378}
-  - {fileID: 1234657733009468}
+  mDoors: []
 --- !u!1 &1471255291486316
 GameObject:
   m_ObjectHideFlags: 0

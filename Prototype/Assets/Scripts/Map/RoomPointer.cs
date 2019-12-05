@@ -32,7 +32,6 @@ public partial class RoomPointer : MonoBehaviour
                 if (room.GetComponent<Room>() != null) //if it is actually a room
                 {
                     int index = room.GetComponent<Room>().RoomIndex;
-                    Debug.Log("ROOM NUMBER: " + index);
                     next.GetComponent<RoomManager>().RoomIndex = index;
                     if (!room.GetComponent<Room>().isVisited && index != 0) //if the room is not visited
                     {

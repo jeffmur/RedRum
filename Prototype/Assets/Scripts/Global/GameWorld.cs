@@ -30,9 +30,9 @@ public partial class GameWorld : SceneSingleton<GameWorld>
         
         if(mCamera != null)
         {
-            Vector3 desiredPosition = new Vector3(casper.transform.localPosition.x, casper.transform.localPosition.y, -10f);
-            Vector3 smoothedPostion = Vector3.Lerp(mCamera.transform.position, desiredPosition, 0.125f);
-            mCamera.transform.position = smoothedPostion;
+            Vector3 desiredPosition = casper.transform.position;
+            Vector2 smoothedPostion = Vector2.Lerp(mCamera.transform.position, desiredPosition, 0.015f);
+            mCamera.transform.position = new Vector3(smoothedPostion.x, smoothedPostion.y, -10);
         }
         else
             mCamera = GameObject.Find("Main Camera");
