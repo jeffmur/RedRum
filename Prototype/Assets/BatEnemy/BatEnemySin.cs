@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BatEnemy : Enemy
+public class BatEnemySin : Enemy
 {
     // Start is called before the first frame update
     private float fraquency = 5f;
@@ -43,4 +43,20 @@ public class BatEnemy : Enemy
         //transform.position = ((Vector2)transform.position+direction)*Time.deltaTime*speed+(Vector2)transform.up*Mathf.Sin(Time.time*fraquency)*magnitude;
 
     }
-}
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        base.OnTriggerEnter2D(collision);
+        if (collision.CompareTag("Player"))
+        {
+            casper.GetComponent<PlayerStats>().changeHealth(-1);
+        }
+        else if (collision.CompareTag("HeroBullet"))
+        {
+            if (enemyHealth <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+    }
+
+    }
