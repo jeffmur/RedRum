@@ -12,7 +12,7 @@ public class SuitcaseBossAbstract : Enemy
 
     protected override void Start()
     {
-        enemyHealth = 500;
+        enemyHealth = 3000;
         speed = 1f;
 
         base.Start();

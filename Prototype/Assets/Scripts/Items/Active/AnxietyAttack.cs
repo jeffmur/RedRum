@@ -23,7 +23,7 @@ public class AnxietyAttack : ActivatedItem
 
     protected override void setItemDurations()
     {
-        cooldownDuration = 3;
+        cooldownDuration = 10;
         effectDuration = 3;
         frameTick = 1;
     }
