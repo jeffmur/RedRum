@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CasperFront_Idle
+  m_Name: CasperRightBack_Dodge
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,13 +20,16 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -8674927029853692253, guid: 4d6b05feec2d6b240b5538fa5f92cdbe,
+      value: {fileID: -1975744053285278564, guid: 9b452ec8c32627a46b492ca43ab5f870,
         type: 3}
-    - time: 0.1
-      value: {fileID: -8007560900890329556, guid: 4d6b05feec2d6b240b5538fa5f92cdbe,
+    - time: 0.15
+      value: {fileID: -1627144011865121352, guid: 9b452ec8c32627a46b492ca43ab5f870,
         type: 3}
-    - time: 0.2
-      value: {fileID: -3310322619149290904, guid: 4d6b05feec2d6b240b5538fa5f92cdbe,
+    - time: 0.3
+      value: {fileID: -3531533133440265321, guid: 9b452ec8c32627a46b492ca43ab5f870,
+        type: 3}
+    - time: 0.43333334
+      value: {fileID: -3531533133440265321, guid: 9b452ec8c32627a46b492ca43ab5f870,
         type: 3}
     attribute: m_Sprite
     path: 
@@ -47,15 +50,16 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -8674927029853692253, guid: 4d6b05feec2d6b240b5538fa5f92cdbe, type: 3}
-    - {fileID: -8007560900890329556, guid: 4d6b05feec2d6b240b5538fa5f92cdbe, type: 3}
-    - {fileID: -3310322619149290904, guid: 4d6b05feec2d6b240b5538fa5f92cdbe, type: 3}
+    - {fileID: -1975744053285278564, guid: 9b452ec8c32627a46b492ca43ab5f870, type: 3}
+    - {fileID: -1627144011865121352, guid: 9b452ec8c32627a46b492ca43ab5f870, type: 3}
+    - {fileID: -3531533133440265321, guid: 9b452ec8c32627a46b492ca43ab5f870, type: 3}
+    - {fileID: -3531533133440265321, guid: 9b452ec8c32627a46b492ca43ab5f870, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.21666667
+    m_StopTime: 0.45000002
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
