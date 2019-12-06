@@ -42,12 +42,9 @@ public class Reflector : ActivatedItem
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (gameObject.name == "Reflector")
+        if (collision.gameObject.tag == "EnemyBullet")
         {
-            if (collision.gameObject.tag == "EnemyBullet")
-            {
-                ReflectBullet(collision.gameObject);    
-            }
+            ReflectBullet(collision.gameObject);    
         }
     }
 
