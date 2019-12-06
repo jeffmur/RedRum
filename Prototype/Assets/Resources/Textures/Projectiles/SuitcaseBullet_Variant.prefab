@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 1508283065333119966, guid: 9b53420a65f9fe24bbcaf95443aa3f60,
         type: 3}
       propertyPath: m_Name
-      value: SuitcaseBullet Variant
+      value: SuitcaseBullet_Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1508283065333119961, guid: 9b53420a65f9fe24bbcaf95443aa3f60,
         type: 3}
@@ -70,17 +70,17 @@ PrefabInstance:
     - target: {fileID: 1508283065333119962, guid: 9b53420a65f9fe24bbcaf95443aa3f60,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.0141509175
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1508283065333119962, guid: 9b53420a65f9fe24bbcaf95443aa3f60,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.03404722
+      value: 0.8837067
       objectReference: {fileID: 0}
     - target: {fileID: 1508283065333119962, guid: 9b53420a65f9fe24bbcaf95443aa3f60,
         type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1508283065333119960, guid: 9b53420a65f9fe24bbcaf95443aa3f60,
         type: 3}

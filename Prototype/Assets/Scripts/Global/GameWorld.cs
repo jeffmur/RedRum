@@ -43,12 +43,18 @@ public partial class GameWorld : SceneSingleton<GameWorld>
             if ((dist >= cSize-1 && dist < cSize * 2) && (screenPos.x > 100 || screenPos.y > 100))
             {
                 desiredPosition = (crosshairs.transform.position + casper.transform.position) / 2;
+                Vector2 smoothedPostion = Vector2.Lerp(mCamera.transform.position, desiredPosition, 0.015f);
+                mCamera.transform.position = new Vector3(smoothedPostion.x, smoothedPostion.y, -10);
             }
-            // else Always keep Casper in view
+            else
+            {
+                // else Always keep Casper in view
 
-            // Lerp to Pos VERY JUMPY
-            Vector2 smoothedPostion = Vector2.Lerp(mCamera.transform.position, desiredPosition, 0.125f);
-            mCamera.transform.position = new Vector3(smoothedPostion.x, smoothedPostion.y, -10);
+                // Lerp to Pos VERY JUMPY
+                Vector2 smoothedPostion = Vector2.Lerp(mCamera.transform.position, desiredPosition, 0.125f);
+                mCamera.transform.position = new Vector3(smoothedPostion.x, smoothedPostion.y, -10);
+            }
+   
         }
         else
             mCamera = GameObject.Find("Main Camera");
