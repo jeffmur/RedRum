@@ -25,7 +25,7 @@ public class AnxietyAttack : ActivatedItem
     {
         cooldownDuration = 10;
         effectDuration = 3;
-        frameTick = 1;
+        frameTick = 3;
     }
     protected override void setItemInfo()
     {
