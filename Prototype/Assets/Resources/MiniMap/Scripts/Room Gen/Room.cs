@@ -6,7 +6,9 @@ public class Room : MonoBehaviour {
 
     public int roomType;
     public bool isVisited = false;
-    public Vector2 roomPosition;
+
+    public int i;
+    public int RoomIndex { set => i = value; get => i; }
     // Start is called before the first frame update
     void Start()
     {

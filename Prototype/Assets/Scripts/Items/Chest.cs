@@ -7,14 +7,16 @@ public class Chest : MonoBehaviour
     public Sprite opened;
     public Sprite closed;
     private SpriteRenderer rend;
-    private List<GameObject> myItems;
+    public ItemManager itemManager;
     public bool openChest = false;
-    private Transform casper;
+    public int RoomIndex;
+    private GameObject key;
     // Start is called before the first frame update
     void Start()
     {
         rend = GetComponent<SpriteRenderer>();
-        casper = GameObject.FindGameObjectWithTag("Player").transform;
+        itemManager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
+        key = Resources.Load("Textures/Prefabs/Items/Key") as GameObject;
     }
 
     // Update is called once per frame
@@ -24,17 +26,19 @@ public class Chest : MonoBehaviour
         if(openChest && rend.sprite != opened)
         {
             rend.sprite = opened;
+            GetComponent<BoxCollider2D>().isTrigger = true;
+            GetComponentInParent<DoorSystem>().OpenAll();
             spawnRandomItem();
         }
     }
 
-    public void initChest(List<GameObject> items) { myItems = items; gameObject.SetActive(false); openChest = false; }
-
-    public void destroyChest(GameObject old)
-    {
+    public void initChest(int index) { 
+        gameObject.SetActive(false); 
         openChest = false;
-        Destroy(old);
+        RoomIndex = index;
+        Casper.Instance.currentRoomIndex = index;
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (rend.sprite != opened)
@@ -46,8 +50,14 @@ public class Chest : MonoBehaviour
 
     private void spawnRandomItem()
     {
-        int i = Random.Range(0, myItems.Count - 1);
-        GameObject item = Instantiate(myItems[i], transform.position, Quaternion.identity);
-        item.AddComponent<ItemBehavior>();
+        GameObject item;
+        if (transform.parent.name != "Boss Pool")
+            item = Instantiate(itemManager.SpawnRandomItem(), transform.position, Quaternion.identity);
+        else
+            item = Instantiate(key, transform.position, Quaternion.identity);
+
+        item.AddComponent<ItemSpawnBehavior>(); // rotate and "float up"
+        item.AddComponent<RoomRegister>().RoomIndex = RoomIndex; // assigns item to roomIndex
+        item.transform.parent = gameObject.transform.parent; // child of room   
     }
 }

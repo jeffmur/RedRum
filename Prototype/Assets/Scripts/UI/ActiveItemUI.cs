@@ -5,19 +5,18 @@ using UnityEngine.UI;
 public class ActiveItemUI : MonoBehaviour
 {
     public Image itemImage, cooldownBar;
-    private float cooldownTime, waitTime, cooldownTimeElapsed;
-    private bool onCooldown = false;
+    private float barIncreaseTime, barDecreaseTime;
 
     private void Update()
     {
-        if (cooldownTimeElapsed > 0)
-        {
-            echoCooldown();
-        }
-        else
-        {
-            onCooldown = false;
-        }
+        //if (cooldownTimeElapsed > 0)
+        //{
+        //    echoCooldown();
+        //}
+        //else
+        //{
+        //    onCooldown = false;
+        //}
     }
 
     public void displayActiveItem(Item item)
@@ -25,11 +24,11 @@ public class ActiveItemUI : MonoBehaviour
         if (item is ActivatedItem)
         {
             SpriteRenderer rend = item.GetComponent<SpriteRenderer>();
+            itemImage = GetComponent<Image>();
             itemImage.sprite = rend.sprite;
-            itemImage.color = Color.white;
             ActivatedItem actItem = (ActivatedItem)item;
-            cooldownTime = actItem.getCooldownDuration();
-            waitTime = actItem.getEffectDuration();
+            barIncreaseTime = actItem.getCooldownDuration();
+            barDecreaseTime = actItem.getEffectDuration();
         }
     }
 
@@ -39,23 +38,34 @@ public class ActiveItemUI : MonoBehaviour
         {
             itemImage.sprite = null;
         }
-        else if (!onCooldown)
+        else
         {
-            StartCoroutine(initCooldownBar());
+            StartCoroutine(StartCooldown());
         }
     }
 
-    private IEnumerator initCooldownBar()
+    private IEnumerator StartCooldown()
     {
-        yield return new WaitForSeconds(waitTime);
-        cooldownTimeElapsed = cooldownTime;
-        onCooldown = true;
+        float timer = barDecreaseTime;
+        while (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            float cdBarPercentage = timer / barDecreaseTime;
+            cooldownBar.fillAmount = cdBarPercentage;
+            yield return null;
+        }
+        StartCoroutine(echoCooldown());
     }
 
-    private void echoCooldown()
+    private IEnumerator echoCooldown()
     {
-        cooldownTimeElapsed -= Time.deltaTime;
-        float cdBarPercentage = cooldownTimeElapsed / cooldownTime;
-        cooldownBar.fillAmount = cdBarPercentage;
+        float timer = barIncreaseTime;
+        while (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            float cdBarPercentage = timer / barIncreaseTime;
+            cooldownBar.fillAmount = 1 - cdBarPercentage;
+            yield return null;
+        }
     }
 }

@@ -8,6 +8,7 @@ public class ReloadCooldown : MonoBehaviour
     private float reloadStartTime;
     private float reloadSpeed;
     public bool reloading;
+
     // Start is called before the first frame update
     void Start()
     {

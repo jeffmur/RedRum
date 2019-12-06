@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class RoomStats : MonoBehaviour
 {
-    public Camera mCamera;
-    public List<GameObject> mWalls;
+    private Camera mCamera;
+    public List<GameObject> mDoors;
     private float maxY;
     private float minY;
     private float maxX;
@@ -13,20 +13,59 @@ public class RoomStats : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        setWallDemensions();
+        foreach(Transform folder in this.transform)
+        {
+            if (folder.name == "Doors")
+                foreach (Transform doors in folder)
+                    mDoors.Add(doors.gameObject);
+        }
+        mCamera = Camera.main;
+        setDemensions();
         mCamera.ResetAspect();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    public Vector2 spawnEnemyInBounds(Vector2 loc)
+    {
+        // Is within bounds
+        if (!isInRoom(loc))
+        {
+            // Check each side
+            if (maxX <= loc.x)
+            {
+                float offset = loc.x - maxX - 2;
+                return new Vector2(loc.x - offset, loc.y);
+            }
+            if (minX >= loc.x || loc.x - minX <= 5)
+            {
+                float offset = minX - loc.x + 2;
+                return new Vector2(loc.x + offset, loc.y);
+            }
+            if (maxY <= loc.x)
+            {
+                float offset = loc.y - maxY - 2;
+                return new Vector2(loc.x, loc.y - offset);
+            }
+            if (minY >= loc.x)
+            {
+                float offset = minY - loc.y + 2;
+                return new Vector2(loc.x, loc.y + offset);
+            }
+        }
+        return loc;
+
+        // See OnTriggerEnter2D for enemy overlap
     }
 
     public bool isInRoom(Vector2 location)
     {
-        return maxX > location.x 
-            && minX < location.x 
+        return maxX > location.x
+            && minX < location.x
             && maxY > location.y
             && minY < location.y;
     }
@@ -53,24 +92,24 @@ public class RoomStats : MonoBehaviour
         }
         return location;
     }
-    private void setWallDemensions()
+    private void setDemensions()
     {
-        for(int i = 0; i < mWalls.Count; i++)
+        for (int i = 0; i < mDoors.Count; i++)
         {
-            string name = mWalls[i].name;
+            string name = mDoors[i].name;
             switch (name)
             {
-                case "left_wall":
-                    minX = mWalls[0].transform.position.x;
+                case "Top_Door":
+                    maxY = mDoors[i].transform.position.y;
                     break;
-                case "right_wall":
-                    maxX = mWalls[1].transform.position.x;
+                case "Right_Door":
+                    maxX = mDoors[i].transform.position.x;
                     break;
-                case "top_wall":
-                    maxY = mWalls[2].transform.position.y;
+                case "Bottom_Door":
+                    minY = mDoors[i].transform.position.y;
                     break;
-                case "bot_wall":
-                    minY = mWalls[3].transform.position.y;
+                case "Left_Door":
+                    minX = mDoors[i].transform.position.x;
                     break;
             }
         }
@@ -83,17 +122,6 @@ public class RoomStats : MonoBehaviour
     private float getWidthDem()
     {
         return maxX - minX;
-    }
-
-
-    public Vector2 getHeightVec()
-    {
-        return new Vector2(minY, maxY);
-    }
-
-    public Vector2 getWidthVec()
-    {
-        return new Vector2(minX, maxX);
     }
 
     public void setCamLocation()
@@ -110,24 +138,22 @@ public class RoomStats : MonoBehaviour
 
     public Vector2 sendPlayerToDoor(string side)
     {
-        Vector2 location = new Vector2(0,0);
-        float tHeight = getHeightVec().x + getHeightVec().y;
-        float tWidth = getWidthVec().x + getWidthVec().y;
+        Vector2 center = transform.position;
         switch (side)
         {
             case "TOP":
-                location = new Vector2(tWidth / 2, getHeightVec().y);
+                center = new Vector2(center.x, maxY - 2f);
                 break;
             case "BOTTOM":
-                location = new Vector2(tWidth / 2, getHeightVec().x + 1f);
+                center = new Vector2(center.x, minY + 3f);
                 break;
             case "RIGHT":
-                location = new Vector2(getWidthVec().y, tHeight / 2);
+                center = new Vector2(maxX - 2f, center.y);
                 break;
             case "LEFT":
-                location = new Vector2(getWidthVec().x, tHeight / 2);
+                center = new Vector2(minX + 2f, center.y);
                 break;
         }
-        return location;
+        return center;
     }
 }
