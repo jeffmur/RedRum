@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 416837339725389608}
   - component: {fileID: 416837339725389615}
   - component: {fileID: 416837339725389611}
-  - component: {fileID: 416837339725389609}
   - component: {fileID: 416837339725389610}
   - component: {fileID: 416837339725389620}
-  - component: {fileID: 416837339725389621}
+  - component: {fileID: 3095331038703055408}
   m_Layer: 0
   m_Name: GhostEnemy
   m_TagString: Enemy
@@ -112,21 +111,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.24}
   m_EdgeRadius: 0
---- !u!114 &416837339725389609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 416837339725389614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa21e206acd4254184ad726b28501f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AngerDistance: 2
-  Speed: 10
-  AngerStateTimeLimit: 1
 --- !u!50 &416837339725389610
 Rigidbody2D:
   serializedVersion: 4
@@ -167,7 +151,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &416837339725389621
+--- !u!114 &3095331038703055408
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,8 +160,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 416837339725389614}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a8f6099468e60849b1bb1a66b4173c0, type: 3}
+  m_Script: {fileID: 11500000, guid: ac300cae82d9747a0af21a955cad4a34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 200
-  itemDrop: {fileID: 562611308969471150, guid: 2e116b2405c505d4d96fc9014bf648e4, type: 3}

@@ -1,4 +1,5 @@
-﻿﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,11 +28,11 @@ public class HealthUI : MonoBehaviour
         }
     }
 
-    public void setStartingHealth(int activeHearts)
+    public void setStartingHealth(Tuple<int, int> health)
     {
         currentHearts = new List<GameObject>();
-        currentHP = activeHearts;
-        maxHP = activeHearts;
+        currentHP = health.Item1;
+        maxHP = health.Item2;
         setHealthUI();
     }
 
@@ -39,7 +40,7 @@ public class HealthUI : MonoBehaviour
     {
         xDisplacement = 50f;
         yDisplacement = 25f;
-
+        if (currentHearts == null) { return; }
         foreach (GameObject heart in currentHearts)
         {
             GameObject.Destroy(heart);
@@ -62,6 +63,10 @@ public class HealthUI : MonoBehaviour
         Image NewImage = NewObj.AddComponent<Image>(); //Add the Image Component script
         NewImage.GetComponent<RectTransform>().sizeDelta = new Vector2(25, 25);
         NewImage.sprite = heart; //Set the Sprite of the Image Component on the new GameObject
+
+        if (healthPanel == null)
+            healthPanel = GameObject.Find("PlayerHealth").GetComponent<RectTransform>();
+
         NewObj.GetComponent<RectTransform>().SetParent(healthPanel.transform); //Assign the newly created Image GameObject as a Child of the Parent Panel.
         NewObj.SetActive(true); //Activate the GameObject
         NewObj.transform.localPosition = healthPanel.anchoredPosition + new Vector2(xDisplacement, yDisplacement);

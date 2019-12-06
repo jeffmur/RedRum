@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using System.Collections;
 public abstract class ActivatedItem : Item
 {
     // set effectDuration to -1 if no lingering effects
     // set cooldownDuration to -1 if item is one time use
     public float effectDuration, cooldownDuration; // make sure you set these up
     public float effectTimeElapsed, cooldownTimeElapsed;
+    public int frameTick, framePointer; // note: bad idea to tie game logic to frame rate
     public bool isOnCooldown = false, isOnEffect = false;
 
     public float getCooldownDuration()
@@ -16,8 +18,7 @@ public abstract class ActivatedItem : Item
     {
         return effectDuration;
     }
-
-    private void Update()
+    protected virtual void Update()
     {
         // if the item is activated and is doing its effect
         if (isOnEffect)
@@ -25,12 +26,12 @@ public abstract class ActivatedItem : Item
             processEffect();
             return;
         }
-
         // if the item is completely done with its activation
         // and the item is on cooldown
         if (isOnCooldown)
         {
             processCooldown();
+            framePointer = 0;
         }
     }
 
@@ -42,12 +43,13 @@ public abstract class ActivatedItem : Item
         {
             Debug.Log("Set up the item durations please.");
         }
+        framePointer = 0;
     }
 
     public override void process()
     {
         base.process();
-        stats.setActivatedItem(this);
+        casperData.setActivatedItem(this);
     }
 
     public void activateItem()
@@ -64,20 +66,31 @@ public abstract class ActivatedItem : Item
         }
     }
 
-    //returns true once effect ends, false if not
     private void processEffect()
     {
         // if the effect duration is -1, there is no effect, so
         // immediately move to cooldown
         if (effectDuration < -0.9) // basically if duration is -1
         {
+            isOnEffect = false;
             return;
         }
-        setItemEffectBehavior(); // do the effect
+
+        if (framePointer == frameTick)
+        {
+            doItemEffect(); // do the effect
+            framePointer = 0;
+        }
+        else
+        {
+            framePointer++;
+        }
         effectTimeElapsed -= Time.deltaTime;
-        if (effectTimeElapsed < 0)
+        effectTimeElapsed = Mathf.Clamp(effectTimeElapsed, 0, effectDuration);
+        if (effectTimeElapsed == 0)
         {
             isOnEffect = false;
+            endItemEffect();
             return; // effect is done, move to cooldown
         }
         else
@@ -86,7 +99,6 @@ public abstract class ActivatedItem : Item
         }
     }
 
-    // if the cooldown duration is -1, the item is a one time use
     private void processCooldown()
     {
         // if the cooldown duration is -1, the item is a one time use
@@ -96,12 +108,12 @@ public abstract class ActivatedItem : Item
             return;
         }
         cooldownTimeElapsed -= Time.deltaTime;
-        if (cooldownTimeElapsed < 0)
+        cooldownTimeElapsed = Mathf.Clamp(cooldownTimeElapsed, 0, cooldownDuration);
+        if (cooldownTimeElapsed == 0)
         {
             //cooldown is completed, item is ready to use again
             isOnCooldown = false;
         }
-        //invoke some item cooldown UI echo
     }
 
     private void destroyItem()
@@ -117,16 +129,10 @@ public abstract class ActivatedItem : Item
 
     //define effect and cooldown durations
     protected abstract void setItemDurations();
-
     //define initial activation effects.
-    protected virtual void setActivateItemBehavior()
-    {
-        return;
-    }
-
+    protected abstract void setActivateItemBehavior();
     //define item effect after activation. Ignore if effectDuration is -1
-    protected virtual void setItemEffectBehavior()
-    {
-        return;
-    }
+    protected abstract void doItemEffect();
+    //define item state after effect is done
+    protected abstract void endItemEffect();
 }

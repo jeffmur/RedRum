@@ -7,7 +7,7 @@ public class EnemyBullet : MonoBehaviour
     public GameObject hitEffect;
     public int bulletDamage = 1;
     public float bulletSpeed = 3f;
-    private Vector3 bulletDirection;
+    public Vector3 bulletDirection;
 
     void Update()
     {
@@ -25,15 +25,22 @@ public class EnemyBullet : MonoBehaviour
         }
         else if (other.CompareTag("Player"))
         {
-            GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-            Destroy(effect, 0.5f);
-            other.GetComponent<PlayerStats>().changeHealth(-bulletDamage);
-            Destroy(gameObject);
+            Casper casper = other.GetComponent<Casper>();
+            if (!casper.IsEtherial)
+            {
+                GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+                Destroy(effect, 0.5f);
+                if (tag != "HeroBullet")
+                {
+                    casper.changeHealth(-bulletDamage);
+                }
+                Destroy(gameObject);
+            }
         }
     }
 
     public void SetBulletDirection(Vector3 direction)
     {
-        bulletDirection = direction;
+        bulletDirection = direction.normalized;
     }
 }

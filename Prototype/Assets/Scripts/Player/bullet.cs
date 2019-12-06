@@ -8,7 +8,7 @@ public class bullet : MonoBehaviour
     private Vector2 screenBounds;
     public GameObject hitEffect;
 
-    public int bulletDamage = 20;
+    public int bulletDamage = 5;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Wall"))
@@ -21,7 +21,6 @@ public class bullet : MonoBehaviour
         {
             GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
             Destroy(effect, 0.5f);
-            other.GetComponent<EnemyHealthManager>().DecreaseHealth(bulletDamage);
             Destroy(this.gameObject);
         }
     }

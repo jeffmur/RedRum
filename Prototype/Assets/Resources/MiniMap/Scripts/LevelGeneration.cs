@@ -37,21 +37,12 @@ public class LevelGeneration : MonoBehaviour {
         // Set up Camera, Demensions (Scenes.cs)
         // @param 4x4, 5x5, 6x6
         SIZE = GetComponent<SizeController>();
-        SIZE.setUp(Scenes.getDem());
+        SIZE.setUp(Scenes.getDimension());
         direction = Random.Range(1, 6);
     }
 
     private void Update()
     {
-        // TODO: Change to demo scene for alpha Testing
-        // Testing Level Generation
-        if (Input.GetKeyDown("4"))
-            Scenes.Load("Alpha", "4x4");
-        if (Input.GetKeyDown("5"))
-            Scenes.Load("Alpha", "5x5");
-        if (Input.GetKeyDown("6"))
-            Scenes.Load("Alpha", "6x6");
-
         if (timeBtwSpawn <= 0 && stopGeneration == false)
         {
             Move();
