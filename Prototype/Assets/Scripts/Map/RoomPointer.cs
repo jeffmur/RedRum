@@ -87,10 +87,10 @@ public partial class RoomPointer : MonoBehaviour
         mm.moveMMCasper(heroDir);
 
         // Base Case
-        //if (fromRoom.gameObject.name == "Swap_1")
-        //    nextRoom = GameObject.Find("Swap_2");
-        //if(fromRoom.gameObject.name == "Swap_2")
-        //    nextRoom = GameObject.Find("Swap_1");
+        if (fromRoom.gameObject.name == "Swap_1")
+            nextRoom = GameObject.Find("Swap_2");
+        if (fromRoom.gameObject.name == "Swap_2")
+            nextRoom = GameObject.Find("Swap_1");
 
         // Player Icon ON Entry Room
         //if (mm.casperIcon.position == mm.allRooms[0].transform.position)
