@@ -21,7 +21,7 @@ public class GhostAbstract : Enemy
     protected override void Start()
     {
         enemyHealth = 200;
-        speed = 20f;
+        speed = 15f;
 
         base.Start();
         state = (int)States.Idle;
