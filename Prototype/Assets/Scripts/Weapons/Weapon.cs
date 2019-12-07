@@ -18,6 +18,7 @@ public class Weapon : MonoBehaviour
 
     private Animator animator;
     private ReloadCooldown reloadCooldown;
+    public AudioClip weaponSound;
     public int bulletsInClip;
     private float timeSinceLastShot;
     private float reloadStartTime;
