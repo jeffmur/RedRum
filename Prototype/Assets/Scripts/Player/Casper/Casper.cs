@@ -62,7 +62,6 @@ public partial class Casper : SceneSingleton<Casper>
     }
     public void FireEquippedGun(Vector3 target)
     {
-        Debug.Log(EnableFire);
         if (EnableFire)
         {
             Weapon selectedWeapon = weaponInventory.GetSelectedWeapon();

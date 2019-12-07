@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
 
-            if (Input.GetKeyDown(KeyCode.Space)) // activate dodge
+            if (Input.GetMouseButtonDown(1)) // activate dodge
             {
                 Casper.Instance.MoveSpeed *= 1.5f; 
                 Casper.Instance.IsEtherial = true;

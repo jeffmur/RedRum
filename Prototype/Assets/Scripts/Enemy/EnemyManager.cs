@@ -1,16 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class EnemyManager : SceneSingleton<EnemyManager>
 {
     [SerializeField]
     public List<GameObject> listOfEnemies = null;
     public List<GameObject> listOfBosses = null;
-    public Tilemap floor;
-    public Tilemap outline;
-
+    public GameObject spawnPoint;
     protected override void Awake()
     {
         base.Awake();
@@ -32,7 +29,6 @@ public class EnemyManager : SceneSingleton<EnemyManager>
             GameObject boss = (GameObject)t;
             listOfBosses.Add(boss);
         }
-        spawnInMap(10);
     }
     public GameObject SpawnRandomEnemy()
     {
@@ -45,30 +41,8 @@ public class EnemyManager : SceneSingleton<EnemyManager>
         return null;
     }
 
-    public void spawnInMap(int numOfEnemies)
+    public GameObject getSpawnPoint()
     {
-        foreach(var pos in floor.cellBounds.allPositionsWithin)
-        {
-            Vector3Int localPos = new Vector3Int(pos.x, pos.y, 0);
-            Vector3 place = floor.CellToWorld(localPos);
-
-            // Random Spawn
-            if (Random.Range(1, 990) > numOfEnemies) { continue; }
-
-            if (checkBounds(localPos, numOfEnemies))
-            {
-                numOfEnemies--;
-                var enemy = Instantiate(SpawnRandomEnemy());
-                enemy.transform.position = place;
-
-            }
-        }
-        if (numOfEnemies > 0)
-            spawnInMap(numOfEnemies);
-    }
-
-    private bool checkBounds(Vector3Int pos, int num)
-    {
-        return (floor.HasTile(pos) && !outline.HasTile(pos) && num > 0);
+        return spawnPoint;
     }
 }

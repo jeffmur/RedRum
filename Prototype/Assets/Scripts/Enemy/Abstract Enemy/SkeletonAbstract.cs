@@ -57,6 +57,7 @@ public class SkeletonAbstract : Enemy
         {
             counter++;
             enemyAnimator.SetBool("Die", true);
+            GetComponent<BoxCollider2D>().isTrigger = true;
             Destroy(gameObject, 0.75f);
         }
     }

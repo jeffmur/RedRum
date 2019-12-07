@@ -23,7 +23,9 @@ public class DoorSystem : MonoBehaviour
     void Start()
     {
         LockAll();
-        sMMController = GameObject.Find("Level Generator").GetComponent<MMController>();
+        GameObject temp = GameObject.Find("Level Generator");
+        if(temp)
+            sMMController = temp.GetComponent<MMController>();
     }
     
     /*
@@ -114,8 +116,9 @@ public class DoorSystem : MonoBehaviour
     
     private bool isAvailable(int index)
     {
-        if (allDoors[index] == null)
-            return false;
+        if (allDoors[index] == null) return false;
+        if (sMMController == null) return false;
+      //--------------------------------------------
         List<char> all = sMMController.availableDoors();
         if(all == null) { return false; }
         for(int j = 0; j < all.Count; j++)

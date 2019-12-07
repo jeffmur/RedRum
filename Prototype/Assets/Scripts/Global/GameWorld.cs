@@ -30,6 +30,7 @@ public partial class GameWorld : SceneSingleton<GameWorld>
         
         if(mCamera != null)
         {
+            float smoothLerpSpeed = 0f;
             Vector3 screenPos = Camera.main.WorldToScreenPoint(crosshairs.transform.position);
 
             // Now allows for subtle "peek" when moving cursor to edge of map
@@ -40,21 +41,20 @@ public partial class GameWorld : SceneSingleton<GameWorld>
             float cSize = Camera.main.orthographicSize;
 
             // Create a "box" around casper (need to find a sweet spot)
-            if ((dist >= cSize-1 && dist < cSize * 2) && (screenPos.x > 100 || screenPos.y > 100))
+            if ((dist > cSize) && (screenPos.x > 100 || screenPos.y > 100))
             {
+                // Lerp to vector2 between casper and crosshairs
+                // Slowly lerp there
                 desiredPosition = (crosshairs.transform.position + casper.transform.position) / 2;
-                Vector2 smoothedPostion = Vector2.Lerp(mCamera.transform.position, desiredPosition, 0.015f);
-                mCamera.transform.position = new Vector3(smoothedPostion.x, smoothedPostion.y, -10);
+                smoothLerpSpeed = 0.025f;
             }
-            else
-            {
-                // else Always keep Casper in view
+            else // Otherwise out of range, lerp quickly back to casper
+                smoothLerpSpeed = 0.125f;
 
-                // Lerp to Pos VERY JUMPY
-                Vector2 smoothedPostion = Vector2.Lerp(mCamera.transform.position, desiredPosition, 0.125f);
-                mCamera.transform.position = new Vector3(smoothedPostion.x, smoothedPostion.y, -10);
-            }
-   
+            // Update Camera Position
+            Vector2 smoothedPostion = Vector2.Lerp(mCamera.transform.position, desiredPosition, smoothLerpSpeed);
+            mCamera.transform.position = new Vector3(smoothedPostion.x, smoothedPostion.y, -10);
+
         }
         else
             mCamera = GameObject.Find("Main Camera");
@@ -103,15 +103,11 @@ public partial class GameWorld : SceneSingleton<GameWorld>
         {
             casper.activateItem();
         }
-        if (Input.GetKeyDown("5"))
-        {
-            SlowMotion.DoSlowMotion(5, 0.1f);
-        }
         if (Input.GetMouseButton(0))
         {
             casper.FireEquippedGun(PositionCrosshair());
         }
-        if (Input.GetMouseButton(1))
+        if (Input.GetKeyDown("5"))
         {
             LevelManager.Complete();
         }

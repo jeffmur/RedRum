@@ -37,7 +37,9 @@ public abstract class Enemy : MonoBehaviour
             {
                 Vector3 loc = new Vector3(transform.position.x, transform.position.y, -1);
                 var item = Instantiate(itemDrop, loc, Quaternion.identity);
-                item.AddComponent<RoomRegister>().RoomIndex = GetComponent<RoomRegister>().RoomIndex;
+                TryGetComponent(out RoomRegister rr);
+                if (rr != null)
+                    item.AddComponent<RoomRegister>().RoomIndex = rr.RoomIndex;
                 item.transform.parent = transform.parent; // add to room as child
                 item.tag = "Item"; 
             }
