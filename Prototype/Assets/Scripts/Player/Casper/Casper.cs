@@ -16,6 +16,7 @@ public partial class Casper : SceneSingleton<Casper>
     {
         localCasperData = GlobalControl.Instance.savedCasperData;
         localPlayerData = GlobalControl.Instance.savedPlayerData;
+        Casper.Instance.GetComponentInChildren<Light>().intensity = 0;
     }
 
     private void Update()
@@ -25,7 +26,6 @@ public partial class Casper : SceneSingleton<Casper>
         {
             ObtainEquipment(itemCollision);
         }
-        CheckCasperFlash();
     }
 
     public void SaveData()
@@ -57,6 +57,26 @@ public partial class Casper : SceneSingleton<Casper>
         yield return new WaitForSeconds(time);
         IsInvincible = false;
     }
+
+    private IEnumerator FlashCasper(float timer)
+    {
+        float frameTick = 0;
+        SpriteRenderer casperSprite = GetComponent<SpriteRenderer>();
+        while (timer > 0)
+        {
+            if (frameTick == 5)
+            {
+                casperSprite.enabled = casperSprite.enabled ? false : true;
+                frameTick = 0;
+            }
+
+            timer -= Time.deltaTime;
+            frameTick++;
+            yield return null;
+        }
+        casperSprite.enabled = true;
+    }
+
     public void FireEquippedGun(Vector3 target)
     {
         Weapon selectedWeapon = weaponInventory.GetSelectedWeapon();

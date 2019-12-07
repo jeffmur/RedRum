@@ -113,7 +113,7 @@ public partial class GameWorld : SceneSingleton<GameWorld>
         }
         if (Input.GetMouseButton(1))
         {
-            LevelManager.Complete();
+            
         }
     }
 
