@@ -7,7 +7,7 @@ public class SpawnWaves : MonoBehaviour
 {
     public Tilemap spawn;
     private int waveIndex = 0;
-    private int[] EnemiesToSpawn = {8, 10, 12, 15, 20};
+    private int[] EnemiesToSpawn = {8, 10, 14};
     private DoorSystem myDoorsSys;
     private RoomStats myStats;
     private string message;
@@ -19,12 +19,12 @@ public class SpawnWaves : MonoBehaviour
     {
         myDoorsSys = GetComponent<DoorSystem>();
         myStats = GetComponent<RoomStats>();
-        spawnWave(0f);
+        //spawnWave(0f);
     }
     
     void spawnWave(float wait)
     {
-        if(waveIndex >= EnemiesToSpawn.Length) return;
+        if (waveIndex >= EnemiesToSpawn.Length) { myDoorsSys.OpenAll();  return; }
         spawnTime = Time.time;
         Debug.Log("Spawning " + EnemiesToSpawn[waveIndex] + " enemies");
         StartCoroutine(spawnInMap(EnemiesToSpawn[waveIndex], wait));
@@ -35,10 +35,11 @@ public class SpawnWaves : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        myDoorsSys.OpenAll();
         if (allEnemiesDead() && Time.time - spawnTime > 5)
         {
             waveIndex++;
-            spawnWave(2f);
+            //spawnWave(2f);
         }
     }
 

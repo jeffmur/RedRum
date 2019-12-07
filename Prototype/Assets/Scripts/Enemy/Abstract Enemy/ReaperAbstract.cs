@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretAbstract : Enemy
+public class ReaperAbstract : Enemy
 {
     // Start is called before the first frame update
     
@@ -16,9 +16,10 @@ public class TurretAbstract : Enemy
     protected override void Start()
     {
         base.Start();
-        enemyHealth = 150;
+        enemyHealth = 2000;
 
-        BulletPrefab = Resources.Load<GameObject>("Textures/Projectiles/SlimeBullet");
+        // CHRIS CHANGE IT TO PURPLE FLAMES :)
+        BulletPrefab = Resources.Load<GameObject>("Textures/Projectiles/SuitcaseBullet_Variant");
         StartCoroutine(FireSlimes());
     }
 
@@ -64,10 +65,10 @@ public class TurretAbstract : Enemy
         BulletCooldown = 0;
         int shots = 5;
         int val = index % 360;
-        bulletSpray(val + 270, val + 250, shots);
-        bulletSpray(val + 180, val + 160, shots);
-        bulletSpray(val + 90, val + 70, shots);
-        bulletSpray(val, val - 20, shots);
+        bulletSpray(val + 270, val + 250, shots, transform.position);
+        bulletSpray(val + 180, val + 160, shots, transform.position);
+        bulletSpray(val + 90, val + 70, shots, transform.position);
+        bulletSpray(val, val - 20, shots, transform.position);
     }
 
     /**
@@ -77,20 +78,20 @@ public class TurretAbstract : Enemy
     private void nippleShot(int numberOfBullets)
     {
         BulletCooldown = 3f;
-        bulletSpray(0, 360, numberOfBullets);
+        bulletSpray(0, 360, numberOfBullets, transform.position);
     }
 
-    private void bulletSpray(float endAngle, float startAngle, int numOfBullets)
+    private void bulletSpray(float endAngle, float startAngle, int numOfBullets, Vector3 loc)
     {
         EnemyBullet[] bullets = CreateBullets(numOfBullets);
         float angleStep = (endAngle - startAngle) / bullets.Length;
         float angle = startAngle;
         for (int i = 0; i < bullets.Length; i++)
         {
-            float bulDirX = transform.position.x + Mathf.Sin((angle * Mathf.PI) / 180F);
-            float bulDiry = transform.position.y + Mathf.Cos((angle * Mathf.PI) / 180F);
+            float bulDirX = loc.x + Mathf.Sin((angle * Mathf.PI) / 180F);
+            float bulDiry = loc.y + Mathf.Cos((angle * Mathf.PI) / 180F);
             Vector3 bulMoveVector = new Vector3(bulDirX, bulDiry, 0f);
-            Vector2 bulDir = (bulMoveVector - transform.position);
+            Vector2 bulDir = (bulMoveVector - loc);
             bullets[i].SetBulletDirection(bulDir);
             bullets[i].bulletSpeed = 10f;
 
