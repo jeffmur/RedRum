@@ -8,7 +8,6 @@ public class ReaperAbstract : Enemy
     
     private bool fireDiagonal;
     private float BulletCooldown = 1f;
-
     private readonly Vector3 northWest = Vector3.up + Vector3.left;
     private readonly Vector3 northEast = Vector3.up + Vector3.right;
     private readonly Vector3 southWest = Vector3.down + Vector3.left;
@@ -29,9 +28,6 @@ public class ReaperAbstract : Enemy
         while (true)
         {
             yield return new WaitForSeconds(BulletCooldown);
-            //switch (enemyHealth)
-            //{
-            //}
             Attack(i);
             i++;
         }
@@ -39,21 +35,56 @@ public class ReaperAbstract : Enemy
 
     protected override void Attack(int index)
     {
-        nippleShot(100);
-        //fourWavesShot(index);
-        //bombSpread();
+        int rand = Random.Range(0, index % 4);
+        Debug.Log(rand);
+        switch (rand)
+        {
+            default:
+                nippleShot(20);
+                break;
+            case 1:
+                nippleShot(100);
+                break;
+            case 2:
+                BulletCooldown = 0;
+                fourWavesShot(index);
+                break;
+            case 3:
+                StartCoroutine(bombSpread());
+                break;
+            //case 0:
+            //    nippleShot(100);
+            //    StartCoroutine(bombSpread());
+            //    break;
+        }
+        //if (enemyHealth < 2000 && enemyHealth > 1500)
+        //    nippleShot(20);
+        //if (enemyHealth <= 1500 && enemyHealth > 1000)
+        //    nippleShot(100);
+        //if (enemyHealth <= 1000 && enemyHealth > 500)
+        //    fourWavesShot(index);
+        //if (enemyHealth <= 500 && enemyHealth > 200)
+        //    fourWavesShot(index);
+
+        //if (enemyHealth <= 200 && enemyHealth > 0)
+        //{
+        //    nippleShot(100);
+            
+        //}
     }
 
-    private void bombSpread()
+    IEnumerator bombSpread()
     {
-        //BulletCooldown = 10f;
-        EnemyBullet bomb = Instantiate(BulletPrefab, transform.position, Quaternion.identity).GetComponent<EnemyBullet>();
-        bomb.transform.localScale = new Vector3(0.2f, 0.2f, 1);
-        bomb.SetBulletDirection(casper.transform.position - transform.position);
-
-        Debug.Log("BOMB HIT THE WALL");
-        //bulletSpray(0, 360, 100);
-
+        BulletCooldown = 5f;
+        // GET A SPAWNPOINT OBJECT
+        var sp = Instantiate(EnemyManager.Instance.getSpawnPoint());
+        // ASSIGN POS TO CASPER
+        sp.transform.position = casper.transform.position;
+        Destroy(sp, 4f);
+        // WAIT FOR 3 SECONDS 
+        yield return new WaitForSeconds(3f);
+        // SPRAY
+        bulletSpray(0, 360, 30, sp.transform.position);
     }
 
     /**
@@ -92,6 +123,7 @@ public class ReaperAbstract : Enemy
             float bulDiry = loc.y + Mathf.Cos((angle * Mathf.PI) / 180F);
             Vector3 bulMoveVector = new Vector3(bulDirX, bulDiry, 0f);
             Vector2 bulDir = (bulMoveVector - loc);
+            bullets[i].transform.position = loc;
             bullets[i].SetBulletDirection(bulDir);
             bullets[i].bulletSpeed = 10f;
 
