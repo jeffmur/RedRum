@@ -5091,7 +5091,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.7830992, y: 2.0722907}
+  m_Offset: {x: 0.7831001, y: 2.1718416}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5102,7 +5102,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 34.53386, y: 2.1558886}
+  m_Size: {x: 34.53386, y: 2.35499}
   m_EdgeRadius: 0
 --- !u!1 &1289456404150176
 GameObject:
@@ -5188,8 +5188,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemies:
   - {fileID: 2209327765211105673, guid: 8016457c5d020e34ca151082a3e024c5, type: 3}
-  - {fileID: 5998308202094025501, guid: 62b6b4fb551bcf14d8a2626fd5bbb4e3, type: 3}
-  chestPrefab: {fileID: 0}
+  chestPrefab: {fileID: 1876246382564502, guid: 29452e4e80ed95446b514179ba5e5653,
+    type: 3}
   roomNum: 0
 --- !u!1 &1471255291486316
 GameObject:
@@ -5201,7 +5201,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4502901211852926}
   - component: {fileID: 1803337697}
-  - component: {fileID: 1803337696}
   m_Layer: 0
   m_Name: Left_Door
   m_TagString: Untagged
@@ -5252,20 +5251,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8380394, y: 1.5154862}
   m_EdgeRadius: 0
---- !u!114 &1803337696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1471255291486316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae6b981969da3da478d1afe4f781a8c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fromRoom: {fileID: 2995485833902595615}
-  nextRoom: {fileID: 0}
 --- !u!1 &1538657672567482
 GameObject:
   m_ObjectHideFlags: 0
@@ -5310,7 +5295,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4448261832340000}
   - component: {fileID: 1514660692}
-  - component: {fileID: 1514660691}
   m_Layer: 0
   m_Name: Bottom_Door
   m_TagString: Untagged
@@ -5361,20 +5345,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.9249558, y: 1.9836192}
   m_EdgeRadius: 0
---- !u!114 &1514660691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1539705964994804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae6b981969da3da478d1afe4f781a8c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fromRoom: {fileID: 2995485833902595615}
-  nextRoom: {fileID: 0}
 --- !u!1 &1556098264106108
 GameObject:
   m_ObjectHideFlags: 0
@@ -5543,7 +5513,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4406267389611076}
   - component: {fileID: 1701560093}
-  - component: {fileID: 1701560092}
   m_Layer: 0
   m_Name: Top_Door
   m_TagString: Untagged
@@ -5594,20 +5563,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.4620242, y: 0.6558447}
   m_EdgeRadius: 0
---- !u!114 &1701560092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1837869373701438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae6b981969da3da478d1afe4f781a8c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fromRoom: {fileID: 2995485833902595615}
-  nextRoom: {fileID: 0}
 --- !u!1 &1940396208737054
 GameObject:
   m_ObjectHideFlags: 0
@@ -5618,7 +5573,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4932031560323552}
   - component: {fileID: 183174920}
-  - component: {fileID: 183174919}
   m_Layer: 0
   m_Name: Right_Door
   m_TagString: Untagged
@@ -5669,20 +5623,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.88741016, y: 1.7338476}
   m_EdgeRadius: 0
---- !u!114 &183174919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940396208737054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae6b981969da3da478d1afe4f781a8c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fromRoom: {fileID: 2995485833902595615}
-  nextRoom: {fileID: 0}
 --- !u!1 &1963027273295438
 GameObject:
   m_ObjectHideFlags: 0

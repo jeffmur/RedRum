@@ -33,7 +33,18 @@ public class SlimeAbstract : Enemy
 
     protected override void Attack(int damage)
     {
-        EnemyBullet[] bullets = CreateBullets();
+        fireInterchange();
+        if (enemyHealth <= 50)
+        {
+            BulletCooldown = 0.5f;
+            fireInAllDirections();
+        }
+            
+    }
+
+    private void fireInterchange()
+    {
+        EnemyBullet[] bullets = CreateBullets(4);
         if (!fireDiagonal)
         {
             bullets[0].SetBulletDirection(Vector3.up);
@@ -51,10 +62,24 @@ public class SlimeAbstract : Enemy
             fireDiagonal = false;
         }
     }
-
-    private EnemyBullet[] CreateBullets()
+    private void fireInAllDirections()
     {
-        EnemyBullet[] bullets = new EnemyBullet[4];
+        EnemyBullet[] bullets = CreateBullets(8);
+        // 4 dirs
+        bullets[0].SetBulletDirection(Vector3.up);
+        bullets[1].SetBulletDirection(Vector3.right);
+        bullets[2].SetBulletDirection(Vector3.left);
+        bullets[3].SetBulletDirection(Vector3.down);
+        // Diagonal
+        bullets[4].SetBulletDirection(northWest);
+        bullets[5].SetBulletDirection(northEast);
+        bullets[6].SetBulletDirection(southWest);
+        bullets[7].SetBulletDirection(southEast);
+    }
+
+    private EnemyBullet[] CreateBullets(int num)
+    {
+        EnemyBullet[] bullets = new EnemyBullet[num];
         for (int i = 0; i < bullets.Length; i++)
         {
             bullets[i] = Instantiate(BulletPrefab, transform.position, Quaternion.identity).GetComponent<EnemyBullet>();
