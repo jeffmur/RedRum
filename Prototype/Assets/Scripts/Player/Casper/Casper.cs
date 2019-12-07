@@ -18,6 +18,7 @@ public partial class Casper : SceneSingleton<Casper>
         localCasperData = GlobalControl.Instance.savedCasperData;
         localPlayerData = GlobalControl.Instance.savedPlayerData;
         Casper.Instance.GetComponentInChildren<Light>().intensity = 0;
+        EnableFire = true;
     }
 
     private void Update()
