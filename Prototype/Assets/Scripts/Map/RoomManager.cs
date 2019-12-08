@@ -14,8 +14,8 @@ public partial class RoomManager : MonoBehaviour
     public int roomNum = 0;
     public int RoomIndex { get => roomNum; set => roomNum = value; }
 
-    public delegate void RoomPointerEventDelegate();
-    public event RoomPointerEventDelegate onNewRoomEnter, onRoomCompleted, onBossRoomEnter, onBossDefeated;
+    public delegate void RoomEventDelegate();
+    public event RoomEventDelegate onNewRoomEnter, onRoomCompleted, onBossRoomEnter, onBossDefeated;
 
     // Start is called before the first frame update
     void Start()
@@ -54,34 +54,14 @@ public partial class RoomManager : MonoBehaviour
         {
             chestOpen = myChest.openChest;
         }
-
-        StartCoroutine(waitToEnter());
-
-
     }
 
 
     private bool entered = false;
-    private IEnumerator waitToEnter()
-    {
-        // Wait while casper is in Puzzle
-        while (!myStats.isInRoom(Casper.Instance.transform.position))
-        {
-            yield return null;
-        }
-        if (!entered)
-        {
-            Debug.Log(name + " entered");
-            if (name == "Boss Pool")
-                onBossRoomEnter?.Invoke();
-            else
-                onNewRoomEnter?.Invoke();
-            entered = true;
-        }
-    }
-
     public void Initialize()
     {
+        entered = true;
+        Debug.Log("Entered: " + name);
         //RoomIndex = atIndex;
         // Destroy old chest
         foreach(Transform child in gameObject.transform)
@@ -160,7 +140,6 @@ public partial class RoomManager : MonoBehaviour
         {
             GameObject c = Instantiate(chestPrefab, transform.position, Quaternion.identity);
             c.transform.parent = gameObject.transform;
-
             
             c.TryGetComponent(out Chest me);
             if (me != null)

@@ -15,6 +15,9 @@ public class SpawnWaves : MonoBehaviour
     private float spawnTime = 0;
     public GameObject reaper;
 
+    public delegate void RoomEventDelegate();
+    public event RoomEventDelegate onNewRoomEnter, onRoomCompleted, onBossRoomEnter, onBossDefeated;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +29,7 @@ public class SpawnWaves : MonoBehaviour
     void spawnWave(float wait)
     {
         if (waveIndex >= EnemiesToSpawn.Length) { return; }
+        onNewRoomEnter?.Invoke();
         spawnTime = Time.time;
         //Debug.Log("Spawning " + EnemiesToSpawn[waveIndex] + " enemies");
         StartCoroutine(spawnInMap(EnemiesToSpawn[waveIndex], wait));
@@ -74,11 +78,17 @@ public class SpawnWaves : MonoBehaviour
         }
     }
 
+    private bool oh = false;
     private bool allEnemiesDead()
     {
         foreach (Transform obj in this.transform)
             if (obj.CompareTag("Enemy"))
                 return false;
+        if (!oh)
+        {
+            onRoomCompleted?.Invoke();
+            oh = true;
+        }
         return true;
     }
 
