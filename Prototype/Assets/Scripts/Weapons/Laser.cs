@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SniperRifle : Weapon
+public class Laser : MonoBehaviour
 {
     public LineRenderer laser;
     private GameObject crosshair;
-    private Transform weaponInventory;
     
     private void Start()
     {
@@ -19,6 +18,7 @@ public class SniperRifle : Weapon
         if (transform.parent != null)
         {
             laser.enabled = true;
+            // THIS IS FUCKING STUPID
             laser.SetPosition(0, transform.position);
             laser.SetPosition(laser.positionCount - 1, crosshair.transform.position);
         }
