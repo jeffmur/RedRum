@@ -11,6 +11,18 @@ public class RoomSounds : MonoBehaviour
         EventManager.Instance.onRoomCompleted += RoomCompletedSound;
         EventManager.Instance.onBossRoomEnter += BossRoomEnterSound;
         EventManager.Instance.onBossRoomCompleted += BossDefeatedSound;
+        EventManager.Instance.onWaveStart += WaveStart;
+        EventManager.Instance.onWaveEnd += WaveEnd;
+    }
+
+    private void WaveStart()
+    {
+        print("Wave Started");
+    }
+
+    private void WaveEnd()
+    {
+        print("End of Wave");
     }
 
     private void RoomEnteredSound()

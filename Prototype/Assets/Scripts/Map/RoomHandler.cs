@@ -6,7 +6,7 @@ public class RoomHandler : SceneSingleton<RoomHandler>
 {
     [SerializeField]
     public delegate void RoomEventDelegate();
-    public event RoomEventDelegate onNewRoomEnter, onRoomCompleted, onBossRoomEnter, onBossDefeated;
+    public event RoomEventDelegate onNewWave, onWaveComplete, onNewRoomEnter, onRoomCompleted, onBossRoomEnter, onBossDefeated;
     protected override void Awake()
     {
         base.Awake();
@@ -35,12 +35,12 @@ public class RoomHandler : SceneSingleton<RoomHandler>
     }
     private void SubscribeToEvents(SpawnWaves room)
     {
-        room.onNewRoomEnter += TriggerRoomEnter;
-        room.onRoomCompleted += TriggerRoomCompleted;
+        room.onNewWave += TriggerWaveStart;
+        room.onWaveComplete += TriggerWaveEnd;
         room.onBossRoomEnter += TriggerBossEnter;
         room.onBossDefeated += TriggerBossDefeated;
     }
-
+    // ---------- LEVEL 1 ------------
     public void TriggerRoomEnter()
     {
         onNewRoomEnter?.Invoke();
@@ -51,6 +51,18 @@ public class RoomHandler : SceneSingleton<RoomHandler>
         onRoomCompleted?.Invoke();
     }
 
+    // ---------- LEVEL 2 ------------
+    public void TriggerWaveStart()
+    {
+        onNewWave?.Invoke();
+    }
+
+    public void TriggerWaveEnd()
+    {
+        onWaveComplete?.Invoke();
+    }
+
+    // ---------- BOTH ------------
     public void TriggerBossEnter()
     {
         onBossRoomEnter?.Invoke();

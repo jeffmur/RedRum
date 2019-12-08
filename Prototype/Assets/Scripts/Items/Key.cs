@@ -25,7 +25,7 @@ public class Key : Item
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == "Casper")
+        if (collision.name == "Casper" && Input.GetKeyDown("e"))
         {
             el.show();
             gameObject.SetActive(false);

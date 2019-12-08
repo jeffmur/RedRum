@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class SpawnWaves : MonoBehaviour
 {
     public Tilemap spawn;
-    private int waveIndex = 0;
+    private int waveIndex = 3;
     private int[] EnemiesToSpawn = {8, 10, 14};
     private DoorSystem myDoorsSys;
     private RoomStats myStats;
@@ -16,25 +16,44 @@ public class SpawnWaves : MonoBehaviour
     public GameObject reaper;
 
     public delegate void RoomEventDelegate();
-    public event RoomEventDelegate onNewRoomEnter, onRoomCompleted, onBossRoomEnter, onBossDefeated;
+    public event RoomEventDelegate onNewWave, onWaveComplete, onBossRoomEnter, onBossDefeated;
 
     // Start is called before the first frame update
     void Start()
     {
         myDoorsSys = GetComponent<DoorSystem>();
         myStats = GetComponent<RoomStats>();
+        myStats.setCamLocation();
+        StartCoroutine(delayed(0.2f));
+    }
+
+    IEnumerator delayed(float time)
+    {
+        yield return new WaitForSeconds(time);
         spawnWave(0f);
     }
 
     void spawnWave(float wait)
     {
         if (waveIndex >= EnemiesToSpawn.Length) { return; }
-        onNewRoomEnter?.Invoke();
+        onNewWave?.Invoke();
         spawnTime = Time.time;
         //Debug.Log("Spawning " + EnemiesToSpawn[waveIndex] + " enemies");
         StartCoroutine(spawnInMap(EnemiesToSpawn[waveIndex], wait));
         message = "Wave "+(waveIndex+1)+" \n \n Surive to win";
         EventManager.Instance.TriggerNotification(message);
+    }
+
+    IEnumerator isBossDead()
+    {
+        // Check if reaper has been killed F || F
+        // reaper.active == true
+        // || if currently in a waves
+        // TODO doesn't work atm
+        while (reaper == null || waveIndex < EnemiesToSpawn.Length)
+            yield return null;
+
+        onBossDefeated?.Invoke();
     }
 
     IEnumerator waitToLeave()
@@ -44,12 +63,13 @@ public class SpawnWaves : MonoBehaviour
             GetComponent<RoomStats>().
             isInRoom(Casper.Instance.transform.position))
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return null;
         }
 
         // Spawn enemy
         reaper.SetActive(true);
         // init Boss
+        onBossRoomEnter?.Invoke();
         StartCoroutine(reaper.GetComponent<ReaperAbstract>().beginFight());
     }
 
@@ -58,37 +78,34 @@ public class SpawnWaves : MonoBehaviour
         Debug.Assert(reaper != null);
         myDoorsSys.OpenAll();
         StartCoroutine(waitToLeave());
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (allEnemiesDead() && Time.time - spawnTime > 5)
-        {
-            waveIndex++;
-            spawnWave(2f);
-        }
         // Waves complete
-        if(waveIndex >= EnemiesToSpawn.Length && !once)
+        if (waveIndex >= EnemiesToSpawn.Length && !once)
         {
             initBoss();
             myDoorsSys.OpenAll();
             once = true;
         }
+        else if (allEnemiesDead() && Time.time - spawnTime > 5 && waveIndex < EnemiesToSpawn.Length)
+        {
+            onWaveComplete?.Invoke();
+            waveIndex++;
+            spawnWave(2f);
+        }
+        isBossDead();
+
     }
 
-    private bool oh = false;
     private bool allEnemiesDead()
     {
         foreach (Transform obj in this.transform)
             if (obj.CompareTag("Enemy"))
                 return false;
-        if (!oh)
-        {
-            onRoomCompleted?.Invoke();
-            oh = true;
-        }
+
         return true;
     }
 
