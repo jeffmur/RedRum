@@ -23,6 +23,7 @@ public partial class Casper : SceneSingleton<Casper>
     private void Update()
     {
         //selectedWeapon = weaponInventory.GetSelectedWeapon();
+
         if (Input.GetKeyDown(KeyCode.E) && isHovering)
         {
             ObtainEquipment(itemCollision);

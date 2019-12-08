@@ -13,33 +13,64 @@ public class SpawnWaves : MonoBehaviour
     private string message;
     private bool once = false;
     private float spawnTime = 0;
+    public GameObject reaper;
     
     // Start is called before the first frame update
     void Start()
     {
         myDoorsSys = GetComponent<DoorSystem>();
         myStats = GetComponent<RoomStats>();
-        //spawnWave(0f);
+        spawnWave(0f);
     }
     
     void spawnWave(float wait)
     {
-        if (waveIndex >= EnemiesToSpawn.Length) { myDoorsSys.OpenAll();  return; }
+        if (waveIndex >= EnemiesToSpawn.Length) { return; }
         spawnTime = Time.time;
-        Debug.Log("Spawning " + EnemiesToSpawn[waveIndex] + " enemies");
+        //Debug.Log("Spawning " + EnemiesToSpawn[waveIndex] + " enemies");
         StartCoroutine(spawnInMap(EnemiesToSpawn[waveIndex], wait));
         message = "Wave "+(waveIndex+1)+" \n \n Surive to win";
         EventManager.Instance.TriggerNotification(message);
     }
 
+    IEnumerator waitToLeave()
+    {
+        // Wait while casper is in Puzzle
+        while (!GameObject.Find("Boss Pool").
+            GetComponent<RoomStats>().
+            isInRoom(Casper.Instance.transform.position))
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+           
+        // Spawn enemy
+        reaper.SetActive(true);
+        // init Boss
+        StartCoroutine(reaper.GetComponent<ReaperAbstract>().beginFight());
+    }
+
+    void initBoss()
+    {
+        Debug.Assert(reaper != null);
+        myDoorsSys.OpenAll();
+        StartCoroutine(waitToLeave());
+        
+    }
+
     // Update is called once per frame
     void Update()
     {
-        myDoorsSys.OpenAll();
         if (allEnemiesDead() && Time.time - spawnTime > 5)
         {
             waveIndex++;
-            //spawnWave(2f);
+            spawnWave(2f);
+        }
+        // Waves complete
+        if(waveIndex >= EnemiesToSpawn.Length && !once)
+        {
+            initBoss();
+            myDoorsSys.OpenAll();
+            once = true;
         }
     }
 

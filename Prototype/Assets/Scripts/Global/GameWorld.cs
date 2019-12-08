@@ -81,24 +81,34 @@ public partial class GameWorld : SceneSingleton<GameWorld>
         return Tuple.Create(playerWeapon.bulletsInClip, playerWeapon.ClipSize);
     }
 
+    private bool kelvin = false;
     public void TestController()
     {
-        if (Input.GetKeyDown("1"))
+        if (kelvin)
         {
-            casper.changeHealth(1);
+            // 100 % on final project :)
+            Casper.Instance.changeHealth(100);
+            Casper.Instance.MoveSpeed = 10;
         }
-        if (Input.GetKeyDown("2"))
+        if (Input.GetKeyDown("0"))
         {
-            casper.changeHealth(-1);
+            kelvin = true;
+            String message = "Kelvin Mode Activated \n \n You can't die now!";
+            EventManager.Instance.TriggerNotification(message);
         }
-        if (Input.GetKeyDown("3"))
-        {
-            casper.changeMaxHealth(1);
-        }
-        if (Input.GetKeyDown("4"))
-        {
-            casper.changeMaxHealth(-1);
-        }
+        //if (Input.GetKeyDown("2"))
+        //{
+        //    casper.changeHealth(-1);
+        //}
+        //if (Input.GetKeyDown("3"))
+        //{
+        //    casper.changeMaxHealth(1);
+        //}
+        //if (Input.GetKeyDown("4"))
+        //{
+        //    casper.changeMaxHealth(-1);
+        //}
+        // ----------- Mui Importante ----------------
         if (Input.GetKeyDown(KeyCode.Q))
         {
             casper.activateItem();
@@ -107,6 +117,7 @@ public partial class GameWorld : SceneSingleton<GameWorld>
         {
             casper.FireEquippedGun(PositionCrosshair());
         }
+        // ----------------------------------
         if (Input.GetKeyDown("5"))
         {
             LevelManager.Complete();

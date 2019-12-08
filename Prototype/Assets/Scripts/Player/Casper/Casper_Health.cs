@@ -55,7 +55,7 @@ public partial class Casper
 
         if (value < 0 && (IsInvincible || IsEtherial))
         {
-            print("Casper is invincible");
+            //print("Casper is invincible");
             return;
         }
         CurrentHealth += value;

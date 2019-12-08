@@ -82,7 +82,7 @@ public partial class RoomPointer : MonoBehaviour
             // Move Hero
         mHero.transform.position = next.sendPlayerToDoor(doorSide);
     }
-
+    // FOR LEVEL2
     private void noMiniMapSwap(GameObject nextLevel, string doorSide)
     {
         RoomStats next = nextLevel.GetComponent<RoomStats>();
@@ -105,9 +105,9 @@ public partial class RoomPointer : MonoBehaviour
             if (fromRoom.gameObject.name == "Swap_2")
                 nextRoom = GameObject.Find("Swap_1");
 
-            // Player Icon ON Entry Room
-            //if (mm.casperIcon.position == mm.allRooms[0].transform.position)
-            //    nextRoom = GameObject.Find("Welcome");
+            //Player Icon ON Entry Room
+            if (mm.casperIcon.position == mm.allRooms[0].transform.position)
+                nextRoom = GameObject.Find("Welcome");
 
             // Player Icon On Boss Icon
             float dist = Vector2.Distance(mm.casperIcon.position, mm.bossIcon.position);
@@ -126,8 +126,6 @@ public partial class RoomPointer : MonoBehaviour
         // if door(s) are open
         if (fromRoom.getStatus() == 2 && collision.name == "Casper")
         {
-            Debug.Log("Status is OPEN, " + fromRoom.name + " " + name);
-            Debug.Log("Going to room: " + nextRoom.name);
             switch (name)
             {
                 case "Top_Door":
@@ -148,14 +146,15 @@ public partial class RoomPointer : MonoBehaviour
                     break;
                 case "Right_1":
                 case "Right_2":
+                    bufferSwitch("LEFT", "RIGHT");
+                    break;
                 case "Left_1":
                 case "Left_2":
-                    bufferSwitch("RIGHT", "DOWN");
+                    bufferSwitch("RIGHT", "LEFT");
                     break;
-
-
             }
-            
+            //Debug.Log("Status is OPEN, " + fromRoom.name + " " + name);
+            //Debug.Log("Going to room: " + nextRoom.name);
         }
     }
 }

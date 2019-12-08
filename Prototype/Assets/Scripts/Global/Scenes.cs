@@ -6,6 +6,7 @@ using UnityEngine;
 public static class Scenes
 {
     private static string roomDimension = "4x4"; // Static demensions
+    public static int currentLevel = 0;
 
     // Victory Case
     public static void Load(string path, string dimension, bool isCasperAlive)

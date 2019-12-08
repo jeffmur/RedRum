@@ -5,24 +5,61 @@ using UnityEngine;
 public class ReaperAbstract : Enemy
 {
     // Start is called before the first frame update
-    
-    private bool fireDiagonal;
-    private float BulletCooldown = 1f;
-    private readonly Vector3 northWest = Vector3.up + Vector3.left;
-    private readonly Vector3 northEast = Vector3.up + Vector3.right;
-    private readonly Vector3 southWest = Vector3.down + Vector3.left;
-    private readonly Vector3 southEast = Vector3.down + Vector3.right;
+
+    private Animator anim;
+    private float BulletCooldown = 2f;
+    private GameObject chest;
     protected override void Start()
     {
         base.Start();
         enemyHealth = 2000;
-
+        anim = GetComponent<Animator>();
+        chest = Resources.Load("Textures/Prefabs/Map Misc/chest") as GameObject;
         // CHRIS CHANGE IT TO PURPLE FLAMES :)
         BulletPrefab = Resources.Load<GameObject>("Textures/Projectiles/SuitcaseBullet_Variant");
-        StartCoroutine(FireSlimes());
     }
 
-    private IEnumerator FireSlimes()
+    public IEnumerator beginFight()
+    {
+        // Wait
+        yield return new WaitForSeconds(0.2f);
+        // animate up
+        anim.SetTrigger("show");
+        // start shooting
+        StartCoroutine(FireRoutine());
+    }
+
+    private void Die()
+    {
+        anim.SetTrigger("hide");
+        // camera shake
+        // spawn a chest
+        var c = Instantiate(chest);
+        c.transform.parent = transform.parent;
+        c.transform.localPosition = new Vector3(-1.5f, -1.3f, 0);
+        Destroy(gameObject);
+    }
+
+    IEnumerator HideMove()
+    {
+        yield return new WaitForSeconds(2f); // buffer
+        // ----------- hide -----------
+        anim.SetTrigger("hide");
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<SpriteRenderer>().enabled = false;
+        // ----------- rand loc -----------
+        transform.localPosition = Vector3.zero; // stay in bounds
+        Vector3 loc = new Vector3(
+            transform.localPosition.x + Random.Range(-4, 4), 
+            transform.localPosition.y + Random.Range(-4, 4), 0);
+
+        transform.localPosition = loc;
+        // ----------- show -----------
+        GetComponent<SpriteRenderer>().enabled = true;
+        anim.SetTrigger("show");
+    }
+
+    IEnumerator FireRoutine()
     {
         int i = 0;
         while (true)
@@ -32,50 +69,32 @@ public class ReaperAbstract : Enemy
             i++;
         }
     }
-
+   
     protected override void Attack(int index)
     {
-        int rand = Random.Range(0, index % 4);
-        Debug.Log(rand);
-        switch (rand)
+        int rand = Random.Range(0, index);
+        switch (rand % 4)
         {
-            default:
-                nippleShot(20);
+            case 0: // lower nipple
+                StartCoroutine(nippleShot(10));
                 break;
-            case 1:
-                nippleShot(100);
+            case 1: // upper nipple
+                StartCoroutine(nippleShot(100));
                 break;
-            case 2:
-                BulletCooldown = 0;
-                fourWavesShot(index);
-                break;
-            case 3:
+            case 2: // target casper
                 StartCoroutine(bombSpread());
                 break;
-            //case 0:
-            //    nippleShot(100);
-            //    StartCoroutine(bombSpread());
-            //    break;
-        }
-        //if (enemyHealth < 2000 && enemyHealth > 1500)
-        //    nippleShot(20);
-        //if (enemyHealth <= 1500 && enemyHealth > 1000)
-        //    nippleShot(100);
-        //if (enemyHealth <= 1000 && enemyHealth > 500)
-        //    fourWavesShot(index);
-        //if (enemyHealth <= 500 && enemyHealth > 200)
-        //    fourWavesShot(index);
+            case 3: // target
+                StartCoroutine(HideMove());
+                StartCoroutine(bombSpread());
+                break;
 
-        //if (enemyHealth <= 200 && enemyHealth > 0)
-        //{
-        //    nippleShot(100);
-            
-        //}
+        }
     }
 
     IEnumerator bombSpread()
     {
-        BulletCooldown = 5f;
+        yield return new WaitForSeconds(5f);
         // GET A SPAWNPOINT OBJECT
         var sp = Instantiate(EnemyManager.Instance.getSpawnPoint());
         // ASSIGN POS TO CASPER
@@ -87,18 +106,35 @@ public class ReaperAbstract : Enemy
         bulletSpray(0, 360, 30, sp.transform.position);
     }
 
+    IEnumerator FireWave(int numOfWaves, float duration)
+    {
+        float hardStop = Time.time + duration;
+        int offset = 360 / numOfWaves;
+        int i = 0;
+        while (true)
+        {
+            yield return new WaitForSeconds(0f);
+            for(int j = 0; j < numOfWaves*offset; j+=offset)
+                waveShot(i+j);
+            i++;
+            if (Time.time > hardStop)
+            {
+                isFiringWave = false;
+                yield break;
+            }
+                
+        }
+
+    }
+
     /**
      * Shoots four massive waves of bullets that rotate 360
      * Degrees based on index (increments by counter in FireSlimes
      */
-    private void fourWavesShot(int index)
+    private void waveShot(int index)
     {
-        BulletCooldown = 0;
         int shots = 5;
         int val = index % 360;
-        bulletSpray(val + 270, val + 250, shots, transform.position);
-        bulletSpray(val + 180, val + 160, shots, transform.position);
-        bulletSpray(val + 90, val + 70, shots, transform.position);
         bulletSpray(val, val - 20, shots, transform.position);
     }
 
@@ -106,9 +142,9 @@ public class ReaperAbstract : Enemy
      * Looks like a nippe ;)
      * Shoots a full circle
      */
-    private void nippleShot(int numberOfBullets)
+    IEnumerator nippleShot(int numberOfBullets)
     {
-        BulletCooldown = 3f;
+        yield return new WaitForSeconds(2f);
         bulletSpray(0, 360, numberOfBullets, transform.position);
     }
 
@@ -145,17 +181,23 @@ public class ReaperAbstract : Enemy
         base.DecreaseHealth(damage);
         if (enemyHealth < 0)
         {
-            Destroy(gameObject);
+            Die();
         }
     }
 
-    // Update is called once per frame
+    private bool isFiringWave = false;
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
         if (collision.CompareTag("Player"))
-        {
             collision.gameObject.GetComponent<Casper>().changeHealth(-1);
+
+        if (collision.CompareTag("HeroBullet") && !isFiringWave && enemyHealth <= 1000)
+        {
+            // Number of waves, duration
+            // Seperate from bullet Cooldown
+            StartCoroutine(FireWave(Random.Range(2, 5), Random.Range(5, 10)));
+            isFiringWave = true;
         }
     }
 }

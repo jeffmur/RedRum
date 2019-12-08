@@ -42,7 +42,7 @@ public class Weapon : MonoBehaviour
     void Update()
     {
         // Hot reload
-        if (Input.GetKeyDown(KeyCode.R) && bulletsInClip != ClipSize && !reloadCooldown.reloading) {
+        if (Input.GetKeyDown(KeyCode.R) && bulletsInClip < ClipSize && !reloadCooldown.reloading) {
             animator.SetBool("Reload", true);
             reloadCooldown.StartReload(reloadSpeed);
             reloadStartTime = Time.time;
