@@ -29,7 +29,7 @@ public class GlobalControl : MonoBehaviour
             savedCasperData = new CasperData();
             Casper.Instance.localCasperData = savedCasperData;
             GameObject.Find("ItemPanel").GetComponent<Image>().sprite = null;
-            Casper.Instance.changeMaxHealth(savedCasperData.MaxHealth);
+            Casper.Instance.changeHealth(savedCasperData.MaxHealth);
         }
         Casper.Instance.transform.position = Vector3.zero;
         Camera.main.transform.position = new Vector3(0, 0, -10);
