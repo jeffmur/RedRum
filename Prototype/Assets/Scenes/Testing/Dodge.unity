@@ -507,7 +507,6 @@ MonoBehaviour:
   heightOffset: 0
   equipScale: 0
   bulletsInClip: 0
-  firePoint: {fileID: 1176808555}
   laser: {fileID: 1090173615}
 --- !u!4 &113322967 stripped
 Transform:
