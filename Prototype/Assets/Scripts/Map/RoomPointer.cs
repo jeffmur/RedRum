@@ -13,7 +13,6 @@ public partial class RoomPointer : MonoBehaviour
     private GameObject mHero;
     private GameObject casperIcon;
 
-
     // Start is called before the first frame update
     void Start()
     {

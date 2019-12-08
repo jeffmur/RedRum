@@ -14,6 +14,8 @@ public partial class RoomManager : MonoBehaviour
     public int roomNum = 0;
     public int RoomIndex { get => roomNum; set => roomNum = value; }
 
+    public delegate void RoomPointerEventDelegate();
+    public event RoomPointerEventDelegate onNewRoomEnter, onRoomCompleted, onBossRoomEnter, onBossDefeated;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +27,7 @@ public partial class RoomManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
         // No enemies - UNLOCK
         if (allEnemiesDead())
         {
@@ -52,7 +54,30 @@ public partial class RoomManager : MonoBehaviour
         {
             chestOpen = myChest.openChest;
         }
-        
+
+        StartCoroutine(waitToEnter());
+
+
+    }
+
+
+    private bool entered = false;
+    private IEnumerator waitToEnter()
+    {
+        // Wait while casper is in Puzzle
+        while (!myStats.isInRoom(Casper.Instance.transform.position))
+        {
+            yield return null;
+        }
+        if (!entered)
+        {
+            Debug.Log(name + " entered");
+            if (name == "Boss Pool")
+                onBossRoomEnter?.Invoke();
+            else
+                onNewRoomEnter?.Invoke();
+            entered = true;
+        }
     }
 
     public void Initialize()
@@ -76,25 +101,31 @@ public partial class RoomManager : MonoBehaviour
         int num = Scenes.getInt();
         int AmountOFEnemies = Random.Range(num/2, num);
         for (int i = 0; AmountOFEnemies > i; i++) //creates a random amount of enemies
-            {
-                // ------- ENEMY POSITION ------
-                float x = Random.Range(-4, 4);
-                float y = Random.Range(-4, 4);
-                Vector2 loc = new Vector2(transform.position.x + x, transform.position.y + y);
-                loc = myStats.spawnEnemyInBounds(loc); // will return if inbounds
-                // -----------------------------
-                int typeOfEnemy = Random.Range(0, Enemies.Count); //number of types of enemies 
-                if (Enemies[typeOfEnemy] == null) { typeOfEnemy--; }
-                GameObject enemy = Enemies[typeOfEnemy];
-                GameObject ChildEnemy = Instantiate(enemy, loc, Quaternion.identity);
-                ChildEnemy.AddComponent<RoomRegister>().RoomIndex = roomNum; // assigns item to roomIndex
-                ChildEnemy.gameObject.SetActive(true);
-                ChildEnemy.transform.parent = transform;
+        {
+            // ------- ENEMY POSITION ------
+            float x = Random.Range(-4, 4);
+            float y = Random.Range(-4, 4);
+            Vector2 loc = new Vector2(transform.position.x + x, transform.position.y + y);
+            loc = myStats.spawnEnemyInBounds(loc); // will return if inbounds
+            // -----------------------------
+            int typeOfEnemy = Random.Range(0, Enemies.Count); //number of types of enemies 
+            if (Enemies[typeOfEnemy] == null) { typeOfEnemy--; }
+            GameObject enemy = Enemies[typeOfEnemy];
+            GameObject ChildEnemy = Instantiate(enemy, loc, Quaternion.identity);
+            ChildEnemy.AddComponent<RoomRegister>().RoomIndex = roomNum; // assigns item to roomIndex
+            ChildEnemy.gameObject.SetActive(true);
+            ChildEnemy.transform.parent = transform;
             // Boss Room should only spawn one
-            if (this.name == "Boss Pool") return; 
-            }
+            if (this.name == "Boss Pool")
+            {
+                onBossRoomEnter?.Invoke();
+                return;
+            } 
+        }
+        onNewRoomEnter?.Invoke();
     }
 
+    private bool cleared = false;
     private bool allEnemiesDead()
     {
         if(Enemies.Count == 0) { return true; }
@@ -110,6 +141,15 @@ public partial class RoomManager : MonoBehaviour
             }
         }
         // no enemies
+        if (entered && !cleared)
+        {
+            Debug.Log(name + " cleared");
+            if (name == "Boss Pool")
+                onBossDefeated?.Invoke();
+            else
+                onRoomCompleted?.Invoke();
+            cleared = true;
+        }
         return true;
     }
     // Either be a hole for 
