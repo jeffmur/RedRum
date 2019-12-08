@@ -507,7 +507,6 @@ MonoBehaviour:
   heightOffset: 0
   equipScale: 0
   bulletsInClip: 0
-  firePoint: {fileID: 1176808555}
   laser: {fileID: 1090173615}
 --- !u!4 &113322967 stripped
 Transform:
@@ -6321,6 +6320,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6539579177956660202, guid: 3119cfdf03be01e4ca455c8b871291e3,
+        type: 3}
+      propertyPath: startingWeapon
+      value: 
+      objectReference: {fileID: 791929962}
     - target: {fileID: 6539579178435093423, guid: 3119cfdf03be01e4ca455c8b871291e3,
         type: 3}
       propertyPath: fireRateModifier
@@ -6366,11 +6370,6 @@ PrefabInstance:
       propertyPath: weaponInventory
       value: 
       objectReference: {fileID: 1640093516}
-    - target: {fileID: 6539579177956660202, guid: 3119cfdf03be01e4ca455c8b871291e3,
-        type: 3}
-      propertyPath: startingWeapon
-      value: 
-      objectReference: {fileID: 791929962}
     - target: {fileID: 8518389341730671777, guid: 3119cfdf03be01e4ca455c8b871291e3,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6977,6 +6976,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3276614149025836431, guid: 8ebb8bc789c80544c8a245656e34db1c,
+        type: 3}
+      propertyPath: BulletSpeed
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3276614149025836431, guid: 8ebb8bc789c80544c8a245656e34db1c,
+        type: 3}
+      propertyPath: heightOffset
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3276614149025836431, guid: 8ebb8bc789c80544c8a245656e34db1c,
+        type: 3}
+      propertyPath: barrelOffset
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ebb8bc789c80544c8a245656e34db1c, type: 3}
