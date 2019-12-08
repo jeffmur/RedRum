@@ -120,7 +120,7 @@ public partial class GameWorld : SceneSingleton<GameWorld>
         // ----------------------------------
         if (Input.GetKeyDown("5"))
         {
-
+            Scenes.Load("Complete");
         }
     }
 

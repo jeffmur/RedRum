@@ -61,7 +61,6 @@ public partial class RoomManager : MonoBehaviour
     public void Initialize()
     {
         entered = true;
-        Debug.Log("Entered: " + name);
         //RoomIndex = atIndex;
         // Destroy old chest
         foreach(Transform child in gameObject.transform)
@@ -123,7 +122,6 @@ public partial class RoomManager : MonoBehaviour
         // no enemies
         if (entered && !cleared)
         {
-            Debug.Log(name + " cleared");
             if (name == "Boss Pool")
                 onBossDefeated?.Invoke();
             else

@@ -17,7 +17,8 @@ public class EventManager : SceneSingleton<EventManager>
     public event onItemActivateTriggerDelegate onItemActivateTrigger;
 
     public delegate void gameEventListener();
-    public event gameEventListener onWeaponAdded, onWeaponFired, onWeaponReloaded, onHealed, onDamaged, onItemUse, onItemPickup;
+    public event gameEventListener onWeaponAdded, onWeaponFired, onWeaponReloaded, onHealed, onDamaged, onItemUse, onItemPickup,
+        onRoomCompleted, onNewRoomEntered, onBossRoomEnter, onBossRoomCompleted;
 
     private void Start()
     {
@@ -35,6 +36,16 @@ public class EventManager : SceneSingleton<EventManager>
         Casper.Instance.weaponInventory.WeaponReloadEvent += TriggerWeaponReloaded;
         Casper.Instance.ItemUseEvent += TriggerItemUse;
         Casper.Instance.ItemPickupEvent += TriggerItemPickup;
+
+        GetRoomDelegates();
+    }
+
+    public void GetRoomDelegates()
+    {
+        RoomHandler.Instance.onBossDefeated += TriggerBossRoomCompleted;
+        RoomHandler.Instance.onBossRoomEnter += TriggerBossRoomEntered;
+        RoomHandler.Instance.onRoomCompleted += TriggerRoomCompleted;
+        RoomHandler.Instance.onNewRoomEnter += TriggerRoomEntered;
     }
 
     public void TriggerNotification(string notification) { OnNotifyChange?.Invoke(notification); }
@@ -50,5 +61,8 @@ public class EventManager : SceneSingleton<EventManager>
     private void TriggerItemPickup() { onItemPickup?.Invoke(); }
     private void TriggerItemActivate(ActivatedItem item) { onItemActivateTrigger?.Invoke(item); }
     private void TriggerItemUse() { onItemUse?.Invoke(); }
-
+    private void TriggerRoomEntered() { onNewRoomEntered?.Invoke(); }
+    private void TriggerRoomCompleted() { onRoomCompleted?.Invoke(); }
+    private void TriggerBossRoomEntered() { onBossRoomEnter?.Invoke(); }
+    private void TriggerBossRoomCompleted() { onBossRoomCompleted?.Invoke(); }
 }
