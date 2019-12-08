@@ -658,7 +658,7 @@ PrefabInstance:
     - target: {fileID: 1186585956159646811, guid: 2e116b2405c505d4d96fc9014bf648e4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1186585956159646811, guid: 2e116b2405c505d4d96fc9014bf648e4,
         type: 3}
@@ -2425,7 +2425,7 @@ PrefabInstance:
     - target: {fileID: 6095660636042051236, guid: 37fc0c54bad00e14b912ac7fc7c5d03d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6095660636042051236, guid: 37fc0c54bad00e14b912ac7fc7c5d03d,
         type: 3}
@@ -3057,22 +3057,6 @@ PrefabInstance:
       propertyPath: mCamera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 819693086, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 2.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 819693086, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 10.48
-      objectReference: {fileID: 0}
-    - target: {fileID: 1514660692, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
-      propertyPath: m_Offset.y
-      value: 1.0785298
-      objectReference: {fileID: 0}
-    - target: {fileID: 1514660692, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
-      propertyPath: m_Size.y
-      value: 1.3824644
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
 --- !u!4 &1176808555 stripped
@@ -4570,7 +4554,7 @@ PrefabInstance:
     - target: {fileID: 5406437192608596749, guid: 4829986ffe2983d4ebf75bd0b1108ad3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5406437192608596749, guid: 4829986ffe2983d4ebf75bd0b1108ad3,
         type: 3}
@@ -6478,7 +6462,7 @@ PrefabInstance:
     - target: {fileID: 5595233371882998880, guid: 7270f1ec54b93fc4a9ff83f19f02c615,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5595233371882998880, guid: 7270f1ec54b93fc4a9ff83f19f02c615,
         type: 3}
@@ -6817,7 +6801,7 @@ PrefabInstance:
     - target: {fileID: 3544560815692723907, guid: b78c21e97a5c94a4ead5a1a9acdae654,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3544560815692723907, guid: b78c21e97a5c94a4ead5a1a9acdae654,
         type: 3}
