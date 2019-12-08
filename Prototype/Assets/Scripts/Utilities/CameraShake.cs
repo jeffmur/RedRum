@@ -3,10 +3,7 @@ using System.Collections;
 
 public class CameraShake : MonoBehaviour
 {
-
-    public bool debugMode = false;//Test-run/Call ShakeCamera() on start
-
-    public float shakeAmount;//The amount to shake this frame.
+    private float shakeAmount;//The amount to shake this frame.
     public float shakeDuration;//The duration this frame.
 
     //Readonly values...
@@ -16,13 +13,11 @@ public class CameraShake : MonoBehaviour
 
     bool isRunning = false; //Is the coroutine running right now?
 
-    public bool smooth;//Smooth rotation?
-    public float smoothAmount = 5f;//Amount to smooth
+    private bool smooth = true;//Smooth rotation?
+    private float smoothAmount = 5f;//Amount to smooth
 
     void Start()
     {
-
-        if (debugMode) ShakeCamera();
     }
 
 

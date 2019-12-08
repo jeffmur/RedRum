@@ -43,27 +43,28 @@ public class Weapon : MonoBehaviour
     void Update()
     {
         // Hot reload
-        if (Input.GetKeyDown(KeyCode.R) && bulletsInClip < ClipSize && !reloadCooldown.reloading) {
+        if (Input.GetKeyDown(KeyCode.R) && bulletsInClip < ClipSize && !IsReloading()) {
             animator.SetBool("Reload", true);
             reloadCooldown.StartReload(reloadSpeed);
+            onWeaponReload?.Invoke();
             reloadStartTime = Time.time;
         }
         if (reloadStartTime != -1)
         {
+            // Stop animation reload
             if (Time.time - reloadStartTime >= reloadSpeed)
             {
                 animator.SetBool("Reload", false);
                 bulletsInClip = ClipSize;
                 reloadStartTime = -1;
                 onAmmoChange?.Invoke();
-                onWeaponReload?.Invoke();
             }
         }
     }
 
     public bool FireWeapon(Vector2 direction)
     {
-        if (bulletsInClip > 0 && !reloadCooldown.reloading)
+        if (bulletsInClip > 0 && !IsReloading())
         {
             if (Time.time - timeSinceLastShot >= FireRate)
             {

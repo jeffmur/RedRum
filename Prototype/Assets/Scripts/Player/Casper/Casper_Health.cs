@@ -84,7 +84,7 @@ public partial class Casper
             float invTimer = 2f;
             StartCoroutine(ToggleInvincibility(invTimer));
             StartCoroutine(FlashCasper(invTimer));
-            Camera.main.GetComponent<CameraShake>().ShakeCamera(.08f, .02f);
+            Camera.main.GetComponent<CameraShake>().ShakeCamera(4f, 4f);
             CasperDamageEvent?.Invoke();
         }
     }

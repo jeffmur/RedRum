@@ -22,7 +22,7 @@ public class Casper_Sounds : MonoBehaviour
     private IEnumerator InitSound()
     {      
         casperSounds.volume = 0;
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(1);
         casperSounds.volume = 1;
     }
 

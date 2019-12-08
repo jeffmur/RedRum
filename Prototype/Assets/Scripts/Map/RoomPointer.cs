@@ -92,20 +92,12 @@ public partial class RoomPointer : MonoBehaviour
         mHero.transform.position = next.sendPlayerToDoor(doorSide);
     }
 
-    private void noMiniMapSwap(GameObject nextLevel, string doorSide)
-    {
-        RoomStats next = nextLevel.GetComponent<RoomStats>();
-        // Move camera
-        next.setCamLocation();
-        // Move Hero
-        mHero.transform.position = next.sendPlayerToDoor(doorSide);
-    }
-
     private void bufferSwitch(string roomDir, string heroDir)
     {
         // Move Player Icon First
         if (mm != null)
         {
+            // Swap Method
             mm.moveMMCasper(heroDir);
 
             // Base Case
