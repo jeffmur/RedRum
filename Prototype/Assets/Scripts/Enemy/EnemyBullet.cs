@@ -9,7 +9,7 @@ public class EnemyBullet : MonoBehaviour
     public float bulletSpeed = 3f;
     public Vector3 bulletDirection;
 
-    void Update()
+    protected virtual void Update()
     {
         if (bulletDirection != null)
             transform.localPosition +=  bulletDirection * bulletSpeed * Time.deltaTime;
