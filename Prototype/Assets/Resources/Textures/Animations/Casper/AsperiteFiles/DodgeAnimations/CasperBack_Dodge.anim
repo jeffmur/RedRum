@@ -7,6 +7,7 @@ AnimationClip:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CasperBack_Dodge
+>>>>>>> items
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -31,8 +32,9 @@ AnimationClip:
     - time: 0.43333334
       value: {fileID: -6302146505851752250, guid: afd43d0d61fff95479a5435d1978e5de,
         type: 3}
+>>>>>>> items
     attribute: m_Sprite
-    path: 
+    path:
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 60
@@ -54,6 +56,7 @@ AnimationClip:
     - {fileID: -4271106797175252556, guid: afd43d0d61fff95479a5435d1978e5de, type: 3}
     - {fileID: -6302146505851752250, guid: afd43d0d61fff95479a5435d1978e5de, type: 3}
     - {fileID: -6302146505851752250, guid: afd43d0d61fff95479a5435d1978e5de, type: 3}
+>>>>>>> items
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

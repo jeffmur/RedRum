@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6252822233618363897}
   - component: {fileID: 6252822233618363902}
   - component: {fileID: 6252822233618363903}
+  - component: {fileID: 1925185125}
+  - component: {fileID: 1925185121}
   m_Layer: 0
   m_Name: ReaperBoss
   m_TagString: Untagged
@@ -25,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6252822233618363900}
-  m_LocalRotation: {x: -0.008727774, y: 0, z: -0, w: 0.9999619}
-  m_LocalPosition: {x: 3.3, y: 16.032473, z: 1.7204171}
-  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_LocalRotation: {x: -0.008726465, y: 0, z: 0, w: 0.999962}
+  m_LocalPosition: {x: 3.218, y: 16.014, z: 1.721}
+  m_LocalScale: {x: 9, y: 9, z: 6}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -1, y: 0, z: 0}
 --- !u!212 &6252822233618363902
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -81,7 +83,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &6252822233618363903
 Animator:
   serializedVersion: 3
@@ -97,7 +99,46 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_WarningMessage:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &1925185125
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6252822233618363900}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.17885734, y: -0.16507745}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.74743235, y: 0.74276376}
+    oldSize: {x: 0.64, y: 0.64}
+    newSize: {x: 0.64, y: 0.64}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.35786042, y: 0.54414827}
+  m_EdgeRadius: 0
+--- !u!114 &1925185121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6252822233618363900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68274255afe743a409be4f7aa7bed26a, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  enemyHealth: 100

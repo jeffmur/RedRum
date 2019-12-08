@@ -7,13 +7,14 @@ public class SpawnWaves : MonoBehaviour
 {
     public Tilemap spawn;
     private int waveIndex = 0;
-    private int[] EnemiesToSpawn = {8, 10, 12, 15, 20};
+    private int[] EnemiesToSpawn = {8, 10, 14};
     private DoorSystem myDoorsSys;
     private RoomStats myStats;
     private string message;
     private bool once = false;
     private float spawnTime = 0;
-    
+    public GameObject reaper;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,15 +22,39 @@ public class SpawnWaves : MonoBehaviour
         myStats = GetComponent<RoomStats>();
         spawnWave(0f);
     }
-    
+
     void spawnWave(float wait)
     {
-        if(waveIndex >= EnemiesToSpawn.Length) return;
+        if (waveIndex >= EnemiesToSpawn.Length) { return; }
         spawnTime = Time.time;
-        Debug.Log("Spawning " + EnemiesToSpawn[waveIndex] + " enemies");
+        //Debug.Log("Spawning " + EnemiesToSpawn[waveIndex] + " enemies");
         StartCoroutine(spawnInMap(EnemiesToSpawn[waveIndex], wait));
         message = "Wave "+(waveIndex+1)+" \n \n Surive to win";
         EventManager.Instance.TriggerNotification(message);
+    }
+
+    IEnumerator waitToLeave()
+    {
+        // Wait while casper is in Puzzle
+        while (!GameObject.Find("Boss Pool").
+            GetComponent<RoomStats>().
+            isInRoom(Casper.Instance.transform.position))
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        // Spawn enemy
+        reaper.SetActive(true);
+        // init Boss
+        StartCoroutine(reaper.GetComponent<ReaperAbstract>().beginFight());
+    }
+
+    void initBoss()
+    {
+        Debug.Assert(reaper != null);
+        myDoorsSys.OpenAll();
+        StartCoroutine(waitToLeave());
+
     }
 
     // Update is called once per frame
@@ -39,6 +64,13 @@ public class SpawnWaves : MonoBehaviour
         {
             waveIndex++;
             spawnWave(2f);
+        }
+        // Waves complete
+        if(waveIndex >= EnemiesToSpawn.Length && !once)
+        {
+            initBoss();
+            myDoorsSys.OpenAll();
+            once = true;
         }
     }
 
@@ -55,7 +87,7 @@ public class SpawnWaves : MonoBehaviour
         yield return new WaitForSeconds(wait);
         foreach (var pos in spawn.cellBounds.allPositionsWithin)
         {
-            Vector3Int localPos = new Vector3Int(pos.x, pos.y, 0); // map cell tile 
+            Vector3Int localPos = new Vector3Int(pos.x, pos.y, 0); // map cell tile
             Vector3 place = spawn.CellToWorld(localPos); // to real world pos
 
             // Random Spawn ->> forces as many 'random' continues as possible

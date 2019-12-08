@@ -12,5 +12,5 @@ public class CasperData
     public Vector3 Scale = new Vector3(6, 6, 1);
     public bool isInvincible = false;
     public bool isEtherial = false;
-    public ActivatedItem CurrentActiveItem;
+    public ActivatedItem CurrentActiveItem = null;
 }

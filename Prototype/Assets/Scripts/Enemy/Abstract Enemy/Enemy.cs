@@ -68,7 +68,7 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("HeroBullet"))
+        if (collision.CompareTag("HeroBullet") && GetComponent<SpriteRenderer>().enabled == true)
         {
             GlobalControl.Instance.savedPlayerData.bulletsHit += 1;
             Destroy(collision.gameObject);

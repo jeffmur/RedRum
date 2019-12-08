@@ -19,8 +19,6 @@ public class EnemyBullet : MonoBehaviour
     {
         if (other.CompareTag("Wall"))
         {
-            GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-            Destroy(effect, 0.5f);
             Destroy(gameObject);
         }
         else if (other.CompareTag("Player"))
@@ -28,15 +26,20 @@ public class EnemyBullet : MonoBehaviour
             Casper casper = other.GetComponent<Casper>();
             if (!casper.IsEtherial)
             {
-                GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-                Destroy(effect, 0.5f);
                 if (tag != "HeroBullet")
                 {
                     casper.changeHealth(-bulletDamage);
                 }
+                
                 Destroy(gameObject);
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+        Destroy(effect, 0.5f);
     }
 
     public void SetBulletDirection(Vector3 direction)

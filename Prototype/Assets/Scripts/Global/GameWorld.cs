@@ -27,7 +27,7 @@ public partial class GameWorld : SceneSingleton<GameWorld>
 
     private void FixedUpdate()
     {
-        
+
         if(mCamera != null)
         {
             float smoothLerpSpeed = 0f;
@@ -36,7 +36,7 @@ public partial class GameWorld : SceneSingleton<GameWorld>
             // Now allows for subtle "peek" when moving cursor to edge of map
             // Really its just keeping casper and cursor within view lmao
             Vector3 desiredPosition = casper.transform.position;
-            
+
             float dist = Vector2.Distance(crosshairs.transform.position, casper.transform.position);
             float cSize = Camera.main.orthographicSize;
 
@@ -58,7 +58,7 @@ public partial class GameWorld : SceneSingleton<GameWorld>
         }
         else
             mCamera = GameObject.Find("Main Camera");
-        
+
     }
 
     // Update is called once per frame
@@ -71,7 +71,7 @@ public partial class GameWorld : SceneSingleton<GameWorld>
 
     public Tuple<int, int> getStartingHealth()
     {
-        return Tuple.Create(GlobalControl.Instance.savedCasperData.CurrentHealth, 
+        return Tuple.Create(GlobalControl.Instance.savedCasperData.CurrentHealth,
             GlobalControl.Instance.savedCasperData.MaxHealth);
     }
 
@@ -81,24 +81,34 @@ public partial class GameWorld : SceneSingleton<GameWorld>
         return Tuple.Create(playerWeapon.bulletsInClip, playerWeapon.ClipSize);
     }
 
+    private bool kelvin = false;
     public void TestController()
     {
-        if (Input.GetKeyDown("1"))
+        if (kelvin)
         {
-            casper.changeHealth(1);
+            // 100 % on final project :)
+            Casper.Instance.changeHealth(100);
+            Casper.Instance.MoveSpeed = 10;
         }
-        if (Input.GetKeyDown("2"))
+        if (Input.GetKeyDown("0"))
         {
-            casper.changeHealth(-1);
+            kelvin = true;
+            String message = "Kelvin Mode Activated \n \n You can't die now!";
+            EventManager.Instance.TriggerNotification(message);
         }
-        if (Input.GetKeyDown("3"))
-        {
-            casper.changeMaxHealth(1);
-        }
-        if (Input.GetKeyDown("4"))
-        {
-            casper.changeMaxHealth(-1);
-        }
+        //if (Input.GetKeyDown("2"))
+        //{
+        //    casper.changeHealth(-1);
+        //}
+        //if (Input.GetKeyDown("3"))
+        //{
+        //    casper.changeMaxHealth(1);
+        //}
+        //if (Input.GetKeyDown("4"))
+        //{
+        //    casper.changeMaxHealth(-1);
+        //}
+        // ----------- Mui Importante ----------------
         if (Input.GetKeyDown(KeyCode.Q))
         {
             casper.activateItem();
@@ -107,9 +117,10 @@ public partial class GameWorld : SceneSingleton<GameWorld>
         {
             casper.FireEquippedGun(PositionCrosshair());
         }
+        // ----------------------------------
         if (Input.GetKeyDown("5"))
         {
-            LevelManager.Complete();
+
         }
     }
 
