@@ -494,19 +494,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1198fcdbd1af3d4c9668cc432220798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 0
-  ClipSize: 0
-  BulletSpeed: 0
-  FireRate: 0
-  BulletsPerShot: 1
-  Accuracy: 0
-  reloadSpeed: 0
-  BulletPrefab: {fileID: 762612412696875151, guid: aeaab5f475e2ead4288576f8af2259f3,
-    type: 3}
-  barrelOffset: 0
-  heightOffset: 0
-  equipScale: 0
-  bulletsInClip: 0
   laser: {fileID: 1090173615}
 --- !u!4 &113322967 stripped
 Transform:
@@ -3077,6 +3064,14 @@ PrefabInstance:
     - target: {fileID: 819693086, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 10.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514660692, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
+      propertyPath: m_Offset.y
+      value: 1.0785298
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514660692, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
+      propertyPath: m_Size.y
+      value: 1.3824644
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
@@ -6991,6 +6986,27 @@ PrefabInstance:
         type: 3}
       propertyPath: barrelOffset
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3276614149025836431, guid: 8ebb8bc789c80544c8a245656e34db1c,
+        type: 3}
+      propertyPath: Damage
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3276614149025836430, guid: 8ebb8bc789c80544c8a245656e34db1c,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5802cc242c56cfa47a4b9ac4bb747662, type: 3}
+    - target: {fileID: 3276614149025836430, guid: 8ebb8bc789c80544c8a245656e34db1c,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 38e1e9ecdc9a1214d9bf4340db8843f6,
+        type: 2}
+    - target: {fileID: 3276614149025836430, guid: 8ebb8bc789c80544c8a245656e34db1c,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ebb8bc789c80544c8a245656e34db1c, type: 3}
