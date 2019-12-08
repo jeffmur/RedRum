@@ -12,12 +12,12 @@ public partial class Casper
     {
         if (IsEtherial)
         {
-            if (collision.gameObject.tag =="EnemyBullet")
+            if (collision.gameObject.tag == "EnemyBullet")
             {
                 Physics2D.IgnoreCollision(collision, gameObject.GetComponent<Collider2D>());
             }
         }
-        if (collision.gameObject.tag == "Item" || collision.gameObject.tag == "Weapon")
+        if (collision.gameObject.tag == "Item" || collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Elevator")
         {
             isHovering = true;
             itemCollision = collision;
@@ -28,13 +28,17 @@ public partial class Casper
                 {
                     message = "Press E to pick up";
                 }
-                else if(collision.gameObject.tag == "Weapon")
+                else if (collision.gameObject.tag == "Weapon")
                 {
                     message = "Press E to equip";
                 }
+                else if (collision.gameObject.tag == "Elevator")
+                {
+                    message = "Press E to go to next level";
+                }
                 GameWorld.Instance.hint.showFloatingText(collision.gameObject.transform.position, message);
             }
-        }        
+        }
     }
     private void ObtainEquipment(Collider2D collision)
     {
@@ -60,7 +64,7 @@ public partial class Casper
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Item" || collision.gameObject.tag == "Weapon")
+        if (collision.gameObject.tag == "Item" || collision.gameObject.tag == "Weapon" || collision.gameObject.tag == "Elevator")
         {
             GameWorld.Instance.hint.gameObject.SetActive(false);
             isHovering = false;

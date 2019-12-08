@@ -102,10 +102,12 @@ MonoBehaviour:
   BulletsPerShot: 1
   Accuracy: 0
   reloadSpeed: 1.2
-  BulletPrefab: {fileID: 0}
+  BulletPrefab: {fileID: 3086850139463176874, guid: ebbc9ee296e429f478321f362aabe9a9,
+    type: 3}
   barrelOffset: 0
   heightOffset: 0
   equipScale: 0.13
+  weaponSound: {fileID: 8300000, guid: be64544bade297e4d872dd74c66256d2, type: 3}
   bulletsInClip: 50
 --- !u!82 &8128421812728761369
 AudioSource:
@@ -117,7 +119,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: be64544bade297e4d872dd74c66256d2, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

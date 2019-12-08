@@ -232,12 +232,13 @@ MonoBehaviour:
   FireRate: 0.1
   BulletsPerShot: 1
   Accuracy: 0
-  reloadSpeed: 1.15
+  reloadSpeed: 1.5
   BulletPrefab: {fileID: 762612412696875151, guid: aeaab5f475e2ead4288576f8af2259f3,
     type: 3}
   barrelOffset: 0.4
   heightOffset: 0.15
   equipScale: 0.5
+  weaponSound: {fileID: 0}
   bulletsInClip: 1
 --- !u!82 &3276614149025836430
 AudioSource:

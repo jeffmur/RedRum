@@ -95,7 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea61fc737db1e84d8b26c5b1ec41047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitEffect: {fileID: 0}
+  hitEffect: {fileID: 7858134470129253047, guid: c94078294b230ff49ba4a529b04f1c02,
+    type: 3}
   bulletDamage: 5
 --- !u!58 &16713168633709346
 CircleCollider2D:
@@ -107,7 +108,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
