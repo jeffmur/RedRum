@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +15,15 @@ public class Casper_Sounds : MonoBehaviour
         EventManager.Instance.onItemPickup += ItemPickupSound;
         EventManager.Instance.onWeaponAdded += WeaponPickupSound;
         EventManager.Instance.onWeaponReloaded += WeaponPickupSound;
+
+        StartCoroutine(InitSound());
+    }
+
+    private IEnumerator InitSound()
+    {      
+        casperSounds.volume = 0;
+        yield return new WaitForSeconds(4);
+        casperSounds.volume = 1;
     }
 
     private void DamagedSound()
@@ -39,5 +49,4 @@ public class Casper_Sounds : MonoBehaviour
         casperSounds.clip = Casper.Instance.weaponInventory.GetSelectedWeapon().weaponSound;
         casperSounds.Play();
     }
-
 }
