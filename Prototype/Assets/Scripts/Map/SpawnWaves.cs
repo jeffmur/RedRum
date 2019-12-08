@@ -14,7 +14,7 @@ public class SpawnWaves : MonoBehaviour
     private bool once = false;
     private float spawnTime = 0;
     public GameObject reaper;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +22,7 @@ public class SpawnWaves : MonoBehaviour
         myStats = GetComponent<RoomStats>();
         spawnWave(0f);
     }
-    
+
     void spawnWave(float wait)
     {
         if (waveIndex >= EnemiesToSpawn.Length) { return; }
@@ -42,7 +42,7 @@ public class SpawnWaves : MonoBehaviour
         {
             yield return new WaitForSeconds(0.1f);
         }
-           
+
         // Spawn enemy
         reaper.SetActive(true);
         // init Boss
@@ -54,7 +54,7 @@ public class SpawnWaves : MonoBehaviour
         Debug.Assert(reaper != null);
         myDoorsSys.OpenAll();
         StartCoroutine(waitToLeave());
-        
+
     }
 
     // Update is called once per frame
@@ -87,7 +87,7 @@ public class SpawnWaves : MonoBehaviour
         yield return new WaitForSeconds(wait);
         foreach (var pos in spawn.cellBounds.allPositionsWithin)
         {
-            Vector3Int localPos = new Vector3Int(pos.x, pos.y, 0); // map cell tile 
+            Vector3Int localPos = new Vector3Int(pos.x, pos.y, 0); // map cell tile
             Vector3 place = spawn.CellToWorld(localPos); // to real world pos
 
             // Random Spawn ->> forces as many 'random' continues as possible

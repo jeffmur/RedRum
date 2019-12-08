@@ -50,7 +50,7 @@ public class ReaperAbstract : Enemy
         // ----------- rand loc -----------
         transform.localPosition = Vector3.zero; // stay in bounds
         Vector3 loc = new Vector3(
-            transform.localPosition.x + Random.Range(-4, 4), 
+            transform.localPosition.x + Random.Range(-4, 4),
             transform.localPosition.y + Random.Range(-4, 4), 0);
 
         transform.localPosition = loc;
@@ -69,7 +69,7 @@ public class ReaperAbstract : Enemy
             i++;
         }
     }
-   
+
     protected override void Attack(int index)
     {
         int rand = Random.Range(0, index);
@@ -100,7 +100,7 @@ public class ReaperAbstract : Enemy
         // ASSIGN POS TO CASPER
         sp.transform.position = casper.transform.position;
         Destroy(sp, 4f);
-        // WAIT FOR 3 SECONDS 
+        // WAIT FOR 3 SECONDS
         yield return new WaitForSeconds(3f);
         // SPRAY
         bulletSpray(0, 360, 30, sp.transform.position);
@@ -122,7 +122,7 @@ public class ReaperAbstract : Enemy
                 isFiringWave = false;
                 yield break;
             }
-                
+
         }
 
     }

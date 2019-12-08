@@ -6,7 +6,11 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:Prototype/Assets/Resources/Textures/Animations/Guns/Sniper/Animations/Sniper_Idle.anim
   m_Name: Sniper_Idle
+=======
+  m_Name: CasperFront_Dodge
+>>>>>>> items:Prototype/Assets/Resources/Textures/Animations/Casper/AsperiteFiles/DodgeAnimations/CasperFront_Dodge.anim
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,6 +24,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
+<<<<<<< HEAD:Prototype/Assets/Resources/Textures/Animations/Guns/Sniper/Animations/Sniper_Idle.anim
       value: {fileID: -6554051710541806667, guid: 09833bb0ddc81e7438f06cf74bdad74b,
         type: 3}
     - time: 0.1
@@ -27,7 +32,17 @@ AnimationClip:
         type: 3}
     - time: 0.18333334
       value: {fileID: 3378221400041774109, guid: 09833bb0ddc81e7438f06cf74bdad74b,
+=======
+      value: {fileID: -4702504712866487645, guid: 4d6b05feec2d6b240b5538fa5f92cdbe,
         type: 3}
+    - time: 0.15
+      value: {fileID: 471759403002516255, guid: 4d6b05feec2d6b240b5538fa5f92cdbe,
+>>>>>>> items:Prototype/Assets/Resources/Textures/Animations/Casper/AsperiteFiles/DodgeAnimations/CasperFront_Dodge.anim
+        type: 3}
+    - time: 0.3
+      value: {fileID: 84417112312969054, guid: 4d6b05feec2d6b240b5538fa5f92cdbe, type: 3}
+    - time: 0.43333334
+      value: {fileID: 84417112312969054, guid: 4d6b05feec2d6b240b5538fa5f92cdbe, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -47,15 +62,26 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
+<<<<<<< HEAD:Prototype/Assets/Resources/Textures/Animations/Guns/Sniper/Animations/Sniper_Idle.anim
     - {fileID: -6554051710541806667, guid: 09833bb0ddc81e7438f06cf74bdad74b, type: 3}
     - {fileID: 3378221400041774109, guid: 09833bb0ddc81e7438f06cf74bdad74b, type: 3}
     - {fileID: 3378221400041774109, guid: 09833bb0ddc81e7438f06cf74bdad74b, type: 3}
+=======
+    - {fileID: -4702504712866487645, guid: 4d6b05feec2d6b240b5538fa5f92cdbe, type: 3}
+    - {fileID: 471759403002516255, guid: 4d6b05feec2d6b240b5538fa5f92cdbe, type: 3}
+    - {fileID: 84417112312969054, guid: 4d6b05feec2d6b240b5538fa5f92cdbe, type: 3}
+    - {fileID: 84417112312969054, guid: 4d6b05feec2d6b240b5538fa5f92cdbe, type: 3}
+>>>>>>> items:Prototype/Assets/Resources/Textures/Animations/Casper/AsperiteFiles/DodgeAnimations/CasperFront_Dodge.anim
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
+<<<<<<< HEAD:Prototype/Assets/Resources/Textures/Animations/Guns/Sniper/Animations/Sniper_Idle.anim
     m_StopTime: 0.2
+=======
+    m_StopTime: 0.45000002
+>>>>>>> items:Prototype/Assets/Resources/Textures/Animations/Casper/AsperiteFiles/DodgeAnimations/CasperFront_Dodge.anim
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

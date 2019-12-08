@@ -23,7 +23,7 @@ public partial class RoomPointer : MonoBehaviour
 
         mHero = GameObject.Find("Casper");
     }
-    
+
     private void RoomSwap(GameObject nextLevel, string doorSide)
     {
         if(mm == null) { noMiniMapSwap(nextLevel, doorSide); return; }
@@ -31,7 +31,7 @@ public partial class RoomPointer : MonoBehaviour
         nextLevel.GetComponent<DoorSystem>().LockAll();
         foreach (GameObject room in mm.allRooms) // for all the rooms
         {
-            if (Vector2.Distance(room.transform.position, mm.casperIcon.position) < 2f) // find the room I am in 
+            if (Vector2.Distance(room.transform.position, mm.casperIcon.position) < 2f) // find the room I am in
             {
                 if (room.GetComponent<Room>() != null) //if it is actually a room
                 {
@@ -41,7 +41,7 @@ public partial class RoomPointer : MonoBehaviour
                     {
                         GlobalControl.Instance.savedPlayerData.roomsCleared += 1;
                         room.GetComponent<Room>().isVisited = true; //mark it is visited
-                        next.GetComponent<RoomManager>().Initialize(); //make the enemies spawn 
+                        next.GetComponent<RoomManager>().Initialize(); //make the enemies spawn
                         // Hide all (if any) items in new room
                         Transform real = next.transform;
                         foreach (Transform item in real)
@@ -83,6 +83,15 @@ public partial class RoomPointer : MonoBehaviour
         mHero.transform.position = next.sendPlayerToDoor(doorSide);
     }
     // FOR LEVEL2
+    private void noMiniMapSwap(GameObject nextLevel, string doorSide)
+    {
+        RoomStats next = nextLevel.GetComponent<RoomStats>();
+        // Move camera
+        next.setCamLocation();
+        // Move Hero
+        mHero.transform.position = next.sendPlayerToDoor(doorSide);
+    }
+
     private void noMiniMapSwap(GameObject nextLevel, string doorSide)
     {
         RoomStats next = nextLevel.GetComponent<RoomStats>();

@@ -27,7 +27,7 @@ public partial class GameWorld : SceneSingleton<GameWorld>
 
     private void FixedUpdate()
     {
-        
+
         if(mCamera != null)
         {
             float smoothLerpSpeed = 0f;
@@ -36,7 +36,7 @@ public partial class GameWorld : SceneSingleton<GameWorld>
             // Now allows for subtle "peek" when moving cursor to edge of map
             // Really its just keeping casper and cursor within view lmao
             Vector3 desiredPosition = casper.transform.position;
-            
+
             float dist = Vector2.Distance(crosshairs.transform.position, casper.transform.position);
             float cSize = Camera.main.orthographicSize;
 
@@ -58,7 +58,7 @@ public partial class GameWorld : SceneSingleton<GameWorld>
         }
         else
             mCamera = GameObject.Find("Main Camera");
-        
+
     }
 
     // Update is called once per frame
@@ -71,7 +71,7 @@ public partial class GameWorld : SceneSingleton<GameWorld>
 
     public Tuple<int, int> getStartingHealth()
     {
-        return Tuple.Create(GlobalControl.Instance.savedCasperData.CurrentHealth, 
+        return Tuple.Create(GlobalControl.Instance.savedCasperData.CurrentHealth,
             GlobalControl.Instance.savedCasperData.MaxHealth);
     }
 
@@ -120,7 +120,7 @@ public partial class GameWorld : SceneSingleton<GameWorld>
         // ----------------------------------
         if (Input.GetKeyDown("5"))
         {
-            LevelManager.Complete();
+
         }
     }
 

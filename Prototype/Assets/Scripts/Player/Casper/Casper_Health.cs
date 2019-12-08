@@ -81,8 +81,10 @@ public partial class Casper
         }
         else if (CurrentHealth < prevCurrentHealth)
         {
-            StartCoroutine(ToggleInvincibility(1));
-            FlashDamage();
+            float invTimer = 2f;
+            StartCoroutine(ToggleInvincibility(invTimer));
+            StartCoroutine(FlashCasper(invTimer));
+            Camera.main.GetComponent<CameraShake>().ShakeCamera(.08f, .02f);
             CasperDamageEvent?.Invoke();
         }
     }
