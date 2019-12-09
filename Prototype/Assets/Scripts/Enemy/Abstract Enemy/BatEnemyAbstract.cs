@@ -27,7 +27,7 @@ public class BatEnemyAbstract : Enemy
         Move(movement);
     }
 
-    void Move(Vector2 direction)
+    protected override void Move(Vector2 direction)
     {
         if (direction.x < 0)
         {

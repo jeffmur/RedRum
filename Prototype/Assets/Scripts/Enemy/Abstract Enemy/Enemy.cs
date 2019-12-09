@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public abstract class Enemy : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public abstract class Enemy : MonoBehaviour
     private Chest myChest;
     protected GameObject floatingDamage;
 
+    public GameObject healthBar;
+
+
+
     protected virtual void Start()
     {
         casper = GameObject.FindGameObjectWithTag("Player");
@@ -25,6 +30,7 @@ public abstract class Enemy : MonoBehaviour
         itemDrop = Resources.Load<GameObject>("Textures/Prefabs/Items/Heart");
         floatingDamage = Resources.Load<GameObject>("UI/hitmarker");
         enemySprite = GetComponent<SpriteRenderer>();
+
     }
 
     protected virtual void DecreaseHealth(int damage)
@@ -91,5 +97,21 @@ public abstract class Enemy : MonoBehaviour
         var floating = Instantiate(floatingDamage, location, Quaternion.identity);
         floating.GetComponent<TMPro.TextMeshPro>().text = Damage.ToString();
         Destroy(floating, 0.5f);
+    }
+
+    protected void setHealthbarMaxValue(int health)
+    {
+        healthBar.SetActive(true);
+        healthBar.GetComponent<Slider>().maxValue = health;
+        healthBar.GetComponent<Slider>().value = health;
+    }
+
+    protected void updateHeathBar(int hitDamage)
+    {
+        healthBar.GetComponent<Slider>().value -= hitDamage;
+        if (enemyHealth < 0)
+        {
+            healthBar.SetActive(false);
+        }
     }
 }

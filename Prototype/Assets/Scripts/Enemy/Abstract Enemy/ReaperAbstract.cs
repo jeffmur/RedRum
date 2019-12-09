@@ -17,6 +17,8 @@ public class ReaperAbstract : Enemy
         chest = Resources.Load("Textures/Prefabs/Map Misc/chest") as GameObject;
         // CHRIS CHANGE IT TO PURPLE FLAMES :)
         BulletPrefab = Resources.Load<GameObject>("Textures/Projectiles/ReaperBullet");
+
+        setHealthbarMaxValue(enemyHealth);
     }
 
     public IEnumerator beginFight()
@@ -180,6 +182,8 @@ public class ReaperAbstract : Enemy
     protected override void DecreaseHealth(int damage)
     {
         base.DecreaseHealth(damage);
+        updateHeathBar(damage);
+
         if (enemyHealth < 0)
         {
             Die();
