@@ -22,6 +22,7 @@ public class SpiderBoss : Enemy
     public LineRenderer lineRenderer;
     protected override void Start()
     {
+        base.Start();
         enemyHealth = 1000;
         speed = 3f;
         spiderBullet = Resources.Load<GameObject>("Textures/Projectiles/SpiderBigBullet Variant");
@@ -29,6 +30,8 @@ public class SpiderBoss : Enemy
         BulletPrefab = Resources.Load<GameObject>("Textures/Projectiles/SpiderBullet");
         animator = transform.GetComponent<Animator>();
         StartCoroutine(FireBullets());
+
+        setHealthbarMaxValue(enemyHealth);
     }
 
     private IEnumerator FireBullets()
@@ -132,10 +135,10 @@ public class SpiderBoss : Enemy
         return bullets;
     }
 
-    protected override void OnTriggerEnter2D(Collider2D other)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        base.OnTriggerEnter2D(other);
-        if (other.CompareTag("Wall"))
+        base.OnTriggerEnter2D(collision);
+        if (collision.CompareTag("Wall"))
         {
             moveRight = !moveRight;
         }
@@ -143,10 +146,15 @@ public class SpiderBoss : Enemy
     protected override void DecreaseHealth(int damage)
     {
         base.DecreaseHealth(damage);
+        updateHeathBar(damage);
         if (enemyHealth < 500)
         {
             BulletCooldown = 0.5f;
             bulletAmount = 15;
+        }
+        if (enemyHealth < 0)
+        {
+            Destroy(gameObject);
         }
     }
 }

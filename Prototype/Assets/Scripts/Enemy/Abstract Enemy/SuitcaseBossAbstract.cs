@@ -8,7 +8,7 @@ public class SuitcaseBossAbstract : Enemy
 
     private float BulletCooldown = 3f;
     private Vector3 direction;
-    //private GameObject healthBar;
+
 
     protected override void Start()
     {
@@ -16,15 +16,17 @@ public class SuitcaseBossAbstract : Enemy
         speed = 1f;
 
         base.Start();
-        //healthBar = GameObject.Find("BossHealthBar");
+
+
         BulletPrefab = Resources.Load<GameObject>("Textures/Projectiles/SuitcaseBullet_Variant");
         enemySprite = transform.GetComponent<SpriteRenderer>();
         StartCoroutine(FireShots());
-        //healthBar.SetActive(true);
-        //healthBar.GetComponent<Slider>().maxValue = enemyHealth;
 
 
-    }
+        setHealthbarMaxValue(enemyHealth);
+
+
+        }
 
     // Update is called once per frame
     protected override void Update()
@@ -42,7 +44,7 @@ public class SuitcaseBossAbstract : Enemy
         {
             enemySprite.flipX = true;
         }
-        //healthBar.GetComponent<Slider>().value = enemyHealth;
+
     }
     private IEnumerator FireShots()
     {
@@ -77,21 +79,23 @@ public class SuitcaseBossAbstract : Enemy
         return bullets;
     }
 
-    protected override void OnTriggerEnter2D(Collider2D other)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        base.OnTriggerEnter2D(other);
-        if (other.CompareTag("Player"))
+        base.OnTriggerEnter2D(collision);
+        if (collision.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<Casper>().changeHealth(-1);
+            collision.gameObject.GetComponent<Casper>().changeHealth(-1);
         }
     }
 
     protected override void DecreaseHealth(int damage)
     {
         base.DecreaseHealth(damage);
+        updateHeathBar(damage);
         if (enemyHealth < 0)
         {
             Destroy(gameObject);
+
         }
         else if(enemyHealth < 150)
         {
