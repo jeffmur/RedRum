@@ -2817,11 +2817,27 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 1556098264106108, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 1837869373701438, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762529655683378, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 1539705964994804, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234657733009468, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963027273295438, guid: b9ca87a16fee4f04a91215304cca5772, type: 3}
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}

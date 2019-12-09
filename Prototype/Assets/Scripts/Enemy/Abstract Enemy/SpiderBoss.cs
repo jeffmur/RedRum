@@ -21,6 +21,7 @@ public class SpiderBoss : Enemy
     protected override void Start()
     {
         enemyHealth = 1000;
+        speed = 3f;
         spiderBullet = Resources.Load<GameObject>("Textures/Prefabs/Enemies/SpiderBullet");
         BulletPrefab = Resources.Load<GameObject>("Textures/Prefabs/Enemies/SlimeBullet");
         StartCoroutine(FireSlimes());
@@ -39,10 +40,40 @@ public class SpiderBoss : Enemy
 
     protected override void Update()
     {
-        if(!lazerTime)
-        Move(Vector2.up);
+
+        if (!lazerTime) {
+            Move(Vector2.up);
+        }
+
+        if (shootingTime == 10)
+        {
+            StartCoroutine(shootLaserBreak());
+        }
+    }
+    private void shootLaser(Vector3 fromLoc)
+    {
+        RaycastHit2D hitInfo = Physics2D.Raycast(fromLoc, -Vector3.up);
+        if (hitInfo)
+        {
+            Casper player = hitInfo.transform.GetComponent<Casper>();
+            if (player != null)
+            {
+                Casper.Instance.changeHealth(-1);
+            }
+        }
+        lineRenderer.SetPosition(0, fromLoc);
+        lineRenderer.SetPosition(1, fromLoc - Vector3.up * 8);
+        lineRenderer.enabled = true;
     }
 
+
+    private IEnumerator shootLaserBreak()
+    {
+        shootLaser(firePoint.position);
+        yield return new WaitForSeconds(0.75f);
+        lineRenderer.enabled = false;
+        shootingTime = 0;
+    }
     protected override void Move(Vector2 direction)
     {
         if (moveRight)
@@ -72,11 +103,7 @@ public class SpiderBoss : Enemy
             angle += angleStep;
         }
         shootingTime++;
-        if (shootingTime == 2)
-        {
-            StartCoroutine(shootLaser(firePoint.position));
-        }
-        else if (shootingTime==5)
+    if (shootingTime==5)
         shootSpiderBullet();
     }
     private void shootSpiderBullet()
@@ -85,27 +112,6 @@ public class SpiderBoss : Enemy
         bullet.SetBulletDirection(Vector3.down);
     }
 
-
-    private IEnumerator shootLaser(Vector3 fromLoc)
-    {
-        shootingTime = 0;
-        lazerTime = true;
-        RaycastHit2D hitInfo = Physics2D.Raycast(fromLoc, -Vector3.up);
-        if (hitInfo)
-        {
-            Casper player = hitInfo.transform.GetComponent<Casper>();
-            if (player != null)
-            {
-                Casper.Instance.changeHealth(-1);
-            }
-            lineRenderer.SetPosition(0, fromLoc);
-            lineRenderer.SetPosition(1, fromLoc - Vector3.up * 8);
-        }
-        lineRenderer.enabled = true;
-        yield return new WaitForSeconds(.1f);
-        lineRenderer.enabled = false;
-        lazerTime = false;
-    }
 
     private EnemyBullet[] CreateBullets()
     {
