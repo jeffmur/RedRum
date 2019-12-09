@@ -113,6 +113,7 @@ public abstract class Enemy : MonoBehaviour
         if (healthBar.GetComponent<Slider>().value <= 0)
         {
             healthBar.SetActive(false);
+            healthBar.GetComponent<Slider>().maxValue = 0;
         }
     }
 }
