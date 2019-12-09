@@ -9,6 +9,7 @@ public class SlimeAbstract : Enemy
     private bool fireDiagonal;
     private float BulletCooldown = 1f;
 
+
     private readonly Vector3 northWest = Vector3.up + Vector3.left;
     private readonly Vector3 northEast = Vector3.up + Vector3.right;
     private readonly Vector3 southWest = Vector3.down + Vector3.left;

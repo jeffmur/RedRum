@@ -40,7 +40,6 @@ public class SkeletonAbstract : Enemy
         else
         {
             if (Time.time > (lastAttackTime + attackDelay) && enemyAnimator.GetBool("Die") == false)
-
             {
                 enemyAnimator.SetFloat("Speed", 0);
                 enemyAnimator.SetBool("isAttacking", true);
