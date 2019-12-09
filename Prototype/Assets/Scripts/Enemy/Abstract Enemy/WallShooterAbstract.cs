@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class WallShooterAbstract : Enemy
 {
@@ -56,10 +57,9 @@ public class WallShooterAbstract : Enemy
         timeBtwShot -= Time.deltaTime;
         freezeTime -= Time.deltaTime;
     }
-
-    protected override void OnTriggerEnter2D(Collider2D other)
+    
+    private void colesCole(dynamic other)
     {
-        base.OnTriggerEnter2D(other);
         if (other.CompareTag("Wall"))
         {
             if (direction == 0 || direction == 1)
@@ -91,6 +91,18 @@ public class WallShooterAbstract : Enemy
         {
             other.GetComponent<Casper>().changeHealth(-BulletPrefab.GetComponent<EnemyBullet>().bulletDamage);
         }
+    }
+
+    protected override void OnTriggerEnter2D(Collider2D other)
+    {
+        base.OnTriggerEnter2D(other);
+        colesCole(other);
+    }
+
+    private void OnTriggerEnter2D(TilemapCollider2D other)
+    {
+        base.OnTriggerEnter2D(other);
+        colesCole(other);
     }
     void WallState()
     {

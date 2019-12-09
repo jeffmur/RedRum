@@ -46,7 +46,12 @@ public partial class Casper : SceneSingleton<Casper>
     public float FireRate { get => localCasperData.FireRate; set => localCasperData.FireRate = value; }
     private ActivatedItem HeldItem { get => localCasperData.CurrentActiveItem; set => localCasperData.CurrentActiveItem = value; }
     public bool IsInvincible { get => localCasperData.isInvincible; set => localCasperData.isInvincible = value; }
-    public bool IsEtherial { get => localCasperData.isEtherial;
+    public bool IsEtherial { 
+        get {
+            if(localCasperData != null)
+                return localCasperData.isEtherial;
+            return false;
+            }
         set {
             localCasperData.isEtherial = value;
             Color col = GetComponent<SpriteRenderer>().color;
