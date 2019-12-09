@@ -46,13 +46,12 @@ public class EnemyManager : SceneSingleton<EnemyManager>
     {
         switch (Scenes.currentLevel)
         {
+            case 0:
+            case 1:
+            case 3:
+                return getBoss("SpiderBoss");
             default:
                 return getBoss("SuitcaseBoss");
-            case -1:
-                return getBoss("SpiderBoss");
-            //case 1:
-            //    return getBoss("ReaperBoss");
-
         }
     }
 

@@ -10,6 +10,8 @@ public class RoomStats : MonoBehaviour
     private float minY;
     private float maxX;
     private float minX;
+
+    public float MaxY { get => maxY; }
     // Start is called before the first frame update
     void Start()
     {

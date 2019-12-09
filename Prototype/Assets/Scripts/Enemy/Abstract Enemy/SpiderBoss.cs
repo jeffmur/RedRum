@@ -22,12 +22,14 @@ public class SpiderBoss : Enemy
     public LineRenderer lineRenderer;
     protected override void Start()
     {
+        base.Start();
         enemyHealth = 1000;
         speed = 3f;
         spiderBullet = Resources.Load<GameObject>("Textures/Projectiles/SpiderBigBullet Variant");
         Debug.Log(spiderBullet == null);
         BulletPrefab = Resources.Load<GameObject>("Textures/Projectiles/SpiderBullet");
         animator = transform.GetComponent<Animator>();
+        moveToTop();
         StartCoroutine(FireBullets());
     }
 
@@ -72,6 +74,14 @@ public class SpiderBoss : Enemy
         lineRenderer.enabled = true;
     }
 
+    private void moveToTop()
+    {
+        do
+        {
+            transform.position = new Vector2(transform.position.x, transform.position.y + speed * Time.deltaTime);
+        }
+        while (transform.position.y < GetComponentInParent<RoomStats>().MaxY);
+    }
 
     private IEnumerator shootLaserBreak()
     {
