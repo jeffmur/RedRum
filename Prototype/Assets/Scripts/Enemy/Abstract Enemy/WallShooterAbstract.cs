@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -30,7 +31,7 @@ public class WallShooterAbstract : Enemy
         speed = 10f;
 
         base.Start();
-        direction = Random.Range(0, 4);
+        direction = UnityEngine.Random.Range(0, 4);
         currentStates = (int)States.Wall;
         enemyAnimator = GetComponent<Animator>();
         rb = this.GetComponent<Rigidbody2D>();
@@ -57,8 +58,8 @@ public class WallShooterAbstract : Enemy
         timeBtwShot -= Time.deltaTime;
         freezeTime -= Time.deltaTime;
     }
-    
-    private void colesCole(dynamic other)
+
+    private void colesCole(Collider2D other)
     {
         if (other.CompareTag("Wall"))
         {
@@ -99,9 +100,8 @@ public class WallShooterAbstract : Enemy
         colesCole(other);
     }
 
-    private void OnTriggerEnter2D(TilemapCollider2D other)
+    protected void OnTriggerEnter2D(TilemapCollider2D other)
     {
-        base.OnTriggerEnter2D(other);
         colesCole(other);
     }
     void WallState()
@@ -174,7 +174,7 @@ public class WallShooterAbstract : Enemy
             EnemyBullet bullets = Instantiate(BulletPrefab, transform.position, Quaternion.identity).GetComponent<EnemyBullet>();
             bullets.SetBulletDirection(bulletShootDirc);
             timeBtwShot = shootingCooldown;
-            speed = Random.Range(2, 8);
+            speed = UnityEngine.Random.Range(2, 8);
             freezeTime = 1f;
         }
     }

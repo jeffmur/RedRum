@@ -48,10 +48,10 @@ public class EnemyManager : SceneSingleton<EnemyManager>
         {
             default:
                 return getBoss("SuitcaseBoss");
-            //case 0:
-            //    return getBoss("SpiderBoss");
-            case 1:
-                return getBoss("ReaperBoss");
+            case 0:
+                return getBoss("SpiderBoss");
+            //case 1:
+            //    return getBoss("ReaperBoss");
 
         }
     }
