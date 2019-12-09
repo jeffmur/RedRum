@@ -131,6 +131,7 @@ public class SpiderBoss : Enemy
             moveRight = !moveRight;
         }
     }
+
     protected override void DecreaseHealth(int damage)
     {
         base.DecreaseHealth(damage);
@@ -138,6 +139,10 @@ public class SpiderBoss : Enemy
         {
             BulletCooldown = 0.5f;
             bulletAmount = 15;
+        }
+        if (enemyHealth < 0)
+        {
+            Destroy(gameObject);
         }
     }
     }
