@@ -16,7 +16,7 @@ public class ReaperAbstract : Enemy
         anim = GetComponent<Animator>();
         chest = Resources.Load("Textures/Prefabs/Map Misc/chest") as GameObject;
         // CHRIS CHANGE IT TO PURPLE FLAMES :)
-        BulletPrefab = Resources.Load<GameObject>("Textures/Projectiles/SuitcaseBullet_Variant");
+        BulletPrefab = Resources.Load<GameObject>("Textures/Projectiles/ReaperBullet");
     }
 
     public IEnumerator beginFight()
