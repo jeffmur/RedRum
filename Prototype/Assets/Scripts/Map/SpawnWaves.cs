@@ -36,8 +36,6 @@ public class SpawnWaves : MonoBehaviour
     {
         if (waveIndex >= EnemiesToSpawn.Length) { return; }
         spawnTime = Time.time;
-        //Debug.Log("Spawning " + EnemiesToSpawn[waveIndex] + " enemies");
-        if (waveIndex < 0) waveIndex = 0;
         StartCoroutine(spawnInMap(EnemiesToSpawn[waveIndex], wait));
         message = "Wave "+(waveIndex+1)+" \n \n Surive to win";
         EventManager.Instance.TriggerNotification(message);
