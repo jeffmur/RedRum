@@ -5,12 +5,12 @@ using UnityEngine;
 public class SoundTracks : MonoBehaviour
 {
     public AudioSource SoundTrack;
-    public AudioClip BossMusic, IdleMusic, WaveMusic, Creepy;
+    public AudioClip BossMusic, IdleMusic, WaveMusic, roomComplete;
 
     private void Start()
     {
         EventManager.Instance.onNewRoomEntered += IdleSound;
-        EventManager.Instance.onRoomCompleted += Level1Sound;
+        EventManager.Instance.onRoomCompleted += RoomComplete;
         EventManager.Instance.onBossRoomEnter += BossSound;
         EventManager.Instance.onBossRoomCompleted += IdleSound;
         EventManager.Instance.onWaveStart += IdleSound;
@@ -44,9 +44,9 @@ public class SoundTracks : MonoBehaviour
         SoundTrack.Play();
     }
 
-    private void Level1Sound()
+    private void RoomComplete()
     {
-        SoundTrack.clip = Creepy;
+        SoundTrack.clip = roomComplete;
         SoundTrack.Play();
     }
 }

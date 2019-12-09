@@ -21,28 +21,46 @@ public class RoomSounds : MonoBehaviour
     private void WaveStart()
     {
         print("Wave Started");
+        gameSounds.volume = 0.8f;
+        gameSounds.clip = waveStart;
+        gameSounds.Play();
     }
 
     private void WaveEnd()
     {
         print("End of Wave");
+        gameSounds.clip = waveEnd;
+        gameSounds.Play();
     }
 
     private void RoomEnteredSound()
     {
         print("New room entered");
+        gameSounds.clip = roomEntered;
+        gameSounds.Play();
     }
 
     private void RoomCompletedSound()
     {
         print("Room Completed");
+        gameSounds.clip = roomExit;
+        gameSounds.Play();
     }
     private void BossRoomEnterSound()
     {
         print("BOSS ENGAGED");
+        gameSounds.clip = bossEnter;
+        gameSounds.Play();
     }
     private void BossDefeatedSound()
     {
-        print("YEET");
+        print("BOSS DEAD");
+        gameSounds.clip = bossExit;
+        gameSounds.Play();
     }
+
+    /** Jayden's Needy Needs
+     * NEW SOUNDTRACK FOR EACH BOSS
+     * 
+     */
 }

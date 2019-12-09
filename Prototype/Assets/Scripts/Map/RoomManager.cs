@@ -62,7 +62,11 @@ public partial class RoomManager : MonoBehaviour
     private bool entered = false;
     public void Initialize()
     {
-        entered = true;
+        entered = true; cleared = false;
+        if (name != "Boss Pool")
+            onNewRoomEnter?.Invoke();
+        else
+            onBossRoomEnter?.Invoke();
         //RoomIndex = atIndex;
         // Destroy old chest
         foreach(Transform child in gameObject.transform)
@@ -99,7 +103,7 @@ public partial class RoomManager : MonoBehaviour
         var circle = Instantiate(EnemyManager.Instance.spawnPoint);
         circle.transform.position = atLoc;
         circle.transform.parent = transform;
-        Destroy(circle, 1f);
+        Destroy(circle, 1.1f);
         yield return new WaitForSeconds(1f);
         GameObject enemy;
         if (name != "Boss Pool")
