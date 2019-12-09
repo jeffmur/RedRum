@@ -192,6 +192,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1608282905791620182, guid: 3cb27696244045c4dad0d25ef8138496,
+        type: 3}
+      propertyPath: weaponSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 4e1ff8faed12a475eba9be0e46072269, type: 3}
     - target: {fileID: 1608282905791620183, guid: 3cb27696244045c4dad0d25ef8138496,
         type: 3}
       propertyPath: m_audioClip
@@ -223,6 +228,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 24300002, guid: 38e1e9ecdc9a1214d9bf4340db8843f6,
         type: 2}
+<<<<<<< Updated upstream
     - target: {fileID: 1608282905791620182, guid: 3cb27696244045c4dad0d25ef8138496,
         type: 3}
       propertyPath: weaponSound
@@ -233,6 +239,8 @@ PrefabInstance:
       propertyPath: Damage
       value: 200
       objectReference: {fileID: 0}
+=======
+>>>>>>> Stashed changes
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3cb27696244045c4dad0d25ef8138496, type: 3}
 --- !u!1 &32741325
@@ -12894,10 +12902,11 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 982888125}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c10f76f8adfb2634889bf64fc28f790e, type: 3}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 38e1e9ecdc9a1214d9bf4340db8843f6,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 90027df324b29c0438f97b0c585cf94f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
