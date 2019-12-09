@@ -4,6 +4,8 @@ using UnityEngine;
 
 public partial class Casper
 {
+    public GameObject HeldItemContainer;
+
     public delegate void onItemDelegate(Item item);
     public event onItemDelegate onItemPickup;
 
@@ -23,7 +25,7 @@ public partial class Casper
         HeldItem = item;
         HeldItem.tag = "PickedUp";
         item.hideItem();
-        item.transform.parent = gameObject.transform;
+        item.transform.parent = HeldItemContainer.transform;
     }
 
     private void pickUpItem(Item selectedItem)
@@ -71,8 +73,8 @@ public partial class Casper
         else
         {
             rr.RoomIndex = currentRoomIndex;
-            if(rr.OriginalScale != Vector3.zero)
-                obj.transform.localScale = rr.OriginalScale;
+            //if(rr.OriginalScale != Vector3.zero)
+            //    obj.transform.localScale = rr.OriginalScale;
         }
         // Hide/Show
         obj.tag = "Item";
