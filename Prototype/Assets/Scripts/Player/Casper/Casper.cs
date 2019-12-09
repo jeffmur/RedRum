@@ -35,6 +35,8 @@ public partial class Casper : SceneSingleton<Casper>
     {
         if(HeldItem != null)
             GlobalControl.Instance.saveItem(HeldItem.gameObject);
+
+        GameWorld.Instance.hint.gameObject.SetActive(false);
         GlobalControl.Instance.savedCasperData = localCasperData;
         GlobalControl.Instance.savedPlayerData = localPlayerData;
     }

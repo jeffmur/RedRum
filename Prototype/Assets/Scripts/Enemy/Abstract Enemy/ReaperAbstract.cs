@@ -12,7 +12,7 @@ public class ReaperAbstract : Enemy
     protected override void Start()
     {
         base.Start();
-        enemyHealth = 2000;
+        enemyHealth = 3000;
         anim = GetComponent<Animator>();
         chest = Resources.Load("Textures/Prefabs/Map Misc/chest") as GameObject;
         // CHRIS CHANGE IT TO PURPLE FLAMES :)
@@ -133,7 +133,7 @@ public class ReaperAbstract : Enemy
      */
     private void waveShot(int index)
     {
-        int shots = 5;
+        int shots = 3;
         int val = index % 360;
         bulletSpray(val, val - 20, shots, transform.position);
     }
