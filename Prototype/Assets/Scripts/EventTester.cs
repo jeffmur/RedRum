@@ -38,10 +38,10 @@ public class EventTester : MonoBehaviour
     }
     void printonItemUse()
     {
-        print("ITEM USED");
+        //print("ITEM USED");
     }
     void printonItemPickup()
     {
-        print("ITEM PICKED UP");
+        //print("ITEM PICKED UP");
     }
 }

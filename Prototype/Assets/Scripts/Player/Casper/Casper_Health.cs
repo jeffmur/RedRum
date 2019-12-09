@@ -55,7 +55,7 @@ public partial class Casper
 
         if (value < 0 && (IsInvincible || IsEtherial))
         {
-            print("Casper is invincible");
+            //print("Casper is invincible");
             return;
         }
         CurrentHealth += value;
@@ -81,8 +81,10 @@ public partial class Casper
         }
         else if (CurrentHealth < prevCurrentHealth)
         {
-            StartCoroutine(ToggleInvincibility(1));
-            FlashDamage();
+            float invTimer = 2f;
+            StartCoroutine(ToggleInvincibility(invTimer));
+            StartCoroutine(FlashCasper(invTimer));
+            Camera.main.GetComponent<CameraShake>().ShakeCamera(4f, 4f);
             CasperDamageEvent?.Invoke();
         }
     }

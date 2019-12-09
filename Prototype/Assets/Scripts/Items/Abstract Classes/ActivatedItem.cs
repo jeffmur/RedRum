@@ -39,10 +39,6 @@ public abstract class ActivatedItem : Item
     {
         base.Awake();
         setItemDurations();
-        if (effectDuration < -100 || cooldownDuration < -100)
-        {
-            Debug.Log("Set up the item durations please.");
-        }
         framePointer = 0;
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class SkeletonAbstract : Enemy
 {
@@ -28,7 +29,7 @@ public class SkeletonAbstract : Enemy
     {
         base.Update();
         movement = (casper.transform.position - transform.position).normalized;
-        
+
         distanceToPlayer = Vector2.Distance(casper.transform.position, transform.position);
 
         if (enemyAnimator.GetBool("Die") == false && distanceToPlayer > attackRange)
@@ -51,10 +52,11 @@ public class SkeletonAbstract : Enemy
     protected override void DecreaseHealth(int damage)
     {
         base.DecreaseHealth(damage);
-        if (enemyHealth < 0 && enemyAnimator.GetBool("Die") == false  && counter < 1)
+        if (enemyHealth < 0 && enemyAnimator.GetBool("Die") == false && counter < 1)
         {
             counter++;
             enemyAnimator.SetBool("Die", true);
+            GetComponent<BoxCollider2D>().isTrigger = true;
             Destroy(gameObject, 0.75f);
         }
     }
@@ -80,5 +82,4 @@ public class SkeletonAbstract : Enemy
     {
         casper.GetComponent<Casper>().changeHealth(-damage);
     }
-
 }

@@ -21,7 +21,7 @@ public class GhostAbstract : Enemy
     protected override void Start()
     {
         enemyHealth = 200;
-        speed = 5f;
+        speed = 15f;
 
         base.Start();
         state = (int)States.Idle;
@@ -51,6 +51,7 @@ public class GhostAbstract : Enemy
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
+        base.OnTriggerEnter2D(other);
         if (other.CompareTag("Wall"))
         {
             state = (int)States.Anger;

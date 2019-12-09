@@ -23,7 +23,16 @@ public class DoorSystem : MonoBehaviour
     void Start()
     {
         LockAll();
-        sMMController = GameObject.Find("Level Generator").GetComponent<MMController>();
+        GameObject temp = GameObject.Find("Level Generator");
+        if(temp)
+            sMMController = temp.GetComponent<MMController>();
+        // Add doors
+        foreach (Transform folder in this.transform)
+        {
+            if (folder.name == "Doors")
+                foreach (Transform doors in folder)
+                    allDoors.Add(doors.gameObject);
+        }
     }
     
     /*
@@ -114,15 +123,20 @@ public class DoorSystem : MonoBehaviour
     
     private bool isAvailable(int index)
     {
-        if (allDoors[index] == null)
-            return false;
-        List<char> all = sMMController.availableDoors();
-        if(all == null) { return false; }
-        for(int j = 0; j < all.Count; j++)
+        if (allDoors[index] == null) return false;
+        if (sMMController == null) return true;
+        //--------------------------------------------
+        else
         {
-            if (allDoors[index].name[0] == all[j])
-                return true;
+            List<char> all = sMMController.availableDoors();
+            if (all == null) { return false; }
+            for (int j = 0; j < all.Count; j++)
+            {
+                if (allDoors[index].name[0] == all[j])
+                    return true;
+            }
         }
+        //-------------------------------------------
         return false;
     }
 

@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 10
-  ClipSize: 4
+  ClipSize: 2
   BulletSpeed: 10
   FireRate: 0.8
   BulletsPerShot: 5
