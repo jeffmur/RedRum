@@ -17,23 +17,28 @@ public class SpiderBoss : Enemy
     public Transform firePoint;
     private GameObject spiderBullet;
 
+    private Animator animator;
+
     public LineRenderer lineRenderer;
     protected override void Start()
     {
         enemyHealth = 1000;
         speed = 3f;
-        spiderBullet = Resources.Load<GameObject>("Textures/Prefabs/Enemies/SpiderBullet");
-        BulletPrefab = Resources.Load<GameObject>("Textures/Prefabs/Enemies/SlimeBullet");
-        StartCoroutine(FireSlimes());
+        spiderBullet = Resources.Load<GameObject>("Textures/Projectiles/SpiderBigBullet Variant");
+        Debug.Log(spiderBullet == null);
+        BulletPrefab = Resources.Load<GameObject>("Textures/Projectiles/SpiderBullet");
+        animator = transform.GetComponent<Animator>();
+        StartCoroutine(FireBullets());
     }
 
-    private IEnumerator FireSlimes()
+    private IEnumerator FireBullets()
     {
         while (true)
         {
             yield return new WaitForSeconds(BulletCooldown);
-            if(!lazerTime)
-            Attack(1);
+            animator.SetTrigger("Fire");
+            if (!lazerTime)
+                Attack(1);
         }
     }
 
@@ -47,6 +52,7 @@ public class SpiderBoss : Enemy
 
         if (shootingTime == 10)
         {
+            animator.SetTrigger("Fire");
             StartCoroutine(shootLaserBreak());
         }
     }
@@ -108,8 +114,11 @@ public class SpiderBoss : Enemy
     }
     private void shootSpiderBullet()
     {
-        var bullet = Instantiate(spiderBullet, firePoint.position, Quaternion.identity).GetComponent<EnemyBullet>();
-        bullet.SetBulletDirection(Vector3.down);
+        if (spiderBullet != null && spiderBullet.GetComponent<SpiderBullet>())
+        {
+            var bullet = Instantiate(spiderBullet, firePoint.position, Quaternion.identity).GetComponent<EnemyBullet>();
+            bullet.SetBulletDirection(Vector3.down);
+        }
     }
 
 
@@ -131,18 +140,13 @@ public class SpiderBoss : Enemy
             moveRight = !moveRight;
         }
     }
-
     protected override void DecreaseHealth(int damage)
     {
         base.DecreaseHealth(damage);
-        if (enemyHealth <500)
+        if (enemyHealth < 500)
         {
             BulletCooldown = 0.5f;
             bulletAmount = 15;
         }
-        if (enemyHealth < 0)
-        {
-            Destroy(gameObject);
-        }
     }
-    }
+}

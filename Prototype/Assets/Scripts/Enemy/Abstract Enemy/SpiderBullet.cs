@@ -12,7 +12,7 @@ public class SpiderBullet : EnemyBullet
         bulletSpeed = 3f;
         bulletDamage = 1;
 
-        BulletPrefab = Resources.Load<GameObject>("Textures/Prefabs/Enemies/SlimeBullet");
+        BulletPrefab = Resources.Load<GameObject>("Textures/Projectiles/SpiderBullet");
     }
 
 
