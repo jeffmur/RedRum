@@ -19,12 +19,13 @@ public abstract class Enemy : MonoBehaviour
     private Chest myChest;
     protected GameObject floatingDamage;
 
-    public GameObject healthBar;
+    protected GameObject healthBar;
 
 
 
     protected virtual void Start()
     {
+        healthBar = EnemyManager.Instance.bossHealthBar;
         casper = GameObject.FindGameObjectWithTag("Player");
         Debug.Assert(casper != null);
         itemDrop = Resources.Load<GameObject>("Textures/Prefabs/Items/Heart");
@@ -102,14 +103,14 @@ public abstract class Enemy : MonoBehaviour
     protected void setHealthbarMaxValue(int health)
     {
         healthBar.SetActive(true);
-        healthBar.GetComponent<Slider>().maxValue = health;
-        healthBar.GetComponent<Slider>().value = health;
+        healthBar.GetComponent<Slider>().maxValue += health;
+        healthBar.GetComponent<Slider>().value += health;
     }
 
     protected void updateHeathBar(int hitDamage)
     {
         healthBar.GetComponent<Slider>().value -= hitDamage;
-        if (enemyHealth < 0)
+        if (healthBar.GetComponent<Slider>().value <= 0)
         {
             healthBar.SetActive(false);
         }

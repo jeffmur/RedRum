@@ -8,7 +8,7 @@ public class SpiderBoss : Enemy
 
     private float startAngle = 90, endAngle = 280f;
 
-    private float BulletCooldown = 0.75f;
+    private float BulletCooldown = 2f;
 
     private bool lazerTime = false;
     private bool moveRight = true;
@@ -42,7 +42,7 @@ public class SpiderBoss : Enemy
             yield return new WaitForSeconds(BulletCooldown);
             animator.SetTrigger("Fire");
             if (!lazerTime)
-                Attack(1);
+                Attack(-100);
         }
     }
 
@@ -88,7 +88,7 @@ public class SpiderBoss : Enemy
     private IEnumerator shootLaserBreak()
     {
         shootLaser(firePoint.position);
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(BulletCooldown);
         lineRenderer.enabled = false;
         shootingTime = 0;
     }
@@ -158,7 +158,7 @@ public class SpiderBoss : Enemy
         updateHeathBar(damage);
         if (enemyHealth < 500)
         {
-            BulletCooldown = 0.5f;
+            BulletCooldown = 1f;
             bulletAmount = 15;
         }
         if (enemyHealth < 0)

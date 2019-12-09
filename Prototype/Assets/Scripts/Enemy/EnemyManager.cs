@@ -8,10 +8,13 @@ public class EnemyManager : SceneSingleton<EnemyManager>
     public List<GameObject> listOfEnemies = null;
     public List<GameObject> listOfBosses = null;
     public GameObject spawnPoint;
+    public GameObject bossHealthBar;
     protected override void Awake()
     {
         base.Awake();
         Initialize();
+        if(bossHealthBar)
+            bossHealthBar.SetActive(false);
     }
 
     private void Initialize()
@@ -47,7 +50,6 @@ public class EnemyManager : SceneSingleton<EnemyManager>
         switch (Scenes.currentLevel)
         {
             case 0:
-            case 1:
             case 3:
                 return getBoss("SpiderBoss");
             default:
