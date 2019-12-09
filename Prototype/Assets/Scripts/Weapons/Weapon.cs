@@ -44,7 +44,8 @@ public class Weapon : MonoBehaviour
     {
         // Hot reload
         if (Input.GetKeyDown(KeyCode.R) && bulletsInClip < ClipSize && !IsReloading()) {
-            animator.SetBool("Reload", true);
+            if(animator)
+                animator.SetBool("Reload", true);
             reloadCooldown.StartReload(reloadSpeed);
             onWeaponReload?.Invoke();
             reloadStartTime = Time.time;
@@ -54,7 +55,8 @@ public class Weapon : MonoBehaviour
             // Stop animation reload
             if (Time.time - reloadStartTime >= reloadSpeed)
             {
-                animator.SetBool("Reload", false);
+                if (animator)
+                    animator.SetBool("Reload", false);
                 bulletsInClip = ClipSize;
                 reloadStartTime = -1;
                 onAmmoChange?.Invoke();
@@ -84,7 +86,8 @@ public class Weapon : MonoBehaviour
             {
                 reloadStartTime = Time.time;
                 reloadCooldown.StartReload(reloadSpeed);
-                animator.SetBool("Reload", true);
+                if (animator)
+                    animator.SetBool("Reload", true);
                 onAmmoChange?.Invoke();
                 onWeaponReload?.Invoke();
             }
@@ -95,7 +98,8 @@ public class Weapon : MonoBehaviour
     public void Shoot(Vector2 direction)
     {
         // trigger fire animation
-        animator.SetTrigger("Fire");
+        if(animator)
+            animator.SetTrigger("Fire");
 
         // play audio
         gameObject.GetComponent<AudioSource>().Play();
