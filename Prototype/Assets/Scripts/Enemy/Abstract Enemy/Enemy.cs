@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public abstract class Enemy : MonoBehaviour
 {
@@ -15,12 +16,14 @@ public abstract class Enemy : MonoBehaviour
     protected Animator enemyAnimator;
     protected Rigidbody2D rb;
     private Chest myChest;
+    protected GameObject floatingDamage;
 
     protected virtual void Start()
     {
         casper = GameObject.FindGameObjectWithTag("Player");
         Debug.Assert(casper != null);
         itemDrop = Resources.Load<GameObject>("Textures/Prefabs/Items/Heart");
+        floatingDamage = Resources.Load<GameObject>("UI/hitmarker");
         enemySprite = GetComponent<SpriteRenderer>();
     }
 
@@ -34,7 +37,9 @@ public abstract class Enemy : MonoBehaviour
             {
                 Vector3 loc = new Vector3(transform.position.x, transform.position.y, -1);
                 var item = Instantiate(itemDrop, loc, Quaternion.identity);
-                item.AddComponent<RoomRegister>().RoomIndex = GetComponent<RoomRegister>().RoomIndex;
+                TryGetComponent(out RoomRegister rr);
+                if (rr != null)
+                    item.AddComponent<RoomRegister>().RoomIndex = rr.RoomIndex;
                 item.transform.parent = transform.parent; // add to room as child
                 item.tag = "Item"; 
             }
@@ -63,10 +68,13 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("HeroBullet"))
+        if (collision.CompareTag("HeroBullet") && GetComponent<SpriteRenderer>().enabled == true)
         {
             GlobalControl.Instance.savedPlayerData.bulletsHit += 1;
             Destroy(collision.gameObject);
+            if (enemyHealth > 0)
+                ShowFloatingDamage(collision.transform.GetComponent<bullet>().bulletDamage);
+
             if (collision.transform.GetComponent<bullet>())
                 DecreaseHealth(collision.transform.GetComponent<bullet>().bulletDamage);
             //why can't all bullets be the same, just with different tags?
@@ -75,5 +83,13 @@ public abstract class Enemy : MonoBehaviour
                 DecreaseHealth(collision.transform.GetComponent<EnemyBullet>().bulletDamage);
             }
         }
+    }
+    private void ShowFloatingDamage(int Damage)
+    {
+        float a = Random.Range(-0.5f, 0.5f);
+        Vector2 location = new Vector2(this.transform.position.x + Random.Range(-0.5f, 0.5f), this.transform.position.y + Random.Range(1f, 1.5f));
+        var floating = Instantiate(floatingDamage, location, Quaternion.identity);
+        floating.GetComponent<TMPro.TextMeshPro>().text = Damage.ToString();
+        Destroy(floating, 0.5f);
     }
 }

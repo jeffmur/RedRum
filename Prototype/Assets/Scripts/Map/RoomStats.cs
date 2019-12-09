@@ -30,6 +30,38 @@ public class RoomStats : MonoBehaviour
 
     }
 
+    public Vector2 spawnEnemyInBounds(Vector2 loc)
+    {
+        // Is within bounds
+        if (!isInRoom(loc))
+        {
+            // Check each side
+            if (maxX <= loc.x)
+            {
+                float offset = loc.x - maxX - 2;
+                return new Vector2(loc.x - offset, loc.y);
+            }
+            if (minX >= loc.x || loc.x - minX <= 5)
+            {
+                float offset = minX - loc.x + 2;
+                return new Vector2(loc.x + offset, loc.y);
+            }
+            if (maxY <= loc.x)
+            {
+                float offset = loc.y - maxY - 2;
+                return new Vector2(loc.x, loc.y - offset);
+            }
+            if (minY >= loc.x)
+            {
+                float offset = minY - loc.y + 2;
+                return new Vector2(loc.x, loc.y + offset);
+            }
+        }
+        return loc;
+
+        // See OnTriggerEnter2D for enemy overlap
+    }
+
     public bool isInRoom(Vector2 location)
     {
         return maxX > location.x
@@ -113,7 +145,7 @@ public class RoomStats : MonoBehaviour
                 center = new Vector2(center.x, maxY - 2f);
                 break;
             case "BOTTOM":
-                center = new Vector2(center.x, minY + 2f);
+                center = new Vector2(center.x, minY + 3f);
                 break;
             case "RIGHT":
                 center = new Vector2(maxX - 2f, center.y);

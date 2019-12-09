@@ -8,7 +8,7 @@ public class bullet : MonoBehaviour
     private Vector2 screenBounds;
     public GameObject hitEffect;
 
-    public int bulletDamage = 20;
+    public int bulletDamage = 5;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Wall"))

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine;
 public static class Scenes
 {
     private static string roomDimension = "4x4"; // Static demensions
+    public static int currentLevel = 0;
 
     // Victory Case
     public static void Load(string path, string dimension, bool isCasperAlive)
@@ -32,6 +34,11 @@ public static class Scenes
         return roomDimension;
     }
 
+    public static int getInt()
+    {
+        return int.Parse(roomDimension[0].ToString());
+    }
+
     public static string nextDimension()
     {
         switch (roomDimension[0])
@@ -42,6 +49,19 @@ public static class Scenes
                 return "6x6";
             default:
                 return "4x4";
+        }
+    }
+
+    public static Tuple<int, int> getDifficulty()
+    {
+        switch (currentLevel)
+        {
+            default:
+                return Tuple.Create(2, 4); // Level 1
+            case 2:
+                return Tuple.Create(2, 5); // Level 2
+            case 3:
+                return Tuple.Create(3, 6); // Level 3
         }
     }
 
