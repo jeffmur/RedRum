@@ -132,11 +132,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flashlight
       objectReference: {fileID: 0}
-    - target: {fileID: 1608282905791620178, guid: 3cb27696244045c4dad0d25ef8138496,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1608282905791620181, guid: 3cb27696244045c4dad0d25ef8138496,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -192,42 +187,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1608282905791620183, guid: 3cb27696244045c4dad0d25ef8138496,
-        type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 230d59294c9857140b63dd308ea4bd63, type: 3}
-    - target: {fileID: 1608282905791620183, guid: 3cb27696244045c4dad0d25ef8138496,
-        type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1608282905791620183, guid: 3cb27696244045c4dad0d25ef8138496,
-        type: 3}
-      propertyPath: BypassReverbZones
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1608282905791620183, guid: 3cb27696244045c4dad0d25ef8138496,
-        type: 3}
-      propertyPath: BypassListenerEffects
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1608282905791620183, guid: 3cb27696244045c4dad0d25ef8138496,
-        type: 3}
-      propertyPath: m_Volume
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1608282905791620183, guid: 3cb27696244045c4dad0d25ef8138496,
-        type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 24300002, guid: 38e1e9ecdc9a1214d9bf4340db8843f6,
-        type: 2}
-    - target: {fileID: 1608282905791620182, guid: 3cb27696244045c4dad0d25ef8138496,
-        type: 3}
-      propertyPath: weaponSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 74079e3b043b8a549a28e1350566b7e0, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3cb27696244045c4dad0d25ef8138496, type: 3}
 --- !u!1 &32741325
@@ -685,7 +644,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &225408745
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1411,6 +1370,53 @@ Transform:
   m_Father: {fileID: 851671938}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &499766198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 499766200}
+  - component: {fileID: 499766199}
+  m_Layer: 0
+  m_Name: EnemyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &499766199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499766198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e111fd3496b30ad44a02ecf292eaac91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listOfEnemies: []
+  listOfBosses: []
+  spawnPoint: {fileID: 4810646822928472544, guid: 6e5163161aa5ebb42bffbb4ede44bdb5,
+    type: 3}
+--- !u!4 &499766200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499766198}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -42.2535, y: 27.90761, z: -150.11719}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,6 +1428,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1437,6 +1444,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72df6c3518cd87340a83a9a55c6b62b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeDuration: 5
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -3184,7 +3204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a7671807b9eb5542b41bf031bc7f694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemies: []
   chestPrefab: {fileID: 4760892660590095382, guid: 63f16c90f3e1b214e9b567db9d7adcd4,
     type: 3}
   roomNum: 0

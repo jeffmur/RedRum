@@ -42,6 +42,7 @@ public partial class Casper
     }
     private void ObtainEquipment(Collider2D collision)
     {
+        if(collision == null) { return; }
         if (collision.gameObject.tag == "Item")
         {
             if (collision.gameObject.GetComponent<SpriteRenderer>())
