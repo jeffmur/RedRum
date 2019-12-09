@@ -19,9 +19,8 @@ public class RoomStats : MonoBehaviour
                 foreach (Transform doors in folder)
                     mDoors.Add(doors.gameObject);
         }
-        mCamera = Camera.main;
         setDemensions();
-        mCamera.ResetAspect();
+        Camera.main.ResetAspect();
     }
 
     // Update is called once per frame
@@ -133,7 +132,7 @@ public class RoomStats : MonoBehaviour
         // center is exactly between both
         Vector2 target = (x + y) / 2f;
         // assign camera position
-        mCamera.transform.position = new Vector3(target.x, target.y, -30f);
+        Camera.main.transform.position = new Vector3(target.x, target.y, -30f);
     }
 
     public Vector2 sendPlayerToDoor(string side)

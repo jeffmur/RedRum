@@ -32,6 +32,7 @@ public class ReaperAbstract : Enemy
     private void Die()
     {
         anim.SetTrigger("hide");
+        GameObject.Find("Puzzle").GetComponent<SpawnWaves>().BossDied();
         // camera shake
         // spawn a chest
         var c = Instantiate(chest);

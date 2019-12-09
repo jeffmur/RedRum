@@ -15,6 +15,8 @@ public partial class RoomManager : MonoBehaviour
     public int roomNum = 0;
     public int RoomIndex { get => roomNum; set => roomNum = value; }
 
+    public delegate void RoomEventDelegate();
+    public event RoomEventDelegate onNewRoomEnter, onRoomCompleted, onBossRoomEnter, onBossDefeated;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +29,7 @@ public partial class RoomManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
         // No enemies - UNLOCK
         if (allEnemiesDead())
         {
@@ -54,11 +56,17 @@ public partial class RoomManager : MonoBehaviour
         {
             chestOpen = myChest.openChest;
         }
-        
     }
 
+
+    private bool entered = false;
     public void Initialize()
     {
+        entered = true; cleared = false;
+        if (name != "Boss Pool")
+            onNewRoomEnter?.Invoke();
+        else
+            onBossRoomEnter?.Invoke();
         //RoomIndex = atIndex;
         // Destroy old chest
         foreach(Transform child in gameObject.transform)
@@ -95,7 +103,7 @@ public partial class RoomManager : MonoBehaviour
         var circle = Instantiate(EnemyManager.Instance.spawnPoint);
         circle.transform.position = atLoc;
         circle.transform.parent = transform;
-        Destroy(circle, 1f);
+        Destroy(circle, 1.1f);
         yield return new WaitForSeconds(1f);
         GameObject enemy;
         if (name != "Boss Pool")
@@ -108,6 +116,7 @@ public partial class RoomManager : MonoBehaviour
         enemy.transform.parent = transform; // under room prefab
     }
 
+    private bool cleared = false;
     private bool allEnemiesDead()
     {
         if(EM == null) { return true; }
@@ -123,6 +132,14 @@ public partial class RoomManager : MonoBehaviour
             }
         }
         // no enemies
+        if (entered && !cleared)
+        {
+            if (name == "Boss Pool")
+                onBossDefeated?.Invoke();
+            else
+                onRoomCompleted?.Invoke();
+            cleared = true;
+        }
         return true;
     }
     // Either be a hole for 

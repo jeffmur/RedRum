@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class SpawnWaves : MonoBehaviour
 {
     public Tilemap spawn;
-    private int waveIndex = 0;
+    private int waveIndex = -1;
     private int[] EnemiesToSpawn = {8, 10, 5};
     private DoorSystem myDoorsSys;
     private string message;
@@ -14,12 +14,22 @@ public class SpawnWaves : MonoBehaviour
     private float spawnTime = 0;
     public GameObject reaper;
 
+    public delegate void RoomEventDelegate();
+    public event RoomEventDelegate onNewWave, onWaveComplete, onBossRoomEnter, onBossDefeated;
+
     // Start is called before the first frame update
     void Start()
     {
         myDoorsSys = GetComponent<DoorSystem>();
         Camera.main.transform.position = Casper.Instance.transform.position;
+        StartCoroutine(delaySpawn(0.02f));
+    }
+
+    IEnumerator delaySpawn(float time)
+    {
+        yield return new WaitForSeconds(time);
         spawnWave(0f);
+        onNewWave?.Invoke();
     }
 
     void spawnWave(float wait)
@@ -32,6 +42,11 @@ public class SpawnWaves : MonoBehaviour
         EventManager.Instance.TriggerNotification(message);
     }
 
+    public void BossDied()
+    {
+        onBossDefeated?.Invoke();
+    }
+
     IEnumerator waitToLeave()
     {
         // Wait while casper is in Puzzle
@@ -39,12 +54,13 @@ public class SpawnWaves : MonoBehaviour
             GetComponent<RoomStats>().
             isInRoom(Casper.Instance.transform.position))
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return null;
         }
 
         // Spawn enemy
         reaper.SetActive(true);
         // init Boss
+        onBossRoomEnter?.Invoke();
         StartCoroutine(reaper.GetComponent<ReaperAbstract>().beginFight());
     }
 
@@ -53,24 +69,26 @@ public class SpawnWaves : MonoBehaviour
         Debug.Assert(reaper != null);
         myDoorsSys.OpenAll();
         StartCoroutine(waitToLeave());
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (allEnemiesDead() && Time.time - spawnTime > 5)
+        // Waves complete
+        if (waveIndex >= EnemiesToSpawn.Length && !once)
+        {
+            initBoss();
+            onWaveComplete?.Invoke();
+            myDoorsSys.OpenAll();
+            once = true;
+            message = "You've surived this far \n head to any four doors";
+            EventManager.Instance.TriggerNotification(message);
+        }
+        else if (allEnemiesDead() && Time.time - spawnTime > 5 && waveIndex < EnemiesToSpawn.Length)
         {
             waveIndex++;
             spawnWave(2f);
-        }
-        // Waves complete
-        if(waveIndex >= EnemiesToSpawn.Length && !once)
-        {
-            initBoss();
-            myDoorsSys.OpenAll();
-            once = true;
-        }
+        }          
     }
 
     private bool allEnemiesDead()
@@ -78,6 +96,7 @@ public class SpawnWaves : MonoBehaviour
         foreach (Transform obj in this.transform)
             if (obj.CompareTag("Enemy"))
                 return false;
+
         return true;
     }
 
@@ -113,8 +132,8 @@ public class SpawnWaves : MonoBehaviour
     {
         var circle = Instantiate(EnemyManager.Instance.spawnPoint);
         circle.transform.position = atLoc;
-        Destroy(circle, 2f);
-        yield return new WaitForSeconds(2f);
+        Destroy(circle, 1.5f);
+        yield return new WaitForSeconds(1f);
         GameObject enemy;
         // SPAWN BOSS
         if(waveIndex == EnemiesToSpawn.Length - 1 && i < 2)

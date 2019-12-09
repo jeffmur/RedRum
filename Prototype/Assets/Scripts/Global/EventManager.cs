@@ -17,10 +17,13 @@ public class EventManager : SceneSingleton<EventManager>
     public event onItemActivateTriggerDelegate onItemActivateTrigger;
 
     public delegate void gameEventListener();
-    public event gameEventListener onWeaponAdded, onWeaponFired, onWeaponReloaded, onHealed, onDamaged, onItemUse, onItemPickup;
+    public event gameEventListener onWeaponAdded, onWeaponFired, onWeaponReloaded, onHealed, onDamaged, onItemUse, onItemPickup,
+        onRoomCompleted, onNewRoomEntered, onBossRoomEnter, onBossRoomCompleted, onWaveStart, onWaveEnd;
 
     private void Start()
     {
+        GetRoomDelegates();
+
         Casper.Instance.onHealthChange += TriggerHealthChange;
         Casper.Instance.onMaxHealthChange += TriggerMaxHealthChange;
         Casper.Instance.weaponInventory.onWeaponUse += TriggerAmmoChange;
@@ -37,6 +40,16 @@ public class EventManager : SceneSingleton<EventManager>
         Casper.Instance.ItemPickupEvent += TriggerItemPickup;
     }
 
+    public void GetRoomDelegates()
+    {
+        RoomHandler.Instance.onBossDefeated += TriggerBossRoomCompleted;
+        RoomHandler.Instance.onBossRoomEnter += TriggerBossRoomEntered;
+        RoomHandler.Instance.onRoomCompleted += TriggerRoomCompleted;
+        RoomHandler.Instance.onNewRoomEnter += TriggerRoomEntered;
+        RoomHandler.Instance.onNewWave += TriggerWaveStart;
+        RoomHandler.Instance.onWaveComplete += TriggerWaveEnd;
+    }
+
     public void TriggerNotification(string notification) { OnNotifyChange?.Invoke(notification); }
     private void TriggerAmmoChange(int value) { onAmmoChange?.Invoke(value); }
     private void TriggerWeaponAdded() { onWeaponAdded?.Invoke(); }
@@ -50,5 +63,10 @@ public class EventManager : SceneSingleton<EventManager>
     private void TriggerItemPickup() { onItemPickup?.Invoke(); }
     private void TriggerItemActivate(ActivatedItem item) { onItemActivateTrigger?.Invoke(item); }
     private void TriggerItemUse() { onItemUse?.Invoke(); }
-
+    private void TriggerRoomEntered() { onNewRoomEntered?.Invoke(); }
+    private void TriggerRoomCompleted() { onRoomCompleted?.Invoke(); }
+    private void TriggerBossRoomEntered() { onBossRoomEnter?.Invoke(); }
+    private void TriggerBossRoomCompleted() { onBossRoomCompleted?.Invoke(); }
+    private void TriggerWaveStart() { onWaveStart?.Invoke(); }
+    private void TriggerWaveEnd() { onWaveEnd?.Invoke(); }
 }
