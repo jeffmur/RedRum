@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8128421812728761373}
   m_Layer: 0
   m_Name: ArrowGun
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,10 +102,12 @@ MonoBehaviour:
   BulletsPerShot: 1
   Accuracy: 0
   reloadSpeed: 1.2
-  BulletPrefab: {fileID: 0}
+  BulletPrefab: {fileID: 3086850139463176874, guid: ebbc9ee296e429f478321f362aabe9a9,
+    type: 3}
   barrelOffset: 0
   heightOffset: 0
   equipScale: 0.13
+  weaponSound: {fileID: 8300000, guid: 4d6d816408e48e7428e863203522508f, type: 3}
   bulletsInClip: 50
 --- !u!82 &8128421812728761369
 AudioSource:
@@ -116,9 +118,10 @@ AudioSource:
   m_GameObject: {fileID: 8128421812728761368}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 38e1e9ecdc9a1214d9bf4340db8843f6,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: e1d79f4a0c7873742babc5f6e9ff800e, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

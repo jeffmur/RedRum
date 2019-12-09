@@ -7,7 +7,7 @@ public class Key : Item
     private ElevatorBehavior el;
     private Object elPrefab;
     private GameObject bossRoom;
-    private ElevatorBehavior eb;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,16 +25,16 @@ public class Key : Item
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == "Casper" && Input.GetKeyDown("e"))
+        if (collision.tag == "Player")
         {
             el.show();
-            gameObject.SetActive(false);
+            Camera.main.GetComponent<CameraShake>().ShakeCamera(10f, 10f);
         }
     }
     protected override void setItemInfo()
     {
         itemID = 4;
         itemName = "Key";
-        caption = "DJ KHALID";
+        caption = "Level Complete";
     }
 }

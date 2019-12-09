@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
@@ -48,6 +49,19 @@ public static class Scenes
                 return "6x6";
             default:
                 return "4x4";
+        }
+    }
+
+    public static Tuple<int, int> getDifficulty()
+    {
+        switch (currentLevel)
+        {
+            default:
+                return Tuple.Create(2, 4); // Level 1
+            case 2:
+                return Tuple.Create(2, 5); // Level 2
+            case 3:
+                return Tuple.Create(3, 6); // Level 3
         }
     }
 

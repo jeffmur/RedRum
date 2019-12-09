@@ -6,18 +6,19 @@ public class Laser : MonoBehaviour
 {
     public LineRenderer laser;
     private GameObject crosshair;
-    
+    private bool waitToShow = false;
     private void Start()
     {
         crosshair = GameObject.Find("crossHairs");
         laser.useWorldSpace = true;
-        laser.enabled = false;
     }
     void Shoot()
     {
+        laser.enabled = waitToShow;
         if (transform.parent != null)
         {
-            laser.enabled = true;
+            waitToShow = true;
+            laser.enabled = waitToShow;
             // THIS IS FUCKING STUPID
             laser.SetPosition(0, transform.position);
             laser.SetPosition(laser.positionCount - 1, crosshair.transform.position);

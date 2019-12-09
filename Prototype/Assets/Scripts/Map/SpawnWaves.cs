@@ -6,10 +6,9 @@ using UnityEngine.Tilemaps;
 public class SpawnWaves : MonoBehaviour
 {
     public Tilemap spawn;
-    private int waveIndex = 3;
-    private int[] EnemiesToSpawn = {8, 10, 14};
+    private int waveIndex = 0;
+    private int[] EnemiesToSpawn = {8, 10, 5};
     private DoorSystem myDoorsSys;
-    private RoomStats myStats;
     private string message;
     private bool once = false;
     private float spawnTime = 0;
@@ -22,14 +21,7 @@ public class SpawnWaves : MonoBehaviour
     void Start()
     {
         myDoorsSys = GetComponent<DoorSystem>();
-        myStats = GetComponent<RoomStats>();
-        myStats.setCamLocation();
-        StartCoroutine(delayed(0.2f));
-    }
-
-    IEnumerator delayed(float time)
-    {
-        yield return new WaitForSeconds(time);
+        Camera.main.transform.position = Casper.Instance.transform.position;
         spawnWave(0f);
     }
 
@@ -123,7 +115,7 @@ public class SpawnWaves : MonoBehaviour
             if (checkBounds(localPos, numOfEnemies))
             {
                 numOfEnemies--;
-                StartCoroutine(SpawnEnemy(place));
+                StartCoroutine(SpawnEnemy(place, numOfEnemies));
             }
         }
         // make sure all enemies spawn
@@ -137,13 +129,23 @@ public class SpawnWaves : MonoBehaviour
         return (spawn.HasTile(pos) && num > 0);
     }
 
-    IEnumerator SpawnEnemy(Vector3 atLoc)
+    IEnumerator SpawnEnemy(Vector3 atLoc, int i)
     {
         var circle = Instantiate(EnemyManager.Instance.spawnPoint);
         circle.transform.position = atLoc;
         Destroy(circle, 2f);
         yield return new WaitForSeconds(2f);
-        var enemy = Instantiate(EnemyManager.Instance.SpawnRandomEnemy());
+        GameObject enemy;
+        // SPAWN BOSS
+        if(waveIndex == EnemiesToSpawn.Length - 1 && i < 2)
+        {
+            enemy = Instantiate(EnemyManager.Instance.SpawnFloorBoss()); // Spawn 2 of them
+            enemy.GetComponent<BoxCollider2D>().isTrigger = false;
+        }
+        // SPAWN ENEMY
+        else
+            enemy = Instantiate(EnemyManager.Instance.SpawnRandomEnemy());
+
         enemy.transform.position = atLoc;
         enemy.transform.parent = transform; // under room prefab
     }

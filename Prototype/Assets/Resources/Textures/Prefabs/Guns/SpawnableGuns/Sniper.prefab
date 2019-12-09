@@ -140,7 +140,6 @@ GameObject:
   - component: {fileID: 3276614149025836431}
   - component: {fileID: 3276614149025836430}
   - component: {fileID: 3276614149025836425}
-  - component: {fileID: 571266025771957406}
   - component: {fileID: 102727450}
   m_Layer: 0
   m_Name: Sniper
@@ -232,12 +231,13 @@ MonoBehaviour:
   FireRate: 0.1
   BulletsPerShot: 1
   Accuracy: 0
-  reloadSpeed: 1.15
+  reloadSpeed: 1.5
   BulletPrefab: {fileID: 762612412696875151, guid: aeaab5f475e2ead4288576f8af2259f3,
     type: 3}
   barrelOffset: 0.4
   heightOffset: 0.15
   equipScale: 0.5
+  weaponSound: {fileID: 0}
   bulletsInClip: 1
 --- !u!82 &3276614149025836430
 AudioSource:
@@ -355,19 +355,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &571266025771957406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3276614149025836424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1198fcdbd1af3d4c9668cc432220798, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  laser: {fileID: 0}
 --- !u!114 &102727450
 MonoBehaviour:
   m_ObjectHideFlags: 0

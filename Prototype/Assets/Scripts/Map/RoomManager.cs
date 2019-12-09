@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public partial class RoomManager : MonoBehaviour
 {
-    public List<GameObject> Enemies;
+    private static EnemyManager EM;
     private DoorSystem sDoorSys;
     public GameObject chestPrefab;
     private Chest myChest;
@@ -22,6 +23,7 @@ public partial class RoomManager : MonoBehaviour
     {
         sDoorSys = GetComponent<DoorSystem>();
         myStats = GetComponent<RoomStats>();
+        EM = EnemyManager.Instance;
     }
 
     // Update is called once per frame
@@ -75,39 +77,45 @@ public partial class RoomManager : MonoBehaviour
         handleChest();
 
         // Random generation of enemies
-        if(Enemies.Count == 0) { return; }
+        if(EM.NumOfEnemies() == 0) { return; }
         // Between 1 and 5 enemies per room
-        int num = Scenes.getInt();
-        int AmountOFEnemies = Random.Range(num/2, num);
+        Tuple<int, int> num = Scenes.getDifficulty();
+        int AmountOFEnemies = UnityEngine.Random.Range(num.Item1, num.Item2);
         for (int i = 0; AmountOFEnemies > i; i++) //creates a random amount of enemies
-        {
-            // ------- ENEMY POSITION ------
-            float x = Random.Range(-4, 4);
-            float y = Random.Range(-4, 4);
-            Vector2 loc = new Vector2(transform.position.x + x, transform.position.y + y);
-            loc = myStats.spawnEnemyInBounds(loc); // will return if inbounds
-            // -----------------------------
-            int typeOfEnemy = Random.Range(0, Enemies.Count); //number of types of enemies 
-            if (Enemies[typeOfEnemy] == null) { typeOfEnemy--; }
-            GameObject enemy = Enemies[typeOfEnemy];
-            GameObject ChildEnemy = Instantiate(enemy, loc, Quaternion.identity);
-            ChildEnemy.AddComponent<RoomRegister>().RoomIndex = roomNum; // assigns item to roomIndex
-            ChildEnemy.gameObject.SetActive(true);
-            ChildEnemy.transform.parent = transform;
-            // Boss Room should only spawn one
-            if (this.name == "Boss Pool")
             {
-                onBossRoomEnter?.Invoke();
-                return;
-            } 
-        }
-        onNewRoomEnter?.Invoke();
+                // ------- ENEMY POSITION ------
+                float x = UnityEngine.Random.Range(-4, 4);
+                float y = UnityEngine.Random.Range(-4, 4);
+                Vector2 loc = new Vector2(transform.position.x + x, transform.position.y + y);
+                loc = myStats.spawnEnemyInBounds(loc); // will return if inbounds
+                // -----------------------------
+                StartCoroutine(SpawnEnemy(loc));
+                // Boss Room should only spawn one
+                if (this.name == "Boss Pool") return; 
+            }
+    }
+    IEnumerator SpawnEnemy(Vector3 atLoc)
+    {
+        var circle = Instantiate(EnemyManager.Instance.spawnPoint);
+        circle.transform.position = atLoc;
+        circle.transform.parent = transform;
+        Destroy(circle, 1f);
+        yield return new WaitForSeconds(1f);
+        GameObject enemy;
+        if (name != "Boss Pool")
+            enemy = Instantiate(EnemyManager.Instance.SpawnRandomEnemy(), atLoc, Quaternion.identity);
+        else
+            enemy = Instantiate(EnemyManager.Instance.SpawnFloorBoss(), atLoc, Quaternion.identity);
+        // Add Componets
+        enemy.AddComponent<RoomRegister>().RoomIndex = roomNum; // assigns item to roomIndex
+        enemy.transform.position = atLoc;
+        enemy.transform.parent = transform; // under room prefab
     }
 
     private bool cleared = false;
     private bool allEnemiesDead()
     {
-        if(Enemies.Count == 0) { return true; }
+        if(EM == null) { return true; }
 
         foreach(Transform child in this.transform)
         {

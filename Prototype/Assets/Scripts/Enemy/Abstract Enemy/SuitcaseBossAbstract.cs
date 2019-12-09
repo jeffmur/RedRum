@@ -8,7 +8,7 @@ public class SuitcaseBossAbstract : Enemy
 
     private float BulletCooldown = 3f;
     private Vector3 direction;
-    private GameObject healthBar;
+    //private GameObject healthBar;
 
     protected override void Start()
     {
@@ -16,12 +16,12 @@ public class SuitcaseBossAbstract : Enemy
         speed = 1f;
 
         base.Start();
-        healthBar = GameObject.Find("HealthBarSlider");
+        //healthBar = GameObject.Find("BossHealthBar");
         BulletPrefab = Resources.Load<GameObject>("Textures/Projectiles/SuitcaseBullet_Variant");
         enemySprite = transform.GetComponent<SpriteRenderer>();
         StartCoroutine(FireShots());
-        healthBar.SetActive(true);
-        healthBar.GetComponent<Slider>().maxValue = enemyHealth;
+        //healthBar.SetActive(true);
+        //healthBar.GetComponent<Slider>().maxValue = enemyHealth;
 
 
     }
@@ -42,7 +42,7 @@ public class SuitcaseBossAbstract : Enemy
         {
             enemySprite.flipX = true;
         }
-        healthBar.GetComponent<Slider>().value = enemyHealth;
+        //healthBar.GetComponent<Slider>().value = enemyHealth;
     }
     private IEnumerator FireShots()
     {
@@ -93,11 +93,11 @@ public class SuitcaseBossAbstract : Enemy
         {
             Destroy(gameObject);
         }
-        else if(enemyHealth< (healthBar.GetComponent<Slider>().maxValue / 2))
+        else if(enemyHealth < 150)
         {
             enemySprite.color = Color.red;
-            speed = 2f;
-            BulletCooldown = 1.5f;
+            speed = 3f;
+            BulletCooldown = 1f;
 
         }
     }
