@@ -893,6 +893,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c021801b8e40047a917e98e46265a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SoundTrack: {fileID: 268353133}
+  BossMusic: {fileID: 8300000, guid: c761d659b79a1b1478754293aec62b3a, type: 3}
+  IdleMusic: {fileID: 8300000, guid: 90027df324b29c0438f97b0c585cf94f, type: 3}
+  WaveMusic: {fileID: 8300000, guid: 6c41e3f61fb33c6448df4a3eb2d7ce27, type: 3}
+  Creepy: {fileID: 8300000, guid: c10f76f8adfb2634889bf64fc28f790e, type: 3}
 --- !u!82 &268353133
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5899,6 +5904,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4682506d38297bc4da5c34f466b30dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSounds: {fileID: 0}
+  waveStart: {fileID: 0}
+  waveEnd: {fileID: 0}
+  roomEntered: {fileID: 0}
+  roomExit: {fileID: 0}
+  bossEnter: {fileID: 0}
+  bossExit: {fileID: 0}
 --- !u!1 &1596568809
 GameObject:
   m_ObjectHideFlags: 0

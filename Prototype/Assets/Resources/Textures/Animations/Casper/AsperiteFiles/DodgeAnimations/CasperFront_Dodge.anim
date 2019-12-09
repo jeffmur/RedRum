@@ -7,7 +7,6 @@ AnimationClip:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CasperFront_Dodge
->>>>>>> items
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -25,7 +24,6 @@ AnimationClip:
         type: 3}
     - time: 0.15
       value: {fileID: 471759403002516255, guid: 4d6b05feec2d6b240b5538fa5f92cdbe,
->>>>>>> items
         type: 3}
     - time: 0.3
       value: {fileID: 84417112312969054, guid: 4d6b05feec2d6b240b5538fa5f92cdbe, type: 3}
@@ -54,14 +52,12 @@ AnimationClip:
     - {fileID: 471759403002516255, guid: 4d6b05feec2d6b240b5538fa5f92cdbe, type: 3}
     - {fileID: 84417112312969054, guid: 4d6b05feec2d6b240b5538fa5f92cdbe, type: 3}
     - {fileID: 84417112312969054, guid: 4d6b05feec2d6b240b5538fa5f92cdbe, type: 3}
->>>>>>> items
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
     m_StopTime: 0.45000002
->>>>>>> items
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

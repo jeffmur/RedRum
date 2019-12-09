@@ -9,12 +9,12 @@ public class SoundTracks : MonoBehaviour
 
     private void Start()
     {
-        EventManager.Instance.on
-        EventManager.Instance.onDamaged += DamagedSound;
-        EventManager.Instance.onHealed += HealedSound;
-        EventManager.Instance.onItemPickup += ItemPickupSound;
-        EventManager.Instance.onWeaponAdded += WeaponPickupSound;
-        EventManager.Instance.onWeaponReloaded += WeaponPickupSound;
+        EventManager.Instance.onNewRoomEntered += IdleSound;
+        EventManager.Instance.onRoomCompleted += Level1Sound;
+        EventManager.Instance.onBossRoomEnter += BossSound;
+        EventManager.Instance.onBossRoomCompleted += IdleSound;
+        EventManager.Instance.onWaveStart += IdleSound;
+        EventManager.Instance.onWaveEnd += Level2Sound;
 
         StartCoroutine(InitSound());
     }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class RoomSounds : MonoBehaviour
 {
+    public AudioSource gameSounds;
+    public AudioClip waveStart, waveEnd, roomEntered,  roomExit, bossEnter, bossExit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +17,7 @@ public class RoomSounds : MonoBehaviour
         EventManager.Instance.onWaveStart += WaveStart;
         EventManager.Instance.onWaveEnd += WaveEnd;
     }
-
+    
     private void WaveStart()
     {
         print("Wave Started");
