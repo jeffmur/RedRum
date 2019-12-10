@@ -22,6 +22,36 @@ public class EventManager : SceneSingleton<EventManager>
 
     private void Start()
     {
+        InitializeDelagates();
+    }
+
+    public void NewSceneHandler()
+    {
+        Unsubscribe();
+        InitializeDelagates();
+    }
+
+    public void Unsubscribe()
+    {
+        UnSubRooms();
+        Casper.Instance.onHealthChange -= TriggerHealthChange;
+        Casper.Instance.onMaxHealthChange -= TriggerMaxHealthChange;
+        Casper.Instance.weaponInventory.onWeaponUse -= TriggerAmmoChange;
+        Casper.Instance.onItemPickup -= TriggerItemPickup;
+        Casper.Instance.onItemUse -= TriggerItemActivate;
+
+        //generic event listeners
+        Casper.Instance.CasperHealedEvent -= TriggerOnHealed;
+        Casper.Instance.CasperDamageEvent -= TriggerOnDamaged;
+        Casper.Instance.weaponInventory.WeaponAddedEvent -= TriggerWeaponAdded;
+        Casper.Instance.weaponInventory.WeaponFiredEvent -= TriggerWeaponFired;
+        Casper.Instance.weaponInventory.WeaponReloadEvent -= TriggerWeaponReloaded;
+        Casper.Instance.ItemUseEvent -= TriggerItemUse;
+        Casper.Instance.ItemPickupEvent -= TriggerItemPickup;
+    }
+
+    public void InitializeDelagates()
+    {
         GetRoomDelegates();
 
         Casper.Instance.onHealthChange += TriggerHealthChange;
@@ -40,7 +70,7 @@ public class EventManager : SceneSingleton<EventManager>
         Casper.Instance.ItemPickupEvent += TriggerItemPickup;
     }
 
-    public void GetRoomDelegates()
+    private void GetRoomDelegates()
     {
         RoomHandler.Instance.onBossDefeated += TriggerBossRoomCompleted;
         RoomHandler.Instance.onBossRoomEnter += TriggerBossRoomEntered;
@@ -48,6 +78,16 @@ public class EventManager : SceneSingleton<EventManager>
         RoomHandler.Instance.onNewRoomEnter += TriggerRoomEntered;
         RoomHandler.Instance.onNewWave += TriggerWaveStart;
         RoomHandler.Instance.onWaveComplete += TriggerWaveEnd;
+    }
+
+    private void UnSubRooms()
+    {
+        RoomHandler.Instance.onBossDefeated -= TriggerBossRoomCompleted;
+        RoomHandler.Instance.onBossRoomEnter -= TriggerBossRoomEntered;
+        RoomHandler.Instance.onRoomCompleted -= TriggerRoomCompleted;
+        RoomHandler.Instance.onNewRoomEnter -= TriggerRoomEntered;
+        RoomHandler.Instance.onNewWave -= TriggerWaveStart;
+        RoomHandler.Instance.onWaveComplete -= TriggerWaveEnd;
     }
 
     public void TriggerNotification(string notification) { OnNotifyChange?.Invoke(notification); }

@@ -41,7 +41,7 @@ public class RoomSounds : MonoBehaviour
     }
 
     private void RoomCompletedSound()
-    {
+    { 
         //print("Room Completed");
         gameSounds.clip = roomExit;
         gameSounds.Play();

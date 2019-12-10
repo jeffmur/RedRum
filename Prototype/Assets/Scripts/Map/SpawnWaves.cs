@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class SpawnWaves : MonoBehaviour
 {
     public Tilemap spawn;
-    private int waveIndex = -1;
+    private int waveIndex = 0;
     private int[] EnemiesToSpawn = {8, 10, 5};
     private DoorSystem myDoorsSys;
     private string message;
@@ -23,6 +23,7 @@ public class SpawnWaves : MonoBehaviour
         myDoorsSys = GetComponent<DoorSystem>();
         Camera.main.transform.position = Casper.Instance.transform.position;
         StartCoroutine(delaySpawn(0.02f));
+        spawnTime = Time.time;
     }
 
     IEnumerator delaySpawn(float time)
@@ -80,7 +81,7 @@ public class SpawnWaves : MonoBehaviour
             onWaveComplete?.Invoke();
             myDoorsSys.OpenAll();
             once = true;
-            message = "You've surived this far \n head to any four doors";
+            message = "You've surived this far \n \n head to any four doors";
             EventManager.Instance.TriggerNotification(message);
         }
         else if (allEnemiesDead() && Time.time - spawnTime > 5 && waveIndex < EnemiesToSpawn.Length)
@@ -138,7 +139,6 @@ public class SpawnWaves : MonoBehaviour
         if(waveIndex == EnemiesToSpawn.Length - 1 && i < 2)
         {
             enemy = Instantiate(EnemyManager.Instance.SpawnFloorBoss()); // Spawn 2 of them
-            enemy.GetComponent<BoxCollider2D>().isTrigger = false;
         }
         // SPAWN ENEMY
         else

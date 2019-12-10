@@ -4,30 +4,25 @@ using UnityEngine;
 
 public class Key : Item
 {
-    private ElevatorBehavior el;
+    private ElevatorBehavior EB;
     private Object elPrefab;
     private GameObject bossRoom;
 
     // Start is called before the first frame update
     void Start()
     {
-        EventManager.Instance.onItemPickup += showing;
         elPrefab = Resources.Load("Textures/Prefabs/elevator");
         bossRoom = GameObject.Find("Boss Pool");
         GameObject temp = Instantiate(elPrefab, bossRoom.transform) as GameObject;
-        el = temp.GetComponent<ElevatorBehavior>();
+        EB = temp.GetComponent<ElevatorBehavior>();
+        EventManager.Instance.onItemPickup += showing;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            Camera.main.GetComponent<CameraShake>().ShakeCamera(10f, 10f);
-        }
-    }
     private void showing()
     {
-        el.show();
+        EB.show();
+        Camera.main.GetComponent<CameraShake>().ShakeCamera(10f, 10f);
+        EventManager.Instance.onItemPickup -= showing;
     }
     protected override void setItemInfo()
     {

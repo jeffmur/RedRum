@@ -65,7 +65,7 @@ public partial class GameWorld : SceneSingleton<GameWorld>
     private void Update()
     {
         PositionCrosshair();
-        TestController();
+        Controls();
         Debug.Assert(casper != null);
     }
 
@@ -82,7 +82,7 @@ public partial class GameWorld : SceneSingleton<GameWorld>
     }
 
     private bool kelvin = false;
-    public void TestController()
+    public void Controls()
     {
         if (kelvin)
         {
@@ -116,11 +116,6 @@ public partial class GameWorld : SceneSingleton<GameWorld>
         if (Input.GetMouseButton(0))
         {
             casper.FireEquippedGun(PositionCrosshair());
-        }
-        // ----------------------------------
-        if (Input.GetKeyDown("5"))
-        {
-            Scenes.Load("Complete");
         }
     }
 

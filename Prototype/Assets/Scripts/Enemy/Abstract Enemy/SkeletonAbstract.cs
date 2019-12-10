@@ -52,7 +52,7 @@ public class SkeletonAbstract : Enemy
     protected override void DecreaseHealth(int damage)
     {
         base.DecreaseHealth(damage);
-        if (enemyHealth < 0 && enemyAnimator.GetBool("Die") == false && counter < 1)
+        if (enemyHealth <= 0 && !enemyAnimator.GetBool("Die") && counter < 1)
         {
             counter++;
             enemyAnimator.SetBool("Die", true);

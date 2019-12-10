@@ -88,15 +88,6 @@ public class SlimeAbstract : Enemy
         return bullets;
     }
 
-    protected override void DecreaseHealth(int damage)
-    {
-        base.DecreaseHealth(damage);
-        if (enemyHealth < 0)
-        {
-            Destroy(gameObject);
-        }
-    }
-
     // Update is called once per frame
     protected override void OnTriggerEnter2D(Collider2D collision)
     {

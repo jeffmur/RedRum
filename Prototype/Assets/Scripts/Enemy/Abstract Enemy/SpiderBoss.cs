@@ -26,7 +26,6 @@ public class SpiderBoss : Enemy
         enemyHealth = 1000;
         speed = 3f;
         spiderBullet = Resources.Load<GameObject>("Textures/Projectiles/SpiderBigBullet Variant");
-        Debug.Log(spiderBullet == null);
         BulletPrefab = Resources.Load<GameObject>("Textures/Projectiles/SpiderBullet");
         animator = transform.GetComponent<Animator>();
         moveToTop();
@@ -160,10 +159,6 @@ public class SpiderBoss : Enemy
         {
             BulletCooldown = 1f;
             bulletAmount = 15;
-        }
-        if (enemyHealth < 0)
-        {
-            Destroy(gameObject);
         }
     }
 }

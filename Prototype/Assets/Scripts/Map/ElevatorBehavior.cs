@@ -7,16 +7,17 @@ public class ElevatorBehavior : MonoBehaviour
     private Animator animator;
     private BoxCollider2D[] boxes;
     // Start is called before the first frame update
-    void Start()
+    void Update()
     {
         // hide
         animator = GetComponent<Animator>();
         boxes = GetComponents<BoxCollider2D>();
-        //show();
     }
 
     public void show()
     {
+        if (!animator)
+            animator = GetComponent<Animator>();
         animator.SetBool("Show", true);
     }
 

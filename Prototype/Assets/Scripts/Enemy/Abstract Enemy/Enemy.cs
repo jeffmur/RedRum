@@ -19,13 +19,13 @@ public abstract class Enemy : MonoBehaviour
     private Chest myChest;
     protected GameObject floatingDamage;
 
-    protected GameObject healthBar;
+    protected Slider healthBar;
 
 
 
     protected virtual void Start()
     {
-        healthBar = EnemyManager.Instance.bossHealthBar;
+        healthBar = EnemyManager.Instance.bossHealthBar.GetComponent<Slider>();
         casper = GameObject.FindGameObjectWithTag("Player");
         Debug.Assert(casper != null);
         itemDrop = Resources.Load<GameObject>("Textures/Prefabs/Items/Heart");
@@ -37,7 +37,7 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void DecreaseHealth(int damage)
     {
         enemyHealth -= damage;
-        if (enemyHealth < 0)
+        if (enemyHealth <= 0)
         {
             GlobalControl.Instance.savedPlayerData.enemiesKilled += 1;
             if (Random.Range(1, 5) > 3 && itemDrop != null) 
@@ -50,6 +50,7 @@ public abstract class Enemy : MonoBehaviour
                 item.transform.parent = transform.parent; // add to room as child
                 item.tag = "Item"; 
             }
+            Destroy(gameObject);
         }
     }
 
@@ -102,18 +103,18 @@ public abstract class Enemy : MonoBehaviour
 
     protected void setHealthbarMaxValue(int health)
     {
-        healthBar.SetActive(true);
-        healthBar.GetComponent<Slider>().maxValue += health;
-        healthBar.GetComponent<Slider>().value += health;
+        healthBar.gameObject.SetActive(true);
+        healthBar.maxValue += health;
+        healthBar.value = healthBar.maxValue;
     }
 
     protected void updateHeathBar(int hitDamage)
     {
         healthBar.GetComponent<Slider>().value -= hitDamage;
-        if (healthBar.GetComponent<Slider>().value <= 0)
+        if (healthBar.value <= 1)
         {
-            healthBar.SetActive(false);
-            healthBar.GetComponent<Slider>().maxValue = 0;
+            healthBar.maxValue = 0;
+            healthBar.gameObject.SetActive(false);
         }
     }
 }

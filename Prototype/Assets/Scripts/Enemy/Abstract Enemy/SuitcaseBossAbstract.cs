@@ -92,15 +92,10 @@ public class SuitcaseBossAbstract : Enemy
     {
         base.DecreaseHealth(damage);
         updateHeathBar(damage);
-        if (enemyHealth < 0)
-        {
-            Destroy(gameObject);
-
-        }
-        else if(enemyHealth < 150)
+        if(enemyHealth < 500)
         {
             enemySprite.color = Color.red;
-            speed = 3f;
+            speed = 2.5f;
             BulletCooldown = 1f;
 
         }

@@ -178,13 +178,4 @@ public class WallShooterAbstract : Enemy
             freezeTime = 1f;
         }
     }
-
-    protected override void DecreaseHealth(int damage)
-    {
-        base.DecreaseHealth(damage);
-        if (enemyHealth < 0)
-        {
-            Destroy(gameObject);
-        }
-    }
 }

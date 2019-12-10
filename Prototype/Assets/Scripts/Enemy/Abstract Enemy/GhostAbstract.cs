@@ -74,15 +74,6 @@ public class GhostAbstract : Enemy
         }
     }
 
-    protected override void DecreaseHealth(int damage)
-    {
-        base.DecreaseHealth(damage);
-        if (enemyHealth < 0)
-        {
-            Destroy(gameObject);
-        }
-    }
-
     private void IdleState()
     {
         // "Casper touches ghost"

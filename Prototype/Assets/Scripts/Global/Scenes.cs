@@ -27,6 +27,8 @@ public static class Scenes
     public static void Load(string path)
     {
         SceneManager.LoadScene(path);
+        if(EventManager.Instance != null)
+            EventManager.Instance.NewSceneHandler();
     }
 
     public static string getDimension()
