@@ -7,18 +7,16 @@ using UnityEngine.UI;
 public abstract class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
-    protected GameObject casper;
     public int enemyHealth = 100;
-    protected GameObject BulletPrefab;
     protected int damage = 1;
-    protected GameObject itemDrop;
     protected float speed = 2f;
+    protected GameObject casper; //casper instance 
+    protected GameObject BulletPrefab;
+    protected GameObject itemDrop;
     protected SpriteRenderer enemySprite;
     protected Animator enemyAnimator;
     protected Rigidbody2D rb;
-    private Chest myChest;
     protected GameObject floatingDamage;
-
     protected Slider healthBar;
 
 
@@ -31,7 +29,6 @@ public abstract class Enemy : MonoBehaviour
         itemDrop = Resources.Load<GameObject>("Textures/Prefabs/Items/Heart");
         floatingDamage = Resources.Load<GameObject>("UI/hitmarker");
         enemySprite = GetComponent<SpriteRenderer>();
-
     }
 
     protected virtual void DecreaseHealth(int damage)
@@ -81,14 +78,14 @@ public abstract class Enemy : MonoBehaviour
             GlobalControl.Instance.savedPlayerData.bulletsHit += 1;
             Destroy(collision.gameObject);
             if (enemyHealth > 0)
-                ShowFloatingDamage(collision.transform.GetComponent<bullet>().bulletDamage);
+                ShowFloatingDamage(collision.transform.GetComponent<Bullet>().bulletDamage);
 
-            if (collision.transform.GetComponent<bullet>())
-                DecreaseHealth(collision.transform.GetComponent<bullet>().bulletDamage);
+            if (collision.transform.GetComponent<Bullet>())
+                DecreaseHealth(collision.transform.GetComponent<Bullet>().bulletDamage);
             //why can't all bullets be the same, just with different tags?
-            if (collision.transform.GetComponent<EnemyBullet>())
+            if (collision.transform.GetComponent<Bullet>())
             {
-                DecreaseHealth(collision.transform.GetComponent<EnemyBullet>().bulletDamage);
+                DecreaseHealth(collision.transform.GetComponent<Bullet>().bulletDamage);
             }
         }
     }

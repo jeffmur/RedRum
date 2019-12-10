@@ -50,7 +50,7 @@ public class Reflector : ActivatedItem
 
     private void ReflectBullet(GameObject obj)
     {
-        EnemyBullet bullet = obj.GetComponent<EnemyBullet>();
+        Bullet bullet = obj.GetComponent<Bullet>();
         Vector3 inDirection = bullet.bulletDirection;
         Vector3 inNormal = casper.transform.position - obj.transform.position;
         bullet.bulletDirection = Vector3.Reflect(inDirection, inNormal);

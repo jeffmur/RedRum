@@ -153,7 +153,7 @@ public class ReaperAbstract : Enemy
 
     private void bulletSpray(float endAngle, float startAngle, int numOfBullets, Vector3 loc)
     {
-        EnemyBullet[] bullets = CreateBullets(numOfBullets);
+        Bullet[] bullets = CreateBullets(numOfBullets);
         float angleStep = (endAngle - startAngle) / bullets.Length;
         float angle = startAngle;
         for (int i = 0; i < bullets.Length; i++)
@@ -169,12 +169,12 @@ public class ReaperAbstract : Enemy
             angle += angleStep;
         }
     }
-    private EnemyBullet[] CreateBullets(int amt)
+    private Bullet[] CreateBullets(int amt)
     {
-        EnemyBullet[] bullets = new EnemyBullet[amt];
+        Bullet[] bullets = new Bullet[amt];
         for (int i = 0; i < bullets.Length; i++)
         {
-            bullets[i] = Instantiate(BulletPrefab, transform.position, Quaternion.identity).GetComponent<EnemyBullet>();
+            bullets[i] = Instantiate(BulletPrefab, transform.position, Quaternion.identity).GetComponent<Bullet>();
         }
         return bullets;
     }

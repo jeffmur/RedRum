@@ -45,7 +45,7 @@ public class SlimeAbstract : Enemy
 
     private void fireInterchange()
     {
-        EnemyBullet[] bullets = CreateBullets(4);
+        Bullet[] bullets = CreateBullets(4);
         if (!fireDiagonal)
         {
             bullets[0].SetBulletDirection(Vector3.up);
@@ -65,7 +65,7 @@ public class SlimeAbstract : Enemy
     }
     private void fireInAllDirections()
     {
-        EnemyBullet[] bullets = CreateBullets(8);
+        Bullet[] bullets = CreateBullets(8);
         // 4 dirs
         bullets[0].SetBulletDirection(Vector3.up);
         bullets[1].SetBulletDirection(Vector3.right);
@@ -78,12 +78,12 @@ public class SlimeAbstract : Enemy
         bullets[7].SetBulletDirection(southEast);
     }
 
-    private EnemyBullet[] CreateBullets(int num)
+    private Bullet[] CreateBullets(int num)
     {
-        EnemyBullet[] bullets = new EnemyBullet[num];
+        Bullet[] bullets = new Bullet[num];
         for (int i = 0; i < bullets.Length; i++)
         {
-            bullets[i] = Instantiate(BulletPrefab, transform.position, Quaternion.identity).GetComponent<EnemyBullet>();
+            bullets[i] = Instantiate(BulletPrefab, transform.position, Quaternion.identity).GetComponent<Bullet>();
         }
         return bullets;
     }

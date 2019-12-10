@@ -119,7 +119,7 @@ public class Weapon : MonoBehaviour
         Vector2 gunUp = transform.up;
         bulletPosition += gunUp * heightOffset;
         bullet.transform.position = bulletPosition;
-        bullet.GetComponent<bullet>().bulletDamage = (int)(Damage * Casper.Instance.localCasperData.damageModifier);
+        bullet.GetComponent<Bullet>().bulletDamage = (int)(Damage * Casper.Instance.localCasperData.damageModifier);
         return bullet;
     }
 

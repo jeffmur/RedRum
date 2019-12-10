@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpiderBullet : EnemyBullet
+public class SpiderBullet : Bullet
 {
     private GameObject BulletPrefab;
     int numberOfBullet = 30;
@@ -27,10 +27,10 @@ public class SpiderBullet : EnemyBullet
 
     private void bulletSpray(float endAngle, float startAngle, int numOfBullets, Vector3 loc)
     {
-        EnemyBullet[] bullets = new EnemyBullet[numOfBullets];
+        Bullet[] bullets = new Bullet[numOfBullets];
         for (int i = 0; i < bullets.Length; i++)
         {
-            bullets[i] = Instantiate(BulletPrefab, loc, Quaternion.identity).GetComponent<EnemyBullet>();
+            bullets[i] = Instantiate(BulletPrefab, loc, Quaternion.identity).GetComponent<Bullet>();
         }
         float angleStep = (endAngle - startAngle) / bullets.Length;
         float angle = startAngle;

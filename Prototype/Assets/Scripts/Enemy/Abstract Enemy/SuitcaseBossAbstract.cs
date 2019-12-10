@@ -57,7 +57,7 @@ public class SuitcaseBossAbstract : Enemy
 
     protected override void Attack(int damage)
     {
-        EnemyBullet[] bullets = CreateBullets(6);
+        Bullet[] bullets = CreateBullets(6);
         float spread = 10f;
         for (int i = 0; i < bullets.Length; i++)
         {
@@ -69,12 +69,12 @@ public class SuitcaseBossAbstract : Enemy
         }
     }
 
-    private EnemyBullet[] CreateBullets(int number)
+    private Bullet[] CreateBullets(int number)
     {
-        EnemyBullet[] bullets = new EnemyBullet[number];
+        Bullet[] bullets = new Bullet[number];
         for (int i = 0; i < bullets.Length; i++)
         {
-            bullets[i] = Instantiate(BulletPrefab, transform.position, Quaternion.identity).GetComponent<EnemyBullet>();
+            bullets[i] = Instantiate(BulletPrefab, transform.position, Quaternion.identity).GetComponent<Bullet>();
         }
         return bullets;
     }

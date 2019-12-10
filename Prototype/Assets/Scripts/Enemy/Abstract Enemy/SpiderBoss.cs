@@ -105,7 +105,7 @@ public class SpiderBoss : Enemy
 
     protected override void Attack(int damage)
     {
-        EnemyBullet[] bullets = CreateBullets();
+        Bullet[] bullets = CreateBullets();
         float angleStep = (endAngle - startAngle) / bulletAmount;
         float angle = startAngle;
         for (int i = 0; i < bulletAmount; i++)
@@ -127,18 +127,18 @@ public class SpiderBoss : Enemy
     {
         if (spiderBullet != null && spiderBullet.GetComponent<SpiderBullet>())
         {
-            var bullet = Instantiate(spiderBullet, firePoint.position, Quaternion.identity).GetComponent<EnemyBullet>();
+            var bullet = Instantiate(spiderBullet, firePoint.position, Quaternion.identity).GetComponent<Bullet>();
             bullet.SetBulletDirection(Vector3.down);
         }
     }
 
 
-    private EnemyBullet[] CreateBullets()
+    private Bullet[] CreateBullets()
     {
-        EnemyBullet[] bullets = new EnemyBullet[bulletAmount];
+        Bullet[] bullets = new Bullet[bulletAmount];
         for (int i = 0; i < bullets.Length; i++)
         {
-            bullets[i] = Instantiate(BulletPrefab, firePoint.position, Quaternion.identity).GetComponent<EnemyBullet>();
+            bullets[i] = Instantiate(BulletPrefab, firePoint.position, Quaternion.identity).GetComponent<Bullet>();
         }
         return bullets;
     }

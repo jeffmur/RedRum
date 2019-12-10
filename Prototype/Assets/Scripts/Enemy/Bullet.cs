@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBullet : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
     public GameObject hitEffect;
     public int bulletDamage = 1;
@@ -31,10 +31,10 @@ public class EnemyBullet : MonoBehaviour
                 if (tag != "HeroBullet")
                 {
                     casper.changeHealth(-bulletDamage);
+                    GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+                    Destroy(effect, 0.5f);
+                    Destroy(gameObject);
                 }
-                GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-                Destroy(effect, 0.5f);
-                Destroy(gameObject);
             }
         }
     }

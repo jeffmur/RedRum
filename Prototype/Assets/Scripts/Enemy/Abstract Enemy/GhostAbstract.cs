@@ -64,7 +64,7 @@ public class GhostAbstract : Enemy
         else if (other.CompareTag("HeroBullet"))
         {
             Destroy(other.gameObject);
-            DecreaseHealth(other.transform.GetComponent<bullet>().bulletDamage);
+            DecreaseHealth(other.transform.GetComponent<Bullet>().bulletDamage);
             GlobalControl.Instance.savedPlayerData.bulletsHit += 1;
             if (state != (int)States.Chase)
             {

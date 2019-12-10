@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 870585644736912047}
   - component: {fileID: 870585644736912046}
   - component: {fileID: 870585644736912045}
-  - component: {fileID: 870585644736912041}
+  - component: {fileID: 806236422952136863}
   m_Layer: 0
   m_Name: RayGunBullet
   m_TagString: HeroBullet
@@ -121,7 +121,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &870585644736912041
+--- !u!114 &806236422952136863
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,9 +130,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 870585644736912044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ea61fc737db1e84d8b26c5b1ec41047, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a695f2f172a4864fa1b134c00d89693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 7858134470129253047, guid: c94078294b230ff49ba4a529b04f1c02,
     type: 3}
-  bulletDamage: 20
+  bulletDamage: 25
+  bulletSpeed: 3
+  bulletDirection: {x: 0, y: 0, z: 0}

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 762612412696875140}
   - component: {fileID: 762612412696875139}
   - component: {fileID: 762612412696875138}
-  - component: {fileID: 762612412696875137}
   - component: {fileID: 762612412696875136}
+  - component: {fileID: 2681977946337071437}
   m_Layer: 0
   m_Name: ShotgunBullet
   m_TagString: HeroBullet
@@ -100,21 +100,6 @@ CircleCollider2D:
   m_Offset: {x: -0.02426076, y: 0.027293205}
   serializedVersion: 2
   m_Radius: 0.096665144
---- !u!114 &762612412696875137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 762612412696875151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ea61fc737db1e84d8b26c5b1ec41047, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitEffect: {fileID: 7858134470129253047, guid: c94078294b230ff49ba4a529b04f1c02,
-    type: 3}
-  bulletDamage: 20
 --- !u!50 &762612412696875136
 Rigidbody2D:
   serializedVersion: 4
@@ -136,3 +121,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2681977946337071437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762612412696875151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a695f2f172a4864fa1b134c00d89693, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitEffect: {fileID: 7858134470129253047, guid: c94078294b230ff49ba4a529b04f1c02,
+    type: 3}
+  bulletDamage: 10
+  bulletSpeed: 3
+  bulletDirection: {x: 0, y: 0, z: 0}

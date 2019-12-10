@@ -10,10 +10,10 @@ public class Laser : MonoBehaviour
     private void Start()
     {
         crosshair = GameObject.Find("crossHairs");
-        laser.useWorldSpace = true;
     }
     void Shoot()
     {
+        laser.useWorldSpace = true;
         laser.enabled = waitToShow;
         if (transform.parent != null)
         {

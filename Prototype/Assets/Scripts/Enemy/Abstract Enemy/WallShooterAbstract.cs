@@ -90,7 +90,7 @@ public class WallShooterAbstract : Enemy
         }
         else if (other.CompareTag("Player"))
         {
-            other.GetComponent<Casper>().changeHealth(-BulletPrefab.GetComponent<EnemyBullet>().bulletDamage);
+            other.GetComponent<Casper>().changeHealth(-BulletPrefab.GetComponent<Bullet>().bulletDamage);
         }
     }
 
@@ -171,7 +171,7 @@ public class WallShooterAbstract : Enemy
         if (timeBtwShot < 0)
         {
             enemyAnimator.SetBool("Attack", true);
-            EnemyBullet bullets = Instantiate(BulletPrefab, transform.position, Quaternion.identity).GetComponent<EnemyBullet>();
+            Bullet bullets = Instantiate(BulletPrefab, transform.position, Quaternion.identity).GetComponent<Bullet>();
             bullets.SetBulletDirection(bulletShootDirc);
             timeBtwShot = shootingCooldown;
             speed = UnityEngine.Random.Range(2, 8);
