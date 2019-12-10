@@ -6,23 +6,29 @@ public class Laser : MonoBehaviour
 {
     public LineRenderer laser;
     private GameObject crosshair;
-    private Weapon sniper;
-    private bool waitToShow = false;
+    private WeaponInventory weaponInventory;
+    public bool waitToShow = false;
     private void Start()
     {
         crosshair = GameObject.Find("crossHairs");
-        sniper = gameObject.GetComponentInParent<Weapon>(); // if we wanted to map properly to the sniper offset
+        weaponInventory = Casper.Instance.weaponInventory;
+        laser.enabled = waitToShow;
+        //sniper = gameObject.GetComponentInParent<Weapon>(); // if we wanted to map properly to the sniper offset
     }
     void Shoot()
     {
-        laser.useWorldSpace = true; //wait for the Sniper to be picked up 
-        laser.enabled = waitToShow;
-        if (transform.parent != null)
+        if (weaponInventory.GetSelectedWeapon().name == "Sniper(Clone)")
         {
-            waitToShow = true;
+            Debug.Log(weaponInventory.GetSelectedWeapon().name);
+            laser.useWorldSpace = true; //wait for the Sniper to be picked up 
             laser.enabled = waitToShow;
-            laser.SetPosition(0, transform.position);
-            laser.SetPosition(laser.positionCount - 1, crosshair.transform.position);
+            if (transform.parent != null)
+            {
+                waitToShow = true;
+                laser.enabled = waitToShow;
+                laser.SetPosition(0, transform.position);
+                laser.SetPosition(laser.positionCount - 1, crosshair.transform.position);
+            }
         }
     }
 
