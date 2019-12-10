@@ -232,7 +232,7 @@ MonoBehaviour:
   BulletsPerShot: 1
   Accuracy: 0
   reloadSpeed: 1.5
-  BulletPrefab: {fileID: 762612412696875151, guid: aeaab5f475e2ead4288576f8af2259f3,
+  BulletPrefab: {fileID: 762612412696875151, guid: 8ef09a1157a20c04294e4bb7a0b9e846,
     type: 3}
   barrelOffset: 0.4
   heightOffset: 0.15
