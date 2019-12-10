@@ -19,7 +19,6 @@ public class Laser : MonoBehaviour
     {
         if (weaponInventory.GetSelectedWeapon().name == "Sniper(Clone)")
         {
-            Debug.Log(weaponInventory.GetSelectedWeapon().name);
             laser.useWorldSpace = true; //wait for the Sniper to be picked up 
             laser.enabled = waitToShow;
             if (transform.parent != null)

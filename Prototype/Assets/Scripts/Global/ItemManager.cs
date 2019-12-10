@@ -15,14 +15,14 @@ public class ItemManager : SceneSingleton<ItemManager>
 
     private void Initialize()
     {
-       // Object[] items = Resources.LoadAll("Textures/Prefabs/Items/PickupItems");
+        Object[] items = Resources.LoadAll("Textures/Prefabs/Items/PickupItems");
         Object[] weapons = Resources.LoadAll("Textures/Prefabs/Guns/SpawnableGuns");
 
-        //foreach (Object t in items)
-        //{
-        //    GameObject item = (GameObject)t;
-        //    listOfItems.Add(item);
-        //}
+        foreach (Object t in items)
+        {
+            GameObject item = (GameObject)t;
+            listOfItems.Add(item);
+        }
         foreach (Object t in weapons)
         {
             GameObject weapon = (GameObject)t;
