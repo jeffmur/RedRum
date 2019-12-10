@@ -59,7 +59,7 @@ public class MainController : SceneSingleton<MainController>
         healthInfo.CurrentHP = value;
         if(value <= 0)
         {
-            StartCoroutine(ShowDeathPanel());
+            StartCoroutine(ShowDeathPanel()); //throwing error because the main controller dies before this is access
         }
     }
 

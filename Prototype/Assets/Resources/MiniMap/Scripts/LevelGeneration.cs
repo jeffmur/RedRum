@@ -12,11 +12,9 @@ public class LevelGeneration : MonoBehaviour {
     public GameObject criticalPath;
     public Transform playerIcon;
     public Transform bossIcon;
-
     private int direction;
     public bool stopGeneration;
     private int downCounter;
-
     public float moveIncrement;
     private float timeBtwSpawn;
     public float startTimeBtwSpawn;
@@ -133,10 +131,8 @@ public class LevelGeneration : MonoBehaviour {
                         Instantiate(rooms[randRoomDownOpening], transform.position, Quaternion.identity);
                     }
 
-                }
-                
-               
-  
+                }           
+
                 Vector2 pos = new Vector2(transform.position.x, transform.position.y - moveIncrement);
                 transform.position = pos;
 
