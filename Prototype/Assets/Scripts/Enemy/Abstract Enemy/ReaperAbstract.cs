@@ -114,7 +114,7 @@ public class ReaperAbstract : Enemy
         int i = 0;
         while (true)
         {
-            yield return new WaitForSeconds(0f);
+            yield return new WaitForSeconds(0.05f);
             for(int j = 0; j < numOfWaves*offset; j+=offset)
                 waveShot(i+j);
             i++;
