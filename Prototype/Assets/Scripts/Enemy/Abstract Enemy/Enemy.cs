@@ -76,7 +76,7 @@ public abstract class Enemy : MonoBehaviour
         if (collision.CompareTag("HeroBullet") && GetComponent<SpriteRenderer>().enabled == true)
         {
             GlobalControl.Instance.savedPlayerData.bulletsHit += 1;
-            Destroy(collision.gameObject);
+            if(gameObject.name != "SniperBullet") Destroy(collision.gameObject); //piercing damage
             if (enemyHealth > 0)
                 ShowFloatingDamage(collision.transform.GetComponent<Bullet>().bulletDamage);
 

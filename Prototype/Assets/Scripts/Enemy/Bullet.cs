@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
             transform.localPosition +=  bulletDirection * bulletSpeed * Time.deltaTime;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Wall"))
         {

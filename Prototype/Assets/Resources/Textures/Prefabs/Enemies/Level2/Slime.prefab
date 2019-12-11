@@ -121,4 +121,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fde8397249a9e84b818396a2626f074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletCooldown: 0
+  enemyHealth: 150
