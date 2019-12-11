@@ -15,9 +15,7 @@ public class ReaperAbstract : Enemy
         enemyHealth = 3000;
         anim = GetComponent<Animator>();
         chest = Resources.Load("Textures/Prefabs/Map Misc/chest") as GameObject;
-        // CHRIS CHANGE IT TO PURPLE FLAMES :)
-        BulletPrefab = Resources.Load<GameObject>("Textures/Projectiles/ReaperBullet");
-
+        BulletPrefab = Resources.Load<GameObject>("Textures/Prefabs/Projectiles/EnemyBullets/ReaperBullet");
         setHealthbarMaxValue(enemyHealth);
     }
 

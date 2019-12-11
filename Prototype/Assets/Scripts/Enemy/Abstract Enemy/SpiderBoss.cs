@@ -25,8 +25,8 @@ public class SpiderBoss : Enemy
         base.Start();
         enemyHealth = 1000;
         speed = 3f;
-        spiderBullet = Resources.Load<GameObject>("Textures/Projectiles/SpiderBigBullet Variant");
-        BulletPrefab = Resources.Load<GameObject>("Textures/Projectiles/SpiderBullet");
+        spiderBullet = Resources.Load<GameObject>("Textures/Prefabs/Projectiles/EnemyBullets/SpiderBigBullet Variant");
+        BulletPrefab = Resources.Load<GameObject>("Textures/Prefabs/Projectiles/EnemyBullets/SpiderBullet");
         animator = transform.GetComponent<Animator>();
         moveToTop();
         StartCoroutine(FireBullets());

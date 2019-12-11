@@ -18,7 +18,7 @@ public class SuitcaseBossAbstract : Enemy
         base.Start();
 
 
-        BulletPrefab = Resources.Load<GameObject>("Textures/Projectiles/SuitcaseBullet_Variant");
+        BulletPrefab = Resources.Load<GameObject>("Textures/Prefabs/Projectiles/EnemyBullets/SuitcaseBullet_Variant");
         enemySprite = transform.GetComponent<SpriteRenderer>();
         StartCoroutine(FireShots());
 

@@ -18,8 +18,7 @@ public class SlimeAbstract : Enemy
     {
         base.Start();
         enemyHealth = 150;
-
-        BulletPrefab = Resources.Load<GameObject>("Textures/Projectiles/SlimeBullet");
+        BulletPrefab = Resources.Load<GameObject>("Textures/Prefabs/Projectiles/EnemyBullets/SlimeBullet");
         StartCoroutine(FireSlimes());
     }
 
