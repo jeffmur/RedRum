@@ -38,6 +38,10 @@ public class LevelManager : MonoBehaviour
         Scenes.Load("Credits", false);
     }
 
+    public void toMenu()
+    {
+        Scenes.Load("Menu", false);
+    }
     public void QuitGame() 
     {
         Debug.Log("Quit!");
