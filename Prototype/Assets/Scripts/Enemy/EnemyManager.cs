@@ -19,7 +19,12 @@ public class EnemyManager : SceneSingleton<EnemyManager>
 
     private void Initialize()
     {
-        Object[] enemies = Resources.LoadAll("Textures/Prefabs/Enemies/Level2");
+        Object[] enemies;
+        if (Scenes.currentLevel == 1)
+            enemies = Resources.LoadAll("Textures/Prefabs/Enemies/Level2");
+        else
+            enemies = Resources.LoadAll("Textures/Prefabs/Enemies/Level1");
+
         Object[] bosses = Resources.LoadAll("Textures/Prefabs/Enemies/Bosses");
 
         foreach (Object t in enemies)
