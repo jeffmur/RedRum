@@ -21,7 +21,8 @@ public static class Scenes
     public static void Load(string path, bool isCasperAlive)
     {
         SceneManager.LoadScene(path);
-        GlobalControl.Instance.ResetCasper(isCasperAlive);
+        if (GlobalControl.Instance != null)
+            GlobalControl.Instance.ResetCasper(isCasperAlive);
     }
 
     public static void Load(string path)
