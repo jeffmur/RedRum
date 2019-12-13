@@ -33,6 +33,15 @@ public class LevelManager : MonoBehaviour
             Scenes.Load(GAME[Scenes.currentLevel], Scenes.getDimension(), true);
     }
 
+    public void toCredits()
+    {
+        Scenes.Load("Credits", false);
+    }
+
+    public void toMenu()
+    {
+        Scenes.Load("Menu", false);
+    }
     public void QuitGame() 
     {
         Debug.Log("Quit!");

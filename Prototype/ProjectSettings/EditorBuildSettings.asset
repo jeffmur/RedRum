@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menus/Dead.unity
     guid: 6e35da6d8a8c8774f9441ef614bda6d9
+  - enabled: 1
+    path: Assets/Scenes/Menus/Win.unity
+    guid: 7ac87b6b53f1947e6bbd0dbcbe6b7e50
+  - enabled: 1
+    path: Assets/Scenes/Menus/Credits.unity
+    guid: 8084e4cd523a44efab483733551e4fd2
   m_configObjects: {}
