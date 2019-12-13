@@ -19,7 +19,7 @@ Hotel RedRum is a randomly generated action RPG shooter with heavy Rogue-like el
 - Random Map Generation (4x4, 5x5, 6x6)
 - Cache System to save items in room.
 - Active and Passive Items
-- Five weapons
+- Weapons:
   - Flashlight (Starting)
   - Raygun
   - Sniper Rifle
