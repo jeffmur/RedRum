@@ -1,4 +1,5 @@
 # RedЯum Hotel
+'jeffmur.github.io/RedRumHotel'
 
 # Git Basics
 
@@ -12,13 +13,10 @@
 `git pull`
 
 #### If you would like to work on your own branch
-`git checkout <your name>`
-
-#### Once complete with modifying a file or a number of files add the files to the git repo
-`git add <filename> <filename> <more filenames>`
+`git checkout -b <your name>`
 
 #### Shortcut for adding all files
-`git add *` <- DO NOT DO THIS FOR ANY REASON
+`git add *`
 
 #### Commit the changes you have made to the repo
 `git commit -m "Some message relating to the changes you have done"`
