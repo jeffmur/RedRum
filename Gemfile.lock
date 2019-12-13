@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jekyll-theme-architect (0.1.1)
+    jekyll-theme-hacker (0.1.1)
       jekyll (> 3.5, < 5.0)
       jekyll-seo-tag (~> 2.0)
 
@@ -103,7 +103,7 @@ PLATFORMS
 
 DEPENDENCIES
   html-proofer (~> 3.0)
-  jekyll-theme-architect!
+  jekyll-theme-hacker!
   rubocop (~> 0.50)
   w3c_validators (~> 1.3)
 

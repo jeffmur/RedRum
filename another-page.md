@@ -2,10 +2,8 @@
 layout: default
 ---
 
-## [Back To Overview](./)
-or read it all...
+## Welcome to another page
 
+_yay_
 
-# Game Design Document
-
-<embed src="./builds/GG-GDD.pdf" width="750px" height="2100px" />
+[back](./)
