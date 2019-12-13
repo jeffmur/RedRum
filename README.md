@@ -1,5 +1,4 @@
-# RedЯum Hotel
-'jeffmur.github.io/RedRumHotel'
+# [RedЯum Hotel](https://jeffmur.github.io/RedRumHotel)
 
 # Git Basics
 
