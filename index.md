@@ -13,7 +13,7 @@ Hotel RedRum is a randomly generated action RPG shooter with heavy Rogue-like el
 ### What is Hotel RedRum
 'RedRum' obviously coined from the 1980's hit Film _The Shining_ allowed our development team to focus on a theme that would warn players of a treacherous and unforgiving path ahead, however the gameplay shows a friendly main character _Casper_ and child friendly enemies. 
 
-### [Current Features](./another-page.html)
+### [Current Features](./gdd.html)
 - Main Menu with volume control and information about items
 - Player Statistics
 - Random Map Generation (4x4, 5x5, 6x6)
