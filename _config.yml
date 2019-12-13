@@ -1,4 +1,5 @@
-theme: jekyll-theme-architect
-title: RedЯum Hotel
-description: Final Project CSS 385
+title: Hotel RedRum
+description: CSS 385 Final Project
 show_downloads: true
+google_analytics:
+theme: jekyll-theme-architect
